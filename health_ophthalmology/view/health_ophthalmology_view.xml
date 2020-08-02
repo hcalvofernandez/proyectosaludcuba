@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<tryton>
+<odoo>
     <data>
    		 <record id="gnuhealth_ophthalmology_evaluation_action" model="ir.actions.act_window">
             <field name="name">gnuhealth.ophthalmology.evaluation.action</field>
@@ -11,4 +11,4 @@
         <menuitem name="Ophthalmologic evaluations" parent="health.gnuhealth_reporting_menu" id="gnuhealth_ophthalmology_evaluation_menu" action="gnuhealth_ophthalmology_evaluation_action" icon="gnuhealth-list"/>
 
 	</data>
-</tryton>
+</odoo>

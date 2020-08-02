@@ -15,12 +15,10 @@
         'base',
     ],
     'data' : [
-        'views/template.xml',
-        'views/hms_view.xml',
+        'views/oph_form.xml',
+        'views/oph_form.xml',
     ],
-    'images': [
-        'static/description/hms_document_preview_almightycs_cover.jpg',
-    ],
+
     'application': False,
     'sequence': 2,
     'price': 36,

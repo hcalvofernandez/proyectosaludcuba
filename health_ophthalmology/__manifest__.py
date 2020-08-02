@@ -17,6 +17,10 @@
     'data' : [
         'views/oph_form.xml',
         'views/oph_form.xml',
+        'views/findings_form.xml',
+        'views/findings_tree.xml',
+        'views/health_ophthalmology_view.xml',
+
     ],
 
     'application': False,

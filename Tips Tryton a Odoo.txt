@@ -1,0 +1,19 @@
+Guia para migracion Tryton a Odoo
+Tryton  ----|---- Odoo
+setup.py  --->  manifest.py
+folder /icon --> static/description
+data --> data
+locale --> i18n
+Wizard --> TransientModel Wizard in Odoo
+
+
+In Models class
+cambiar ->(models.Model)
+cambiar __name__  -> _name =
+cambiar Many2One -> Many2one
+cambiar DateTime  -> Datetime
+cambiar One2Many -> One2many 
+cambiar cls -> self ??
+
+
+ 

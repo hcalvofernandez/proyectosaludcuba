@@ -14,6 +14,5 @@ cambiar Many2One -> Many2one
 cambiar DateTime  -> Datetime
 cambiar One2Many -> One2many 
 cambiar cls -> self ??
-
-
- 
+cambiar Pool().get() -> self.env[]
+cambiar Transaction().connection.cursor() -> self.env.cr

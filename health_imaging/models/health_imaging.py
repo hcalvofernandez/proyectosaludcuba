@@ -80,8 +80,6 @@ class GnuHealthSequenceSetup(models.Model):
     imaging_request_sequence = fields.Many2one('ir.sequence',
                                                'Imaging Request Sequence', required=True,
                                                domain=[('code', '=', 'gnuhealth.imaging.test.request')])
-
-
     imaging_sequence = fields.Many2one('ir.sequence',
                                        'Imaging Result Sequence', required=True,
                                        domain=[('code', '=', 'gnuhealth.imaging.test.result')])
@@ -154,12 +152,12 @@ class ImagingTestRequest(models.Model ):
     _order = 'date desc,request desc'
     _table = 'gnuhealth_imaging_test_request'
 
-    patient = fields.Many2one('gnuhealth.patient', 'Patient', required=True)
+    patient = fields.Integer()#TODO fields.Many2one('gnuhealth.patient', 'Patient', required=True)
     date = fields.Datetime('Date', required=True,default=datetime.date.today())
     requested_test = fields.Many2one(
         'gnuhealth.imaging.test', 'Test',
         required=True)
-    doctor = fields.Many2one('gnuhealth.healthprofessional', 'Doctor', required=True)
+    doctor = fields.Integer()#TODO fields.Many2one('gnuhealth.healthprofessional', 'Doctor', required=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('requested', 'Requested'),
@@ -219,7 +217,7 @@ class ImagingTestResult(models.Model):
     _order = 'date desc'
     _table = 'gnuhealth_imaging_test_result'
 
-    patient = fields.Many2one('gnuhealth.patient', 'Patient', readonly=True)
+    patient = fields.Integer()#TODO fields.Many2one('gnuhealth.patient', 'Patient', readonly=True)
     number = fields.Char('Number', readonly=True)
     date = fields.Datetime('Date', required=True)
     request_date = fields.Datetime('Requested Date', readonly=True)
@@ -229,10 +227,10 @@ class ImagingTestResult(models.Model):
     request = fields.Many2one(
         'gnuhealth.imaging.test.request', 'Request',
         readonly=True)
-    doctor = fields.Many2one('gnuhealth.healthprofessional', 'Doctor',
-                             required=True)
+    doctor = fields.Integer() #TODO fields.Many2one('gnuhealth.healthprofessional', 'Doctor',
+                            # required=True)
     comment = fields.Text('Comment')
-    images = fields.One2many ('ir.attachment', 'resource', 'Images')
+    images = fields.Binary(attachment=True)#TODO fields.One2many ('ir.attachment', 'resource', 'Images')
 
     _sql_constraints = [
         ('number_uniq',

@@ -7,7 +7,6 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">gnuhealth.imaging.test.result</field>
             <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
         </record>
 
         <record id='gnuhealth_imaging_test_result_view_form' model='ir.ui.view'>
@@ -18,7 +17,7 @@
                     <header>
                         <button name="requested" type="object" string="Request" icon="fa-bars"/>
                         <button name="generate_results" type="object" string="Generate Results" icon="fa-bars"/>
-                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+
                     </header>
                     <sheet>
                         <group col="4">

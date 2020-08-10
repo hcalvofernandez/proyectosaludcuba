@@ -24,11 +24,21 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/imaging_test_form.xml',
+        'views/imaging_test_request_form.xml',
+        'views/imaging_test_request_tree.xml',
+        'views/imaging_test_result_form.xml',
+        'views/imaging_test_tree.xml',
+        'views/imaging_test_result_tree.xml',
+        'views/imaging_test_type_form.xml',
+        'views/imaging_test_type_tree.xml',
+        'views/patient_imaging_test_request_start_form.xml',
+        #data
+        'data/gnuhealth_commands.xml',
+        'data/health_imaging_sequences.xml',
+        #'data/imaging_data.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
 }

@@ -8,7 +8,6 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">gnuhealth.imaging.test.request</field>
             <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
         </record>
 
         <record id='gnuhealth_imaging_test__request_view_form' model='ir.ui.view'>

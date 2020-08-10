@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <!--data TODO revisar que es?>
         <record model="gnuhealth.command" id="mi">
             <field name="name">mi</field>
             <field name="model">gnuhealth.imaging.test.result</field>
@@ -8,5 +8,5 @@
             <field name="description">Medical Imaging Results</field>
             <field name="internal">False</field>
         </record>
-    </data>
+    </data-->
 </odoo>

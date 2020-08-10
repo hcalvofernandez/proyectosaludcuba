@@ -2,8 +2,35 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="product_category_imaging_services" model="product.product_category">
+        <record id="gnuhealth_test_type_ultrasound" model="gnuhealth.imaging.test.type">
+            <field name="code">US</field>
+            <field name="name">Ultrasound</field>
+        </record>
+
+        <record id="gnuhealth_test_type_mri" model="gnuhealth.imaging.test.type">
+            <field name="code">MRI</field>
+            <field name="name">MRI</field>
+        </record>
+
+        <record id="gnuhealth_test_type_xray" model="gnuhealth.imaging.test.type">
+            <field name="code">XR</field>
+            <field name="name">X-ray</field>
+        </record>
+
+        <record id="gnuhealth_test_type_ctscan" model="gnuhealth.imaging.test.type">
+            <field name="code">CT</field>
+            <field name="name">CT Scan</field>
+        </record>
+
+        <record id="gnuhealth_test_type_petscan" model="gnuhealth.imaging.test.type">
+            <field name="code">PET</field>
+            <field name="name">PET Scan</field>
+        </record>
+
+        <!-- categorias de productos -->
+        <!--<record id="product_category_imaging_services" model="product.category">
             <field name="name">Imaging Services</field>
+            <field name="parent_id" ref="product.product_category_all"/>
         </record>
 
         <record id="product_template_ultrasoundcharges" model="product.product_template">
@@ -69,32 +96,7 @@
 
         <record id="product_product_petscancharges" model="product.product_product">
             <field name="template" model="product.product_template" ref="product_template_petscancharges"/>
-        </record>
-
-        <record id="gnuhealth_test_type_ultrasound" model="gnuhealth.imaging.test.type">
-            <field name="code">US</field>
-            <field name="name">Ultrasound</field>
-        </record>
-
-        <record id="gnuhealth_test_type_mri" model="gnuhealth.imaging.test.type">
-            <field name="code">MRI</field>
-            <field name="name">MRI</field>
-        </record>
-
-        <record id="gnuhealth_test_type_xray" model="gnuhealth.imaging.test.type">
-            <field name="code">XR</field>
-            <field name="name">X-ray</field>
-        </record>
-
-        <record id="gnuhealth_test_type_ctscan" model="gnuhealth.imaging.test.type">
-            <field name="code">CT</field>
-            <field name="name">CT Scan</field>
-        </record>
-
-        <record id="gnuhealth_test_type_petscan" model="gnuhealth.imaging.test.type">
-            <field name="code">PET</field>
-            <field name="name">PET Scan</field>
-        </record>
+        </record>-->
 
 
     </data>

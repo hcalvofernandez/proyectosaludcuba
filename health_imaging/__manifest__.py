@@ -23,7 +23,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/imaging_test_form.xml',
         'views/imaging_test_request_form.xml',
         'views/imaging_test_request_tree.xml',
@@ -36,7 +36,7 @@
         #data
         'data/gnuhealth_commands.xml',
         'data/health_imaging_sequences.xml',
-        #'data/imaging_data.xml',
+        'data/imaging_data.xml',
     ],
     'installable': True,
     'application': True,

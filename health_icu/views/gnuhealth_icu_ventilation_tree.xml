@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+
+        <record id='gnuhealth_icu_ventilation_view_tree' model='ir.ui.view'>
+            <field name="name">ICU Ventilation</field>
+            <field name="model">gnuhealth.icu.ventilation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="current_mv"/>
+                    <field name="ventilation"/>
+                    <field name="mv_start" widget="date"/>
+                    <field name="mv_end" widget="date"/>
+                    <field name="mv_period"/>
+                    <field name="remarks" expand="1"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

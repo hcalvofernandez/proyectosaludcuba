@@ -11,13 +11,13 @@
             <field name="model">gnuhealth.icu.glasgow</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name" expand="1"/>
-                    <field name="evaluation_date" widget="date" expand="1"/>
-                    <field name="evaluation_date" string="Time" widget="time" expand="1"/>
-                    <field name="glasgow_eyes" expand="1"/>
-                    <field name="glasgow_verbal" expand="1"/>
-                    <field name="glasgow_motor" expand="1"/>
-                    <field name="glasgow" expand="1"/>
+                    <field name="name" />
+                    <field name="evaluation_date"  />
+                    <field name="evaluation_date" string="Time"  />
+                    <field name="glasgow_eyes" />
+                    <field name="glasgow_verbal" />
+                    <field name="glasgow_motor" />
+                    <field name="glasgow" />
                 </tree>
             </field>
         </record>

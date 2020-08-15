@@ -28,76 +28,28 @@
         </record>
 
         <!-- categorias de productos -->
-        <!--<record id="product_category_imaging_services" model="product.category">
+         <!--record id="product_category_1" model="product.category">
+            <field name="parent_id" ref="product_category_all"/>
             <field name="name">Imaging Services</field>
-            <field name="parent_id" ref="product.product_category_all"/>
-        </record>
+        </record-->
 
-        <record id="product_template_ultrasoundcharges" model="product.product_template">
+        <!--record id="product_template_ultrasoundcharges" model="product.template">
             <field name="name">Ultrasound charges</field>
-            <field eval="1" name="list_price"/>
-            <field eval="0" name="cost_price"/>
-            <field name="default_uom" ref="product.product_uom_unit"/>
             <field name="type">service</field>
-            <field name="cat_id" ref="product_category_imaging_services"/>
+            <field name="categ_id">3</field>
         </record>
-
-        <record id="product_template_mricharges" model="product.product_template">
+        <record id="product_template_mricharges" model="product.template">
             <field name="name">MRI charges</field>
-            <field eval="1" name="list_price"/>
-            <field eval="0" name="cost_price"/>
-            <field name="default_uom" ref="product.product_uom_unit"/>
-            <field name="type">service</field>
-            <field name="cat_id" ref="product_category_imaging_services"/>
         </record>
-
-        <record id="product_template_xraycharges" model="product.product_template">
+        <record id="product_template_xraycharges" model="product.template">
             <field name="name">X-ray charges</field>
-            <field eval="1" name="list_price"/>
-            <field eval="0" name="cost_price"/>
-            <field name="default_uom" ref="product.product_uom_unit"/>
-            <field name="type">service</field>
-            <field name="cat_id" ref="product_category_imaging_services"/>
         </record>
-
-        <record id="product_template_ctscancharges" model="product.product_template">
+        <record id="product_template_ctscancharges" model="product.template">
             <field name="name">CT Scan charges</field>
-            <field eval="1" name="list_price"/>
-            <field eval="0" name="cost_price"/>
-            <field name="default_uom" ref="product.product_uom_unit"/>
-            <field name="type">service</field>
-            <field name="cat_id" ref="product_category_imaging_services"/>
         </record>
-
-        <record id="product_template_petscancharges" model="product.product_template">
+        <record id="product_template_petscancharges" model="product.template">
             <field name="name">PET Scan charges</field>
-            <field eval="1" name="list_price"/>
-            <field eval="0" name="cost_price"/>
-            <field name="default_uom" ref="product.product_uom_unit"/>
-            <field name="type">service</field>
-            <field name="cat_id" ref="product_category_imaging_services"/>
-        </record>
-
-        <record id="product_product_ultrasoundcharges" model="product.product_product">
-            <field name="template" model="product.product_template" ref="product_template_ultrasoundcharges"/>
-        </record>
-
-        <record id="product_product_mricharges" model="product.product_product">
-            <field name="template" model="product.product_template" ref="product_template_mricharges"/>
-        </record>
-
-        <record id="product_product_xraycharges" model="product.product_product">
-            <field name="template" model="product.product_template" ref="product_template_xraycharges"/>
-        </record>
-
-        <record id="product_product_ctscancharges" model="product.product_product">
-            <field name="template" model="product.product_template" ref="product_template_ctscancharges"/>
-        </record>
-
-        <record id="product_product_petscancharges" model="product.product_product">
-            <field name="template" model="product.product_template" ref="product_template_petscancharges"/>
-        </record>-->
-
+        </record-->
 
     </data>
 </odoo>

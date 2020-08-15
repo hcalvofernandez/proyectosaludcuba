@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <!-- Include inpatient registration on evaluation form -->
+    <record model="ir.ui.view" id="gnuhealth_patient_evaluation_view_form_extend">
+        <field name="name">gnuhealth.patient.evaluation.view.form.extend</field>
+        <field name="model">gnuhealth.patient.evaluation</field>
+        <field name="inherit_id" ref="health.gnuhealth_patient_evaluation_view"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name=evaluation_type]" position="after">
+                <label name="inpatient_registration_code"/>
+                <field name="inpatient_registration_code"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

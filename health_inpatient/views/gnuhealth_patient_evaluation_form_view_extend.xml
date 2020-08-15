@@ -8,7 +8,7 @@
     <record model="ir.ui.view" id="gnuhealth_patient_evaluation_view_form_extend">
         <field name="name">gnuhealth.patient.evaluation.view.form.extend</field>
         <field name="model">gnuhealth.patient.evaluation</field>
-        <field name="inherit_id" ref="health.gnuhealth_patient_evaluation_view"/>
+        <field name="inherit_id" ref="medical.gnuhealth_patient_evaluation_view"/>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name=evaluation_type]" position="after">

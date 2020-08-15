@@ -8,7 +8,7 @@
     <record model="ir.ui.view" id="gnuhealth_appointment_form_view_extend">
         <field name="name">gnuhealth.appointment.form.view.extend</field>
         <field name="model">gnuhealth.appointment</field>
-        <field name="inherit_id" ref="health.gnuhealth_appointment_form"/>
+        <field name="inherit_id" ref="medical.gnuhealth_appointment_form"/>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <xpath expr="/form/group/field[@name=institution]" position="after">

@@ -45,7 +45,7 @@
     <menuitem
             id="gnuhealth_inpatient_medication_admin_time_menu"
             name="Inpatient Medication Admin Times"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_inpatient_medication_admin_time_action"
     />
 </odoo>

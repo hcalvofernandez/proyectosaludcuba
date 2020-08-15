@@ -51,7 +51,7 @@
     <menuitem
             id="gnuhealth_inpatient_meal_menu"
             name="Inpatient Meal"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_inpatient_meal_action"
     />
 </odoo>

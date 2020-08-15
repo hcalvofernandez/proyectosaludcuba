@@ -16,3 +16,5 @@ cambiar One2Many -> One2many
 cambiar cls -> self ??
 cambiar Pool().get() -> self.env[]
 cambiar Transaction().connection.cursor() -> self.env.cr
+los 'def _search_rec_name(cls, name, clause)' significa que hay que hacer un 'def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None)'
+los 'def get_rec_name(cls)' significa que hay que hacer un 'def _get_name(self)'

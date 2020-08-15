@@ -56,7 +56,7 @@
                             <field name="course_completed"/>
                             <label name="discontinued"/>
                             <field name="discontinued"/>
-                            <label name="discontinued_reason"/>
+                            <label name="discontinued_reason" attrs="{'invisible': [('discontinued', '=', False)], 'required': [('discontinued', '=', True)]}"/>
                             <field name="discontinued_reason"/>
                         </group>
                         <newline/>
@@ -99,7 +99,7 @@
     <menuitem
             id="gnuhealth_inpatient_medication_menu"
             name="Inpatient Medication"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_inpatient_medication_action"
     />
 

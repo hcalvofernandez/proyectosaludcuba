@@ -46,7 +46,7 @@
     <menuitem
             id="gnuhealth_bed_transfer_menu"
             name="Bed Transfers"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_bed_transfer_action"
     />
 </odoo>

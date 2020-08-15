@@ -3,7 +3,6 @@
     Copyright 2008 Luis Falcon <lfalcon@gnusolidario.org>
     Copyright 2016 LasLabs Inc.
     Copyright 2020 LabViv.
-    License GPL-3.0 or later (http://www.gnu.org/licenses/gpl).
 -->
 <odoo>
     <record id="medical_patient_view_tree" model="ir.ui.view">

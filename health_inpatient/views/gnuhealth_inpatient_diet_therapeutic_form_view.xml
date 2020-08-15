@@ -45,7 +45,7 @@
     <menuitem
             id="gnuhealth_diet_therapeutic_menu"
             name="Diet Therapeutic"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_diet_therapeutic_action"
     />
 </odoo>

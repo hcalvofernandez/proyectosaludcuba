@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18d23200-c8dd-4f14-8a8b-268dc561c1a8" name="Default" comment="" />
-    <list id="06de9b3d-35f1-437f-966f-de17ef83fef5" name="not-included" comment="archivos .idea&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/health_imaging.iml" afterPath="$PROJECT_DIR$/.idea/health_imaging.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list id="06de9b3d-35f1-437f-966f-de17ef83fef5" name="not-included" comment="archivos .idea&#10;" />
+    <list default="true" id="18d23200-c8dd-4f14-8a8b-268dc561c1a8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/el.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/el.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/__manifest__.py" afterPath="$PROJECT_DIR$/../health_icu/__manifest__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/ar.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/ar.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/de.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/de.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/es.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/es.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/fr.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/fr.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/it_IT.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/it_IT.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/ja_JP.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/ja_JP.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/lo.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/lo.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/pt_BR.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/pt_BR.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/zh_CN.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/zh_CN.po" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/models/health_icu.py" afterPath="$PROJECT_DIR$/../health_icu/models/health_icu.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_apache2_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_apache2_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_tree.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_tree.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_tree.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_patient_icu_rounding.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_patient_icu_rounding.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/health_icu_view.xml" afterPath="$PROJECT_DIR$/../health_icu/views/health_icu_view.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__manifest__.py" afterPath="$PROJECT_DIR$/__manifest__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/imaging_data.xml" afterPath="$PROJECT_DIR$/data/imaging_data.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/health_imaging.py" afterPath="$PROJECT_DIR$/models/health_imaging.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_request_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_request_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_request_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_request_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_result_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_result_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_result_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_result_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_type_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_type_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_type_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_type_tree.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" afterPath="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wizard/wizard_health_imaging.py" afterPath="$PROJECT_DIR$/wizard/wizard_health_imaging.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" afterPath="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../original completo/health_imaging/wizard/wizard_health_imaging.py" afterPath="$PROJECT_DIR$/../original completo/health_imaging/wizard/wizard_health_imaging.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,47 +49,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__manifest__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/__manifest__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="25" column="8" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="imaging_data.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/imaging_data.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ir.model.access.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/security/ir.model.access.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="126" lean-forward="false" selection-start-line="6" selection-start-column="126" selection-end-line="6" selection-end-column="126" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ModelView</find>
-      <find>gnuhealth.</find>
-      <find>(Wizard)</find>
-      <find>pool = Pool()</find>
-      <find>active</find>
-      <find>label</find>
       <find>gnuhealth.imaging.test.request</find>
       <find>gnuhealth_imaging_test_request</find>
       <find>widget=&quot;date&quot;</find>
@@ -65,7 +61,6 @@
       <find>product.template-product.category</find>
       <find>test.request</find>
       <find>patient_imaging_test_request_start_view_form</find>
-      <find>gnuhealth.patient.imaging.test.request.start</find>
       <find>now</find>
       <find>Many2many</find>
       <find>Many2</find>
@@ -81,6 +76,13 @@
       <find>product_template_ultrasoundcharges</find>
       <find>product_category_imagingservices</find>
       <find>&lt;field name=&quot;cat_id&quot;&gt;50&lt;/field&gt;</find>
+      <find>image</find>
+      <find>health</find>
+      <find>act_imaging_test_type_view</find>
+      <find>menu_patient_imaging_test_request</find>
+      <find>imaging.test.request</find>
+      <find>gnuhealth.patient.imaging.test.request.start</find>
+      <find>gnuhealth.request.imaging.test</find>
     </findStrings>
     <replaceStrings>
       <replace>self.env[]</replace>
@@ -109,28 +111,31 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/imaging_test_request_tree.xml" />
-        <option value="$PROJECT_DIR$/views/imaging_test_result_tree.xml" />
-        <option value="$PROJECT_DIR$/views/imaging_test_tree.xml" />
-        <option value="$PROJECT_DIR$/views/imaging_test_type_tree.xml" />
         <option value="$PROJECT_DIR$/models/wizard_health_imaging.py" />
         <option value="$PROJECT_DIR$/wizard/__init__.py" />
         <option value="$PROJECT_DIR$/models/__init__.py" />
         <option value="$PROJECT_DIR$/data/health_imaging_sequences.xml" />
-        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" />
-        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging.py" />
         <option value="$PROJECT_DIR$/__init__.py" />
-        <option value="$PROJECT_DIR$/views/imaging_test_form.xml" />
-        <option value="$PROJECT_DIR$/views/imaging_test_request_form.xml" />
-        <option value="$PROJECT_DIR$/views/imaging_test_type_form.xml" />
-        <option value="$PROJECT_DIR$/views/imaging_test_result_form.xml" />
-        <option value="$PROJECT_DIR$/models/health_imaging.py" />
-        <option value="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" />
         <option value="$PROJECT_DIR$/data/gnuhealth_commands.xml" />
         <option value="$PROJECT_DIR$/i18n/es.po" />
         <option value="$PROJECT_DIR$/security/ir.model.access.csv" />
         <option value="$PROJECT_DIR$/data/imaging_data.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_keyword.xml" />
+        <option value="$PROJECT_DIR$/../original completo/health_imaging/wizard/wizard_health_imaging.py" />
+        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" />
         <option value="$PROJECT_DIR$/__manifest__.py" />
+        <option value="$PROJECT_DIR$/views/health_imaging_view.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_form.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_request_form.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_request_tree.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_result_form.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_result_tree.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_tree.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_type_form.xml" />
+        <option value="$PROJECT_DIR$/views/imaging_test_type_tree.xml" />
+        <option value="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" />
+        <option value="$PROJECT_DIR$/models/health_imaging.py" />
+        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging.py" />
       </list>
     </option>
   </component>
@@ -156,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,17 +199,17 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../health_icu" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Program Files (x86)\Odoo 13.0\server\odoo\addons\health_imaging\wizard" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Program Files (x86)\Odoo 13.0\server\odoo\addons\health_imaging\views" />
       <recent name="C:\Program Files (x86)\Odoo 13.0\server\odoo\addons\health_imaging\wizard" />
     </key>
   </component>
@@ -274,12 +280,12 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24810892" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23404256" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25642964" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2111293" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.66448444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -312,7 +318,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/imaging_data.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/security/ir.model.access.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="126" lean-forward="false" selection-start-line="6" selection-start-column="126" selection-end-line="6" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__manifest__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -328,7 +355,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="44" lean-forward="false" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -336,7 +362,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -344,7 +369,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="17" lean-forward="false" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -353,7 +377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3740">
           <caret line="221" column="11" lean-forward="false" selection-start-line="221" selection-start-column="4" selection-end-line="221" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -373,106 +396,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/models.py" />
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_result_tree.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="49" lean-forward="false" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_tree.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_type_tree.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Web-Sites/Trabajo Odoo Cuba/proyectosaludcuba-master/original completo/health_imaging/wizard/wizard_health_imaging.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-459">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../fleet/models/fleet_vehicle.py" />
-    <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../account/wizard/account_accrual_accounting.py" />
-    <entry file="file://$PROJECT_DIR$/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../base/models/res_partner.py" />
     <entry file="file://$PROJECT_DIR$/../base/models/ir_attachment.py" />
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_request_form.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wizard/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="35" lean-forward="true" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_request_tree.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_type_form.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_result_form.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="36" column="67" lean-forward="true" selection-start-line="36" selection-start-column="67" selection-end-line="36" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/gnuhealth_commands.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -482,33 +415,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../account/__manifest__.py" />
-    <entry file="file://$PROJECT_DIR$/i18n/fr.po">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/i18n/pt_BR.po">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/i18n/fr.po" />
+    <entry file="file://$PROJECT_DIR$/i18n/pt_BR.po" />
     <entry file="file://$PROJECT_DIR$/i18n/es.po">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="402" column="0" lean-forward="true" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_form.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -520,60 +432,179 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/wizard_health_imaging.py">
+    <entry file="file://$PROJECT_DIR$/models/wizard_health_imaging.py" />
+    <entry file="file://$PROJECT_DIR$/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
+        <state relative-caret-position="34">
+          <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../medical/models/medical_patient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../base/models/res_partner.py" />
+    <entry file="file://$PROJECT_DIR$/../product/models/product_template.py" />
+    <entry file="file://$PROJECT_DIR$/../base/models/res_country.py" />
+    <entry file="file://$PROJECT_DIR$/security/ir.model.access.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="126" lean-forward="false" selection-start-line="6" selection-start-column="126" selection-end-line="6" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/imaging_data.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../original completo/health_imaging/health_imaging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-26">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../original completo/health_imaging/wizard/wizard_health_imaging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="66" column="9" lean-forward="true" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wizard/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="35" lean-forward="true" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__manifest__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="36" column="64" lean-forward="false" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/imaging_keyword.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="995">
+          <caret line="65" column="20" lean-forward="false" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/health_imaging_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_form.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-729">
-          <caret line="66" column="4" lean-forward="false" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
-          <folding>
-            <element signature="e#1044#1059#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="102">
+          <caret line="6" column="67" lean-forward="true" selection-start-line="6" selection-start-column="67" selection-end-line="6" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/health_imaging.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="154" column="31" lean-forward="false" selection-start-line="154" selection-start-column="31" selection-end-line="154" selection-end-column="31" />
+        <state relative-caret-position="111">
+          <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_request_form.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/security/ir.model.access.csv">
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_request_tree.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="126" lean-forward="false" selection-start-line="6" selection-start-column="126" selection-end-line="6" selection-end-column="126" />
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/imaging_data.xml">
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_result_form.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/__manifest__.py">
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_result_tree.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="25" column="8" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_tree.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_type_form.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_type_tree.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
           <folding />
         </state>
       </provider>

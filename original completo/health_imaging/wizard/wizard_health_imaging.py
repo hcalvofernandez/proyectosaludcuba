@@ -64,7 +64,7 @@ class WizardGenerateResult(Wizard):
 
 class RequestImagingTest(ModelView):
     'Request - Test'
-    __name__ = 'gnuhealth.request-imaging-test'
+    _name = 'gnuhealth.request-imaging-test'
     _table = 'gnuhealth_request_imaging_test'
 
     request = fields.Many2One('gnuhealth.patient.imaging.test.request.start',

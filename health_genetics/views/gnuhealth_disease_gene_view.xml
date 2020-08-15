@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <record id="gnuhealth_disease_gene_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth.disease.gene.form.view</field>
+        <field name="model">gnuhealth.disease.gene</field>
+        <field name="arch" type="xml">
+            <form>
+                <label name="name"/>
+                <field name="name"/>
+                <label name="long_name"/>
+                <field name="long_name"/>
+                <newline/>
+                <label name="protein_name"/>
+                <field name="protein_name"/>
+                <label name="protein_uri"/>
+                <field name="protein_uri" widget="url"/>
+                <newline/>
+                <label name="chromosome"/>
+                <field name="chromosome"/>
+                <label name="location"/>
+                <field name="location"/>
+                <label name="gene_id"/>
+                <field name="gene_id"/>
+                <newline/>
+                <field colspan="4" name="variants"/>
+                <newline/>
+                <field colspan="4" name="info"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="gnuhealth_disease_gene_tree_view" model="ir.ui.view">
+        <field name="name">gnuhealth.disease.gene.tree.view</field>
+        <field name="model">gnuhealth.disease.gene</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" expand="1"/>
+                <field name="long_name" expand="1"/>
+                <field name="chromosome" expand="1"/>
+                <field name="variants" expand="1"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="gnuhealth_disease_gene_action">
+        <field name="name">Disease Genes</field>
+        <field name="res_model">gnuhealth.disease.gene</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="gnuhealth_disease_gene_menu"
+            name="Disease Genes"
+            parent="health_genetics_menu"
+            action="gnuhealth_disease_gene_action"
+    />
+</odoo>

@@ -27,7 +27,7 @@ from odoo.osv import expression
 from uuid import uuid4
 
 __all__ = ['DiseaseGene', 'ProteinDisease', 'GeneVariant', 'GeneVariantPhenotype',
-           'PatientGeneticRisk', 'FamilyDiseases', 'GnuHealthPatient']
+           'PatientGeneticRisk', 'FamilyDiseases', 'PatientData']
 
 
 class DiseaseGene(models.Model):

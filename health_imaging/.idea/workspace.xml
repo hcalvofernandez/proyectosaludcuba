@@ -2,45 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="06de9b3d-35f1-437f-966f-de17ef83fef5" name="not-included" comment="archivos .idea&#10;" />
-    <list default="true" id="18d23200-c8dd-4f14-8a8b-268dc561c1a8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/el.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/el.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/__manifest__.py" afterPath="$PROJECT_DIR$/../health_icu/__manifest__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/ar.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/ar.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/de.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/de.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/es.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/es.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/fr.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/fr.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/it_IT.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/it_IT.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/ja_JP.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/ja_JP.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/lo.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/lo.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/pt_BR.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/pt_BR.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/i18n/zh_CN.po" afterPath="$PROJECT_DIR$/../health_icu/i18n/zh_CN.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/models/health_icu.py" afterPath="$PROJECT_DIR$/../health_icu/models/health_icu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_apache2_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_apache2_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_tree.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_glasgow_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_tree.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_icu_ventilation_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_form.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_tree.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_inpatient_icu_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/gnuhealth_patient_icu_rounding.xml" afterPath="$PROJECT_DIR$/../health_icu/views/gnuhealth_patient_icu_rounding.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../health_icu/views/health_icu_view.xml" afterPath="$PROJECT_DIR$/../health_icu/views/health_icu_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__manifest__.py" afterPath="$PROJECT_DIR$/__manifest__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/imaging_data.xml" afterPath="$PROJECT_DIR$/data/imaging_data.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/health_imaging.py" afterPath="$PROJECT_DIR$/models/health_imaging.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_request_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_request_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_request_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_request_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_result_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_result_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_result_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_result_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_type_form.xml" afterPath="$PROJECT_DIR$/views/imaging_test_type_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/imaging_test_type_tree.xml" afterPath="$PROJECT_DIR$/views/imaging_test_type_tree.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" afterPath="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wizard/wizard_health_imaging.py" afterPath="$PROJECT_DIR$/wizard/wizard_health_imaging.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" afterPath="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../original completo/health_imaging/wizard/wizard_health_imaging.py" afterPath="$PROJECT_DIR$/../original completo/health_imaging/wizard/wizard_health_imaging.py" />
-    </list>
+    <list default="true" id="18d23200-c8dd-4f14-8a8b-268dc561c1a8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,6 +65,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Yadier &lt;yadierq87@gmail.com&gt;" />
         <option value="Yadier" />
       </list>
     </option>
@@ -265,7 +228,21 @@
       <option name="project" value="LOCAL" />
       <updated>1597094315847</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="-- instalable con dependencias a medical OK --">
+      <created>1597502146794</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1597502146794</updated>
+    </task>
+    <task id="LOCAL-00006" summary="-- instalable con dependencias a medical OK --">
+      <created>1597502227492</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1597502227492</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -307,7 +284,8 @@
     <MESSAGE value="-- iniciando para poder instalar las modelos basicas --" />
     <MESSAGE value="-- llenando archivo data --" />
     <MESSAGE value="-- llenando data y security a las modelos --" />
-    <option name="LAST_COMMIT_MESSAGE" value="-- llenando data y security a las modelos --" />
+    <MESSAGE value="-- instalable con dependencias a medical OK --" />
+    <option name="LAST_COMMIT_MESSAGE" value="-- instalable con dependencias a medical OK --" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -377,6 +355,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3740">
           <caret line="221" column="11" lean-forward="false" selection-start-line="221" selection-start-column="4" selection-end-line="221" selection-end-column="11" />
+          <folding>
+            <element signature="e#1522#2641#0" expanded="false" />
+            <element signature="e#2706#4423#0" expanded="false" />
+            <element signature="e#4518#4777#0" expanded="false" />
+            <element signature="e#4818#5299#0" expanded="false" />
+            <element signature="e#5346#7458#0" expanded="false" />
+            <element signature="e#7503#9296#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -542,6 +528,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
           <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="67" />
+          <folding>
+            <element signature="e#1522#2641#0" expanded="false" />
+            <element signature="e#2706#4423#0" expanded="false" />
+            <element signature="e#4518#4777#0" expanded="false" />
+            <element signature="e#4818#5299#0" expanded="false" />
+            <element signature="e#5346#7458#0" expanded="false" />
+            <element signature="e#7503#9296#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

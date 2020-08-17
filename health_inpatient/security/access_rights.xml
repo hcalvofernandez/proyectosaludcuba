@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- BEGIN INPATIENT ADMINISTRATION GROUP ACCESS RIGHTS -->
+
+        <!-- Create the Health Inpatient Administration group -->
+        <record model="res.group" id="group_health_inpatient_admin">
+            <field name="name">Health Inpatient Administration</field>
+        </record>
+
+        <!-- Assign the Group to the "admin" user -->
+
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <!-- Access to Menus -->
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+    </data>
+</odoo>

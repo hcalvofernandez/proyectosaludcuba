@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gnuhealth_sequence_setup,gnuhealth.sequence.setup,model_gnuhealth_sequence_setup,base.group_user,1,1,1,1
+access_gnuhealth_sequences,gnuhealth.sequences,model_gnuhealth_sequences,base.group_user,1,1,1,1
+access_gnuhealth_imaging_test_type,gnuhealth.imaging.test.type,model_gnuhealth_imaging_test_type,base.group_user,1,1,1,1
+access_gnuhealth_imaging_test,gnuhealth.imaging.test,model_gnuhealth_imaging_test,base.group_user,1,1,1,1
+access_gnuhealth_imaging_test_request,gnuhealth.imaging.test.request,model_gnuhealth_imaging_test_request,base.group_user,1,1,1,1
+access_gnuhealth_imaging_test_result,gnuhealth.imaging.test.result,model_gnuhealth_imaging_test_result,base.group_user,1,1,1,1

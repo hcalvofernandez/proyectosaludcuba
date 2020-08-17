@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <record id="gnuhealth_icu_glasgow_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth.icu.glasgow.form.view</field>
+        <field name="model">gnuhealth.icu.glasgow</field>
+        <field name="arch" type="xml">
+            <form>
+                <group colspan="4">
+                    <field name="name"/>
+                    <field name="evaluation_date"/>
+                </group>
+                <newline/>
+                <group id="group_glasgow_header" colspan="4">
+                    <field name="glasgow_eyes"/>
+                    <field name="glasgow_verbal"/>
+                    <field name="glasgow_motor"/>
+                    <field name="glasgow"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

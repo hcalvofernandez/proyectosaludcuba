@@ -1,0 +1,18 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+#. module: health_imaging
+msgctxt "error:gnuhealth.imaging.test.result:"
+msgid "The test ID code must be unique"
+msgstr ""
+
+#. module: health_imaging
+msgctxt "field:gnuhealth.imaging.test,active:"
+msgid "Active"
+msgstr ""
+
+#. module: health_imaging
+msgctxt "field:gnuhealth.imaging.test,code:"
+msgid "Code"
+msgstr ""

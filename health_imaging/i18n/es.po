@@ -1,0 +1,14 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+#. module: health_imaging
+#: model:ir.model.fields,field_active:health_imaging.field_gnuhealth_imaging_test_active
+msgid "Active"
+msgstr "Activo"
+
+
+#. module: health_imaging
+#: model:ir.model.fields,field_code:health_imaging.field_gnuhealth_imaging_test_code
+msgid "Code"
+msgstr "Código"

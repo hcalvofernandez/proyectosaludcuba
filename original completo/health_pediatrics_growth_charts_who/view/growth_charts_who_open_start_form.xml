@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<form>
-    <label name="indicator"/>
-    <field name="indicator"/>
-    <label name="measure"/>
-    <field name="measure"/>
-</form>

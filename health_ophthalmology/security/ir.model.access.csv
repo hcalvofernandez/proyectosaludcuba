@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gnuhealth_ophthalmology_evaluation,access_gnuhealth_ophthalmology_evaluation_admin,health_ophthalmology.model_gnuhealth_ophthalmology_evaluation,base.group_system,1,1,1,1
+access_gnuhealth_ophthalmology_findings,access_gnuhealth_ophthalmology_findings_admin,health_ophthalmology.model_gnuhealth_ophthalmology_findings,base.group_system,1,1,1,1

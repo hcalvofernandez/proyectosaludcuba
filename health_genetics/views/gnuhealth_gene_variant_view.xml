@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <record id="gnuhealth_gene_variant_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth.gene.variant.form.view</field>
+        <field name="model">gnuhealth.gene.variant</field>
+        <field name="arch" type="xml">
+            <form>
+                <label name="name"/>
+                <field name="name"/>
+                <label name="variant"/>
+                <field name="variant"/>
+                <newline/>
+                <label name="aa_change"/>
+                <field name="aa_change"/>
+                <newline/>
+                <field colspan="4" name="phenotypes"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="gnuhealth_gene_variant_tree_view" model="ir.ui.view">
+        <field name="name">gnuhealth.gene.variant.tree.view</field>
+        <field name="model">gnuhealth.gene.variant</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" expand="1"/>
+                <field name="variant" expand="1"/>
+                <field name="aa_change" expand="1"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="gnuhealth_gene_variant_action">
+        <field name="name">Natural Variant</field>
+        <field name="res_model">gnuhealth.gene.variant</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="gnuhealth_gene_variant_menu"
+            name="Natural Variant"
+            parent="health_genetics_menu"
+            action="gnuhealth_gene_variant_action"
+    />
+</odoo>

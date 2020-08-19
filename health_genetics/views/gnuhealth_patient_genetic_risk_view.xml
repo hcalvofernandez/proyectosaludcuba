@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <record id="gnuhealth_patient_genetic_risk_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth.patient.genetic.risk.form.view</field>
+        <field name="model">gnuhealth.patient.genetic.risk</field>
+        <field name="arch" type="xml">
+            <form>
+                <label name="patient"/>
+                <field name="patient"/>
+                <label name="patient_genetic_risk"/>
+                <field name="patient_genetic_risk"/>
+
+                <newline/>
+                <field name="disease_gene" invisible="1"/>
+                <label name="natural_variant"/>
+                <field name="natural_variant" domain="[('name','=',disease_gene)]"/>
+                <label name="variant_phenotype"/>
+                <field name="variant_phenotype" domain="[('name','=',natural_variant)]"/>
+                <label name="onset"/>
+                <field name="onset"/>
+                <newline/>
+                <label name="notes" colspan="4"/>
+                <field name="notes" colspan="4"/>
+                <newline/>
+                <group id="genetics_info_footer" colspan="4">
+                    <label name="healthprof"/>
+                    <field name="healthprof"/>
+                    <label name="institution"/>
+                    <field name="institution"/>
+                </group>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="gnuhealth_patient_genetic_risk_tree_view" model="ir.ui.view">
+        <field name="name">gnuhealth.patient.genetic.risk.tree.view</field>
+        <field name="model">gnuhealth.patient.genetic.risk</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="patient"/>
+                <field name="patient_genetic_risk" expand="1"/>
+                <field name="disease_gene" invisible="1"/>
+                <field name="natural_variant" expand="1" domain="[('name','=',disease_gene)]"/>
+                <field name="variant_phenotype" expand="1" domain="[('name','=',natural_variant)]"/>
+                <field name="onset" expand="1"/>
+                <field name="notes" expand="1"/>
+                <field name="healthprof"/>
+                <field name="institution"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="gnuhealth_patient_genetic_risk_action">
+        <field name="name">Patient Genetic Information</field>
+        <field name="res_model">gnuhealth.patient.genetic.risk</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="gnuhealth_patient_genetic_risk_menu"
+            name="Patient Genetic Information"
+            parent="health_genetics_menu"
+            action="gnuhealth_patient_genetic_risk_action"
+    />
+</odoo>

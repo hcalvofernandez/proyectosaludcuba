@@ -40,7 +40,7 @@
     <menuitem
             id="gnuhealth_inpatient_diet_menu"
             name="Inpatient Diet"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_inpatient_diet_action"
     />
 </odoo>

@@ -22,99 +22,17 @@
 ##############################################################################
 from datetime import datetime
 from odoo import api, fields, models, _, tools
+from odoo.exceptions import RedirectWarning, UserError, ValidationError, AccessError
+from odoo.osv import expression
 from odoo.tools import grouped_slice, reduce_ids
 
 import pytz
 
-__all__ = ['GnuHealthSequences', 'GnuHealthSequenceSetup',
-           'DietTherapeutic', 'InpatientRegistration',
+__all__ = ['DietTherapeutic', 'InpatientRegistration',
            'BedTransfer', 'Appointment', 'PatientEvaluation', 'PatientData',
            'InpatientMedication', 'InpatientMedicationAdminTimes',
            'InpatientMedicationLog', 'InpatientDiet', 'InpatientMeal',
-           'InpatientMealOrder', 'InpatientMealOrderItem', 'ECG']
-
-sequences = ['inpatient_registration_sequence',
-             'inpatient_meal_order_sequence']
-
-
-class GnuHealthSequences(models.Model):
-    _description = 'GNU Health Sequences'
-    _name = 'gnuhealth.sequences'
-
-    inpatient_registration_sequence = fields.MultiValue(fields.Many2one(
-        'ir.sequence', 'Inpatient Sequence', required=True,
-        domain=[('code', '=', 'gnuhealth.inpatient.registration')]))
-
-    inpatient_meal_order_sequence = fields.MultiValue(fields.Many2one(
-        'ir.sequence', 'Inpatient Meal Sequence', required=True,
-        domain=[('code', '=', 'gnuhealth.inpatient.meal.order')]))
-
-    @classmethod
-    def multivalue_model(self, field):
-        # pool = Pool()
-
-        if field in sequences:
-            return self.env['gnuhealth.sequence.setup']
-        return super(GnuHealthSequences, self).multivalue_model(field)
-
-    @classmethod
-    def default_inpatient_registration_sequence(self):
-        return self.multivalue_model(
-            'inpatient_registration_sequence').default_inpatient_registration_sequence()
-
-    @classmethod
-    def default_inpatient_meal_order_sequence(self):
-        return self.multivalue_model(
-            'inpatient_meal_order_sequence').default_inpatient_meal_order_sequence()
-
-
-# SEQUENCE SETUP
-class GnuHealthSequenceSetup(models.Model):
-    _description = 'GNU Health Sequences Setup'
-    _name = 'gnuhealth.sequence.setup'
-
-    inpatient_registration_sequence = fields.Many2one('ir.sequence',
-                                                      'Inpatient Sequence', required=True,
-                                                      domain=[('code', '=', 'gnuhealth.inpatient.registration')])
-
-    inpatient_meal_order_sequence = fields.Many2one('ir.sequence',
-                                                    'Inpatient Meal Sequence', required=True,
-                                                    domain=[('code', '=', 'gnuhealth.inpatient.meal.order')])
-
-    @classmethod
-    def __register__(self, module_name):
-        TableHandler = backend.get('TableHandler')
-        exist = TableHandler.table_exist(self._table)
-
-        super(GnuHealthSequenceSetup, self).__register__(module_name)
-
-        if not exist:
-            self._migrate_property([], [], [])
-
-    @classmethod
-    def _migrate_property(self, field_names, value_names, fields):
-        field_names.extend(sequences)
-        value_names.extend(sequences)
-        migrate_property(
-            'gnuhealth.sequences', field_names, self, value_names,
-            fields=fields)
-
-    @classmethod
-    def default_inpatient_registration_sequence(self):
-        # pool = Pool()
-        ModelData = self.env['ir.model.data']
-        return ModelData.get_id(
-            'health_inpatient', 'seq_gnuhealth_inpatient_registration')
-
-    @classmethod
-    def default_inpatient_meal_order_sequence(self):
-        # pool = Pool()
-        ModelData = self.env['ir.model.data']
-        return ModelData.get_id(
-            'health_inpatient', 'seq_gnuhealth_inpatient_meal_order')
-
-
-# END SEQUENCE SETUP , MIGRATION FROM FIELDS.PROPERTY
+           'InpatientMealOrder', 'InpatientMealOrderItem', 'PatientECG']
 
 
 # Therapeutic Diet types
@@ -123,19 +41,14 @@ class DietTherapeutic(models.Model):
     _description = 'Diet Therapy'
     _name = "gnuhealth.diet.therapeutic"
 
-    name = fields.Char('Diet type', required=True, translate=True)
-    code = fields.Char('Code', required=True)
-    description = fields.Text('Indications', required=True, translate=True)
-
-    # @classmethod
-    # def __setup__(self):
-    #     super(DietTherapeutic, self).__setup__()
-    #
-    #     t = self.__table__()
-    #     self._sql_constraints = [
-    #         ('code_unique', Unique(t, t.code),
-    #          'The Diet code already exists'),
-    #     ]
+    name = fields.Char('Diet type',
+                       required=True,
+                       translate=True)
+    code = fields.Char('Code',
+                       required=True)
+    description = fields.Text('Indications',
+                              required=True,
+                              translate=True)
 
     _sql_constraints = [
         ('code_uniq', 'unique (code)', 'The Diet code already exists!'),
@@ -146,136 +59,187 @@ class InpatientRegistration(models.Model):
     _description = 'Patient admission History'
     _name = 'gnuhealth.inpatient.registration'
 
-    STATES = {'readonly': Or(Eval('state') == 'done',
-                             Eval('state') == 'finished')}
-
-    name = fields.Char('Registration Code', readonly=True, index=True)
-    patient = fields.Many2one('gnuhealth.patient', 'Patient',
-                              required=True, index=True, states=STATES)
-    admission_type = fields.Selection([
-        (None, ''),
-        ('routine', 'Routine'),
-        ('maternity', 'Maternity'),
-        ('elective', 'Elective'),
-        ('urgent', 'Urgent'),
-        ('emergency', 'Emergency'),
-    ], 'Admission type', required=True, index=True, states=STATES)
-    hospitalization_date = fields.Datetime('Hospitalization date',
-                                           required=True, index=True, states=STATES)
-    discharge_date = fields.Datetime('Expected Discharge Date', required=True,
-                                     states=STATES)
-    attending_physician = fields.Many2one('gnuhealth.healthprofessional',
-                                          'Attending Physician', states=STATES)
-    operating_physician = fields.Many2one('gnuhealth.healthprofessional',
-                                          'Operating Physician', states=STATES)
-    admission_reason = fields.Many2one('gnuhealth.pathology',
-                                       'Reason for Admission', help="Reason for Admission", states=STATES,
-                                       index=True)
-    bed = fields.Many2one('gnuhealth.hospital.bed', 'Hospital Bed',
-                          states={
-                              'required': Not(Bool(Eval('name'))),
-                              'readonly': Or(Eval('state') == 'done',
-                                             Eval('state') == 'finished',
-                                             Bool(Eval('name')),
-                                             )
-                          },
-                          depends=['name'])
-    nursing_plan = fields.Text('Nursing Plan', states=STATES)
-    medications = fields.One2many('gnuhealth.inpatient.medication', 'name',
-                                  'Medications', states=STATES)
-    therapeutic_diets = fields.One2many('gnuhealth.inpatient.diet', 'name',
-                                        'Meals / Diet Program', states=STATES)
-
-    nutrition_notes = fields.Text('Nutrition notes / directions', states=STATES)
-    discharge_plan = fields.Text('Discharge Plan', states=STATES)
-    info = fields.Text('Notes', states=STATES)
-    state = fields.Selection((
-        (None, ''),
-        ('free', 'free'),
-        ('cancelled', 'cancelled'),
-        ('confirmed', 'confirmed'),
-        ('hospitalized', 'hospitalized'),
-        ('done', 'Discharged - needs cleaning'),
-        ('finished', 'Finished'),
-    ), 'Status', index=True, readonly=True)
-
-    bed_transfers = fields.One2many('gnuhealth.bed.transfer', 'name',
-                                    'Transfer History', readonly=True)
-
-    discharged_by = fields.Many2one(
-        'gnuhealth.healthprofessional', 'Discharged by', readonly=True,
-        help="Health Professional that discharged the patient")
-
-    discharge_reason = fields.Selection([
-        (None, ''),
-        ('home', 'Home / Selfcare'),
-        ('transfer', 'Transferred to another institution'),
-        ('death', 'Death'),
-        ('against_advice', 'Left against medical advice')],
-        'Discharge Reason',
-        states={'readonly': Not(Equal(Eval('state'), 'hospitalized')), },
-        help="Reason for patient discharge")
-
-    discharge_dx = fields.Many2one('gnuhealth.pathology',
-                                   'Discharge Dx', help="Code for Discharge Diagnosis",
-                                   states={'readonly': Not(Equal(Eval('state'), 'hospitalized')), })
-
-    institution = fields.Many2one('gnuhealth.institution', 'Institution',
-                                  readonly=True)
-
-    puid = fields.Function(
-        fields.Char('PUID', help="Person Unique Identifier"),
-        'get_patient_puid', searcher="search_patient_puid")
-
-    @staticmethod
-    def default_institution(self):
+    @api.model
+    def _get_default_institution(self):
         HealthInst = self.env['gnuhealth.institution']
         institution = HealthInst.get_institution()
         return institution
 
-    def get_patient_puid(self, name):
+    name = fields.Char('Registration Code',
+                       readonly=True,
+                       index=True)
+    patient = fields.Many2one('gnuhealth.patient',
+                              'Patient',
+                              required=True,
+                              index=True,
+                              readonly=True,
+                              states={
+                                  'done': [('readonly', True)],
+                                  'finished': [('readonly', True)],
+                              }, )
+    admission_type = fields.Selection([('none', ''),
+                                       ('routine', 'Routine'),
+                                       ('maternity', 'Maternity'),
+                                       ('elective', 'Elective'),
+                                       ('urgent', 'Urgent'),
+                                       ('emergency', 'Emergency'), ],
+                                      'Admission type',
+                                      default='none',
+                                      required=True,
+                                      index=True,
+                                      readonly=True,
+                                      states={
+                                          'done': [('readonly', True)],
+                                          'finished': [('readonly', True)],
+                                      }, )
+    hospitalization_date = fields.Datetime('Hospitalization date',
+                                           required=True,
+                                           index=True,
+                                           readonly=True,
+                                           states={
+                                               'done': [('readonly', True)],
+                                               'finished': [('readonly', True)],
+                                           }, )
+    discharge_date = fields.Datetime('Expected Discharge Date',
+                                     required=True,
+                                     readonly=True,
+                                     states={
+                                         'done': [('readonly', True)],
+                                         'finished': [('readonly', True)],
+                                     }, )
+    attending_physician = fields.Many2one('gnuhealth.healthprofessional',
+                                          'Attending Physician',
+                                          readonly=True,
+                                          states={
+                                              'done': [('readonly', True)],
+                                              'finished': [('readonly', True)],
+                                          }, )
+    operating_physician = fields.Many2one('gnuhealth.healthprofessional',
+                                          'Operating Physician',
+                                          readonly=True,
+                                          states={
+                                              'done': [('readonly', True)],
+                                              'finished': [('readonly', True)],
+                                          }, )
+    admission_reason = fields.Many2one('gnuhealth.pathology',
+                                       'Reason for Admission',
+                                       help="Reason for Admission",
+                                       readonly=True,
+                                       states={
+                                           'done': [('readonly', True)],
+                                           'finished': [('readonly', True)],
+                                       }, index=True)
+    bed = fields.Many2one('gnuhealth.hospital.bed',
+                          'Hospital Bed',
+                          readonly=True,
+                          states={
+                              'done': [('readonly', True)],
+                              'finished': [('readonly', True)],
+                          },
+                          depends=['name'])
+    nursing_plan = fields.Text('Nursing Plan',
+                               readonly=True,
+                               states={
+                                   'done': [('readonly', True)],
+                                   'finished': [('readonly', True)],
+                               }, )
+    medications = fields.One2many('gnuhealth.inpatient.medication',
+                                  'name',
+                                  'Medications',
+                                  readonly=True,
+                                  states={
+                                      'done': [('readonly', True)],
+                                      'finished': [('readonly', True)],
+                                  }, )
+    therapeutic_diets = fields.One2many('gnuhealth.inpatient.diet',
+                                        'name',
+                                        'Meals / Diet Program',
+                                        readonly=True,
+                                        states={
+                                            'done': [('readonly', True)],
+                                            'finished': [('readonly', True)],
+                                        }, )
+
+    nutrition_notes = fields.Text('Nutrition notes / directions',
+                                  readonly=True,
+                                  states={
+                                      'done': [('readonly', True)],
+                                      'finished': [('readonly', True)],
+                                  }, )
+    discharge_plan = fields.Text('Discharge Plan',
+                                 readonly=True,
+                                 states={
+                                     'done': [('readonly', True)],
+                                     'finished': [('readonly', True)],
+                                 }, )
+    info = fields.Text('Notes',
+                       readonly=True,
+                       states={
+                           'done': [('readonly', True)],
+                           'finished': [('readonly', True)],
+                       }, )
+    state = fields.Selection((('none', ''),
+                              ('free', 'free'),
+                              ('cancelled', 'cancelled'),
+                              ('confirmed', 'confirmed'),
+                              ('hospitalized', 'hospitalized'),
+                              ('done', 'Discharged - needs cleaning'),
+                              ('finished', 'Finished'),
+                              ), 'Status',
+                             index=True,
+                             default='free',
+                             readonly=True)
+
+    bed_transfers = fields.One2many('gnuhealth.bed.transfer',
+                                    'name',
+                                    'Transfer History',
+                                    readonly=True)
+
+    discharged_by = fields.Many2one('gnuhealth.healthprofessional',
+                                    'Discharged by',
+                                    readonly=True,
+                                    help="Health Professional that discharged the patient")
+
+    discharge_reason = fields.Selection([('none', ''),
+                                         ('home', 'Home / Selfcare'),
+                                         ('transfer', 'Transferred to another institution'),
+                                         ('death', 'Death'),
+                                         ('against_advice', 'Left against medical advice')],
+                                        'Discharge Reason',
+                                        default='none',
+                                        readonly=True,
+                                        states={
+                                            'hospitalized': [('readonly', False)],
+                                        },
+                                        help="Reason for patient discharge")
+
+    discharge_dx = fields.Many2one('gnuhealth.pathology',
+                                   'Discharge Dx',
+                                   help="Code for Discharge Diagnosis",
+                                   readonly=True,
+                                   states={
+                                       'hospitalized': [('readonly', True)],
+                                   }, )
+
+    institution = fields.Many2one('gnuhealth.institution',
+                                  'Institution',
+                                  readonly=True,
+                                  default=_get_default_institution)
+
+    puid = fields.Char('PUID',
+                       help="Person Unique Identifier",
+                       compute='_get_patient_puid',
+                       search='_search_patient_puid',
+                       )
+
+    @api.depends('patient')
+    def _get_patient_puid(self):
         return self.patient.name.ref
 
-    @classmethod
-    def search_patient_puid(self, name, clause):
+    def search_patient_puid(self, operator, value):
         res = []
-        value = clause[2]
-        res.append(('patient.name.ref', clause[1], value))
+        res.append(('patient.name.ref', operator, value))
         return res
-
-    @classmethod
-    def __setup__(self):
-        super(InpatientRegistration, self).__setup__()
-        # t = self.__table__()
-        # self._sql_constraints = [
-        #     ('name_unique', Unique(t, t.name),
-        #      'The Registration code already exists'),
-        # ]
-
-        self._error_messages.update({
-            'bed_is_not_available': 'Bed is not available',
-            'discharge_reason_needed': 'Admission and Discharge reasons \n'
-                                       'as well as Discharge Dx are needed',
-            'destination_bed_unavailable': 'Destination bed unavailable',
-            'need_timezone': 'You need to set up the company timezone'})
-        self._buttons.update({
-            'confirmed': {
-                'invisible': And(Not(Equal(Eval('state'), 'free')),
-                                 Not(Equal(Eval('state'), 'cancelled'))),
-            },
-            'cancel': {
-                'invisible': Not(Equal(Eval('state'), 'confirmed')),
-            },
-            'admission': {
-                'invisible': Not(Equal(Eval('state'), 'confirmed')),
-            },
-            'discharge': {
-                'invisible': Not(Equal(Eval('state'), 'hospitalized')),
-            },
-            'bedclean': {
-                'invisible': Not(Equal(Eval('state'), 'done')),
-            },
-        })
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'The Registration code already exists!'),
@@ -284,78 +248,74 @@ class InpatientRegistration(models.Model):
     ## Method to check for availability and make the hospital bed reservation
     # Checks that there are not overlapping dates and status of the bed / room
     # is not confirmed, hospitalized or done but requiring cleaning ('done')
-    @classmethod
-    @ModelView.button
-    def confirmed(self, registrations):
-        registration_id = registrations[0]
+    def button_confirmed(self):
+        self.ensure_one()
         Bed = self.env['gnuhealth.hospital.bed']
         cursor = self.env.cr
-        bed_id = registration_id.bed.id
+        bed_id = self.bed.id
         cursor.execute("SELECT COUNT(*) \
             FROM gnuhealth_inpatient_registration \
             WHERE (hospitalization_date::timestamp,discharge_date::timestamp) \
                 OVERLAPS (timestamp %s, timestamp %s) \
               AND (state = %s or state = %s or state = %s) \
               AND bed = CAST(%s AS INTEGER) ",
-                       (registration_id.hospitalization_date,
-                        registration_id.discharge_date,
+                       (self.hospitalization_date,
+                        self.discharge_date,
                         'confirmed', 'hospitalized', 'done', str(bed_id)))
         res = cursor.fetchone()
-        if (registration_id.discharge_date.date() <
-                registration_id.hospitalization_date.date()):
-            self.raise_user_error("The Discharge date must later than the " \
-                                  "Admission")
+        if self.discharge_date.date() < self.hospitalization_date.date():
+            raise UserError(
+                _(
+                    'The Discharge date must later than the Admission!'
+                ))
         if res[0] > 0:
-            self.raise_user_error('bed_is_not_available')
+            raise UserError(
+                _(
+                    'Bed is not available!'
+                ))
         else:
-            self.write(registrations, {'state': 'confirmed'})
-            Bed.write([registration_id.bed], {'state': 'reserved'})
+            self.write({'state': 'confirmed'})
+            self.bed.write({'state': 'reserved'})
 
-    @classmethod
-    @ModelView.button
-    def discharge(self, registrations):
-        registration_id = registrations[0]
+    def button_discharge(self):
+        self.ensure_one()
         Bed = self.env['gnuhealth.hospital.bed']
 
         signing_hp = self.env['gnuhealth.healthprofessional'].get_health_professional()
         if not signing_hp:
-            self.raise_user_error(
-                "No health professional associated to this user !")
+            raise UserError(
+                _(
+                    'No health professional associated to this user!'
+                ))
 
-        self.write(registrations, {'state': 'done',
-                                   'discharged_by': signing_hp})
+        self.write({'state': 'done',
+                    'discharged_by': signing_hp})
 
-        Bed.write([registration_id.bed], {'state': 'to_clean'})
+        self.bed.write({'state': 'to_clean'})
 
-    @classmethod
-    @ModelView.button
-    def bedclean(self, registrations):
-        registration_id = registrations[0]
+    def button_bedclean(self):
+        self.ensure_one()
         Bed = self.env['gnuhealth.hospital.bed']
 
-        self.write(registrations, {'state': 'finished'})
+        self.write({'state': 'finished'})
 
-        Bed.write([registration_id.bed], {'state': 'free'})
+        self.bed.write({'state': 'free'})
 
-    @classmethod
-    @ModelView.button
-    def cancel(self, registrations):
-        registration_id = registrations[0]
+    def button_cancel(self):
+        self.ensure_one()
         Bed = self.env['gnuhealth.hospital.bed']
 
-        self.write(registrations, {'state': 'cancelled'})
-        Bed.write([registration_id.bed], {'state': 'free'})
+        self.write({'state': 'cancelled'})
+        self.bed.write({'state': 'free'})
 
-    @classmethod
-    @ModelView.button
-    def admission(self, registrations):
-        registration_id = registrations[0]
+    def button_admission(self):
+        self.ensure_one()
         Bed = self.env['gnuhealth.hospital.bed']
 
-        Company = self.env['company.company']
+        Company = self.env['res.company']
 
         timezone = None
-        company_id = Transaction().context.get('company')
+        company_id = self._context.get('company')
         if company_id:
             company = Company(company_id)
             if company.timezone:
@@ -365,68 +325,71 @@ class InpatientRegistration(models.Model):
                 dt_local = datetime.astimezone(dt.replace(tzinfo=pytz.utc),
                                                timezone)
 
-                if (registration_id.hospitalization_date.date() !=
+                if (self.hospitalization_date.date() !=
                         dt_local.date()):
-                    self.raise_user_error("The Admission date must be today")
+                    raise UserError(
+                        _(
+                            'The Admission date must be today.'
+                        ))
                 else:
-                    self.write(registrations, {'state': 'hospitalized'})
-                    Bed.write([registration_id.bed], {'state': 'occupied'})
+                    self.write({'state': 'hospitalized'})
+                    self.bed.write({'state': 'occupied'})
 
             else:
-                self.raise_user_error('need_timezone')
+                raise UserError(
+                    _(
+                        'You need to set up the company timezone.'
+                    ))
 
-    @classmethod
-    def create(self, vlist):
-        Sequence = self.env['ir.sequence']
-        Config = self.env['gnuhealth.sequences']
-
-        vlist = [x.copy() for x in vlist]
-        for values in vlist:
+    @api.model_create_multi
+    def create(self, vals_list):
+        vals_list = [x.copy() for x in vals_list]
+        for values in vals_list:
             if not values.get('name'):
-                config = Config(1)
-                values['name'] = Sequence.get_id(
-                    config.inpatient_registration_sequence.id)
-        return super(InpatientRegistration, self).create(vlist)
+                values['name'] = self.env['ir.sequence'].next_by_code('gnuhealth.inpatient.registration')
+        return super(InpatientRegistration, self).create(vals_list)
 
-    @staticmethod
-    def default_state():
-        return 'free'
-
-    @classmethod
-    def validate(self, registrations):
-        super(InpatientRegistration, self).validate(registrations)
-        for registration in registrations:
+    @api.constrains('admission_reason', 'state', 'discharge_dx')
+    def validate(self):
+        super(InpatientRegistration, self).validate()
+        for registration in self:
             registration.check_discharge_context()
 
     def check_discharge_context(self):
         if ((not self.discharge_reason or not self.discharge_dx
              or not self.admission_reason)
                 and self.state == 'done'):
-            self.raise_user_error('discharge_reason_needed')
+            raise UserError(
+                _(
+                    'Admission and Discharge reasons \n'
+                    'as well as Discharge Dx are needed.'
+                ))
 
     # Format Registration ID : Patient : Bed
-    def get_rec_name(self, name):
+    def _get_name(self):
         if self.patient:
-            return self.name + ':' + self.bed.rec_name + ':' \
-                   + self.patient.rec_name
-
+            return self.name + ':' + self.bed.rec_name + ':' + self.patient.rec_name
         else:
             return self.name
 
     # Allow searching by the hospitalization code, patient name
-    # or bed number 
+    # or bed number
 
-    @classmethod
-    def search_rec_name(self, name, clause):
-        field = None
+    @api.model
+    def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
         # Search by Registration Code ID or Patient
-        for field in ('name', 'patient', 'bed'):
-            registrations = self.search([(field,) + tuple(clause[1:])], limit=1)
-            if registrations:
-                break
-        if registrations:
-            return [(field,) + tuple(clause[1:])]
-        return [(self._rec_name,) + tuple(clause[1:])]
+        args = args or []
+        if operator.startswith('!') or operator.startswith('not '):
+            domain = [('name', operator, name),
+                      ('patient.name', operator, name),
+                      ('bed.name', operator, name)]
+        else:
+            domain = ['|', '|',
+                      ('name', operator, name),
+                      ('patient.name', operator, name),
+                      ('bed.name', operator, name)]
+        rec = self._search(expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid)
+        return models.lazy_name_get(self.browse(rec).with_user(name_get_uid))
 
 
 class BedTransfer(models.Model):
@@ -445,71 +408,55 @@ class BedTransfer(models.Model):
 
 class Appointment(models.Model):
     _name = 'gnuhealth.appointment'
+    _inherit = 'gnuhealth.appointment'
 
-    inpatient_registration_code = fields.Many2one(
-        'gnuhealth.inpatient.registration',
-        'Inpatient Registration',
-        help="Enter the patient hospitalization code")
+    inpatient_registration_code = fields.Many2one('gnuhealth.inpatient.registration',
+                                                  'Inpatient Registration',
+                                                  help="Enter the patient hospitalization code")
 
 
 class PatientEvaluation(models.Model):
     _name = 'gnuhealth.patient.evaluation'
+    _inherit = 'gnuhealth.patient.evaluation'
 
-    inpatient_registration_code = fields.Many2one(
-        'gnuhealth.inpatient.registration',
-        'IPC',
-        help="Enter the patient hospitalization code")
+    inpatient_registration_code = fields.Many2one('gnuhealth.inpatient.registration',
+                                                  'IPC',
+                                                  help="Enter the patient hospitalization code")
 
 
-class ECG(models.Model):
+# ECG
+class PatientECG(models.Model):
     _name = 'gnuhealth.patient.ecg'
+    _inherit = 'gnuhealth.patient.ecg'
 
-    inpatient_registration_code = fields.Many2one(
-        'gnuhealth.inpatient.registration',
-        'Inpatient Registration',
-        help="Enter the patient hospitalization code")
+    inpatient_registration_code = fields.Many2one('gnuhealth.inpatient.registration',
+                                                  'Inpatient Registration',
+                                                  help="Enter the patient hospitalization code")
 
 
 class PatientData(models.Model):
-    _description = 'Inherit patient model and add the patient status to the patient.'
+    """Inherit patient model and add the patient status to the patient."""
     _name = 'gnuhealth.patient'
+    _inherit = 'gnuhealth.patient'
 
-    patient_status = fields.Function(fields.Boolean('Hospitalized',
-                                                    help="Show the hospitalization status of the patient"),
-                                     getter='get_patient_status', searcher='search_patient_status')
+    patient_status = fields.Boolean('Hospitalized',
+                                    help="Show the hospitalization status of the patient",
+                                    compute='_get_patient_status',
+                                    search='_search_patient_status')
 
-    @classmethod
-    def get_patient_status(self, patients, name):
+    @api.depends('variant')
+    def _get_patient_status(self, patients, name):
         cursor = self.env.cr
-        # pool = Pool()
-        Registration = self.env['gnuhealth.inpatient.registration']
-        registration = Registration.__table__()
+        cursor.execute(("SELECT gir.id \
+                        FROM gnuhealth_inpatient_registration gir \
+                        WHERE (gir.state = %s ) \
+                        GROUP_BY gir.id",
+                        ('hospitalized',)))
+        res = cursor.fetchall()
 
-        # Will store statuses {patient: True/False, ...}
-        ids = list(map(int, patients))
-        result = dict.fromkeys(ids, False)
+        return res
 
-        for sub_ids in grouped_slice(ids):
-            # SQL expression for relevant patient ids
-            clause_ids = reduce_ids(registration.id, sub_ids)
-
-            # Hospitalized patient ids
-            query = registration.select(registration.patient, Literal(True),
-                                        where=(registration.state == 'hospitalized') & clause_ids,
-                                        group_by=registration.patient)
-
-            # Update dictionary of patient ids with True statuses
-            cursor.execute(*query)
-            result.update(cursor.fetchall())
-
-        return result
-
-    @classmethod
-    def search_patient_status(self, name, clause):
-        p = self.env['gnuhealth.inpatient.registration']
-        table = p.__table__()
-        pat = self.__table__()
-        _, operator, value = clause
+    def _search_patient_status(self, operator, value):
 
         # Validate operator and value
         if operator not in ['=', '!=']:
@@ -518,8 +465,13 @@ class PatientData(models.Model):
             raise ValueError('Wrong value: %s' % value)
 
         # Find hospitalized patient ids
-        j = pat.join(table, condition=pat.id == table.patient)
-        s = j.select(pat.id, where=table.state == 'hospitalized')
+        cursor = self.env.cr
+        bed_id = self.bed.id
+        cursor.execute("SELECT pat.id \
+            FROM gnuhealth_inpatient_registration gir join gnuhealth_patient pat on pat.id = gir.patient \
+            WHERE (gir.state = %s )",
+                       ('hospitalized',))
+        query_res = self._cr.fetchall()
 
         # Choose domain operator
         if (operator == '=' and value) or (operator == '!=' and not value):
@@ -527,7 +479,7 @@ class PatientData(models.Model):
         else:
             d = 'not in'
 
-        return [('id', d, s)]
+        return [('id', d, query_res)]
 
 
 class InpatientMedication(models.Model):
@@ -579,29 +531,24 @@ class InpatientMedication(models.Model):
     frequency = fields.Integer('Frequency',
                                help='Time in between doses the patient must wait (ie, for 1 pill'
                                     ' each 8 hours, put here 8 and select \"hours\" in the unit field')
-    frequency_unit = fields.Selection([
-        (None, ''),
-        ('seconds', 'seconds'),
-        ('minutes', 'minutes'),
-        ('hours', 'hours'),
-        ('days', 'days'),
-        ('weeks', 'weeks'),
-        ('wr', 'when required'),
-    ],
-        'unit',
-        index=True,
-        sort=False)
+    frequency_unit = fields.Selection([('none', ''),
+                                       ('seconds', 'seconds'),
+                                       ('minutes', 'minutes'),
+                                       ('hours', 'hours'),
+                                       ('days', 'days'),
+                                       ('weeks', 'weeks'),
+                                       ('wr', 'when required'), ],
+                                      'unit',
+                                      index=True,
+                                      sort=False)
     frequency_prn = fields.Boolean('PRN',
                                    help='Use it as needed, pro re nata')
     is_active = fields.Boolean('Active',
+                               default=True,
                                help='Check if the patient is currently taking the medication')
     discontinued = fields.Boolean('Discontinued')
     course_completed = fields.Boolean('Course Completed')
     discontinued_reason = fields.Char('Reason for discontinuation',
-                                      states={
-                                          'invisible': Not(Bool(Eval('discontinued'))),
-                                          'required': Bool(Eval('discontinued')),
-                                      },
                                       depends=['discontinued'],
                                       help='Short description for discontinuing the treatment')
     adverse_reaction = fields.Text('Adverse Reactions',
@@ -611,7 +558,7 @@ class InpatientMedication(models.Model):
                     'course_completed')
     def on_change_with_is_active(self):
         is_active = True
-        if (self.discontinued or self.course_completed):
+        if self.discontinued or self.course_completed:
             is_active = False
         return is_active
 
@@ -624,10 +571,6 @@ class InpatientMedication(models.Model):
                     'discontinued')
     def on_change_with_course_completed(self):
         return not (self.is_active or self.discontinued)
-
-    @staticmethod
-    def default_is_active():
-        return True
 
 
 class InpatientMedicationAdminTimes(models.Model):
@@ -650,13 +593,24 @@ class InpatientMedicationLog(models.Model):
     _description = 'Inpatient Medication Log History'
     _name = "gnuhealth.inpatient.medication.log"
 
+    @api.model
+    def _default_health_professional(self):
+        # pool = Pool()
+        return self.env['gnuhealth.healthprofessional'].get_health_professional()
+
+    @api.model
+    def _default_admin_time(self):
+        return datetime.now()
+
     name = fields.Many2one('gnuhealth.inpatient.medication',
                            'Medication')
     admin_time = fields.Datetime("Date",
-                                 readonly=True)
+                                 readonly=True,
+                                 default=_default_admin_time)
     health_professional = fields.Many2one('gnuhealth.healthprofessional',
                                           'Health Professional',
-                                          readonly=True)
+                                          readonly=True,
+                                          default=_default_health_professional)
     dose = fields.Float('Dose',
                         help='Amount of medication (eg, 250 mg) per dose')
     dose_unit = fields.Many2one('gnuhealth.dose.unit',
@@ -665,32 +619,18 @@ class InpatientMedicationLog(models.Model):
     remarks = fields.Text('Remarks',
                           help='specific remarks for this dose')
 
-    @classmethod
-    def __setup__(self):
-        super(InpatientMedicationLog, self).__setup__()
-        self._error_messages.update({
-            'health_professional_warning':
-                'No health professional associated to this user',
-        })
-
-    @classmethod
-    def validate(self, records):
-        super(InpatientMedicationLog, self).validate(records)
-        for record in records:
+    @api.constrains('health_professional')
+    def validate(self):
+        super(InpatientMedicationLog, self).validate()
+        for record in self:
             record.check_health_professional()
 
     def check_health_professional(self):
         if not self.health_professional:
-            self.raise_user_error('health_professional_warning')
-
-    @staticmethod
-    def default_health_professional(self):
-        # pool = Pool()
-        return self.env['gnuhealth.healthprofessional'].get_health_professional()
-
-    @staticmethod
-    def default_admin_time():
-        return datetime.now()
+            raise UserError(
+                _(
+                    'No health professional associated to this user!'
+                ))
 
 
 class InpatientDiet(models.Model):
@@ -710,6 +650,12 @@ class InpatientMeal(models.Model):
     _description = 'Inpatient Meal'
     _name = "gnuhealth.inpatient.meal"
 
+    @api.model
+    def _default_institution(self):
+        HealthInst = self.env['gnuhealth.institution']
+        institution = HealthInst.get_institution()
+        return institution
+
     name = fields.Many2one('product.product',
                            'Food',
                            required=True,
@@ -725,15 +671,10 @@ class InpatientMeal(models.Model):
                                       'Vegetarian')
 
     institution = fields.Many2one('gnuhealth.institution',
-                                  'Institution')
+                                  'Institution',
+                                  default=_default_institution)
 
-    @staticmethod
-    def default_institution(self):
-        HealthInst = self.env['gnuhealth.institution']
-        institution = HealthInst.get_institution()
-        return institution
-
-    def get_rec_name(self, name):
+    def _get_name(self):
         if self.name:
             return self.name.name
 
@@ -755,21 +696,29 @@ class InpatientMealOrder(models.Model):
     _description = 'Inpatient Meal Order'
     _name = "gnuhealth.inpatient.meal.order"
 
+    @api.model
+    def _default_order_date(self):
+        return datetime.now()
+
+    @api.model
+    def _default_health_professional(self):
+        # pool = Pool()
+        return self.env['gnuhealth.healthprofessional'].get_health_professional()
+
     name = fields.Many2one('gnuhealth.inpatient.registration',
                            'Registration Code',
                            domain=[('state', '=', 'hospitalized')],
                            required=True)
 
-    mealtime = fields.Selection((
-        (None, ''),
-        ('breakfast', 'Breakfast'),
-        ('lunch', 'Lunch'),
-        ('dinner', 'Dinner'),
-        ('snack', 'Snack'),
-        ('special', 'Special order'),),
-        'Meal time',
-        required=True,
-        sort=False)
+    mealtime = fields.Selection((('none', ''),
+                                 ('breakfast', 'Breakfast'),
+                                 ('lunch', 'Lunch'),
+                                 ('dinner', 'Dinner'),
+                                 ('snack', 'Snack'),
+                                 ('special', 'Special order'),),
+                                'Meal time',
+                                required=True,
+                                sort=False)
 
     meal_item = fields.One2many('gnuhealth.inpatient.meal.order.item',
                                 'name',
@@ -779,7 +728,8 @@ class InpatientMealOrder(models.Model):
                              readonly=True)
 
     health_professional = fields.Many2one('gnuhealth.healthprofessional',
-                                          'Health Professional')
+                                          'Health Professional',
+                                          default=_default_health_professional)
 
     remarks = fields.Text('Remarks')
 
@@ -792,58 +742,50 @@ class InpatientMealOrder(models.Model):
 
     order_date = fields.Datetime('Date',
                                  help='Order date',
-                                 required=True)
+                                 required=True,
+                                 default=_default_order_date)
 
-    state = fields.Selection((
-        (None, ''),
-        ('draft', 'Draft'),
-        ('cancelled', 'Cancelled'),
-        ('ordered', 'Ordered'),
-        ('processing', 'Processing'),
-        ('done', 'Done'),),
-        'Status',
-        readonly=True)
+    state = fields.Selection((('none', ''),
+                              ('draft', 'Draft'),
+                              ('cancelled', 'Cancelled'),
+                              ('ordered', 'Ordered'),
+                              ('processing', 'Processing'),
+                              ('done', 'Done'),),
+                             'Status',
+                             readonly=True,
+                             default='draft')
 
-    @staticmethod
-    def default_order_date():
-        return datetime.now()
-
-    @staticmethod
-    def default_state():
-        return 'draft'
-
-    @staticmethod
-    def default_health_professional():
-        # pool = Pool()
-        return self.env['gnuhealth.healthprofessional'].get_health_professional()
-
-    @classmethod
-    def create(self, vlist):
-        Sequence = self.env['ir.sequence']
-        Config = self.env['gnuhealth.sequences']
-
-        vlist = [x.copy() for x in vlist]
-        for values in vlist:
+    @api.model_create_multi
+    def create(self, vals_list):
+        vals_list = [x.copy() for x in vals_list]
+        for values in vals_list:
             if not values.get('meal_order'):
-                config = Config(1)
-                values['meal_order'] = Sequence.get_id(
-                    config.inpatient_meal_order_sequence.id)
-        return super(InpatientMealOrder, self).create(vlist)
+                values['meal_order'] = self.env['ir.sequence'].next_by_code('gnuhealth.inpatient.meal.order')
+        return super(InpatientMealOrder, self).create(vals_list)
 
-    @classmethod
-    def validate(self, meal_orders):
-        super(InpatientMealOrder, self).validate(meal_orders)
-        for meal_order in meal_orders:
+    @api.constrains('health_professional', 'meal_warning', 'meal_warning_ack')
+    def validate(self):
+        super(InpatientMealOrder, self).validate()
+        for meal_order in self:
             meal_order.check_meal_order_warning()
             meal_order.check_health_professional()
 
     def check_meal_order_warning(self):
         if not self.meal_warning_ack and self.meal_warning:
-            self.raise_user_error('meal_order_warning')
+            raise UserError(
+                _(
+                    '===== MEAL WARNING ! =====\n\n\n'
+                    'This patient has special meal needs \n\n'
+                    'Check and acknowledge that\n'
+                    'the meal items in this order are correct \n\n'
+                ))
 
     def check_health_professional(self):
         if not self.health_professional:
-            self.raise_user_error('health_professional_warning')
+            raise UserError(
+                _(
+                    'No health professional associated to this user!'
+                ))
 
     @fields.depends('name')
     def on_change_name(self):
@@ -855,56 +797,18 @@ class InpatientMealOrder(models.Model):
                 self.meal_warning = True
                 self.meal_warning_ack = False
 
-    @classmethod
-    def __setup__(self):
-        super(InpatientMealOrder, self).__setup__()
-        self._buttons.update({
-            'cancel': {'invisible': Not(Equal(Eval('state'), 'ordered'))}
-        })
-
-        self._buttons.update({
-            'generate': {'invisible': Or(Equal(Eval('state'), 'ordered'),
-                                         Equal(Eval('state'), 'done'))},
-        })
-
-        self._buttons.update({
-            'done': {'invisible': Not(Equal(Eval('state'), 'ordered'))}
-        })
-
-        self._error_messages.update({
-            'meal_order_warning':
-                '===== MEAL WARNING ! =====\n\n\n'
-                'This patient has special meal needs \n\n'
-                'Check and acknowledge that\n'
-                'the meal items in this order are correct \n\n',
-            'health_professional_warning':
-                'No health professional associated to this user',
-        })
-
-        # t = self.__table__()
-        # self._sql_constraints = [
-        #     ('meal_order_uniq', Unique(t, t.meal_order),
-        #      'The Meal Order code already exists'),
-        # ]
-
     _sql_constraints = [
         ('meal_order_uniq', 'unique (meal_order)', 'The Meal Order code already exists!'),
     ]
 
-    @classmethod
-    @ModelView.button
-    def generate(self, mealorders):
-        self.write(mealorders, {
-            'state': 'ordered'})
+    def button_generate(self):
+        self.ensure_one()
+        self.write({'state': 'ordered'})
 
-    @classmethod
-    @ModelView.button
-    def cancel(self, mealorders):
-        self.write(mealorders, {
-            'state': 'cancelled'})
+    def button_cancel(self):
+        self.ensure_one()
+        self.write({'state': 'cancelled'})
 
-    @classmethod
-    @ModelView.button
-    def done(self, mealorders):
-        self.write(mealorders, {
-            'state': 'done'})
+    def button_done(self):
+        self.ensure_one()
+        self.write({'state': 'done'})

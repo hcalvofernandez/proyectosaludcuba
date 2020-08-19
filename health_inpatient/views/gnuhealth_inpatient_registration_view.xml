@@ -9,6 +9,28 @@
         <field name="model">gnuhealth.inpatient.registration</field>
         <field name="arch" type="xml">
             <form>
+<!--                <header>-->
+<!--                    <button name="button_admission"-->
+<!--                            string="Admission"-->
+<!--                            class="oe_highlight"-->
+<!--                            type="object"-->
+<!--                            attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>-->
+<!--                    <button name="button_bedclean"-->
+<!--                            string="Clean Bed"-->
+<!--                            class="oe_highlight"-->
+<!--                            type="object"-->
+<!--                            attrs="{'invisible': [('state', '!=', 'done')]}"/>-->
+<!--                    <button name="button_discharge"-->
+<!--                            string="Discharge"-->
+<!--                            class="oe_highlight"-->
+<!--                            type="object"-->
+<!--                            attrs="{'invisible': [('state', '!=', 'hospitalized')]}"/>-->
+<!--                    <button name="button_cancel"-->
+<!--                            string="Cancel"-->
+<!--                            class="oe_highlight"-->
+<!--                            type="object"-->
+<!--                            attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>-->
+<!--                </header>-->
                 <notebook>
                     <page string="Administrative data" id="page_admin_data">
                         <group colspan="4" id="group_admin_data_holder1">
@@ -61,17 +83,40 @@
 
                         <group colspan="4" col="6" string="Status" id="group_registration_holder1">
                             <field name="state" xexpand="1"/>
-                            <button name="confirmed" string="Confirm" help="Confirm Registration / Make the reservation"
-                                    icon="icon-ok"/>
-                            <button name="cancel" help="Cancel Registration" string="Cancel" icon="icon-cancel"
-                                    confirm="Cancel the patient registration process ?"/>
-                            <button name="admission" help="Patient Admission" string="Admission" icon="icon-ok"
-                                    confirm="Admit the patient in the health institution and assign the bed"/>
-                            <button name="discharge" help="Discharge Patient" string="Discharge" icon="icon-home"
-                                    confirm="You are about to discharge the patient from the health institution."/>
-                            <button name="bedclean" help="Click when Bed has been cleaned" string="Clean Bed"
+                            <button name="button_confirmed"
+                                    string="Confirm"
+                                    help="Confirm Registration / Make the reservation"
+                                    icon="icon-ok"
+                                    type="object"
+                                    attrs="{'invisible': [('state', 'not in, ['free','cancelled'])]}"/>
+                            <button name="button_cancel"
+                                    string="Cancel"
+                                    help="Cancel Registration"
+                                    icon="icon-cancel"
+                                    confirm="Cancel the patient registration process ?"
+                                    type="object"
+                                    attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                            <button name="button_admission"
+                                    string="Admission"
+                                    help="Patient Admission"
+                                    icon="icon-ok"
+                                    confirm="Admit the patient in the health institution and assign the bed"
+                                    type="object"
+                                    attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                            <button name="button_discharge"
+                                    string="Discharge"
+                                    help="Discharge Patient"
                                     icon="icon-home"
-                                    confirm="Confirm that the bed has been cleaned and is now ready to use"/>
+                                    confirm="You are about to discharge the patient from the health institution."
+                                    type="object"
+                                    attrs="{'invisible': [('state', '!=', 'hospitalized')]}"/>
+                            <button name="button_bedclean"
+                                    string="Clean Bed"
+                                    help="Click when Bed has been cleaned"
+                                    icon="icon-home"
+                                    confirm="Confirm that the bed has been cleaned and is now ready to use"
+                                    type="object"
+                                    attrs="{'invisible': [('state', '!=', 'done')]}"/>
                         </group>
                     </page>
 
@@ -129,7 +174,7 @@
     <menuitem
             id="gnuhealth_inpatient_registration_menu"
             name="Inpatient Registration"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_inpatient_registration_action"
     />
 </odoo>

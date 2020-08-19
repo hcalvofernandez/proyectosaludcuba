@@ -49,7 +49,7 @@
     <menuitem
             id="gnuhealth_inpatient_medication_log_menu"
             name="Inpatient Medication Log"
-            parent=""
+            parent="health_inpatient_menu"
             action="gnuhealth_inpatient_medication_log_action"
     />
 </odoo>

@@ -21,10 +21,9 @@
 #
 ##############################################################################
 from datetime import datetime
-from odoo import api, fields, models, _, tools
+from odoo import api, fields, models, _
 from odoo.exceptions import RedirectWarning, UserError, ValidationError, AccessError
 from odoo.osv import expression
-from odoo.tools import grouped_slice, reduce_ids
 
 import pytz
 

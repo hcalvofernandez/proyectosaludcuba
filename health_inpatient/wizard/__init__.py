@@ -21,5 +21,5 @@
 #
 ##############################################################################
 
-from .wizard_health_inpatient import *
-from .wizard_inpatient_evaluation import *
+from .gnuhealth_bed_transfer_create_wizard import *
+from .gnuhealth__inpatient_evaluation_create_wizard import *

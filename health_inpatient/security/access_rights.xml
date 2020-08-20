@@ -23,5 +23,65 @@
                    eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
         </record>
 
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_bed_transfer_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_diet_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_diet_therapeutic_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_meal_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_meal_order_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_meal_order_item_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_medication_admin_time_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_medication_log_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_medication_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="health_inpatient.gnuhealth_inpatient_registration_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('health_inpatient.group_health_inpatient_admin'))]"/>
+        </record>
+
     </data>
 </odoo>

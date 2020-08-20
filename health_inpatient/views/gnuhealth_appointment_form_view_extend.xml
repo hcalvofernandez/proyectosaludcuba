@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+
+    <record model="ir.ui.view" id="gnuhealth_appointment_form_view_extend">
+        <field name="name">gnuhealth.appointment.form.view.extend</field>
+        <field name="model">gnuhealth.appointment</field>
+        <field name="inherit_id" ref="medical.gnuhealth_appointment_form"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/group/field[@name=institution]" position="after">
+                <label name="inpatient_registration_code"/>
+                <field name="inpatient_registration_code"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

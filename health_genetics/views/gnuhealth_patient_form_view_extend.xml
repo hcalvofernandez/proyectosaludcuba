@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <record model="ir.ui.view" id="gnuhealth_patient_view_form_extend">
+        <field name="name">gnuhealth.patient.view.form.extend</field>
+        <field name="model">gnuhealth.patient</field>
+        <field name="inherit_id" ref="medical.medical_patient_view_form"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/notebook/page[@id=&quot;general_info&quot;]" position="after">
+                <page string="Genetics" id="patient_genetics">
+                    <field name="genetic_risks"/>
+                    <field name="family_history"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -433,7 +433,7 @@ class PatientECG(models.Model):
                                                   help="Enter the patient hospitalization code")
 
 
-class PatientData(models.Model):
+class MedicalPatient(models.Model):
     """Inherit patient model and add the patient status to the patient."""
     _name = 'medical.patient'
     _inherit = 'medical.patient'

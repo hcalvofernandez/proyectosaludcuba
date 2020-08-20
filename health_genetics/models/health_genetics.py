@@ -377,7 +377,7 @@ class FamilyDiseases(models.Model):
                                 required=True)
 
 
-class PatientData(models.Model):
+class MedicalPatient(models.Model):
     """Add to the Medical patient_data class (gnuhealth.patient) the genetic and family risks"""
     _name = 'medical.patient'
     _inherit = 'medical.patient'

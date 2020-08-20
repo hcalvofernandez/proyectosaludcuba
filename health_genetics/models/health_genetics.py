@@ -21,9 +21,8 @@
 #
 ##############################################################################
 # from datetime import datetime
-from odoo import api, fields, models, _, tools
+from odoo import api, fields, models, _
 from odoo.osv import expression
-# from odoo.tools import grouped_slice, reduce_ids
 from uuid import uuid4
 
 __all__ = ['DiseaseGene', 'ProteinDisease', 'GeneVariant', 'GeneVariantPhenotype',

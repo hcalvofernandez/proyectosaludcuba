@@ -67,7 +67,7 @@ class InpatientRegistration(models.Model):
     name = fields.Char('Registration Code',
                        readonly=True,
                        index=True)
-    patient = fields.Many2one('gnuhealth.patient',
+    patient = fields.Many2one('medical.patient',
                               'Patient',
                               required=True,
                               index=True,
@@ -433,10 +433,10 @@ class PatientECG(models.Model):
                                                   help="Enter the patient hospitalization code")
 
 
-class PatientData(models.Model):
+class MedicalPatient(models.Model):
     """Inherit patient model and add the patient status to the patient."""
-    _name = 'gnuhealth.patient'
-    _inherit = 'gnuhealth.patient'
+    _name = 'medical.patient'
+    _inherit = 'medical.patient'
 
     patient_status = fields.Boolean('Hospitalized',
                                     help="Show the hospitalization status of the patient",

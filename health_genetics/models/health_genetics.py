@@ -257,7 +257,7 @@ class PatientGeneticRisk(models.Model):
     _description = 'Patient Genetic Information'
     _name = 'gnuhealth.patient.genetic.risk'
 
-    patient = fields.Many2one('gnuhealth.patient',
+    patient = fields.Many2one('medical.patient',
                               'Patient',
                               index=True)
     disease_gene = fields.Many2one('gnuhealth.disease.gene',
@@ -346,7 +346,7 @@ class FamilyDiseases(models.Model):
     _description = 'Family History'
     _name = 'gnuhealth.patient.family.diseases'
 
-    patient = fields.Many2one('gnuhealth.patient',
+    patient = fields.Many2one('medical.patient',
                               'Patient',
                               index=True)
     name = fields.Many2one('gnuhealth.pathology',
@@ -379,8 +379,8 @@ class FamilyDiseases(models.Model):
 
 class PatientData(models.Model):
     """Add to the Medical patient_data class (gnuhealth.patient) the genetic and family risks"""
-    _name = 'gnuhealth.patient'
-    _inherit = 'gnuhealth.patient'
+    _name = 'medical.patient'
+    _inherit = 'medical.patient'
 
     genetic_risks = fields.One2many('gnuhealth.patient.genetic.risk',
                                     'patient',

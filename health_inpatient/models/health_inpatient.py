@@ -553,7 +553,7 @@ class InpatientMedication(models.Model):
     adverse_reaction = fields.Text('Adverse Reactions',
                                    help='Side effects or adverse reactions that the patient experienced')
 
-    @fields.depends('discontinued',
+    @api.depends('discontinued',
                     'course_completed')
     def on_change_with_is_active(self):
         is_active = True
@@ -561,12 +561,12 @@ class InpatientMedication(models.Model):
             is_active = False
         return is_active
 
-    @fields.depends('is_active',
+    @api.depends('is_active',
                     'course_completed')
     def on_change_with_discontinued(self):
         return not (self.is_active or self.course_completed)
 
-    @fields.depends('is_active',
+    @api.depends('is_active',
                     'discontinued')
     def on_change_with_course_completed(self):
         return not (self.is_active or self.discontinued)
@@ -786,7 +786,7 @@ class InpatientMealOrder(models.Model):
                     'No health professional associated to this user!'
                 ))
 
-    @fields.depends('name')
+    @api.depends('name')
     def on_change_name(self):
         if self.name:
             # Trigger the warning if the patient 

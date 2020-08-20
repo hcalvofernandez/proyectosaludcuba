@@ -578,7 +578,7 @@ class InpatientMedicationAdminTimes(models.Model):
 
     name = fields.Many2one('gnuhealth.inpatient.medication',
                            'Medication')
-    admin_time = fields.Time("Time")
+    admin_time = fields.Datetime("Time")
     dose = fields.Float('Dose',
                         help='Amount of medication (eg, 250 mg) per dose')
     dose_unit = fields.Many2one('gnuhealth.dose.unit',

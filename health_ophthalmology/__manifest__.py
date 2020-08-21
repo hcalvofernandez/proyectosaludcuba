@@ -6,7 +6,7 @@
     """,
     'version': '1.0.1',
     'category': 'Hospital Management System',
-    'author': 'Almighty Consulting Solutions Pvt. Ltd.',
+    'author': 'SoftwareEscarlata',
     'support': 'health@gnusolidario.org',
     'website': 'https://www.gnuhealth.org',
     'license': 'OPL-1',

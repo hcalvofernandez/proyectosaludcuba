@@ -1,0 +1,22 @@
+<!-- Action keyword -->
+        <!--record model="ir.action.keyword"
+                id="act_open_ecg_keyword1">
+            <field name="keyword">form_relate</field>
+            <field name="model">gnuhealth.inpatient.icu,-1</field>
+            <field name="action" ref="act_ecg_form1"/>
+        </record>
+
+        <record model="ir.action.keyword"
+                id="act_open_glasgow_keyword1">
+            <field name="keyword">form_relate</field>
+            <field name="model">gnuhealth.inpatient.icu,-1</field>
+            <field name="action" ref="act_glasgow_form1"/>
+        </record>
+
+        <record model="ir.action.keyword"
+                id="act_open_apache_keyword1">
+            <field name="keyword">form_relate</field>
+            <field name="model">gnuhealth.inpatient.icu,-1</field>
+            <field name="action" ref="act_apache_form1"/>
+        </record-->
+

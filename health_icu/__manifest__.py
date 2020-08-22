@@ -13,6 +13,8 @@
     """,
 
     'author': "GNU Solidario",
+	'author_name': "Yadier A. De Quesada",
+	'author_email': "yadierq87@gmail.com",
     'website': "https://www.gnuhealth.org",
 
     'category': 'Healthcare Industry',
@@ -37,7 +39,7 @@
         'views/gnuhealth_icu_ventilation_tree.xml',
         'views/gnuhealth_inpatient_icu_form.xml',
         'views/gnuhealth_inpatient_icu_tree.xml',
-        'views/gnuhealth_patient_icu_rounding.xml',
+        #'views/gnuhealth_patient_icu_rounding.xml',
         'views/health_icu_view.xml',
     ],
     'installable': True,

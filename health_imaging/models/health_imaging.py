@@ -7,6 +7,7 @@
 #    Copyright (C) 2008-2020 Luis Falcon <lfalcon@gnuhealth.org>
 #    Copyright (C) 2011-2020 GNU Solidario <health@gnusolidario.org>
 #    Copyright (C) 2013  Sebastián Marro <smarro@thymbra.com>
+#    Copyright (C) 2020  Yadier A. De Quesada <yadierq87@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -30,7 +31,6 @@ __all__ = [
     'ImagingTest', 'ImagingTestRequest', 'ImagingTestResult']
 
 sequences = ['imaging_request_sequence', 'imaging_sequence']
-
 
 class GnuHealthSequences(models.Model ):
     "GNU Health Sequences"
@@ -115,8 +115,6 @@ class GnuHealthSequenceSetup(models.Model):
             'health_imaging', 'seq_gnuhealth_imaging_test')
 
 # END SEQUENCE SETUP , MIGRATION FROM FIELDS.PROPERTY
-
-
 class ImagingTestType(models.Model):
     'Imaging Test Type'
     _name = 'gnuhealth.imaging.test.type'
@@ -126,7 +124,6 @@ class ImagingTestType(models.Model):
 
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True)
-
 
 class ImagingTest(models.Model, ):
     'Imaging Test'
@@ -143,8 +140,6 @@ class ImagingTest(models.Model, ):
     product = fields.Many2one('product.product', 'Service', required=True)
     active = fields.Boolean('Active', select=True,default=True)
 
-
-
 class ImagingTestRequest(models.Model ):
     'Imaging Test Request'
     _name = 'gnuhealth.imaging.test.request'
@@ -152,12 +147,12 @@ class ImagingTestRequest(models.Model ):
     _order = 'date desc,request desc'
     _table = 'gnuhealth_imaging_test_request'
 
-    patient = fields.Integer()#TODO fields.Many2one('gnuhealth.patient', 'Patient', required=True)
+    patient = fields.Many2one('medical.patient', 'Patient', required=True)
     date = fields.Datetime('Date', required=True,default=datetime.date.today())
     requested_test = fields.Many2one(
         'gnuhealth.imaging.test', 'Test',
         required=True)
-    doctor = fields.Integer()#TODO fields.Many2one('gnuhealth.healthprofessional', 'Doctor', required=True)
+    doctor = fields.Many2one('res.partner', 'Doctor', required=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('requested', 'Requested'),
@@ -209,15 +204,15 @@ class ImagingTestRequest(models.Model ):
     def done(self, requests):
         pass
 
-
 class ImagingTestResult(models.Model):
     'Imaging Test Result'
     _name = 'gnuhealth.imaging.test.result'
     _description = 'Imaging Test Result'
+    _inherit = ['image.mixin']
     _order = 'date desc'
     _table = 'gnuhealth_imaging_test_result'
 
-    patient = fields.Integer()#TODO fields.Many2one('gnuhealth.patient', 'Patient', readonly=True)
+    patient = fields.Many2one('medical.patient', 'Patient', readonly=True)
     number = fields.Char('Number', readonly=True)
     date = fields.Datetime('Date', required=True)
     request_date = fields.Datetime('Requested Date', readonly=True)
@@ -227,8 +222,7 @@ class ImagingTestResult(models.Model):
     request = fields.Many2one(
         'gnuhealth.imaging.test.request', 'Request',
         readonly=True)
-    doctor = fields.Integer() #TODO fields.Many2one('gnuhealth.healthprofessional', 'Doctor',
-                            # required=True)
+    doctor = fields.Many2one('res.partner', 'Doctor',required=True)
     comment = fields.Text('Comment')
     images = fields.Binary(attachment=True)#TODO fields.One2many ('ir.attachment', 'resource', 'Images')
 

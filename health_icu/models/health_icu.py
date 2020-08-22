@@ -4,6 +4,7 @@
 #    GNU Health: The Free Health and Hospital Information System
 #    Copyright (C) 2008-2020 Luis Falcon <lfalcon@gnusolidario.org>
 #    Copyright (C) 2011-2020 GNU Solidario <health@gnusolidario.org>
+#    Copyright (C) 2020 Yadier Abel <yadierq87@gmail.com>
 #
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -63,14 +64,13 @@ class InpatientIcu(models.Model):
     icu_admission_date = fields.Datetime('ICU Admission',
                                          help="ICU Admission Date", required=True)
     discharged_from_icu = fields.Boolean('Discharged')
-    icu_discharge_date = fields.Datetime('Discharge', )
-    #TODO                                  states={
-    #     'invisible': Not(Bool(('discharged_from_icu'))),
-    #     'required': Bool(('discharged_from_icu')),
-    #     },
+    icu_discharge_date = fields.Datetime('Discharge',
+                                      states={
+                                          'discharged_from_icu':[('invisible',False)
+                                              ,('required',True)]})
     # depends=['discharged_from_icu'])
     #TODO a compute field icu_stay = fields.Function(fields.TimeDelta('Duration'), 'icu_duration')
-    icu_stay = fields.Datetime( 'icu_duration')
+    icu_stay = fields.Datetime('icu_duration')
 
     mv_history = fields.One2many('gnuhealth.icu.ventilation',
                                  'name', "Mechanical Ventilation History")
@@ -107,8 +107,10 @@ class InpatientIcu(models.Model):
         # Reset the admission flag when the patient is discharged from ICU
         if self.discharged_from_icu:
             res = False
+            self.icu_discharge_date = datetime.today()
         else:
             res = True
+            self.icu_discharge_date = False
         return res
 
 class Glasgow(models.Model):
@@ -424,10 +426,8 @@ class MechanicalVentilation(models.Model):
                      "Pressure Ventilation, BiPAP-CPAP \n"
                      "ETT - Endotracheal Tube", sort=False)
 
-    ett_size = fields.Integer('ETT Size',)
-    #TODO states={
-    #  'invisible': Not(Equal(('ventilation'), 'ett'))})
-
+    ett_size = fields.Integer('ETT Size',
+    states={'ventilation':[('invisible', 'ett')]})#TODO change to false
     tracheostomy_size = fields.Integer('Tracheostomy size',)
     #TODO states={
     #   'invisible': Not(Equal(('ventilation'), 'tracheostomy'))})
@@ -495,7 +495,8 @@ class ChestDrainageAssessment(models.Model):
         ('purulent', 'Purulent')],
         'Aspect', sort=False)
     suction = fields.Boolean('Suction')
-    suction_pressure = fields.Integer('cm H2O',)
+    suction_pressure = fields.Integer('cm H2O',
+    states = {'suction': [('invisible', False),('required',True)]})
     #TODO states={
     #'invisible': Not(Bool(('suction'))),
     #'required': Bool(('suction')),

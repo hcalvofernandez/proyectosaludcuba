@@ -5,7 +5,6 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 <odoo>
     <data>
-
         <record model="ir.ui.view" id="gnuhealth_patient_icu_rounding_view">
             <field name="model">gnuhealth.patient.rounding</field>
             <field name="inherit" ref="health_nursing.gnuhealth_patient_rounding_view" />
@@ -89,6 +88,5 @@
                 </xpath>
             </form>
         </record>
-
     </data>
 </odoo>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <!-- Request - Test -->
         <record id="gnuhealth_request_imaging_test_form_view" model="ir.ui.view">
             <field name="name">gnuhealth.request.imaging.test.form</field>
@@ -15,7 +14,6 @@
                 </form>
             </field>
         </record>
-
         <!-- Request Patient Imaging Test Start -->
         <record id="gnuhealth_patient_imaging_test_request_start_form_view" model="ir.ui.view">
             <field name="name">gnuhealth.patient.imaging.test.request.start.form</field>
@@ -31,12 +29,9 @@
                             <field name="urgent" />
                         </group>
                     </sheet>
-
-
                 </form>
             </field>
         </record>
-
         <!-- gnuhealth.patient.imaging.test.request -->
         <record id="gnuhealth_request_imaging.test_form_view" model="ir.ui.view">
             <field name="name">gnuhealth.patient.imaging.test.request.form</field>
@@ -47,20 +42,14 @@
                         <field name="account_type" invisible="1"/>
                         <field name="company_id" invisible="1"/>
                     </group>
-
                 </form>
             </field>
         </record>
-
         <!--record id="account_accrual_accounting_wizard_action" model="ir.actions.act_window">
             <field name="name">Create Accrual Entry for the expense/revenue recognition</field>
             <field name="res_model">account.accrual.accounting.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record-->
-
-
-
-
     </data>
 </odoo>

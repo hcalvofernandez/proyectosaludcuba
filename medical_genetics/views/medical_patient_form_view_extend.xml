@@ -4,7 +4,7 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-    <record model="ir.ui.view" id="gnuhealth_patient_view_form_extend">
+    <record model="ir.ui.view" id="medical_patient_view_form_extend">
         <field name="name">medical.patient.view.form.extend</field>
         <field name="model">medical.patient</field>
         <field name="inherit_id" ref="medical.medical_patient_view_form"/>

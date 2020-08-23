@@ -31,7 +31,7 @@ __all__ = ['DiseaseGene', 'ProteinDisease', 'GeneVariant', 'GeneVariantPhenotype
 
 class DiseaseGene(models.Model):
     _description = 'Disease Genes'
-    _name = 'gnuhealth.disease.gene'
+    _name = 'medical.disease.gene'
 
     name = fields.Char('Gene Name',
                        required=True,
@@ -52,7 +52,7 @@ class DiseaseGene(models.Model):
 
     info = fields.Text('Information',
                        help="Extra Information")
-    variants = fields.One2many('gnuhealth.gene.variant',
+    variants = fields.One2many('medical.gene.variant',
                                'name',
                                'Variants')
 
@@ -92,7 +92,7 @@ class DiseaseGene(models.Model):
 
 class ProteinDisease(models.Model):
     _description = 'Protein related disorders'
-    _name = 'gnuhealth.protein.disease'
+    _name = 'medical.protein.disease'
 
     name = fields.Char('Disease',
                        required=True,
@@ -111,7 +111,7 @@ class ProteinDisease(models.Model):
     mim_reference = fields.Char('MIM',
                                 help="MIM -Mendelian Inheritance in Man- DB reference")
 
-    gene_variant = fields.One2many('gnuhealth.gene.variant.phenotype',
+    gene_variant = fields.One2many('medical.gene.variant.phenotype',
                                    'phenotype',
                                    'Natural Variant',
                                    help="Protein sequence variant(s) involved in this condition")
@@ -157,9 +157,9 @@ class ProteinDisease(models.Model):
 
 class GeneVariant(models.Model):
     _description = 'Natural Variant'
-    _name = 'gnuhealth.gene.variant'
+    _name = 'medical.gene.variant'
 
-    name = fields.Many2one('gnuhealth.disease.gene',
+    name = fields.Many2one('medical.disease.gene',
                            'Gene and Protein',
                            required=True,
                            help="Gene and expressing protein (in parenthesis)")
@@ -168,7 +168,7 @@ class GeneVariant(models.Model):
                           index=True)
     aa_change = fields.Char('Change',
                             help="Resulting amino acid change")
-    phenotypes = fields.One2many('gnuhealth.gene.variant.phenotype',
+    phenotypes = fields.One2many('medical.gene.variant.phenotype',
                                  'variant',
                                  'Phenotypes')
 
@@ -200,19 +200,19 @@ class GeneVariant(models.Model):
 
 class GeneVariantPhenotype(models.Model):
     _description = 'Variant Phenotypes'
-    _name = 'gnuhealth.gene.variant.phenotype'
+    _name = 'medical.gene.variant.phenotype'
 
     name = fields.Char('Code',
                        required=True)
-    variant = fields.Many2one('gnuhealth.gene.variant',
+    variant = fields.Many2one('medical.gene.variant',
                               'Variant',
                               required=True)
-    gene = fields.Many2one('gnuhealth.disease.gene',
+    gene = fields.Many2one('medical.disease.gene',
                            'Gene & Protein',
                            compute='_get_gene',
                            search='_search_gene',
                            help="Gene and expressing protein (in parenthesis)")
-    phenotype = fields.Many2one('gnuhealth.protein.disease',
+    phenotype = fields.Many2one('medical.protein.disease',
                                 'Phenotype',
                                 required=True)
 
@@ -255,18 +255,18 @@ class GeneVariantPhenotype(models.Model):
 
 class PatientGeneticRisk(models.Model):
     _description = 'Patient Genetic Information'
-    _name = 'gnuhealth.patient.genetic.risk'
+    _name = 'medical.patient.genetic.risk'
 
     patient = fields.Many2one('medical.patient',
                               'Patient',
                               index=True)
-    disease_gene = fields.Many2one('gnuhealth.disease.gene',
+    disease_gene = fields.Many2one('medical.disease.gene',
                                    'Gene',
                                    required=True)
-    natural_variant = fields.Many2one('gnuhealth.gene.variant',
+    natural_variant = fields.Many2one('medical.gene.variant',
                                       'Variant',
                                       depends=['disease_gene'])
-    variant_phenotype = fields.Many2one('gnuhealth.gene.variant.phenotype',
+    variant_phenotype = fields.Many2one('medical.gene.variant.phenotype',
                                         'Phenotype',
                                         depends=['natural_variant'])
     onset = fields.Integer('Onset',
@@ -274,15 +274,15 @@ class PatientGeneticRisk(models.Model):
 
     notes = fields.Char("Notes")
 
-    healthprof = fields.Many2one('gnuhealth.healthprofessional',
+    healthprof = fields.Many2one('medical.healthprofessional',
                                  'Health prof',
                                  help="Health professional")
 
-    institution = fields.Many2one('gnuhealth.institution',
+    institution = fields.Many2one('medical.institution',
                                   'Institution')
 
     def default_institution(self):
-        HealthInst = self.env['gnuhealth.institution']
+        HealthInst = self.env['medical.institution']
         institution = HealthInst.get_institution()
         return institution
 
@@ -290,7 +290,7 @@ class PatientGeneticRisk(models.Model):
         """ Adds an entry in the person Page of Life
             related to this genetic finding
         """
-        Pol = self.env['gnuhealth.pol']
+        Pol = self.env['medical.pol']
         pol = []
 
         vals = {
@@ -344,12 +344,12 @@ class PatientGeneticRisk(models.Model):
 
 class FamilyDiseases(models.Model):
     _description = 'Family History'
-    _name = 'gnuhealth.patient.family.diseases'
+    _name = 'medical.patient.family.diseases'
 
     patient = fields.Many2one('medical.patient',
                               'Patient',
                               index=True)
-    name = fields.Many2one('gnuhealth.pathology',
+    name = fields.Many2one('medical.pathology',
                            'Condition',
                            required=True)
     xory = fields.Selection([(None, ''),
@@ -378,13 +378,13 @@ class FamilyDiseases(models.Model):
 
 
 class MedicalPatient(models.Model):
-    """Add to the Medical patient_data class (gnuhealth.patient) the genetic and family risks"""
+    """Add to the Medical patient_data class (medical.patient) the genetic and family risks"""
     _name = 'medical.patient'
     _inherit = 'medical.patient'
 
-    genetic_risks = fields.One2many('gnuhealth.patient.genetic.risk',
+    genetic_risks = fields.One2many('medical.patient.genetic.risk',
                                     'patient',
                                     'Genetic Information')
-    family_history = fields.One2many('gnuhealth.patient.family.diseases',
+    family_history = fields.One2many('medical.patient.family.diseases',
                                      'patient',
                                      'Family History')

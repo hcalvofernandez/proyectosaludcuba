@@ -4,9 +4,9 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-    <record id="gnuhealth_gene_variant_form_view" model="ir.ui.view">
-        <field name="name">gnuhealth.gene.variant.form.view</field>
-        <field name="model">gnuhealth.gene.variant</field>
+    <record id="medical_gene_variant_form_view" model="ir.ui.view">
+        <field name="name">medical.gene.variant.form.view</field>
+        <field name="model">medical.gene.variant</field>
         <field name="arch" type="xml">
             <form>
                 <label name="name"/>
@@ -22,9 +22,9 @@
         </field>
     </record>
 
-    <record id="gnuhealth_gene_variant_tree_view" model="ir.ui.view">
-        <field name="name">gnuhealth.gene.variant.tree.view</field>
-        <field name="model">gnuhealth.gene.variant</field>
+    <record id="medical_gene_variant_tree_view" model="ir.ui.view">
+        <field name="name">medical.gene.variant.tree.view</field>
+        <field name="model">medical.gene.variant</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
@@ -36,16 +36,16 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="gnuhealth_gene_variant_action">
+    <record model="ir.actions.act_window" id="medical_gene_variant_action">
         <field name="name">Natural Variant</field>
-        <field name="res_model">gnuhealth.gene.variant</field>
+        <field name="res_model">medical.gene.variant</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
-            id="gnuhealth_gene_variant_menu"
+            id="medical_gene_variant_menu"
             name="Natural Variant"
-            parent="health_genetics_menu"
-            action="gnuhealth_gene_variant_action"
+            parent="medical_genetics_menu"
+            action="medical_gene_variant_action"
     />
 </odoo>

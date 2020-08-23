@@ -4,15 +4,15 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 <odoo>
     <menuitem
-        id="health_genetics_root"
+        id="medical_genetics_root"
         name="Genetics"
         sequence="10"
-        web_icon="health_genetics,static/description/icon.png"
+        web_icon="medical_genetics,static/description/icon.png"
     />
     <menuitem
-        id="health_genetics_menu"
+        id="medical_genetics_menu"
         name="Genetic"
-        parent="health_genetics_root"
+        parent="medical_genetics_root"
         sequence="10"
     />
 </odoo>

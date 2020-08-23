@@ -4,9 +4,9 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-    <record id="gnuhealth_patient_family_diseases_form_view" model="ir.ui.view">
-        <field name="name">gnuhealth.patient.family.diseases.form.view</field>
-        <field name="model">gnuhealth.patient.family.diseases</field>
+    <record id="medical_patient_family_diseases_form_view" model="ir.ui.view">
+        <field name="name">medical.patient.family.diseases.form.view</field>
+        <field name="model">medical.patient.family.diseases</field>
         <field name="arch" type="xml">
             <form>
                 <label name="name"/>
@@ -20,9 +20,9 @@
         </field>
     </record>
 
-    <record id="gnuhealth_patient_family_diseases_tree_view" model="ir.ui.view">
-        <field name="name">gnuhealth.patient.family.diseases.tree.view</field>
-        <field name="model">gnuhealth.patient.family.diseases</field>
+    <record id="medical_patient_family_diseases_tree_view" model="ir.ui.view">
+        <field name="name">medical.patient.family.diseases.tree.view</field>
+        <field name="model">medical.patient.family.diseases</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree editable="top">
@@ -34,16 +34,16 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="gnuhealth_patient_family_diseases_action">
+    <record model="ir.actions.act_window" id="medical_patient_family_diseases_action">
         <field name="name">Family History</field>
-        <field name="res_model">gnuhealth.patient.family.diseases</field>
+        <field name="res_model">medical.patient.family.diseases</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
-            id="gnuhealth_patient_family_diseases_menu"
+            id="medical_patient_family_diseases_menu"
             name="Family History"
-            parent="health_genetics_menu"
-            action="gnuhealth_patient_family_diseases_action"
+            parent="medical_genetics_menu"
+            action="medical_patient_family_diseases_action"
     />
 </odoo>

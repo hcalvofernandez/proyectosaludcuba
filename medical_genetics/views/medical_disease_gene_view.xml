@@ -4,9 +4,9 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-    <record id="gnuhealth_disease_gene_form_view" model="ir.ui.view">
-        <field name="name">gnuhealth.disease.gene.form.view</field>
-        <field name="model">gnuhealth.disease.gene</field>
+    <record id="medical_disease_gene_form_view" model="ir.ui.view">
+        <field name="name">medical.disease.gene.form.view</field>
+        <field name="model">medical.disease.gene</field>
         <field name="arch" type="xml">
             <form>
                 <label name="name"/>
@@ -33,9 +33,9 @@
         </field>
     </record>
 
-    <record id="gnuhealth_disease_gene_tree_view" model="ir.ui.view">
-        <field name="name">gnuhealth.disease.gene.tree.view</field>
-        <field name="model">gnuhealth.disease.gene</field>
+    <record id="medical_disease_gene_tree_view" model="ir.ui.view">
+        <field name="name">medical.disease.gene.tree.view</field>
+        <field name="model">medical.disease.gene</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
@@ -48,16 +48,16 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="gnuhealth_disease_gene_action">
+    <record model="ir.actions.act_window" id="medical_disease_gene_action">
         <field name="name">Disease Genes</field>
-        <field name="res_model">gnuhealth.disease.gene</field>
+        <field name="res_model">medical.disease.gene</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
-            id="gnuhealth_disease_gene_menu"
+            id="medical_disease_gene_menu"
             name="Disease Genes"
-            parent="health_genetics_menu"
-            action="gnuhealth_disease_gene_action"
+            parent="medical_genetics_menu"
+            action="medical_disease_gene_action"
     />
 </odoo>

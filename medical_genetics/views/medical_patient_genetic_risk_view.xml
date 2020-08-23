@@ -4,9 +4,9 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-    <record id="gnuhealth_patient_genetic_risk_form_view" model="ir.ui.view">
-        <field name="name">gnuhealth.patient.genetic.risk.form.view</field>
-        <field name="model">gnuhealth.patient.genetic.risk</field>
+    <record id="medical_patient_genetic_risk_form_view" model="ir.ui.view">
+        <field name="name">medical.patient.genetic.risk.form.view</field>
+        <field name="model">medical.patient.genetic.risk</field>
         <field name="arch" type="xml">
             <form>
                 <label name="patient"/>
@@ -37,9 +37,9 @@
         </field>
     </record>
 
-    <record id="gnuhealth_patient_genetic_risk_tree_view" model="ir.ui.view">
-        <field name="name">gnuhealth.patient.genetic.risk.tree.view</field>
-        <field name="model">gnuhealth.patient.genetic.risk</field>
+    <record id="medical_patient_genetic_risk_tree_view" model="ir.ui.view">
+        <field name="name">medical.patient.genetic.risk.tree.view</field>
+        <field name="model">medical.patient.genetic.risk</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree editable="top">
@@ -57,16 +57,16 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="gnuhealth_patient_genetic_risk_action">
+    <record model="ir.actions.act_window" id="medical_patient_genetic_risk_action">
         <field name="name">Patient Genetic Information</field>
-        <field name="res_model">gnuhealth.patient.genetic.risk</field>
+        <field name="res_model">medical.patient.genetic.risk</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
-            id="gnuhealth_patient_genetic_risk_menu"
+            id="medical_patient_genetic_risk_menu"
             name="Patient Genetic Information"
-            parent="health_genetics_menu"
-            action="gnuhealth_patient_genetic_risk_action"
+            parent="medical_genetics_menu"
+            action="medical_patient_genetic_risk_action"
     />
 </odoo>

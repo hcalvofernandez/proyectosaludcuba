@@ -4,9 +4,9 @@
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-    <record id="gnuhealth_protein_disease_form_view" model="ir.ui.view">
-        <field name="name">gnuhealth.protein.disease.form.view</field>
-        <field name="model">gnuhealth.protein.disease</field>
+    <record id="medical_protein_disease_form_view" model="ir.ui.view">
+        <field name="name">medical.protein.disease.form.view</field>
+        <field name="model">medical.protein.disease</field>
         <field name="arch" type="xml">
             <form>
                 <group string="Disease" id="disease_header" colspan="4" col="6">
@@ -35,9 +35,9 @@
         </field>
     </record>
 
-    <record id="gnuhealth_protein_disease_tree_view" model="ir.ui.view">
-        <field name="name">gnuhealth.protein.disease.tree.view</field>
-        <field name="model">gnuhealth.protein.disease</field>
+    <record id="medical_protein_disease_tree_view" model="ir.ui.view">
+        <field name="name">medical.protein.disease.tree.view</field>
+        <field name="model">medical.protein.disease</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
@@ -50,16 +50,16 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="gnuhealth_protein_disease_action">
+    <record model="ir.actions.act_window" id="medical_protein_disease_action">
         <field name="name">Protein related disorders</field>
-        <field name="res_model">gnuhealth.protein.disease</field>
+        <field name="res_model">medical.protein.disease</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
-            id="gnuhealth_protein_disease_menu"
+            id="medical_protein_disease_menu"
             name="Protein related disorders"
-            parent="health_genetics_menu"
-            action="gnuhealth_protein_disease_action"
+            parent="medical_genetics_menu"
+            action="medical_protein_disease_action"
     />
 </odoo>

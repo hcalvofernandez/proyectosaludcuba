@@ -26,9 +26,7 @@ from datetime import date, datetime, timedelta
 
 
 __all__ = ['WizardGenerateResult', 'RequestImagingTest',
-    'RequestPatientImagingTestStart', 'RequestPatientImagingTest']
-
-
+           'RequestPatientImagingTestStart', 'RequestPatientImagingTest']
 class WizardGenerateResult(models.TransientModel):#hereda de Wizard
     'Generate Results'
     _name = 'wizard.generate.result'
@@ -57,31 +55,24 @@ class WizardGenerateResult(models.TransientModel):#hereda de Wizard
     #     Request.requested(requests)
     #     Request.done(requests)
     #     return action, {}
-
-
 class RequestImagingTest(models.TransientModel):
     'Request - Test'
     _name = 'gnuhealth.request.imaging.test'
     _table = 'gnuhealth_request_imaging_test'
     _description = 'Request - Test'
-
     request = fields.Many2one('gnuhealth.patient.imaging.test.request.start',
-        'Request', required=True)
+                              'Request', required=True)
     test = fields.Many2one('gnuhealth.imaging.test', 'Test', required=True)
-
-
 class RequestPatientImagingTestStart(models.TransientModel):
     'Request Patient Imaging Test Start'
     _name = 'gnuhealth.patient.imaging.test.request.start'
-
-    date = fields.Datetime('Date',default=date.today())
+    date = fields.Datetime('Date',default=datetime.today())
     #patient = fields.Many2one('gnuhealth.patient', 'Patient', required=True)
     #doctor = fields.Many2one('gnuhealth.healthprofessional', 'Doctor',
     #    required=True, help="Doctor who Request the lab tests.")
     #tests = fields.Many2many('gnuhealth.request-imaging-test', 'request',
     #    'test', 'Tests', required=True)
     urgent = fields.Boolean('Urgent')
-
     # def default_doctor(self):
     #     HealthProf= self.env.get('gnuhealth.healthprofessional')
     #     hp = HealthProf.get_health_professional()
@@ -89,24 +80,19 @@ class RequestPatientImagingTestStart(models.TransientModel):
     #         RequestPatientImagingTestStart.raise_user_error(
     #             "No health professional associated to this user !")
     #     return hp
-
-
 class RequestPatientImagingTest(models.TransientModel):#hereda de wizard
     'Request Patient Imaging Test'
     _name = 'gnuhealth.patient.imaging.test.request'
-
     # start = StateView('gnuhealth.patient.imaging.test.request.start',
     #     'health_imaging.patient_imaging_test_request_start_view_form', [
     #         Button('Cancel', 'end', 'tryton-cancel'),
     #         Button('Request', 'request', 'tryton-ok', default=True),
     #         ])
     # request = StateTransition()
-
     def transition_request(self):
         ImagingTestRequest = self.env.get('gnuhealth.imaging.test.request')
         Sequence = self.env.get('ir.sequence')
         Config = self.env.get('gnuhealth.sequences')
-
         config = Config(1)
         request_number = Sequence.get_id(config.imaging_request_sequence.id)
         imaging_tests = []
@@ -121,5 +107,4 @@ class RequestPatientImagingTest(models.TransientModel):#hereda de wizard
             imaging_test['urgent'] = self.start.urgent
             imaging_tests.append(imaging_test)
         ImagingTestRequest.create(imaging_tests)
-
         return 'end'

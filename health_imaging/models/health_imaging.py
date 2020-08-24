@@ -29,16 +29,13 @@ from odoo import models, fields, api
 __all__ = [
     'GnuHealthSequences', 'GnuHealthSequenceSetup','ImagingTestType',
     'ImagingTest', 'ImagingTestRequest', 'ImagingTestResult']
-
 sequences = ['imaging_request_sequence', 'imaging_sequence']
-
 class GnuHealthSequences(models.Model ):
     "GNU Health Sequences"
     _name = "gnuhealth.sequences"
     _description = "GNU Health Sequences"
     _order = 'id,name'
     _table = 'gnuhealth_sequences'
-
     imaging_request_sequence =  fields.Many2one(
         'ir.sequence',
         'Imaging Request Sequence',
@@ -49,26 +46,20 @@ class GnuHealthSequences(models.Model ):
         'Imaging Sequence',
         domain=[('code', '=', 'gnuhealth.imaging.test.result')],
         required=True)
-
-
     @classmethod
     def _multivalue_model(self, field):
         self.env = self.env['gnuhealth.sequence.setup']
         if field in sequences:
             return self.env.get()
         return super(GnuHealthSequences).multivalue_model(field)
-
-
     @classmethod
     def _default_imaging_request_sequence(self):
         return self.multivalue_model(
             'imaging_request_sequence').default_imaging_request_sequence()
-
     @classmethod
     def _default_imaging_sequence(self):
         return self.multivalue_model(
             'imaging_sequence').default_imaging_sequence()
-
 # SEQUENCE SETUP
 class GnuHealthSequenceSetup(models.Model):
     'GNU Health Sequences Setup'
@@ -76,15 +67,13 @@ class GnuHealthSequenceSetup(models.Model):
     _description = 'GNU Health Sequences Setup'
     _order = 'id,name'
     _table = 'gnuhealth_sequences_setup'
-
     imaging_request_sequence = fields.Many2one('ir.sequence',
                                                'Imaging Request Sequence', required=True,
                                                domain=[('code', '=', 'gnuhealth.imaging.test.request')])
     imaging_sequence = fields.Many2one('ir.sequence',
                                        'Imaging Result Sequence', required=True,
                                        domain=[('code', '=', 'gnuhealth.imaging.test.result')])
-
-    # @classmethod
+    # @classmethod TODO check this Tablehandler
     # def __register__(self, module_name):
     #     TableHandler = backend.get('TableHandler')
     #     exist = TableHandler.table_exist(self._table)
@@ -101,19 +90,16 @@ class GnuHealthSequenceSetup(models.Model):
     #     migrate_property(
     #         'gnuhealth.sequences', field_names, self, value_names,
     #         fields=fields)
-
     @classmethod
     def default_imaging_request_sequence(self):
         ModelData = self.env.get('ir.model.data')
         return ModelData.get_id(
             'health_imaging', 'seq_gnuhealth_imaging_test_request')
-
     @classmethod
     def default_imaging_sequence(self):
         ModelData = self.env.get('ir.model.data')
         return ModelData.get_id(
             'health_imaging', 'seq_gnuhealth_imaging_test')
-
 # END SEQUENCE SETUP , MIGRATION FROM FIELDS.PROPERTY
 class ImagingTestType(models.Model):
     'Imaging Test Type'
@@ -121,32 +107,27 @@ class ImagingTestType(models.Model):
     _description = 'Imaging Test Type'
     _order = 'id,name'
     _table = 'gnuhealth_imaging_test_type'
-
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True)
-
 class ImagingTest(models.Model, ):
     'Imaging Test'
     _name = 'gnuhealth.imaging.test'
     _description = 'Imaging Test'
     _order = 'id,name'
     _table = 'gnuhealth_imaging_test'
-
     code = fields.Char('Code', required=True)
     name = fields.Char('Name', required=True)
     test_type = fields.Many2one(
         'gnuhealth.imaging.test.type', 'Type',
         required=True)
     product = fields.Many2one('product.product', 'Service', required=True)
-    active = fields.Boolean('Active', select=True,default=True)
-
+    active = fields.Boolean('Active', index=True,default=True)
 class ImagingTestRequest(models.Model ):
     'Imaging Test Request'
     _name = 'gnuhealth.imaging.test.request'
     _description = 'Imaging Test Request'
     _order = 'date desc,request desc'
     _table = 'gnuhealth_imaging_test_request'
-
     patient = fields.Many2one('medical.patient', 'Patient', required=True)
     date = fields.Datetime('Date', required=True,default=datetime.date.today())
     requested_test = fields.Many2one(
@@ -161,12 +142,10 @@ class ImagingTestRequest(models.Model ):
     comment = fields.Text('Comment')
     request = fields.Char('Request', readonly=True)
     urgent = fields.Boolean('Urgent')
-
     # self._buttons.update({
     #     'requested': {'invisible': ~Eval('state').in_(['draft']),},
     #     'generate_results': { 'invisible': ~Eval('state').in_(['requested'])  }
     #     })
-
     @classmethod
     def create(self, vlist):
         Sequence = self.env.get('ir.sequence')
@@ -178,7 +157,6 @@ class ImagingTestRequest(models.Model ):
                 values['request'] = Sequence.get_id(
                     config.imaging_request_sequence.id)
         return super(ImagingTestRequest).create(vlist)
-
     @classmethod
     def copy(self, tests, default=None):
         if default is None:
@@ -187,23 +165,19 @@ class ImagingTestRequest(models.Model ):
         default['request'] = None
         default['date'] = datetime.date.today()
         return super(ImagingTestRequest, self).copy(tests, default=default)
-
     @classmethod
     #@.button
     #@Workflow.transition('requested')
     def requested(self, requests):
         pass
-
     @classmethod
     #open ('health_imaging.wizard_generate_result')
     def generate_results(self, requests):
         pass
-
     @classmethod
     #@Workflow.transition('done')
     def done(self, requests):
         pass
-
 class ImagingTestResult(models.Model):
     'Imaging Test Result'
     _name = 'gnuhealth.imaging.test.result'
@@ -211,7 +185,6 @@ class ImagingTestResult(models.Model):
     _inherit = ['image.mixin']
     _order = 'date desc'
     _table = 'gnuhealth_imaging_test_result'
-
     patient = fields.Many2one('medical.patient', 'Patient', readonly=True)
     number = fields.Char('Number', readonly=True)
     date = fields.Datetime('Date', required=True)
@@ -225,26 +198,21 @@ class ImagingTestResult(models.Model):
     doctor = fields.Many2one('res.partner', 'Doctor',required=True)
     comment = fields.Text('Comment')
     images = fields.Binary(attachment=True)#TODO fields.One2many ('ir.attachment', 'resource', 'Images')
-
     _sql_constraints = [
         ('number_uniq',
          'UNIQUE (number)',
          'The test ID code must be unique!')]
-
     @classmethod
     def create(self, vlist):
         Sequence = self.env.get('ir.sequence')
         Config = self.env.get('gnuhealth.sequences')
-
         vlist = [x.copy() for x in vlist]
         for values in vlist:
             if not values.get('name'):
                 config = Config(1)
                 values['number'] = Sequence.get_id(
                     config.imaging_sequence.id)
-
         return super(ImagingTestResult, self).create(vlist)
-
     @classmethod
     def search_rec_name(self, name, clause):
         if clause[1].startswith('!') or clause[1].startswith('not '):

@@ -2,7 +2,6 @@
 <!--# Copyright 2020 Yadieq87@gmail.com -->
 <odoo>
     <data>
-
         <!-- 'gnuhealth.imaging.test.request' -->
         <record id="gnuhealth_imaging_test_request_action_all" model="ir.actions.act_window">
             <field name="name">Imaging Test Request Action</field>
@@ -10,15 +9,14 @@
             <field name="res_model">gnuhealth.imaging.test.request</field>
             <field name="view_mode">kanban,form,tree</field>
         </record>
-
         <record id='gnuhealth_imaging_test__request_view_form' model='ir.ui.view'>
             <field name="name">Imaging Test Request Form</field>
             <field name="model">gnuhealth.imaging.test.request</field>
             <field name="arch" type="xml">
                 <form string="Imaging Test">
                     <header>
-                         <button name="requested" type="object" string="Request" icon="fa-bars"/>
-                         <button name="generate_results" type="object" string="Generate Results" icon="fa-bars"/>
+                        <button name="requested" type="object" string="Request" icon="fa-bars"/>
+                        <button name="generate_results" type="object" string="Generate Results" icon="fa-bars"/>
                         <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                     </header>
                     <sheet>
@@ -36,6 +34,5 @@
                 </form>
             </field>
         </record>
-
     </data>
 </odoo>

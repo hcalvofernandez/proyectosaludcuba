@@ -9,7 +9,6 @@
             <field name="res_model">gnuhealth.imaging.test.result</field>
             <field name="view_mode">kanban,form,tree</field>
         </record>
-
         <record id='gnuhealth_imaging_test_result_view_form' model='ir.ui.view'>
             <field name="name">Imaging Test Result Form</field>
             <field name="model">gnuhealth.imaging.test.result</field>
@@ -18,7 +17,6 @@
                     <header>
                         <button name="requested" type="object" string="Request" icon="fa-bars"/>
                         <button name="generate_results" type="object" string="Generate Results" icon="fa-bars"/>
-
                     </header>
                     <sheet>
                         <group col="4">
@@ -42,7 +40,6 @@
                 </form>
             </field>
         </record>
-
     </data>
 </odoo>
 

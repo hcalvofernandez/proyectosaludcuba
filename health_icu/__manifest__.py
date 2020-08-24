@@ -24,7 +24,7 @@
     #TODO depends 'health'
     #health_inpatient
     #health_nursing
-    'depends': ['base'],
+    'depends': ['base','medical'],
 
     # always loaded
     'data': [

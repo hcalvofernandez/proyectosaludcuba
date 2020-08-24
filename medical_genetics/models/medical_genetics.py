@@ -326,7 +326,7 @@ class PatientGeneticRisk(models.Model):
         # Execute first the creation of PoL
         genetic_info = super(PatientGeneticRisk, self).create(vals_list)
 
-        self.create_genetics_pol(genetic_info[0])
+        # self.create_genetics_pol(genetic_info[0])
 
         return genetic_info
 

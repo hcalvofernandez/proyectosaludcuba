@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <record id="medical_gene_variant_form_view" model="ir.ui.view">
+            <field name="name">medical.gene.variant.form.view</field>
+            <field name="model">medical.gene.variant</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="name"/>
+                        <field name="name"/>
+                        <label for="variant"/>
+                        <field name="variant"/>
+                        <newline/>
+                        <label for="aa_change"/>
+                        <field name="aa_change"/>
+                        <newline/>
+                        <field colspan="4" name="phenotypes"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="medical_gene_variant_tree_view" model="ir.ui.view">
+            <field name="name">medical.gene.variant.tree.view</field>
+            <field name="model">medical.gene.variant</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="variant"/>
+                    <field name="aa_change"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="medical_gene_variant_action">
+            <field name="name">Natural Variant</field>
+            <field name="res_model">medical.gene.variant</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="medical_gene_variant_menu"
+                name="Natural Variant"
+                parent="medical_genetics_menu"
+                action="medical_gene_variant_action"
+        />
+    </data>
+</odoo>

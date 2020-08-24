@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <record id="medical_disease_gene_form_view" model="ir.ui.view">
+            <field name="name">medical.disease.gene.form.view</field>
+            <field name="model">medical.disease.gene</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="name"/>
+                        <field name="name"/>
+                        <label for="long_name"/>
+                        <field name="long_name"/>
+                        <newline/>
+                        <label for="protein_name"/>
+                        <field name="protein_name"/>
+                        <label for="protein_uri"/>
+                        <field name="protein_uri" widget="url"/>
+                        <newline/>
+                        <label for="chromosome"/>
+                        <field name="chromosome"/>
+                        <label for="location"/>
+                        <field name="location"/>
+                        <label for="gene_id"/>
+                        <field name="gene_id"/>
+                        <newline/>
+                        <field colspan="4" name="variants"/>
+                        <newline/>
+                        <field colspan="4" name="info"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="medical_disease_gene_tree_view" model="ir.ui.view">
+            <field name="name">medical.disease.gene.tree.view</field>
+            <field name="model">medical.disease.gene</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="long_name"/>
+                    <field name="chromosome"/>
+                    <field name="variants"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="medical_disease_gene_action">
+            <field name="name">Disease Genes</field>
+            <field name="res_model">medical.disease.gene</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="medical_disease_gene_menu"
+                name="Disease Genes"
+                parent="medical_genetics_menu"
+                action="medical_disease_gene_action"
+        />
+    </data>
+</odoo>

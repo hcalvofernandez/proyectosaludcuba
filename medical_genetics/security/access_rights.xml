@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- BEGIN GENETICS ADMINISTRATION GROUP ACCESS RIGHTS -->
+
+        <!-- Create the medical Administration group -->
+        <record model="res.groups" id="group_medical_genetics_admin">
+            <field name="name">Medical Genetics Administration</field>
+        </record>
+
+        <!-- Assign the Group to the "admin" user -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+
+        <!-- END OF GENETICS ADMINISTRATION GROUP ACCESS RIGHTS -->
+
+        <!-- Access to Menus -->
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_genetics_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_disease_gene_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_gene_variant_phenotype_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_gene_variant_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_patient_family_diseases_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_patient_genetic_risk_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_genetics.medical_protein_disease_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
+        </record>
+
+    </data>
+</odoo>
+
+

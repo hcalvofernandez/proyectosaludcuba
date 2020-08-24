@@ -26,7 +26,7 @@ from odoo.osv import expression
 from uuid import uuid4
 
 __all__ = ['DiseaseGene', 'ProteinDisease', 'GeneVariant', 'GeneVariantPhenotype',
-           'PatientGeneticRisk', 'FamilyDiseases', 'PatientData']
+           'PatientGeneticRisk', 'FamilyDiseases', 'MedicalPatient']
 
 
 class DiseaseGene(models.Model):
@@ -64,6 +64,8 @@ class DiseaseGene(models.Model):
         for record in self:
             if record.protein_name:
                 record.protein_uri = 'http://www.uniprot.org/uniprot/' + str(record.protein_name)
+            else:
+                record.protein_uri = ''
 
     _sql_constraints = [
         ('name_unique', 'unique (name)', 'The Official Symbol name must be unique!'),
@@ -116,7 +118,7 @@ class ProteinDisease(models.Model):
                                    'Natural Variant',
                                    help="Protein sequence variant(s) involved in this condition")
 
-    dominance = fields.Selection([(None, ''),
+    dominance = fields.Selection([('none', ''),
                                   ('d', 'dominant'),
                                   ('r', 'recessive'),
                                   ('c', 'codominance'), ],
@@ -130,8 +132,9 @@ class ProteinDisease(models.Model):
         self.ensure_one()
         ret_url = ''
         if self.name:
-            ret_url = 'http://www.uniprot.org/diseases/' + str(self.name)
-        return ret_url
+            self.disease_uri = 'http://www.uniprot.org/diseases/' + str(self.name)
+        else:
+            self.disease_uri = ''
 
     _sql_constraints = [
         ('name_unique', 'unique (name)', 'The Disease Code  name must be unique!'),
@@ -219,7 +222,9 @@ class GeneVariantPhenotype(models.Model):
     @api.depends('variant')
     def _get_gene(self):
         if self.variant:
-            return self.variant.name.id
+            self.gene = self.variant.name.id
+        else:
+            self.gene = False
 
     def _get_name(self):
         if self.phenotype:
@@ -274,45 +279,46 @@ class PatientGeneticRisk(models.Model):
 
     notes = fields.Char("Notes")
 
-    healthprof = fields.Many2one('medical.healthprofessional',
-                                 'Health prof',
-                                 help="Health professional")
+    # healthprof = fields.Many2one('medical.healthprofessional',
+    #                              'Health prof',
+    #                              help="Health professional")
 
-    institution = fields.Many2one('medical.institution',
-                                  'Institution')
+    institution = fields.Many2one('res.partner',
+                                  'Institution',
+                                  domain="[('is_institution', '=', True)]")
 
     def default_institution(self):
-        HealthInst = self.env['medical.institution']
+        HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
         return institution
-
-    def create_genetics_pol(self, genetic_info):
-        """ Adds an entry in the person Page of Life
-            related to this genetic finding
-        """
-        Pol = self.env['medical.pol']
-        pol = []
-
-        vals = {
-            'page': str(uuid4()),
-            'person': genetic_info.patient.name.id,
-            'age': genetic_info.onset and str(genetic_info.onset) + 'y' or '',
-            'federation_account': genetic_info.patient.name.federation_account,
-            'page_type': 'medical',
-            'medical_context': 'genetics',
-            'relevance': 'important',
-            'gene': genetic_info.disease_gene.rec_name,
-            'natural_variant': genetic_info.natural_variant and genetic_info.natural_variant.aa_change,
-            'summary': genetic_info.notes,
-            'author': genetic_info.healthprof and genetic_info.healthprof.name.rec_name,
-            'node': genetic_info.institution and genetic_info.institution.name.rec_name
-        }
-        if genetic_info.variant_phenotype:
-            vals['health_condition_text'] = vals['health_condition_text'] = \
-                genetic_info.variant_phenotype.phenotype.rec_name
-
-        pol.append(vals)
-        Pol.create(pol)
+    #
+    # def create_genetics_pol(self, genetic_info):
+    #     """ Adds an entry in the person Page of Life
+    #         related to this genetic finding
+    #     """
+    #     Pol = self.env['medical.pol']
+    #     pol = []
+    #
+    #     vals = {
+    #         'page': str(uuid4()),
+    #         'person': genetic_info.patient.name.id,
+    #         'age': genetic_info.onset and str(genetic_info.onset) + 'y' or '',
+    #         'federation_account': genetic_info.patient.name.federation_account,
+    #         'page_type': 'medical',
+    #         'medical_context': 'genetics',
+    #         'relevance': 'important',
+    #         'gene': genetic_info.disease_gene.rec_name,
+    #         'natural_variant': genetic_info.natural_variant and genetic_info.natural_variant.aa_change,
+    #         'summary': genetic_info.notes,
+    #         'author': genetic_info.healthprof and genetic_info.healthprof.name.rec_name,
+    #         'node': genetic_info.institution and genetic_info.institution.name.rec_name
+    #     }
+    #     if genetic_info.variant_phenotype:
+    #         vals['health_condition_text'] = vals['health_condition_text'] = \
+    #             genetic_info.variant_phenotype.phenotype.rec_name
+    #
+    #     pol.append(vals)
+    #     Pol.create(pol)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -352,7 +358,7 @@ class FamilyDiseases(models.Model):
     name = fields.Many2one('medical.pathology',
                            'Condition',
                            required=True)
-    xory = fields.Selection([(None, ''),
+    xory = fields.Selection([('none', ''),
                              ('m', 'Maternal'),
                              ('f', 'Paternal'),
                              ('s', 'Sibling'), ],

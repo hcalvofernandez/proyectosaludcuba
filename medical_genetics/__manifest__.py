@@ -9,6 +9,7 @@
     'category': 'Medical',
     'depends': [
         'medical',
+        'medical_base',
     ],
     'Author': 'GNU Solidario',
     'website': "https://www.gnuhealth.org",
@@ -26,7 +27,6 @@
         'views/medical_patient_genetic_risk_view.xml',
         'views/medical_protein_disease_view.xml',
         'data/disease_genes.xml',
-        'data/commands.xml',
         'security/access_rights.xml',
         'security/ir.model.access.csv',
     ],

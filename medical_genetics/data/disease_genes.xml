@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data skiptest="1" noupdate="1">
+    <data noupdate="1">
         <record model="medical.disease.gene" id="A2BP1">
             <field name="name">A2BP1</field>
             <field name="long_name">ataxin 2-binding protein 1</field>

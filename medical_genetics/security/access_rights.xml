@@ -5,19 +5,13 @@
         <!-- BEGIN GENETICS ADMINISTRATION GROUP ACCESS RIGHTS -->
 
         <!-- Create the medical Administration group -->
-        <record model="res.group" id="group_medical_genetics_admin">
+        <record model="res.groups" id="group_medical_genetics_admin">
             <field name="name">Medical Genetics Administration</field>
         </record>
 
         <!-- Assign the Group to the "admin" user -->
         <record id="base.user_admin" model="res.users">
             <field name="groups_id" eval="[(4, ref('medical_genetics.group_medical_genetics_admin'))]"/>
-        </record>
-
-        <!-- Access to Menus -->
-        <record model="ir.ui.menu-res.group" id="menu_medical_group_medical_genetics_admin">
-            <field name="menu" ref="medical_conf_genetics"/>
-            <field name="group" ref="group_medical_genetics_admin"/>
         </record>
 
 

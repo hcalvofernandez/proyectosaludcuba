@@ -6,7 +6,6 @@
 
 <odoo>
     <data>
-
         <record id='gnuhealth_icu_glasgow_view_tree' model='ir.ui.view'>
             <field name="name">ICU Glasgow</field>
             <field name="model">gnuhealth.icu.glasgow</field>

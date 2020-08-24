@@ -15,7 +15,6 @@
                     <field name="score_date"/>
                     <field name="age"/>
                 </group>
-
                 <newline/>
                 <group id="group_apache_physisological" string="Physiological" colspan="4">
                     <field name="temperature"/>
@@ -43,7 +42,6 @@
                 <group>
                     <field name="apache_score"/>
                 </group>
-
             </form>
         </field>
     </record>

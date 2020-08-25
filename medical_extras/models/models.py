@@ -837,3 +837,25 @@ class Medicament(models.Model):
     #         return 'gnuhealth-warning'
 
 
+class DrugForm(models.Model):
+    _name = 'medical.drug.form'
+    _description = 'Drug Form'
+
+    name = fields.Char(
+        'Form',
+        required=True,
+        index=True,
+        translate=True
+    )
+    code = fields.Char(
+        'Code',
+        required=True,
+        help="Please use CAPITAL LETTERS and no spaces"
+    )
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', 'The Unit must be unique!'),
+        ('code_uniq', 'unique (code)', 'The CODE must be unique!'),
+    ]
+
+

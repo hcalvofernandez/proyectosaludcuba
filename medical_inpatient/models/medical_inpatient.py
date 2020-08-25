@@ -40,14 +40,20 @@ class DietTherapeutic(models.Model):
     _description = 'Diet Therapy'
     _name = "medical.diet.therapeutic"
 
-    name = fields.Char('Diet type',
-                       required=True,
-                       translate=True)
-    code = fields.Char('Code',
-                       required=True)
-    description = fields.Text('Indications',
-                              required=True,
-                              translate=True)
+    name = fields.Char(
+        'Diet type',
+        required=True,
+        translate=True
+    )
+    code = fields.Char(
+        'Code',
+        required=True
+    )
+    description = fields.Text(
+        'Indications',
+        required=True,
+        translate=True
+    )
 
     _sql_constraints = [
         ('code_uniq', 'unique (code)', 'The Diet code already exists!'),
@@ -64,181 +70,232 @@ class InpatientRegistration(models.Model):
         institution = HealthInst.get_institution()
         return institution
 
-    name = fields.Char('Registration Code',
-                       readonly=True,
-                       index=True)
-    patient = fields.Many2one('medical.patient',
-                              'Patient',
-                              required=True,
-                              index=True,
-                              readonly=True,
-                              states={
-                                  'done': [('readonly', True)],
-                                  'finished': [('readonly', True)],
-                              }, )
-    admission_type = fields.Selection([('none', ''),
-                                       ('routine', 'Routine'),
-                                       ('maternity', 'Maternity'),
-                                       ('elective', 'Elective'),
-                                       ('urgent', 'Urgent'),
-                                       ('emergency', 'Emergency'), ],
-                                      'Admission type',
-                                      default='none',
-                                      required=True,
-                                      index=True,
-                                      readonly=True,
-                                      states={
-                                          'done': [('readonly', True)],
-                                          'finished': [('readonly', True)],
-                                      }, )
-    hospitalization_date = fields.Datetime('Hospitalization date',
-                                           required=True,
-                                           index=True,
-                                           readonly=True,
-                                           states={
-                                               'done': [('readonly', True)],
-                                               'finished': [('readonly', True)],
-                                           }, )
-    discharge_date = fields.Datetime('Expected Discharge Date',
-                                     required=True,
-                                     readonly=True,
-                                     states={
-                                         'done': [('readonly', True)],
-                                         'finished': [('readonly', True)],
-                                     }, )
-    attending_physician = fields.Many2one('medical.healthprofessional',
-                                          'Attending Physician',
-                                          readonly=True,
-                                          states={
-                                              'done': [('readonly', True)],
-                                              'finished': [('readonly', True)],
-                                          }, )
-    operating_physician = fields.Many2one('medical.healthprofessional',
-                                          'Operating Physician',
-                                          readonly=True,
-                                          states={
-                                              'done': [('readonly', True)],
-                                              'finished': [('readonly', True)],
-                                          }, )
-    admission_reason = fields.Many2one('medical.pathology',
-                                       'Reason for Admission',
-                                       help="Reason for Admission",
-                                       readonly=True,
-                                       states={
-                                           'done': [('readonly', True)],
-                                           'finished': [('readonly', True)],
-                                       }, index=True)
-    bed = fields.Many2one('medical.hospital.bed',
-                          'Hospital Bed',
-                          readonly=True,
-                          states={
-                              'done': [('readonly', True)],
-                              'finished': [('readonly', True)],
-                          },
-                          depends=['name'])
-    nursing_plan = fields.Text('Nursing Plan',
-                               readonly=True,
-                               states={
-                                   'done': [('readonly', True)],
-                                   'finished': [('readonly', True)],
-                               }, )
-    medications = fields.One2many('medical.inpatient.medication',
-                                  'name',
-                                  'Medications',
-                                  readonly=True,
-                                  states={
-                                      'done': [('readonly', True)],
-                                      'finished': [('readonly', True)],
-                                  }, )
-    therapeutic_diets = fields.One2many('medical.inpatient.diet',
-                                        'name',
-                                        'Meals / Diet Program',
-                                        readonly=True,
-                                        states={
-                                            'done': [('readonly', True)],
-                                            'finished': [('readonly', True)],
-                                        }, )
+    name = fields.Char(
+        'Registration Code',
+        readonly=True,
+        index=True
+    )
+    patient = fields.Many2one(
+        'medical.patient',
+        'Patient',
+        required=True,
+        index=True,
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    admission_type = fields.Selection(
+        [
+            ('none', ''),
+            ('routine', 'Routine'),
+            ('maternity', 'Maternity'),
+            ('elective', 'Elective'),
+            ('urgent', 'Urgent'),
+            ('emergency', 'Emergency'),
+        ],
+        'Admission type',
+        default='none',
+        required=True,
+        index=True,
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    hospitalization_date = fields.Datetime(
+        'Hospitalization date',
+        required=True,
+        index=True,
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    discharge_date = fields.Datetime(
+        'Expected Discharge Date',
+        required=True,
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    attending_physician = fields.Many2one(
+        'res.partner',
+        'Attending Physician',
+        domain=[('is_healthprof', '=', True)],
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    operating_physician = fields.Many2one(
+        'res.partner',
+        'Operating Physician',
+        domain=[('is_healthprof', '=', True)],
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    admission_reason = fields.Many2one(
+        'medical.pathology',
+        'Reason for Admission',
+        help="Reason for Admission",
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+        index=True
+    )
+    bed = fields.Many2one(
+        'medical.hospital.bed',
+        'Hospital Bed',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+        depends=['name']
+    )
+    nursing_plan = fields.Text(
+        'Nursing Plan',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    medications = fields.One2many(
+        'medical.inpatient.medication',
+        'name',
+        'Medications',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    therapeutic_diets = fields.One2many(
+        'medical.inpatient.diet',
+        'name',
+        'Meals / Diet Program',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
 
-    nutrition_notes = fields.Text('Nutrition notes / directions',
-                                  readonly=True,
-                                  states={
-                                      'done': [('readonly', True)],
-                                      'finished': [('readonly', True)],
-                                  }, )
-    discharge_plan = fields.Text('Discharge Plan',
-                                 readonly=True,
-                                 states={
-                                     'done': [('readonly', True)],
-                                     'finished': [('readonly', True)],
-                                 }, )
-    info = fields.Text('Notes',
-                       readonly=True,
-                       states={
-                           'done': [('readonly', True)],
-                           'finished': [('readonly', True)],
-                       }, )
-    state = fields.Selection((('none', ''),
-                              ('free', 'free'),
-                              ('cancelled', 'cancelled'),
-                              ('confirmed', 'confirmed'),
-                              ('hospitalized', 'hospitalized'),
-                              ('done', 'Discharged - needs cleaning'),
-                              ('finished', 'Finished'),
-                              ), 'Status',
-                             index=True,
-                             default='free',
-                             readonly=True)
+    nutrition_notes = fields.Text(
+        'Nutrition notes / directions',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    discharge_plan = fields.Text(
+        'Discharge Plan',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    info = fields.Text(
+        'Notes',
+        readonly=True,
+        states={
+            'done': [('readonly', True)],
+            'finished': [('readonly', True)],
+        },
+    )
+    state = fields.Selection(
+        [
+            ('none', ''),
+            ('free', 'free'),
+            ('cancelled', 'cancelled'),
+            ('confirmed', 'confirmed'),
+            ('hospitalized', 'hospitalized'),
+            ('done', 'Discharged - needs cleaning'),
+            ('finished', 'Finished'),
+        ],
+        'Status',
+        index=True,
+        default='free',
+        readonly=True
+    )
 
     bed_transfers = fields.One2many('medical.bed.transfer',
                                     'name',
                                     'Transfer History',
                                     readonly=True)
 
-    discharged_by = fields.Many2one('medical.healthprofessional',
-                                    'Discharged by',
-                                    readonly=True,
-                                    help="Health Professional that discharged the patient")
+    discharged_by = fields.Many2one(
+        'res.partner',
+        'Discharged by',
+        domain=[('is_healthprof', '=', True)],
+        readonly=True,
+        help="Health Professional that discharged the patient"
+    )
 
-    discharge_reason = fields.Selection([('none', ''),
-                                         ('home', 'Home / Selfcare'),
-                                         ('transfer', 'Transferred to another institution'),
-                                         ('death', 'Death'),
-                                         ('against_advice', 'Left against medical advice')],
-                                        'Discharge Reason',
-                                        default='none',
-                                        readonly=True,
-                                        states={
-                                            'hospitalized': [('readonly', False)],
-                                        },
-                                        help="Reason for patient discharge")
+    discharge_reason = fields.Selection(
+        [
+            ('none', ''),
+            ('home', 'Home / Selfcare'),
+            ('transfer', 'Transferred to another institution'),
+            ('death', 'Death'),
+            ('against_advice', 'Left against medical advice'),
+        ],
+        'Discharge Reason',
+        default='none',
+        readonly=True,
+        states={
+            'hospitalized': [('readonly', False)],
+        },
+        help="Reason for patient discharge"
+    )
 
-    discharge_dx = fields.Many2one('medical.pathology',
-                                   'Discharge Dx',
-                                   help="Code for Discharge Diagnosis",
-                                   readonly=True,
-                                   states={
-                                       'hospitalized': [('readonly', True)],
-                                   }, )
+    discharge_dx = fields.Many2one(
+        'medical.pathology',
+        'Discharge Dx',
+        help="Code for Discharge Diagnosis",
+        readonly=True,
+        states={
+            'hospitalized': [('readonly', True)],
+        },
+    )
 
-    institution = fields.Many2one('medical.institution',
-                                  'Institution',
-                                  readonly=True,
-                                  default=_get_default_institution)
+    institution = fields.Many2one(
+        'medical.institution',
+        'Institution',
+        readonly=True,
+        default=_get_default_institution
+    )
 
-    puid = fields.Char('PUID',
-                       help="Person Unique Identifier",
-                       compute='_get_patient_puid',
-                       search='_search_patient_puid',
-                       )
+    # puid = fields.Char(
+    #     'PUID',
+    #     help="Person Unique Identifier",
+    #     compute='_get_patient_puid',
+    #     search='_search_patient_puid',
+    # )
 
-    @api.depends('patient')
-    def _get_patient_puid(self):
-        return self.patient.name.ref
-
-    def search_patient_puid(self, operator, value):
-        res = []
-        res.append(('patient.name.ref', operator, value))
-        return res
+    # @api.depends('patient')
+    # def _get_patient_puid(self):
+    #     return self.patient.name
+    #
+    # def search_patient_puid(self, operator, value):
+    #     res = []
+    #     res.append(('patient.name', operator, value))
+    #     return res
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'The Registration code already exists!'),
@@ -253,7 +310,7 @@ class InpatientRegistration(models.Model):
         cursor = self.env.cr
         bed_id = self.bed.id
         cursor.execute("SELECT COUNT(*) \
-            FROM gnuhealth_inpatient_registration \
+            FROM medical_inpatient_registration \
             WHERE (hospitalization_date::timestamp,discharge_date::timestamp) \
                 OVERLAPS (timestamp %s, timestamp %s) \
               AND (state = %s or state = %s or state = %s) \
@@ -280,7 +337,7 @@ class InpatientRegistration(models.Model):
         self.ensure_one()
         Bed = self.env['medical.hospital.bed']
 
-        signing_hp = self.env['medical.healthprofessional'].get_health_professional()
+        signing_hp = self.env['res.partner'].get_health_professional()
         if not signing_hp:
             raise UserError(
                 _(
@@ -395,42 +452,56 @@ class BedTransfer(models.Model):
     _description = 'Bed transfers'
     _name = 'medical.bed.transfer'
 
-    name = fields.Many2one('medical.inpatient.registration',
-                           'Registration Code')
-    transfer_date = fields.Datetime('Date')
-    bed_from = fields.Many2one('medical.hospital.bed',
-                               'From', )
-    bed_to = fields.Many2one('medical.hospital.bed',
-                             'To', )
-    reason = fields.Char('Reason')
+    name = fields.Many2one(
+        'medical.inpatient.registration',
+        'Registration Code'
+    )
+    transfer_date = fields.Datetime(
+        'Date'
+    )
+    bed_from = fields.Many2one(
+        'medical.hospital.bed',
+        'From',
+    )
+    bed_to = fields.Many2one(
+        'medical.hospital.bed',
+        'To',
+    )
+    reason = fields.Char(
+        'Reason'
+    )
 
 
 class Appointment(models.Model):
     _name = 'medical.appointment'
     _inherit = 'medical.appointment'
 
-    inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
-                                                  'Inpatient Registration',
-                                                  help="Enter the patient hospitalization code")
+    inpatient_registration_code = fields.Many2one(
+        'medical.inpatient.registration',
+        'Inpatient Registration',
+        help="Enter the patient hospitalization code"
+    )
 
 
-class PatientEvaluation(models.Model):
-    _name = 'medical.patient.evaluation'
-    _inherit = 'medical.patient.evaluation'
+# todo #hay que importar el modelo de health
+# class PatientEvaluation(models.Model):
+#     _name = 'medical.patient.evaluation'
+#     _inherit = 'medical.patient.evaluation'
+#
+#     inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
+#                                                   'IPC',
+#                                                   help="Enter the patient hospitalization code")
 
-    inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
-                                                  'IPC',
-                                                  help="Enter the patient hospitalization code")
+# todo #importar el modelo de health
 
-
-# ECG
-class PatientECG(models.Model):
-    _name = 'medical.patient.ecg'
-    _inherit = 'medical.patient.ecg'
-
-    inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
-                                                  'Inpatient Registration',
-                                                  help="Enter the patient hospitalization code")
+# # ECG
+# class PatientECG(models.Model):
+#     _name = 'medical.patient.ecg'
+#     _inherit = 'medical.patient.ecg'
+#
+#     inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
+#                                                   'Inpatient Registration',
+#                                                   help="Enter the patient hospitalization code")
 
 
 class MedicalPatient(models.Model):
@@ -438,22 +509,26 @@ class MedicalPatient(models.Model):
     _name = 'medical.patient'
     _inherit = 'medical.patient'
 
-    patient_status = fields.Boolean('Hospitalized',
-                                    help="Show the hospitalization status of the patient",
-                                    compute='_get_patient_status',
-                                    search='_search_patient_status')
+    patient_status = fields.Boolean(
+        'Hospitalized',
+        help="Show the hospitalization status of the patient",
+        compute='_get_patient_status',
+        search='_search_patient_status'
+    )
 
-    @api.depends('variant')
-    def _get_patient_status(self, patients, name):
+    def _get_patient_status(self):
         cursor = self.env.cr
-        cursor.execute(("SELECT gir.id \
-                        FROM gnuhealth_inpatient_registration gir \
-                        WHERE (gir.state = %s ) \
-                        GROUP_BY gir.id",
-                        ('hospitalized',)))
+        cursor.execute("SELECT gir.id \
+                        FROM medical_inpatient_registration gir \
+                        WHERE (gir.state = %s and patient =  %s) \
+                        GROUP BY gir.id",
+                       ('hospitalized', self.id))
         res = cursor.fetchall()
 
-        return res
+        if res:
+            self.patient_status = True
+        else:
+            self.patient_status = False
 
     def _search_patient_status(self, operator, value):
 
@@ -467,7 +542,7 @@ class MedicalPatient(models.Model):
         cursor = self.env.cr
         bed_id = self.bed.id
         cursor.execute("SELECT pat.id \
-            FROM gnuhealth_inpatient_registration gir join gnuhealth_patient pat on pat.id = gir.patient \
+            FROM medical_inpatient_registration gir join medical_patient pat on pat.id = gir.patient \
             WHERE (gir.state = %s )",
                        ('hospitalized',))
         query_res = self._cr.fetchall()
@@ -485,76 +560,120 @@ class InpatientMedication(models.Model):
     _description = 'Inpatient Medication'
     _name = 'medical.inpatient.medication'
 
-    name = fields.Many2one('medical.inpatient.registration',
-                           'Registration Code')
-    medicament = fields.Many2one('medical.medicament',
-                                 'Medicament',
-                                 required=True,
-                                 help='Prescribed Medicament')
-    indication = fields.Many2one('medical.pathology',
-                                 'Indication',
-                                 help='Choose a disease for this medicament from the disease list. It'
-                                      ' can be an existing disease of the patient or a prophylactic.')
-    start_treatment = fields.Datetime('Start',
-                                      help='Date of start of Treatment',
-                                      required=True)
-    end_treatment = fields.Datetime('End',
-                                    help='Date of start of Treatment')
-    dose = fields.Float('Dose',
-                        help='Amount of medication (eg, 250 mg) per dose',
-                        required=True)
-    dose_unit = fields.Many2one('medical.dose.unit',
-                                'dose unit',
-                                required=True,
-                                help='Unit of measure for the medication to be taken')
-    route = fields.Many2one('medical.drug.route',
-                            'Administration Route',
-                            required=True,
-                            help='Drug administration route code.')
-    form = fields.Many2one('medical.drug.form',
-                           'Form',
-                           required=True,
-                           help='Drug form, such as tablet or gel')
-    qty = fields.Integer('x',
-                         required=True,
-                         help='Quantity of units (eg, 2 capsules) of the medicament')
-    common_dosage = fields.Many2one('medical.medication.dosage',
-                                    'Frequency',
-                                    help='Common / standard dosage frequency for this medicament')
-    admin_times = fields.One2many('medical.inpatient.medication.admin_time',
-                                  'name',
-                                  "Admin times")
-    log_history = fields.One2many('medical.inpatient.medication.log',
-                                  'name',
-                                  "Log History")
-    frequency = fields.Integer('Frequency',
-                               help='Time in between doses the patient must wait (ie, for 1 pill'
-                                    ' each 8 hours, put here 8 and select \"hours\" in the unit field')
-    frequency_unit = fields.Selection([('none', ''),
-                                       ('seconds', 'seconds'),
-                                       ('minutes', 'minutes'),
-                                       ('hours', 'hours'),
-                                       ('days', 'days'),
-                                       ('weeks', 'weeks'),
-                                       ('wr', 'when required'), ],
-                                      'unit',
-                                      index=True,
-                                      sort=False)
-    frequency_prn = fields.Boolean('PRN',
-                                   help='Use it as needed, pro re nata')
-    is_active = fields.Boolean('Active',
-                               default=True,
-                               help='Check if the patient is currently taking the medication')
-    discontinued = fields.Boolean('Discontinued')
-    course_completed = fields.Boolean('Course Completed')
-    discontinued_reason = fields.Char('Reason for discontinuation',
-                                      depends=['discontinued'],
-                                      help='Short description for discontinuing the treatment')
-    adverse_reaction = fields.Text('Adverse Reactions',
-                                   help='Side effects or adverse reactions that the patient experienced')
+    name = fields.Many2one(
+        'medical.inpatient.registration',
+        'Registration Code'
+    )
+    medicament = fields.Many2one(
+        'medical.medicament',
+        'Medicament',
+        required=True,
+        help='Prescribed Medicament'
+    )
+    indication = fields.Many2one(
+        'medical.pathology',
+        'Indication',
+        help='Choose a disease for this medicament from the disease list. It'
+             ' can be an existing disease of the patient or a prophylactic.'
+    )
+    start_treatment = fields.Datetime(
+        'Start',
+        help='Date of start of Treatment',
+        required=True
+    )
+    end_treatment = fields.Datetime(
+        'End',
+        help='Date of start of Treatment'
+    )
+    dose = fields.Float(
+        'Dose',
+        help='Amount of medication (eg, 250 mg) per dose',
+        required=True
+    )
+    dose_unit = fields.Many2one(
+        'medical.dose.unit',
+        'dose unit',
+        required=True,
+        help='Unit of measure for the medication to be taken'
+    )
+    route = fields.Many2one(
+        'medical.drug.route',
+        'Administration Route',
+        required=True,
+        help='Drug administration route code.'
+    )
+    form = fields.Many2one(
+        'medical.drug.form',
+        'Form',
+        required=True,
+        help='Drug form, such as tablet or gel'
+    )
+    qty = fields.Integer(
+        'x',
+        required=True,
+        help='Quantity of units (eg, 2 capsules) of the medicament'
+    )
+    common_dosage = fields.Many2one(
+        'medical.medication.dosage',
+        'Frequency',
+        help='Common / standard dosage frequency for this medicament'
+    )
+    admin_times = fields.One2many(
+        'medical.inpatient.medication.admin_time',
+        'name',
+        "Admin times"
+    )
+    log_history = fields.One2many(
+        'medical.inpatient.medication.log',
+        'name',
+        "Log History"
+    )
+    frequency = fields.Integer(
+        'Frequency',
+        help='Time in between doses the patient must wait (ie, for 1 pill'
+             ' each 8 hours, put here 8 and select \"hours\" in the unit field'
+    )
+    frequency_unit = fields.Selection(
+        [
+            ('none', ''),
+            ('seconds', 'seconds'),
+            ('minutes', 'minutes'),
+            ('hours', 'hours'),
+            ('days', 'days'),
+            ('weeks', 'weeks'),
+            ('wr', 'when required'),
+        ],
+        'unit',
+        index=True,
+        sort=False
+    )
+    frequency_prn = fields.Boolean(
+        'PRN',
+        help='Use it as needed, pro re nata'
+    )
+    is_active = fields.Boolean(
+        'Active',
+        default=True,
+        help='Check if the patient is currently taking the medication'
+    )
+    discontinued = fields.Boolean(
+        'Discontinued'
+    )
+    course_completed = fields.Boolean(
+        'Course Completed'
+    )
+    discontinued_reason = fields.Char(
+        'Reason for discontinuation',
+        depends=['discontinued'],
+        help='Short description for discontinuing the treatment'
+    )
+    adverse_reaction = fields.Text(
+        'Adverse Reactions',
+        help='Side effects or adverse reactions that the patient experienced'
+    )
 
     @api.depends('discontinued',
-                    'course_completed')
+                 'course_completed')
     def on_change_with_is_active(self):
         is_active = True
         if self.discontinued or self.course_completed:
@@ -562,12 +681,12 @@ class InpatientMedication(models.Model):
         return is_active
 
     @api.depends('is_active',
-                    'course_completed')
+                 'course_completed')
     def on_change_with_discontinued(self):
         return not (self.is_active or self.course_completed)
 
     @api.depends('is_active',
-                    'discontinued')
+                 'discontinued')
     def on_change_with_course_completed(self):
         return not (self.is_active or self.discontinued)
 
@@ -576,16 +695,26 @@ class InpatientMedicationAdminTimes(models.Model):
     _description = 'Inpatient Medication Admin Times'
     _name = "medical.inpatient.medication.admin_time"
 
-    name = fields.Many2one('medical.inpatient.medication',
-                           'Medication')
-    admin_time = fields.Datetime("Time")
-    dose = fields.Float('Dose',
-                        help='Amount of medication (eg, 250 mg) per dose')
-    dose_unit = fields.Many2one('medical.dose.unit',
-                                'dose unit',
-                                help='Unit of measure for the medication to be taken')
-    remarks = fields.Text('Remarks',
-                          help='specific remarks for this dose')
+    name = fields.Many2one(
+        'medical.inpatient.medication',
+        'Medication'
+    )
+    admin_time = fields.Datetime(
+        "Time"
+    )
+    dose = fields.Float(
+        'Dose',
+        help='Amount of medication (eg, 250 mg) per dose'
+    )
+    dose_unit = fields.Many2one(
+        'medical.dose.unit',
+        'dose unit',
+        help='Unit of measure for the medication to be taken'
+    )
+    remarks = fields.Text(
+        'Remarks',
+        help='specific remarks for this dose'
+    )
 
 
 class InpatientMedicationLog(models.Model):
@@ -595,28 +724,41 @@ class InpatientMedicationLog(models.Model):
     @api.model
     def _default_health_professional(self):
         # pool = Pool()
-        return self.env['medical.healthprofessional'].get_health_professional()
+        return self.env['res.partner'].get_health_professional()
 
     @api.model
     def _default_admin_time(self):
         return datetime.now()
 
-    name = fields.Many2one('medical.inpatient.medication',
-                           'Medication')
-    admin_time = fields.Datetime("Date",
-                                 readonly=True,
-                                 default=_default_admin_time)
-    health_professional = fields.Many2one('medical.healthprofessional',
-                                          'Health Professional',
-                                          readonly=True,
-                                          default=_default_health_professional)
-    dose = fields.Float('Dose',
-                        help='Amount of medication (eg, 250 mg) per dose')
-    dose_unit = fields.Many2one('medical.dose.unit',
-                                'dose unit',
-                                help='Unit of measure for the medication to be taken')
-    remarks = fields.Text('Remarks',
-                          help='specific remarks for this dose')
+    name = fields.Many2one(
+        'medical.inpatient.medication',
+        'Medication'
+    )
+    admin_time = fields.Datetime(
+        "Date",
+        readonly=True,
+        default=_default_admin_time
+    )
+    health_professional = fields.Many2one(
+        'res.partner',
+        'Health Professional',
+        domain=[('is_healthprof', '=', True)],
+        readonly=True,
+        default=_default_health_professional
+    )
+    dose = fields.Float(
+        'Dose',
+        help='Amount of medication (eg, 250 mg) per dose'
+    )
+    dose_unit = fields.Many2one(
+        'medical.dose.unit',
+        'dose unit',
+        help='Unit of measure for the medication to be taken'
+    )
+    remarks = fields.Text(
+        'Remarks',
+        help='specific remarks for this dose'
+    )
 
     @api.constrains('health_professional')
     def validate(self):
@@ -636,13 +778,19 @@ class InpatientDiet(models.Model):
     _description = 'Inpatient Diet'
     _name = "medical.inpatient.diet"
 
-    name = fields.Many2one('medical.inpatient.registration',
-                           'Registration Code')
-    diet = fields.Many2one('medical.diet.therapeutic',
-                           'Diet',
-                           required=True)
-    remarks = fields.Text('Remarks / Directions',
-                          help='specific remarks for this diet / patient')
+    name = fields.Many2one(
+        'medical.inpatient.registration',
+        'Registration Code'
+    )
+    diet = fields.Many2one(
+        'medical.diet.therapeutic',
+        'Diet',
+        required=True
+    )
+    remarks = fields.Text(
+        'Remarks / Directions',
+        help='specific remarks for this diet / patient'
+    )
 
 
 class InpatientMeal(models.Model):
@@ -651,27 +799,39 @@ class InpatientMeal(models.Model):
 
     @api.model
     def _default_institution(self):
-        HealthInst = self.env['medical.institution']
+        # medical.institution
+        HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
         return institution
 
-    name = fields.Many2one('product.product',
-                           'Food',
-                           required=True,
-                           help='Food')
+    name = fields.Many2one(
+        'product.product',
+        'Food',
+        required=True,
+        help='Food'
+    )
 
-    diet_therapeutic = fields.Many2one('medical.diet.therapeutic',
-                                       'Diet')
+    diet_therapeutic = fields.Many2one(
+        'medical.diet.therapeutic',
+        'Diet'
+    )
 
-    diet_belief = fields.Many2one('medical.diet.belief',
-                                  'Belief')
+    diet_belief = fields.Many2one(
+        'medical.diet.belief',
+        'Belief'
+    )
 
-    diet_vegetarian = fields.Many2one('medical.vegetarian_types',
-                                      'Vegetarian')
+    diet_vegetarian = fields.Many2one(
+        'medical.vegetarian_types',
+        'Vegetarian'
+    )
 
-    institution = fields.Many2one('medical.institution',
-                                  'Institution',
-                                  default=_default_institution)
+    institution = fields.Many2one(
+        'res.partner',
+        'Institution',
+        domain=[('is_institution', '=', True)],
+        default=_default_institution
+    )
 
     def _get_name(self):
         if self.name:
@@ -682,13 +842,19 @@ class InpatientMealOrderItem(models.Model):
     _description = 'Inpatient Meal Item'
     _name = "medical.inpatient.meal.order.item"
 
-    name = fields.Many2one('medical.inpatient.meal.order',
-                           'Meal Order')
+    name = fields.Many2one(
+        'medical.inpatient.meal.order',
+        'Meal Order'
+    )
 
-    meal = fields.Many2one('medical.inpatient.meal',
-                           'Meal')
+    meal = fields.Many2one(
+        'medical.inpatient.meal',
+        'Meal'
+    )
 
-    remarks = fields.Char('Remarks')
+    remarks = fields.Char(
+        'Remarks'
+    )
 
 
 class InpatientMealOrder(models.Model):
@@ -702,57 +868,82 @@ class InpatientMealOrder(models.Model):
     @api.model
     def _default_health_professional(self):
         # pool = Pool()
-        return self.env['medical.healthprofessional'].get_health_professional()
+        return self.env['res.partner'].get_health_professional()
 
-    name = fields.Many2one('medical.inpatient.registration',
-                           'Registration Code',
-                           domain=[('state', '=', 'hospitalized')],
-                           required=True)
+    name = fields.Many2one(
+        'medical.inpatient.registration',
+        'Registration Code',
+        domain=[('state', '=', 'hospitalized')],
+        required=True
+    )
 
-    mealtime = fields.Selection((('none', ''),
-                                 ('breakfast', 'Breakfast'),
-                                 ('lunch', 'Lunch'),
-                                 ('dinner', 'Dinner'),
-                                 ('snack', 'Snack'),
-                                 ('special', 'Special order'),),
-                                'Meal time',
-                                required=True,
-                                sort=False)
+    mealtime = fields.Selection(
+        [
+            ('none', ''),
+            ('breakfast', 'Breakfast'),
+            ('lunch', 'Lunch'),
+            ('dinner', 'Dinner'),
+            ('snack', 'Snack'),
+            ('special', 'Special order'),
+        ],
+        'Meal time',
+        required=True,
+        sort=False
+    )
 
-    meal_item = fields.One2many('medical.inpatient.meal.order.item',
-                                'name',
-                                'Items')
+    meal_item = fields.One2many(
+        'medical.inpatient.meal.order.item',
+        'name',
+        'Items'
+    )
 
-    meal_order = fields.Char('Order',
-                             readonly=True)
+    meal_order = fields.Char(
+        'Order',
+        readonly=True
+    )
 
-    health_professional = fields.Many2one('medical.healthprofessional',
-                                          'Health Professional',
-                                          default=_default_health_professional)
+    health_professional = fields.Many2one(
+        'res.partner',
+        'Health Professional',
+        domain=[('is_healthprof', '=', True)],
+        default=_default_health_professional
+    )
 
-    remarks = fields.Text('Remarks')
+    remarks = fields.Text(
+        'Remarks'
+    )
 
-    meal_warning = fields.Boolean('Warning',
-                                  help="The patient has special needs on meals")
+    meal_warning = fields.Boolean(
+        'Warning',
+        help="The patient has special needs on meals"
+    )
 
-    meal_warning_ack = fields.Boolean('Ack',
-                                      help="Check if you have verified the warnings on the"
-                                           " patient meal items")
+    meal_warning_ack = fields.Boolean(
+        'Ack',
+        help="Check if you have verified the warnings on the"
+             " patient meal items"
+    )
 
-    order_date = fields.Datetime('Date',
-                                 help='Order date',
-                                 required=True,
-                                 default=_default_order_date)
+    order_date = fields.Datetime(
+        'Date',
+        help='Order date',
+        required=True,
+        default=_default_order_date
+    )
 
-    state = fields.Selection((('none', ''),
-                              ('draft', 'Draft'),
-                              ('cancelled', 'Cancelled'),
-                              ('ordered', 'Ordered'),
-                              ('processing', 'Processing'),
-                              ('done', 'Done'),),
-                             'Status',
-                             readonly=True,
-                             default='draft')
+    state = fields.Selection(
+        [
+            ('none', ''),
+            ('draft', 'Draft'),
+            ('cancelled', 'Cancelled'),
+            ('ordered', 'Ordered'),
+            ('processing', 'Processing'),
+            ('done', 'Done'),
+        ],
+        'Status',
+        readonly=True,
+        default='draft'
+    )
 
     @api.model_create_multi
     def create(self, vals_list):

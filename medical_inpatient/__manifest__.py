@@ -9,7 +9,8 @@
     'category': 'Medical',
     'depends': [
         'medical',
-        # 'health_lifestyle',
+        'medical_extras',
+        'health_lifestyle',
     ],
     'Author': 'GNU Solidario',
     'website': "https://www.gnuhealth.org",

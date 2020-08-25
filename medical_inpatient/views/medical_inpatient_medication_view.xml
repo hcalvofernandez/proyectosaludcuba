@@ -1,106 +1,97 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
 <!--# Copyright 2020 LabViv-->
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
+    <data>
 
-    <record id="medical_inpatient_medication_form_view" model="ir.ui.view">
-        <field name="name">medical.inpatient.medication.form.view</field>
-        <field name="model">medical.inpatient.medication</field>
-        <field name="arch" type="xml">
-            <form>
-                <notebook>
-                    <page string="General Info" id="inpatient_medication_general_info">
-                        <group id="inpatient_medication_header" string="Medication">
-                            <label name="medicament"/>
-                            <field name="medicament"/>
-                            <label name="indication"/>
-                            <field name="indication"/>
-                        </group>
-                        <newline/>
-                        <newline/>
-                        <group id="inpatient_treatment_period" string="Treatment period">
-                            <label name="start_treatment"/>
-                            <field name="start_treatment"/>
-                            <label name="end_treatment"/>
-                            <field name="end_treatment"/>
-                        </group>
-                        <newline/>
-                        <group id="inpatient_medicament_form" string="Administration">
-                            <label name="form"/>
-                            <field name="form"/>
-                            <label name="route"/>
-                            <field name="route"/>
-                        </group>
-                        <newline/>
-                        <group id="inpatient_medicament_dosage" colspan="4" col="8" string="Dosage">
-                            <label name="dose"/>
-                            <field name="dose"/>
-                            <label name="dose_unit"/>
-                            <field name="dose_unit"/>
-                            <label name="qty"/>
-                            <field name="qty"/>
-                            <label name="common_dosage"/>
-                            <field name="common_dosage"/>
-                        </group>
-                        <newline/>
-                        <field colspan="4" name="admin_times"/>
-                        <newline/>
-                    </page>
-                    <page id="inpatient_medication_misc" string="Extra Info">
-                        <group id="inpatient_treatment_status" string="Status">
-                            <label name="is_active"/>
-                            <field name="is_active"/>
-                            <label name="course_completed"/>
-                            <field name="course_completed"/>
-                            <label name="discontinued"/>
-                            <field name="discontinued"/>
-                            <label name="discontinued_reason" attrs="{'invisible': [('discontinued', '=', False)], 'required': [('discontinued', '=', True)]}"/>
-                            <field name="discontinued_reason"/>
-                        </group>
-                        <newline/>
-                        <group id="inpatient_medication_adeverse_effects" string="Adverse Reactions and Notes">
-                            <field name="adverse_reaction"/>
-                        </group>
-                        <newline/>
-                        <field name="log_history"/>
-                    </page>
-                </notebook>
-            </form>
-        </field>
-    </record>
+        <record id="medical_inpatient_medication_form_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.medication.form.view</field>
+            <field name="model">medical.inpatient.medication</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <notebook>
+                            <page string="General Info" id="inpatient_medication_general_info">
+                                <group id="inpatient_medication_header" string="Medication">
+                                    <field name="medicament"/>
+                                    <field name="indication"/>
+                                </group>
+                                <newline/>
+                                <newline/>
+                                <group id="inpatient_treatment_period" string="Treatment period">
+                                    <field name="start_treatment"/>
+                                    <field name="end_treatment"/>
+                                </group>
+                                <newline/>
+                                <group id="inpatient_medicament_form" string="Administration">
+                                    <field name="form"/>
+                                    <field name="route"/>
+                                </group>
+                                <newline/>
+                                <group id="inpatient_medicament_dosage" colspan="4" col="8" string="Dosage">
+                                    <field name="dose"/>
+                                    <field name="dose_unit"/>
+                                    <field name="qty"/>
+                                    <field name="common_dosage"/>
+                                </group>
+                                <newline/>
+                                <field colspan="4" name="admin_times"/>
+                                <newline/>
+                            </page>
+                            <page id="inpatient_medication_misc" string="Extra Info">
+                                <group id="inpatient_treatment_status" string="Status">
+                                    <field name="is_active"/>
+                                    <field name="course_completed"/>
+                                    <field name="discontinued"/>
+                                    <field name="discontinued_reason"
+                                           attrs="{'invisible': [('discontinued', '=', False)], 'required': [('discontinued', '=', True)]}"/>
+                                </group>
+                                <newline/>
+                                <group id="inpatient_medication_adeverse_effects" string="Adverse Reactions and Notes">
+                                    <field name="adverse_reaction"/>
+                                </group>
+                                <newline/>
+                                <field name="log_history"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
-    <record id="medical_inpatient_medication_tree_view" model="ir.ui.view">
-        <field name="name">medical.inpatient.medication.tree.view</field>
-        <field name="model">medical.inpatient.medication</field>
-        <field name="type">tree</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="medicament" expand="1"/>
-                <field name="start_treatment" widget="date"/>
-                <field name="start_treatment" widget="time"/>
-                <field name="end_treatment" widget="date"/>
-                <field name="end_treatment" widget="time"/>
-                <field name="admin_times"/>
-                <field name="course_completed"/>
-                <field name="discontinued"/>
-                <field name="is_active" expand="1"/>
-            </tree>
-        </field>
-    </record>
+        <record id="medical_inpatient_medication_tree_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.medication.tree.view</field>
+            <field name="model">medical.inpatient.medication</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="medicament"/>
+                    <field name="start_treatment" widget="date"/>
+                    <field name="start_treatment" widget="time"/>
+                    <field name="end_treatment" widget="date"/>
+                    <field name="end_treatment" widget="time"/>
+                    <field name="admin_times"/>
+                    <field name="course_completed"/>
+                    <field name="discontinued"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
 
-    <record model="ir.actions.act_window" id="medical_inpatient_medication_action">
-        <field name="name">Inpatient Medication</field>
-        <field name="res_model">medical.inpatient.medication</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+        <!--        <record model="ir.actions.act_window" id="medical_inpatient_medication_action">-->
+        <!--            <field name="name">Inpatient Medication</field>-->
+        <!--            <field name="res_model">medical.inpatient.medication</field>-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--        </record>-->
 
-    <menuitem
-            id="medical_inpatient_medication_menu"
-            name="Inpatient Medication"
-            parent="medical_inpatient_menu"
-            action="medical_inpatient_medication_action"
-    />
+        <!--        <menuitem-->
+        <!--                id="medical_inpatient_medication_menu"-->
+        <!--                name="Inpatient Medication"-->
+        <!--                parent="medical_inpatient_menu"-->
+        <!--                action="medical_inpatient_medication_action"-->
+        <!--        />-->
+    </data>
 
 </odoo>

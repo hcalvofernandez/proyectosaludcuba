@@ -1,27 +1,17 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
 <!--# Copyright 2020 LabViv-->
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
-
     <data>
-        <record id="gnuhealth_inpatient_evaluation_create_wizard_view" model="ir.ui.view">
-            <field name="name">gnuhealth.inpatient.evaluation.create.wizard.view</field>
-            <field name="model">gnuhealth.inpatient.evaluation.create</field>
+        <record id="medical_inpatient_evaluation_create_wizard_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.evaluation.create.wizard.view</field>
+            <field name="model">medical.inpatient.evaluation.create</field>
             <field name="arch" type="xml">
-                <form string="Create Transfer Patient">
-                    <group>
-                        <label name="newbed"/>
-                        <field name="newbed"/>
-                        <newline/>
-                        <label name="orig_bed_state"/>
-                        <field name="orig_bed_state"/>
-                        <label name="reason"/>
-                        <field name="reason"/>
-                    </group>
+                <form string="Create Inpatient Evaluation Patient">
                     <footer>
-                        <button string='Transfer Patient' name="button_create_bed_transfer" type="object"
+                        <button string='Do Inpatient Evaluation' name="do_inpatient_evaluation" type="object"
                                 class="btn-primary"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
@@ -29,13 +19,13 @@
             </field>
         </record>
 
-        <record id="action_gnuhealth_inpatient_evaluation_create_wizard_view" model="ir.actions.act_window">
+        <record id="action_medical_inpatient_evaluation_create_wizard_view" model="ir.actions.act_window">
             <field name="name">Inpatient Evaluation</field>
-            <field name="res_model">gnuhealth.inpatient.evaluation.create</field>
+            <field name="res_model">medical.inpatient.evaluation.create</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="gnuhealth_inpatient_evaluation_create_wizard_view"/>
+            <field name="view_id" ref="medical_inpatient_evaluation_create_wizard_view"/>
             <field name="target">new</field>
-            <field name="binding_model_id" ref="health_inpatient.model_gnuhealth_inpatient_registration"/>
+            <field name="binding_model_id" ref="medical_inpatient.model_medical_inpatient_registration"/>
             <field name="binding_view_types">list</field>
         </record>
 

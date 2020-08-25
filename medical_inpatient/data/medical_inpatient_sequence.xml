@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data skiptest="1">
+    <data >
 
         <record id="seq_medical_inpatient_registration" model="ir.sequence">
             <field name="name">Inpatient Registration</field>

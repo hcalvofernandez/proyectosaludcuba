@@ -33,12 +33,12 @@ class CreateInpatientEvaluation(models.TransientModel):
     """
     Create Inpatient Evaluation.
     """
-    _name = 'gnuhealth.inpatient.evaluation.create'
+    _name = 'medical.inpatient.evaluation.create'
     _description = 'Create Inpatient Evaluation'
 
     def do_inpatient_evaluation(self):
         self.ensure_one()
-        inpatient_registrations = self.env['gnuhealth.inpatient.registration']
+        inpatient_registrations = self.env['medical.inpatient.registration']
         registrations = inpatient_registrations.browse(self.env.context['active_id'])
         if not registrations:
             raise UserError(
@@ -50,13 +50,13 @@ class CreateInpatientEvaluation(models.TransientModel):
         inpatient_registration_code = registrations[0].id
         evaluation_type = 'inpatient'
 
-        view_id = self.env.ref('medical.gnuhealth_patient_evaluation_view').id
+        view_id = self.env.ref('medical.medical_patient_evaluation_view').id
 
         return {
             'name': _('Patient Evaluation'),
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
-            'res_model': 'gnuhealth.patient.evaluation',
+            'res_model': 'medical.patient.evaluation',
             'view_id': view_id,
             'views': [(view_id, 'form')],
             'target': 'new',

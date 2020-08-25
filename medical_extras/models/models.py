@@ -443,3 +443,52 @@ class MedicalSpecialty(models.Model):
     ]
 
 
+# gnuhealth.healthprofessional
+class HealthProfessional(models.Model):
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+
+    def default_institution(self):
+        return self.env['res.partner'].get_institution()
+
+    def get_health_professional(self):
+        # Get the professional associated to the internal user id
+        # that logs into GNU Health
+        if self.env.user and self.env.user.partner_id.is_healthprof:
+            return self.env.user.partner_id.is_healthprof
+        else:
+            raise UserError(
+                _(
+                    'No Health Professional associated to this user!'
+                ))
+
+    institution = fields.Many2one(
+        'res.partner',
+        'Institution',
+        domain=[('is_institution', '=', True)],
+        default=default_institution,
+        help='Main institution where she/he works'
+    )
+
+    code_healthprof = fields.Char(
+        'LICENSE ID',
+        help='License ID'
+    )
+
+    specialties = fields.One2many(
+        'medical.hp_specialty',
+        'name',
+        'Specialties'
+    )
+
+    is_healthprof = fields.Boolean(
+        'Health Professional',
+        index=True
+    )
+
+    _sql_constraints = [
+        ('code_uniq', 'unique (code_healthprof)', 'The CODE must be unique!'),
+        ('name_uniq', 'unique (name)', 'The health professional must be unique!'),
+    ]
+
+

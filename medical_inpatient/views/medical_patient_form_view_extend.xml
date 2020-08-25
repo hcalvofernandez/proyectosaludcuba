@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="medical_patient_view_form_extend">
+            <field name="name">medical.patient.view.form.extend</field>
+            <field name="model">medical.patient</field>
+            <field name="inherit_id" ref="medical.medical_patient_view_form"/>
+            <field name="priority" eval="60"/>
+            <field name="arch" type="xml">
+                <field name="rh" position="after">
+                    <label for="patient_status"/>
+                    <field name="patient_status"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+<!--todo import patient.ecg from health-->
+<!--        <record model="ir.ui.view" id="medical_patient_ecg_form_extend">-->
+        <!--            <field name="name">medical.patient.ecg.form.extend</field>-->
+        <!--            <field name="model">medical.patient.ecg</field>-->
+        <!--            <field name="inherit_id" ref="medical.medical_patient_ecg_form"/>-->
+        <!--            <field name="priority" eval="20"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="/form/field[@name=name]" position="after">-->
+        <!--                    <label for="inpatient_registration_code"/>-->
+        <!--                    <field name="inpatient_registration_code"/>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

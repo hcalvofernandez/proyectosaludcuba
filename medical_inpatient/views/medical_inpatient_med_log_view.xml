@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <record id="medical_inpatient_medication_log_form_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.medication.log.form.view</field>
+            <field name="model">medical.inpatient.medication.log</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="admin_time"/>
+                        <field name="admin_time"/>
+                        <field name="admin_time"/>
+                        <label for="health_professional"/>
+                        <field name="health_professional"/>
+                        <label for="dose"/>
+                        <field name="dose"/>
+                        <label for="dose_unit"/>
+                        <field name="dose_unit"/>
+                        <label for="remarks"/>
+                        <field name="remarks"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="medical_inpatient_medication_log_tree_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.medication.log.tree.view</field>
+            <field name="model">medical.inpatient.medication.log</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="admin_time" widget="date"/>
+                    <field name="admin_time" widget="time"/>
+                    <field name="health_professional"/>
+                    <field name="dose"/>
+                    <field name="dose_unit"/>
+                    <field name="remarks"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record model="ir.actions.act_window" id="medical_inpatient_medication_log_action">-->
+<!--            <field name="name">Inpatient Medication Log</field>-->
+<!--            <field name="res_model">medical.inpatient.medication.log</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem-->
+<!--                id="medical_inpatient_medication_log_menu"-->
+<!--                name="Inpatient Medication Log"-->
+<!--                parent="medical_inpatient_menu"-->
+<!--                action="medical_inpatient_medication_log_action"-->
+<!--        />-->
+    </data>
+</odoo>

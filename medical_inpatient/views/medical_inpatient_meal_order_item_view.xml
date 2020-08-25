@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <record id="medical_inpatient_meal_order_item_form_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.meal.order.item.form.view</field>
+            <field name="model">medical.inpatient.meal.order.item</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="meal"/>
+                        <field name="meal"/>
+                        <label for="remarks"/>
+                        <field name="remarks"/>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="medical_inpatient_meal_order_item_tree_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.meal.order.item.tree.view</field>
+            <field name="model">medical.inpatient.meal.order.item</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="meal"/>
+                    <field name="remarks"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        <record model="ir.actions.act_window" id="medical_inpatient_meal_order_item_action">-->
+<!--            <field name="name">Inpatient Meal Order Item</field>-->
+<!--            <field name="res_model">medical.inpatient.meal.order.item</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem-->
+<!--                id="medical_inpatient_meal_order_item_menu"-->
+<!--                name="Inpatient Meal Order Item"-->
+<!--                parent="medical_inpatient_menu"-->
+<!--                action="medical_inpatient_meal_order_item_action"-->
+<!--        />-->
+    </data>
+</odoo>
+

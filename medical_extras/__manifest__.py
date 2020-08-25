@@ -16,6 +16,7 @@
     'data': [
         # 'views/template.xml',
         'views/views.xml',
+        'data/medical_extras_sequence.xml',
     ],
     'demo': [
         # 'demo/medical_patient_demo.xml',

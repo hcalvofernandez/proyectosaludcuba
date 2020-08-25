@@ -515,3 +515,84 @@ class HealthProfessionalSpecialties(models.Model):
     ]
 
 
+class HospitalBed(models.Model):
+    _name = 'medical.hospital.bed'
+    _description = 'Hospital Bed'
+    _rec_name = 'telephone_number'
+
+    def default_institution(self):
+        return self.env['res.partner'].get_institution()
+
+    name = fields.Many2one(
+        'product.product',
+        'Bed',
+        required=True,
+        domain=[('is_bed', '=', True)],
+        help='Bed Number'
+    )
+
+    institution = fields.Many2one(
+        'res.partner',
+        'Institution',
+        domain=[('is_institution', '=', True)],
+        required=True,
+        help='Health Institution',
+        default=default_institution,
+    )
+
+    # ward = fields.Many2one(
+    #     'gnuhealth.hospital.ward',
+    #     'Ward',
+    #     domain=[('institution', '=', Eval('institution'))],
+    #     depends=['institution'],
+    #     help='Ward or room'
+    # )
+
+    bed_type = fields.Selection(
+        [
+            ('none', ''),
+            ('gatch', 'Gatch Bed'),
+            ('electric', 'Electric'),
+            ('stretcher', 'Stretcher'),
+            ('low', 'Low Bed'),
+            ('low_air_loss', 'Low Air Loss'),
+            ('circo_electric', 'Circo Electric'),
+            ('clinitron', 'Clinitron'),
+        ],
+        'Bed Type',
+        required=True,
+        default='gatch',
+        sort=False)
+
+    telephone_number = fields.Char(
+        'Telephone Number',
+        help='Telephone number / Extension'
+    )
+
+    extra_info = fields.Text(
+        'Extra Info'
+    )
+
+    state = fields.Selection(
+        [
+            ('none', ''),
+            ('free', 'Free'),
+            ('reserved', 'Reserved'),
+            ('occupied', 'Occupied'),
+            ('to_clean', 'Needs cleaning'),
+            ('na', 'Not available'),
+        ],
+        'Status',
+        readonly=True,
+        default='free',
+        sort=False
+    )
+
+    def fix_bed(self):
+        self.write({'state': 'free'})
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name, institution)', 'The Bed must be unique per Health Center!'),
+    ]
+
+

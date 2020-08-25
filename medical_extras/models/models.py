@@ -596,3 +596,28 @@ class HospitalBed(models.Model):
     ]
 
 
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
+
+    is_medicament = fields.Boolean(
+        'Medicament',
+        help='Check if the product is a medicament'
+    )
+    is_medical_supply = fields.Boolean(
+        'Medical Supply',
+        help='Check if the product is a medical supply'
+    )
+    is_vaccine = fields.Boolean(
+        'Vaccine',
+        help='Check if the product is a vaccine'
+    )
+    is_bed = fields.Boolean(
+        'Bed',
+        help='Check if the product is a bed on the gnuhealth.center'
+    )
+    is_insurance_plan = fields.Boolean(
+        'Insurance Plan',
+        help='Check if the product is an insurance plan'
+    )
+
+

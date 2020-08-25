@@ -859,3 +859,25 @@ class DrugForm(models.Model):
     ]
 
 
+class DrugRoute(models.Model):
+    _name = 'medical.drug.route'
+    _description = 'Drug Administration Route'
+
+    name = fields.Char(
+        'Route',
+        required=True,
+        index=True,
+        translate=True
+    )
+    code = fields.Char(
+        'Code',
+        required=True,
+        help="Please use CAPITAL LETTERS and no spaces"
+    )
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', 'The Unit must be unique!'),
+        ('code_uniq', 'unique (code)', 'The CODE must be unique!'),
+    ]
+
+

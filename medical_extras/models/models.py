@@ -420,3 +420,26 @@ class Appointment(models.Model):
         else:
             self.state = 'free'
 
+
+class MedicalSpecialty(models.Model):
+    _name = 'medical.specialty'
+    _description = 'Medical Specialty'
+
+    name = fields.Char(
+        'Specialty',
+        required=True,
+        translate=True,
+        help='ie, Addiction Psychiatry'
+    )
+    code = fields.Char(
+        'Code',
+        required=True,
+        help='ie, ADP. Please use CAPITAL LETTERS and no spaces'
+    )
+
+    _sql_constraints = [
+        ('code_uniq', 'unique (code)', 'The CODE must be unique!'),
+        ('name_uniq', 'unique (name)', 'The Specialty must be unique!'),
+    ]
+
+

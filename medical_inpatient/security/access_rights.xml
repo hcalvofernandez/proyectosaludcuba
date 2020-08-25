@@ -23,17 +23,17 @@
                    eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
         </record>
 
-        <record model="ir.ui.menu"
-                id="medical_inpatient.medical_bed_transfer_menu">
-            <field name="groups_id"
-                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
-        </record>
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_bed_transfer_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
 
-        <record model="ir.ui.menu"
-                id="medical_inpatient.medical_inpatient_diet_menu">
-            <field name="groups_id"
-                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
-        </record>
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_diet_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
 
         <record model="ir.ui.menu"
                 id="medical_inpatient.medical_diet_therapeutic_menu">
@@ -53,29 +53,29 @@
                    eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
         </record>
 
-        <record model="ir.ui.menu"
-                id="medical_inpatient.medical_inpatient_meal_order_item_menu">
-            <field name="groups_id"
-                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
-        </record>
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_meal_order_item_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
 
-        <record model="ir.ui.menu"
-                id="medical_inpatient.medical_inpatient_medication_admin_time_menu">
-            <field name="groups_id"
-                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
-        </record>
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_medication_admin_time_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
 
-        <record model="ir.ui.menu"
-                id="medical_inpatient.medical_inpatient_medication_log_menu">
-            <field name="groups_id"
-                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
-        </record>
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_medication_log_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
 
-        <record model="ir.ui.menu"
-                id="medical_inpatient.medical_inpatient_medication_menu">
-            <field name="groups_id"
-                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
-        </record>
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_medication_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
 
         <record model="ir.ui.menu"
                 id="medical_inpatient.medical_inpatient_registration_menu">

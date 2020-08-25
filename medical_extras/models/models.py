@@ -881,3 +881,21 @@ class DrugRoute(models.Model):
     ]
 
 
+class DrugDoseUnits(models.Model):
+    _name = 'medical.dose.unit'
+    _description = 'Drug Dose Unit'
+
+    name = fields.Char(
+        'Unit',
+        required=True,
+        index=True,
+        translate=True)
+
+    desc = fields.Char(
+        'Description',
+        translate=True
+    )
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', 'The Unit must be unique!'),
+    ]

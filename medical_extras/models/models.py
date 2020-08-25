@@ -492,3 +492,26 @@ class HealthProfessional(models.Model):
     ]
 
 
+class HealthProfessionalSpecialties(models.Model):
+    _name = 'medical.hp_specialty'
+    _description = 'Health Professional Specialties'
+
+    name = fields.Many2one(
+        'res.partner',
+        'Health Professional',
+        domain=[('is_healthprof', '=', True)],
+        required=True
+    )
+
+    specialty = fields.Many2one(
+        'medical.specialty',
+        'Specialty',
+        required=True,
+        help='Specialty Code'
+    )
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', 'This specialty is already assigned to the Health Professional!'),
+    ]
+
+

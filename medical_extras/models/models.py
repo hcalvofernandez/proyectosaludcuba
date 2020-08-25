@@ -621,3 +621,50 @@ class ProductTemplate(models.Model):
     )
 
 
+class MedicamentCategory(models.Model):
+    _name = 'medical.medicament.category'
+    _description = 'Medicament Category'
+    _parent_name = "parent_id"
+    _parent_store = True
+
+    name = fields.Char(
+        'Name',
+        required=True,
+        translate=True
+    )
+
+    complete_name = fields.Char(
+        'Complete Name',
+        compute='_compute_complete_name',
+        store=True
+    )
+
+    parent_path = fields.Char(
+        index=True
+    )
+
+    parent_id = fields.Many2one(
+        'medical.medicament.category',
+        'Parent Category',
+        index=True
+    )
+
+    child_ids = fields.One2many(
+        'medical.medicament.category',
+        'parent_id',
+        string='Children'
+    )
+
+    @api.depends('name', 'parent_id.complete_name')
+    def _compute_complete_name(self):
+        for category in self:
+            if category.parent_id:
+                category.complete_name = '%s / %s' % (category.parent_id.complete_name, category.name)
+            else:
+                category.complete_name = category.name
+
+    @api.model
+    def name_create(self, name):
+        return self.create({'name': name}).name_get()[0]
+
+

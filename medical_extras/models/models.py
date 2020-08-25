@@ -668,3 +668,172 @@ class MedicamentCategory(models.Model):
         return self.create({'name': name}).name_get()[0]
 
 
+class Medicament(models.Model):
+    _name = 'medical.medicament'
+    _description = 'Medicament'
+
+    name = fields.Many2one(
+        'product.product',
+        'Product',
+        required=True,
+        domain=[('is_medicament', '=', True)],
+        help='Product Name'
+    )
+
+    active_component = fields.Char(
+        'Active component',
+        translate=True,
+        help='Active Component'
+    )
+
+    category = fields.Many2one(
+        'medical.medicament.category',
+        'Category',
+        index=True)
+
+    therapeutic_action = fields.Char(
+        'Therapeutic effect',
+        help='Therapeutic action'
+    )
+
+    composition = fields.Text(
+        'Composition',
+        help='Components'
+    )
+    indications = fields.Text(
+        'Indication',
+        help='Indications'
+    )
+    strength = fields.Float(
+        'Strength',
+        help='Amount of medication (eg, 250 mg) per dose'
+    )
+
+    unit = fields.Many2one(
+        'medical.dose.unit',
+        'dose unit',
+        help='Unit of measure for the medication to be taken'
+    )
+
+    route = fields.Many2one(
+        'medical.drug.route',
+        'Administration Route',
+        help='Drug administration route code.'
+    )
+
+    form = fields.Many2one(
+        'medical.drug.form',
+        'Form',
+        help='Drug form, such as tablet, suspension, liquid ..'
+    )
+
+    sol_conc = fields.Float(
+        'Concentration',
+        help='Solution drug concentration'
+    )
+
+    sol_conc_unit = fields.Many2one(
+        'medical.dose.unit',
+        'Unit',
+        help='Unit of the drug concentration'
+    )
+
+    sol_vol = fields.Float(
+        'Volume',
+        help='Solution concentration volume'
+    )
+
+    sol_vol_unit = fields.Many2one(
+        'medical.dose.unit', 'Unit',
+        help='Unit of the solution volume'
+    )
+
+    dosage = fields.Text(
+        'Dosage Instructions',
+        help='Dosage / Indications'
+    )
+    overdosage = fields.Text(
+        'Overdosage',
+        help='Overdosage'
+    )
+    pregnancy_warning = fields.Boolean(
+        'Pregnancy Warning',
+        help='The drug represents risk to pregnancy or lactancy'
+    )
+
+    pregnancy = fields.Text(
+        'Pregnancy and Lactancy',
+        help='Warnings for Pregnant Women'
+    )
+
+    pregnancy_category = fields.Selection(
+        [
+            ('none', ''),
+            ('A', 'A'),
+            ('B', 'B'),
+            ('C', 'C'),
+            ('D', 'D'),
+            ('X', 'X'),
+            ('N', 'N'),
+        ],
+        'Pregnancy Category',
+        help='** FDA Pregnancy Categories ***\n'
+             'CATEGORY A :Adequate and well-controlled human studies have failed'
+             ' to demonstrate a risk to the fetus in the first trimester of'
+             ' pregnancy (and there is no evidence of risk in later'
+             ' trimesters).\n\n'
+             'CATEGORY B : Animal reproduction studies have failed todemonstrate a'
+             ' risk to the fetus and there are no adequate and well-controlled'
+             ' studies in pregnant women OR Animal studies have shown an adverse'
+             ' effect, but adequate and well-controlled studies in pregnant women'
+             ' have failed to demonstrate a risk to the fetus in any'
+             ' trimester.\n\n'
+             'CATEGORY C : Animal reproduction studies have shown an adverse'
+             ' effect on the fetus and there are no adequate and well-controlled'
+             ' studies in humans, but potential benefits may warrant use of the'
+             ' drug in pregnant women despite potential risks. \n\n '
+             'CATEGORY D : There is positive evidence of human fetal  risk based'
+             ' on adverse reaction data from investigational or marketing'
+             ' experience or studies in humans, but potential benefits may warrant'
+             ' use of the drug in pregnant women despite potential risks.\n\n'
+             'CATEGORY X : Studies in animals or humans have demonstrated fetal'
+             ' abnormalities and/or there is positive evidence of human fetal risk'
+             ' based on adverse reaction data from investigational or marketing'
+             ' experience, and the risks involved in use of the drug in pregnant'
+             ' women clearly outweigh potential benefits.\n\n'
+             'CATEGORY N : Not yet classified'
+    )
+
+    presentation = fields.Text(
+        'Presentation',
+        help='Packaging'
+    )
+    adverse_reaction = fields.Text(
+        'Adverse Reactions'
+    )
+    storage = fields.Text(
+        'Storage Conditions'
+    )
+    is_vaccine = fields.Boolean(
+        'Vaccine'
+    )
+    notes = fields.Text(
+        'Extra Info'
+    )
+
+    active = fields.Boolean(
+        'Active',
+        index=True,
+        default=True)
+    #
+    # # Show the icon depending on the pregnancy category
+    # pregnancy_cat_icon = \
+    #     fields.Function(fields.Char('Preg. Cat. Icon'), 'get_preg_cat_icon')
+    #
+    # def get_preg_cat_icon(self, name):
+    #     if (self.pregnancy_category == 'X'):
+    #         return 'gnuhealth-stop'
+    #     if (self.pregnancy_category == 'D' or self.pregnancy_category == "C"):
+    #         return 'gnuhealth-warning'
+
+

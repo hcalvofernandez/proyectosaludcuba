@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.osv import expression
+from odoo.exceptions import RedirectWarning, UserError, ValidationError, AccessError
 
 
 class MedicalPatientExtends(models.Model):
@@ -39,13 +40,13 @@ class MedicalPatientExtends(models.Model):
         ],
         string='Hb',
         help="Clinically relevant Hemoglobin types\n"
-        "AA = Normal Hemoglobin\n"
-        "AS = Sickle Cell Trait\n"
-        "SS = Sickle Cell Anemia\n"
-        "AC = Sickle Cell Hemoglobin C Disease\n"
-        "CC = Hemoglobin C Disease\n"
-        "A-THAL = A Thalassemia groups\n"
-        "B-THAL = B Thalassemia groups\n"
+             "AA = Normal Hemoglobin\n"
+             "AS = Sickle Cell Trait\n"
+             "SS = Sickle Cell Anemia\n"
+             "AC = Sickle Cell Hemoglobin C Disease\n"
+             "CC = Hemoglobin C Disease\n"
+             "A-THAL = A Thalassemia groups\n"
+             "B-THAL = B Thalassemia groups\n"
     )
 
 
@@ -237,3 +238,185 @@ class MedicalPathology(models.Model):
     _sql_constraints = [
         ('code_uniq', 'unique (code)', 'The disease code must be unique!'),
     ]
+
+
+# PATIENT APPOINTMENT
+class Appointment(models.Model):
+    _name = 'medical.appointment'
+    _description = 'Patient Appointments'
+    _order = "appointment_date desc"
+
+    @api.model
+    def default_appointment_date(self):
+        return fields.Datetime.now()
+
+    @api.model
+    def default_institution(self):
+        return self.env['res.partner'].get_institution()
+
+    name = fields.Char(
+        'Appointment ID',
+        readonly=True
+    )
+
+    patient = fields.Many2one(
+        'medical.patient',
+        'Patient',
+        index=True,
+        help='Patient Name'
+    )
+
+    healthprof = fields.Many2one(
+        'res.partner',
+        'Health Prof',
+        index=True,
+        domain=[('is_healthprof', '=', True)],
+        help='Health Professional'
+    )
+
+    appointment_date = fields.Datetime(
+        'Date and Time',
+        default=default_appointment_date
+    )
+
+    checked_in_date = fields.Datetime(
+        'Checked-in Time'
+    )
+
+    institution = fields.Many2one(
+        'res.partner',
+        'Institution',
+        default=default_institution,
+        domain=[('is_institution', '=', True)],
+        help='Health Care Institution'
+    )
+
+    speciality = fields.Many2one(
+        'medical.specialty',
+        'Specialty',
+        help='Medical Specialty / Sector'
+    )
+
+    state = fields.Selection(
+        [
+            ('none', ''),
+            ('free', 'Free'),
+            ('confirmed', 'Confirmed'),
+            ('checked_in', 'Checked in'),
+            ('done', 'Done'),
+            ('user_cancelled', 'Cancelled by patient'),
+            ('center_cancelled', 'Cancelled by Health Center'),
+            ('no_show', 'No show')
+        ],
+        'State',
+        default='confirmed',
+        sort=False
+    )
+
+    urgency = fields.Selection(
+        [
+            ('none', ''),
+            ('a', 'Normal'),
+            ('b', 'Urgent'),
+            ('c', 'Medical Emergency'),
+        ],
+        'Urgency',
+        default='a',
+        sort=False
+    )
+
+    comments = fields.Text(
+        'Comments'
+    )
+
+    appointment_type = fields.Selection(
+        [
+            ('none', ''),
+            ('outpatient', 'Outpatient'),
+            ('inpatient', 'Inpatient'),
+        ],
+        'Type',
+        default='outpatient',
+        sort=False
+    )
+
+    visit_type = fields.Selection(
+        [
+            ('none', ''),
+            ('new', 'New health condition'),
+            ('followup', 'Followup'),
+            ('well_child', 'Well Child visit'),
+            ('well_woman', 'Well Woman visit'),
+            ('well_man', 'Well Man visit'),
+        ],
+        'Visit',
+        sort=False
+    )
+
+    consultations = fields.Many2one(
+        'product.product', 'Consultation Services',
+        domain=[('type', '=', 'service')],
+        help='Consultation Services'
+    )
+
+    def checked_in(self):
+        self.ensure_one()
+        self.write({'state': 'checked_in'})
+
+    def no_show(self):
+        self.ensure_one()
+        self.write({'state': 'no_show'})
+
+    @api.model
+    def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
+        args = args or []
+        if operator.startswith('!') or operator.startswith('not '):
+            domain = [('name', operator, name),
+                      ('patient.name', operator, name)]
+        else:
+            domain = ['|', '|',
+                      ('name', operator, name),
+                      ('patient.name', operator, name)]
+        rec = self._search(expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid)
+        return models.lazy_name_get(self.browse(rec).with_user(name_get_uid))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+
+        vals_list = [x.copy() for x in vals_list]
+        for values in vals_list:
+            if values['state'] == 'confirmed' and not values.get('name'):
+                values['name'] = self.env['ir.sequence'].next_by_code('medical.appointment')
+
+        return super(Appointment, self).create(vals_list)
+
+    def write(self, values):
+
+        if values.get('state') == 'confirmed' and not values.get('name'):
+            values['name'] = self.env['ir.sequence'].next_by_code('medical.appointment')
+
+        # Update the checked-in time only if unset
+        if values.get('state') == 'checked_in' \
+                and values.get('checked_in_date') is None:
+            values['checked_in_date'] = fields.Datetime.now()
+
+        return super(Appointment, self).write(values)
+
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        self.ensure_one()
+        if default is None:
+            default = {}
+        default = default.copy()
+        default['name'] = None
+        default['appointment_date'] = self.default_appointment_date()
+        default['state'] = 'confirmed'
+        return super(Appointment, self).copy(default)
+
+    @api.depends('patient')
+    def on_change_patient(self):
+        if self.patient:
+            self.state = 'confirmed'
+        else:
+            self.state = 'free'
+

@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="gyneco_pregnancy_action" model="ir.actions.act_window">
+			<field name="name">Gynecology</field>
+			<field name="res_model">medical.patient.pregnancy</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No patient registered
+				</p>
+				<p>
+					You can add some pregnancy patient
+				</p>
+			</field>
+		</record>
+		<!-- Patient Pregnancies
+		<record model="ir.ui.view" id="medical_patient_pregnancy_view">
+			<field name="name">medical_patient_pregnancy</field>
+			<field name="res_model">medical.patient.pregnancy</field>
+			<field name="view_mode">form</field>
+		</record>
+		<record model="ir.ui.view" id="medical_patient_pregnancy_tree">
+			<field name="name">medical_patient_pregnancy_tree</field>
+			<field name="res_model">medical.patient.pregnancy</field>
+			<field name="view_mode">tree</field>
+		</record> -->
+		<!-- Menu entry for Obstetrics histories -->
+		<!--
+		<record model="ir.action.act_window" id="act_pregnancy_form">
+		<field name="name">
+		Obstetric Histories
+		</field>
+		<field name="res_model">
+		medical.patient.pregnancy
+		</field>
+		</record>
+		<menuitem name="Obstetrics" id="medical_obstetrics" icon="medical-obstetrics" parent="health.medical_menu" sequence="65" />
+		<menuitem action="act_pregnancy_form" id="medical_patient_pregnancy" icon="medical-list" parent="medical_obstetrics" />
+		<record model="ir.action.act_window.view" id="act_patient_pregnancy_list_view">
+		<field name="sequence" eval="10" />
+		<field name="view" ref="medical_patient_pregnancy_tree" />
+		<field name="act_window" ref="act_pregnancy_form" />
+		</record>
+		<record model="ir.action.act_window.view" id="act_patient_pregnancy_form_view">
+		<field name="sequence" eval="20" />
+		<field name="view" ref="medical_patient_pregnancy_view" />
+		<field name="act_window" ref="act_pregnancy_form" />
+		</record>
+		-->
+		<!-- Shortcut to the Patient Pregnancies -->
+		<!--
+		<record model="ir.action.act_window" id="act_pregnancy_form1">
+		<field name="name">
+		Obstetric History
+		</field>
+		<field name="res_model">
+		medical.patient.pregnancy
+		</field>
+		<field name="domain" eval="[('name', '=', Eval('active_id'))]" pyson="1" />
+		</record>
+		<record model="ir.action.keyword" id="act_open_pregnancy_keyword1">
+		<field name="keyword">
+		form_relate
+		</field>
+		<field name="res_model">
+		medical.patient,-1
+		</field>
+		<field name="action" ref="act_pregnancy_form1" />
+		</record>
+		-->
+		<!-- PRENATAL Evaluation -->
+		<!--
+		<record model="ir.ui.view" id="medical_prenatal_evaluation_view">
+		<field name="res_model">
+		medical.patient.prenatal.evaluation
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_prenatal_evaluation
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_prenatal_evaluation_tree">
+		<field name="res_model">
+		medical.patient.prenatal.evaluation
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_prenatal_evaluation_tree
+		</field>
+		</record>
+		-->
+		<!-- Perinatal -->
+		<!--
+		<record model="ir.ui.view" id="medical_perinatal_view">
+		<field name="res_model">
+		medical.perinatal
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_perinatal
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_perinatal_tree">
+		<field name="res_model">
+		medical.perinatal
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_perinatal_tree
+		</field>
+		</record>
+		-->
+		<!-- Puerperium -->
+		<!--
+		<record model="ir.ui.view" id="medical_puerperium_monitor_view">
+		<field name="res_model">
+		medical.puerperium.monitor
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_puerperium_monitor
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_puerperium_monitor_tree">
+		<field name="res_model">
+		medical.puerperium.monitor
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_puerperium_monitor_tree
+		</field>
+		</record>
+		-->
+		<!-- Perinatal Monitoring -->
+		<!--
+		<record model="ir.ui.view" id="medical_perinatal_monitor_view">
+		<field name="res_model">
+		medical.perinatal.monitor
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_perinatal_monitor
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_perinatal_monitor_tree">
+		<field name="res_model">
+		medical.perinatal.monitor
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_perinatal_monitor_tree
+		</field>
+		</record>
+		-->
+		<!-- Menstrual history information -->
+		<!--
+		<record model="ir.ui.view" id="medical_menstrual_history_view">
+		<field name="res_model">
+		medical.patient.menstrual_history
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_menstrual_history
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_menstrual_history_tree">
+		<field name="res_model">
+		medical.patient.menstrual_history
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_menstrual_history_tree
+		</field>
+		</record>
+		-->
+		<!-- PAP history information -->
+		<!--
+		<record model="ir.ui.view" id="medical_pap_history_view">
+		<field name="res_model">
+		medical.patient.pap_history
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_pap_history
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_pap_history_tree">
+		<field name="res_model">
+		medical.patient.pap_history
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_pap_history_tree
+		</field>
+		</record>
+		-->
+		<!-- Mammography history information -->
+		<!--
+		<record model="ir.ui.view" id="medical_mammography_history_view">
+		<field name="res_model">
+		medical.patient.mammography_history
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_mammography_history
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_mammography_history_tree">
+		<field name="res_model">
+		medical.patient.mammography_history
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_mammography_history_tree
+		</field>
+		</record>
+		-->
+		<!-- Colposcopy history information -->
+		<!--
+		<record model="ir.ui.view" id="medical_colposcopy_history_view">
+		<field name="res_model">
+		medical.patient.colposcopy_history
+		</field>
+		<field name="view_mode">
+		form
+		</field>
+		<field name="name">
+		medical_colposcopy_history
+		</field>
+		</record>
+		<record model="ir.ui.view" id="medical_colposcopy_history_tree">
+		<field name="res_model">
+		medical.patient.colposcopy_history
+		</field>
+		<field name="view_mode">
+		tree
+		</field>
+		<field name="name">
+		medical_colposcopy_history_tree
+		</field>
+		</record>
+		-->
+		<!-- Include the Gynecological and Obstetric pages into the Patient History -->
+		<!--
+		<record model="ir.ui.view" id="medical_patient_view">
+		<field name="res_model">
+		medical.patient
+		</field>
+		<field name="inherit" ref="health.medical_patient_view_form" />
+		<field name="name">
+		medical_patient
+		</field>
+		</record>
+		-->
+		<menuitem id="gyneco_root_menu" name="Gynecology" sequence="2" web_icon="medical_gyneco,static/description/icon.png" />
+		<menuitem id="gyneco_menu" name="Ginecology" parent="gyneco_root_menu" action="gyneco_pregnancy_action" sequence="1" />
+	</data>
+</odoo>

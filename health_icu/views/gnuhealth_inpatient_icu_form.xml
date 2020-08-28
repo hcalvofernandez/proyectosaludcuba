@@ -20,7 +20,9 @@
                         <field name="icu_admission_date"/>
                         <field name="icu_stay"/>
                         <field name="discharged_from_icu"/>
-                        <field name="icu_discharge_date"/>
+                        <field name="icu_discharge_date"
+                               attrs="{'invisible': [('discharged_from_icu','=',False)],
+                                        'required': [('discharged_from_icu','=',True)]}"/>
                     </group>
                     <newline/>
                     <field name="mv_history" col="4"/>

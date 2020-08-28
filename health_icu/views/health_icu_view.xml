@@ -20,7 +20,6 @@
             <field name="name">Glasgow Coma Scale</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">gnuhealth.icu.glasgow</field>
-            <!--field name="domain" eval="[('name.icu_admissions', '=', Eval('active_id'))]"/-->
         </record>
 
         <record id="action_gnuhealth_icu_ventilation_form" model="ir.actions.act_window">
@@ -29,14 +28,6 @@
             <field name="res_model">gnuhealth.icu.ventilation</field>
             <field name="view_mode">kanban,form,tree</field>
         </record>
-
-        <!--record  id="action_gnuhealth_icu_ecg_form1" model="ir.actions.act_window">
-            <field name="name">Inpatient ECGs</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.patient.ecg</field>
-            <field name="domain" eval="[('inpatient_registration_code.icu_admissions', '=', Eval('active_id'))]" />
-            <field name="view_mode">kanban,form,tree</field>
-        </record-->
 
         <!-- Menu actions all -->
         <!-- Initial Menu TODO cuando este listo modulo health-inpatient-->
@@ -57,15 +48,7 @@
                   id="menu_gnuhealth_icu_apache2_list"
                   parent="gnuhealth_icu_menu"
                   sequence="3"/>
-        <menuitem action="action_gnuhealth_icu_ventilation_form"
-                  name="Ventilation list"
-                  id="menu_gnuhealth_inpatient_ventilation_icu_list"
-                  parent="gnuhealth_icu_menu"
-                  sequence="4"/>
-        <!--menuitem action="action_gnuhealth_icu_ecg_form1"
-                  name="ICU ECGs list"
-                  id="menu_gnuhealth_icu_ecgs_list1"
-                  parent="gnuhealth_icu_menu"/-->
+
 
     </data>
 </odoo>

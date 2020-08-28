@@ -17,7 +17,7 @@
                         <field name="age"/>
                     </group>
                     <newline/>
-                    <group id="group_apache_physisological" string="Physiological" col="4">
+                    <group id="group_apache_physisological" string="Physiological" col="6">
                         <field name="temperature"/>
                         <field name="mean_ap"/>
                         <field name="heart_rate"/>
@@ -37,7 +37,9 @@
                     <newline/>
                     <group id="group_apache_chronic" string="Chronic" col="4">
                         <field name="chronic_condition"/>
-                        <field name="hospital_admission_type"/>
+                        <field name="hospital_admission_type"
+                               attrs="{'invisible': [('chronic_condition','=',False)],
+                                        'required': [('chronic_condition','=',True)]}"/>
                     </group>
                     <newline/>
                     <group col="4">

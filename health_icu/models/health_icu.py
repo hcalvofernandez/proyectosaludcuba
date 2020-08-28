@@ -52,10 +52,7 @@ class InpatientIcu(models.Model):
                                          help="ICU Admission Date", required=True)
     discharged_from_icu = fields.Boolean('Discharged')
     icu_discharge_date = fields.Datetime('Discharge'
-                                    ,compute='icu_duration',store=True,
-                                     states={
-                                         'discharged_from_icu':[('invisible',False)
-                                             ,('required',True)]})
+                                    ,compute='icu_duration',store=True,)
     icu_stay = fields.Datetime('ICU stay',
         compute='icu_duration',store=True)
     mv_history = fields.One2many('gnuhealth.icu.ventilation',
@@ -195,7 +192,7 @@ class ApacheII(models.Model):
         ('blank', '-'),
         ('me', 'Medical or emergency postoperative'),
         ('el', 'elective postoperative')],
-        'Hospital Admission Type',states={'chronic_condition':[('invisible', False),('required',True)]})
+        'Hospital Admission Type',)
     apache_score = fields.Integer('Score')
     #Default FiO2 PaO2 and PaCO2 so we do the A-a gradient
     #calculation with non-null values
@@ -361,13 +358,15 @@ class MechanicalVentilation(models.Model):
     _description = 'Mechanical Ventilation History'
     _order = 'id'
     _table = 'gnuhealth_icu_ventilation'
-    @api.depends('current_mv')#metodo compute para la duracion
+    #metodo compute para la duracion
+    @api.depends('current_mv')
     def mv_duration(self):
-        if self.current_mv:
-            self.mv_start = datetime.now()
-        else:
-            self.mv_end = datetime.now()
-            self.mv_period = self.mv_end - self.mv_start
+        start = end = datetime.now()
+        if self.mv_start:
+            start = self.mv_start
+        if self.mv_end:
+            end = self.mv_end
+        return end.date() - start.date()
     name = fields.Many2one('gnuhealth.inpatient.icu', 'Patient ICU Admission',
                            required=True)
     ventilation = fields.Selection([
@@ -378,15 +377,14 @@ class MechanicalVentilation(models.Model):
         'Type', help="NPPV = Non-Invasive Positive "
                      "Pressure Ventilation, BiPAP-CPAP \n"
                      "ETT - Endotracheal Tube", sort=False)
-    ett_size = fields.Integer('ETT Size',
-                            states={'ventilation == ett':[('invisible', False)]})
-    tracheostomy_size = fields.Integer('Tracheostomy size',
-                                       states={'ventilation == tracheostomy':[('invisible',False)]})
-    mv_start = fields.Datetime('From', help="Start of Mechanical Ventilation",
-                               required=True)
-    mv_end = fields.Datetime('To', help="End of Mechanical Ventilation",compute=mv_duration,
-                            states={'current_mv': [('invisible', 'True'),('required',True)]})
-    mv_period = fields.Datetime('mv_duration')
+    ett_size = fields.Integer('ETT Size',)
+    tracheostomy_size = fields.Integer('Tracheostomy size',)
+    mv_start = fields.Datetime('Date start mechanical Ventilation',
+                               help="Start of Mechanical Ventilation",
+                               required=True,default=datetime.now())
+    mv_end = fields.Datetime('Date End of Mechanical Ventilation',
+                             help="End of Mechanical Ventilation",)
+    mv_period = fields.Datetime(compute=mv_duration,store=True)
     current_mv = fields.Boolean('Current',default=False)
     remarks = fields.Char('Remarks')
 
@@ -435,8 +433,8 @@ class ChestDrainageAssessment(models.Model):
         ('purulent', 'Purulent')],
         'Aspect', sort=False)
     suction = fields.Boolean('Suction')
-    suction_pressure = fields.Integer('cm H2O',
-                states = {'suction': [('invisible', False),('required',True)]})
+    suction_pressure = fields.Integer('cm H2O',)
+                #TODO move to visual attrs states = {'suction': [('invisible', False),('required',True)]})
     oscillation = fields.Boolean('Oscillation')
     air_leak = fields.Boolean('Air Leak')
     fluid_volume = fields.Integer('Volume')

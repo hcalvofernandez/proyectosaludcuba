@@ -14,14 +14,14 @@
                     <group id="group_icu_ventilation" col="4" string="Mechanical Ventilation">
                         <field name="current_mv"/>
                         <field name="mv_start"/>
-                        <field name="mv_end"/>
-                        <field name="mv_period"/>
+                        <field name="mv_end" attrs="{'invisible': [('current_mv','=',True)] }"/>
+                        <field name="mv_period" attrs="{'invisible': [('current_mv','=',True)]}"/>
                         <field name="ventilation"/>
-                        <field name="ett_size"/>
-                        <field name="tracheostomy_size"/>
+                        <field name="ett_size" attrs="{'invisible': [('ventilation','!=','ett')]}"/>
+                        <field name="tracheostomy_size" attrs="{'invisible': [('ventilation','!=','tracheostomy')]}"/>
+                        <newline/>
+                        <field name="remarks" colspan="4"/>
                     </group>
-                    <newline/>
-                    <field name="remarks"/>
                 </sheet>
             </form>
         </field>

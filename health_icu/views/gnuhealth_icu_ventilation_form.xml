@@ -10,17 +10,19 @@
         <field name="model">gnuhealth.icu.ventilation</field>
         <field name="arch" type="xml">
             <form>
-                <group id="group_icu_ventilation" colspan="4" col="8" string="Mechanical Ventilation">
-                    <field name="current_mv"/>
-                    <field name="mv_start"/>
-                    <field name="mv_end"/>
-                    <field name="mv_period"/>
-                    <field name="ventilation"/>
-                    <field name="ett_size"/>
-                    <field name="tracheostomy_size"/>
-                </group>
-                <newline/>
-                <field name="remarks"/>
+                <sheet>
+                    <group id="group_icu_ventilation" col="4" string="Mechanical Ventilation">
+                        <field name="current_mv"/>
+                        <field name="mv_start"/>
+                        <field name="mv_end"/>
+                        <field name="mv_period"/>
+                        <field name="ventilation"/>
+                        <field name="ett_size"/>
+                        <field name="tracheostomy_size"/>
+                    </group>
+                    <newline/>
+                    <field name="remarks"/>
+                </sheet>
             </form>
         </field>
     </record>

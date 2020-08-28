@@ -15,13 +15,13 @@
             <field name="arch" type="xml">
                 <form string="Imaging Test">
                     <header>
-                        <button name="requested" type="object" string="Request" icon="fa-bars"/>
-                        <button name="generate_results" type="object" string="Generate Results" icon="fa-bars"/>
+                        <button name="requested" type="object" string="Request" icon="fa-forward"/>
+                        <button name="generate_results" type="object" string="Generate Results" icon="fa-file-code-o"/>
                         <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                     </header>
                     <sheet>
                         <group col="4">
-                            <field name="request"/>
+                            <field name="name"/>
                             <field name="urgent"/>
                             <field name="patient"/>
                             <field name="date"/>

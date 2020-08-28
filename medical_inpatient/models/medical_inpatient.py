@@ -66,7 +66,7 @@ class InpatientRegistration(models.Model):
 
     @api.model
     def _get_default_institution(self):
-        HealthInst = self.env['medical.institution']
+        HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
         return institution
 
@@ -275,7 +275,7 @@ class InpatientRegistration(models.Model):
     )
 
     institution = fields.Many2one(
-        'medical.institution',
+        'res.partner',
         'Institution',
         readonly=True,
         default=_get_default_institution
@@ -414,7 +414,7 @@ class InpatientRegistration(models.Model):
     def check_discharge_context(self):
         if ((not self.discharge_reason or not self.discharge_dx
              or not self.admission_reason)
-                and self.state == 'done'):
+            and self.state == 'done'):
             raise UserError(
                 _(
                     'Admission and Discharge reasons \n'
@@ -483,25 +483,7 @@ class Appointment(models.Model):
     )
 
 
-# todo #hay que importar el modelo de health
-# class PatientEvaluation(models.Model):
-#     _name = 'medical.patient.evaluation'
-#     _inherit = 'medical.patient.evaluation'
-#
-#     inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
-#                                                   'IPC',
-#                                                   help="Enter the patient hospitalization code")
 
-# todo #importar el modelo de health
-
-# # ECG
-# class PatientECG(models.Model):
-#     _name = 'medical.patient.ecg'
-#     _inherit = 'medical.patient.ecg'
-#
-#     inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
-#                                                   'Inpatient Registration',
-#                                                   help="Enter the patient hospitalization code")
 
 
 class MedicalPatient(models.Model):
@@ -613,11 +595,12 @@ class InpatientMedication(models.Model):
         required=True,
         help='Quantity of units (eg, 2 capsules) of the medicament'
     )
-    common_dosage = fields.Many2one(
-        'medical.medication.dosage',
-        'Frequency',
-        help='Common / standard dosage frequency for this medicament'
-    )
+    #TODO falta la clase 'medical.medication.dosage' ???
+    # common_dosage = fields.Many2one(
+    #     'medical.medication.dosage',
+    #     'Frequency',
+    #     help='Common / standard dosage frequency for this medicament'
+    # )
     admin_times = fields.One2many(
         'medical.inpatient.medication.admin_time',
         'name',
@@ -799,7 +782,7 @@ class InpatientMeal(models.Model):
 
     @api.model
     def _default_institution(self):
-        # medical.institution
+        # res.partner
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
         return institution
@@ -1002,3 +985,23 @@ class InpatientMealOrder(models.Model):
     def button_done(self):
         self.ensure_one()
         self.write({'state': 'done'})
+
+#Evaluation
+class PatientEvaluation(models.Model):
+    _name = 'medical.patient.evaluation'
+    _description = 'Patient Evaluation'
+    #_inherit = 'medical.patient.evaluation'
+    inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
+                                                  'IPC',
+                                                  help="Enter the patient hospitalization code")
+    description = fields.Text('Remark')
+
+# ECG
+class PatientECG(models.Model):
+    _name = 'medical.patient.ecg'
+    _description = 'Patient ECG'
+    #_inherit = 'medical.patient.ecg'
+    inpatient_registration_code = fields.Many2one('medical.inpatient.registration',
+                                                  'Inpatient Registration',
+                                                  help="Enter the patient hospitalization code")
+    description = fields.Text('Remark')

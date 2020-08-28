@@ -14,14 +14,10 @@
             <field name="model">gnuhealth.imaging.test.result</field>
             <field name="arch" type="xml">
                 <form string="Imaging Test Result">
-                    <header>
-                        <button name="requested" type="object" string="Request" icon="fa-bars"/>
-                        <button name="generate_results" type="object" string="Generate Results" icon="fa-bars"/>
-                    </header>
                     <sheet>
                         <group col="4">
+                            <field name="name"/>
                             <field name="patient"/>
-                            <field name="number"/>
                             <field name="date"/>
                             <field name="requested_test"/>
                             <field name="request_date"/>
@@ -30,7 +26,7 @@
                         </group>
                         <notebook>
                             <page string="Images" id="images_page">
-                                <field name="images" colspan="4"/>
+                                <field name="images" widget="many2many_binary" string="Attach a file" colspan="4"/>
                             </page>
                             <page string="Comment" id="comment_page">
                                 <field name="comment" colspan="4"/>

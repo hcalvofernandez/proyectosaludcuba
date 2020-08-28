@@ -22,39 +22,28 @@
 ##############################################################################
 import datetime
 from odoo import models, fields, api
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
+import json
 
 
 __all__ = ['WizardGenerateResult', 'RequestImagingTest',
            'RequestPatientImagingTestStart', 'RequestPatientImagingTest']
 class WizardGenerateResult(models.TransientModel):#hereda de Wizard
     'Generate Results'
-    _name = 'wizard.generate.result'
-    start_state = 'open_'
-    # open_ = StateAction('health_imaging.act_imaging_test_result_view')
-    #
-    # def do_open_(self, action):
-    #     Request = self.env.get('gnuhealth.imaging.test.request')
-    #     Result = self.env.get('gnuhealth.imaging.test.result')
-    #
-    #     request_data = []
-    #     requests = Request.browse(Transaction().context.get('active_ids'))
-    #     for request in requests:
-    #         request_data.append({
-    #             'patient': request.patient.id,
-    #             'date': Datetime.now(),
-    #             'request_date': request.date,
-    #             'requested_test': request.requested_test,
-    #             'request': request.id,
-    #             'doctor': request.doctor})
-    #     results = Result.create(request_data)
-    #
-    #     action['pyson_domain'] = PYSONEncoder().encode(
-    #         [('id', 'in', [r.id for r in results])])
-    #
-    #     Request.requested(requests)
-    #     Request.done(requests)
-    #     return action, {}
+    def return_action_open(self):
+        """ This opens the xml view specified in xml_id for the current vehicle """
+        Request = self.env.get('gnuhealth.imaging.test.request')
+        Result = self.env.get('gnuhealth.imaging.test.result')
+        request_data = []
+        requests = Request.browse(self.context.get('active_ids'))
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "gnuhealth.imaging.test",
+            "views": [[False, "tree"], [False, "form"]],
+            "domain": [["customer", "=", True]],
+        }
+
+
 class RequestImagingTest(models.TransientModel):
     'Request - Test'
     _name = 'gnuhealth.request.imaging.test'

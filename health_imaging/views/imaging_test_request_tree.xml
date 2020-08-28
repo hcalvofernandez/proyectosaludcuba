@@ -7,7 +7,7 @@
             <field name="model">gnuhealth.imaging.test.request</field>
             <field name="arch" type="xml">
                 <tree string="Imaging Test Request">
-                    <field name="request"/>
+                    <field name="name"/><!--before was request-->
                     <field name="patient" />
                     <field name="date"/>
                     <field name="requested_test" />

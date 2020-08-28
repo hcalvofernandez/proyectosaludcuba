@@ -35,7 +35,6 @@ class CreateInpatientEvaluation(models.TransientModel):
     """
     _name = 'medical.inpatient.evaluation.create'
     _description = 'Create Inpatient Evaluation'
-
     def do_inpatient_evaluation(self):
         self.ensure_one()
         inpatient_registrations = self.env['medical.inpatient.registration']
@@ -45,13 +44,10 @@ class CreateInpatientEvaluation(models.TransientModel):
                 _(
                     'You need to select an inpatient registration record!'
                 ))
-
         patient = registrations[0].patient.id
         inpatient_registration_code = registrations[0].id
         evaluation_type = 'inpatient'
-
         view_id = self.env.ref('medical.medical_patient_evaluation_view').id
-
         return {
             'name': _('Patient Evaluation'),
             'type': 'ir.actions.act_window',

@@ -11,11 +11,11 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <label for="name"/>
-                        <field name="name"/>
-                        <label for="institution"/>
-                        <field name="institution" context="{'default_is_institution': True}"/>
-                        <newline/>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="institution" context="{'default_is_institution': True}"/>
+                            <newline/>
+                        </group>
                         <group colspan="4" col="6" id="meal_diet_types">
                             <field name="diet_therapeutic"/>
                             <field name="diet_belief"/>
@@ -23,7 +23,6 @@
                         </group>
                     </sheet>
                 </form>
-
             </field>
         </record>
 

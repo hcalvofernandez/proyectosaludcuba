@@ -10,38 +10,40 @@
         <field name="model">gnuhealth.icu.apache2</field>
         <field name="arch" type="xml">
             <form>
-                <group colspan="4">
-                    <field name="name"/>
-                    <field name="score_date"/>
-                    <field name="age"/>
-                </group>
-                <newline/>
-                <group id="group_apache_physisological" string="Physiological" colspan="4">
-                    <field name="temperature"/>
-                    <field name="mean_ap"/>
-                    <field name="heart_rate"/>
-                    <field name="respiratory_rate"/>
-                    <field name="fio2"/>
-                    <field name="pao2"/>
-                    <field name="paco2"/>
-                    <field name="aado2"/>
-                    <field name="ph"/>
-                    <field name="serum_sodium"/>
-                    <field name="serum_potassium"/>
-                    <field name="serum_creatinine"/>
-                    <field name="hematocrit"/>
-                    <field name="wbc"/>
-                    <field name="arf"/>
-                </group>
-                <newline/>
-                <group id="group_apache_chronic" string="Chronic" colspan="4">
-                    <field name="chronic_condition"/>
-                    <field name="hospital_admission_type"/>
-                </group>
-                <newline/>
-                <group>
-                    <field name="apache_score"/>
-                </group>
+                <sheet string="Apache 2" modifiers="{}">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="score_date"/>
+                        <field name="age"/>
+                    </group>
+                    <newline/>
+                    <group id="group_apache_physisological" string="Physiological" col="4">
+                        <field name="temperature"/>
+                        <field name="mean_ap"/>
+                        <field name="heart_rate"/>
+                        <field name="respiratory_rate"/>
+                        <field name="fio2"/>
+                        <field name="pao2"/>
+                        <field name="paco2"/>
+                        <field name="aado2"/>
+                        <field name="ph"/>
+                        <field name="serum_sodium"/>
+                        <field name="serum_potassium"/>
+                        <field name="serum_creatinine"/>
+                        <field name="hematocrit"/>
+                        <field name="wbc"/>
+                        <field name="arf"/>
+                    </group>
+                    <newline/>
+                    <group id="group_apache_chronic" string="Chronic" col="4">
+                        <field name="chronic_condition"/>
+                        <field name="hospital_admission_type"/>
+                    </group>
+                    <newline/>
+                    <group col="4">
+                        <field name="apache_score"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>

@@ -21,10 +21,9 @@
     'version': '0.0.1',
 
     # any module necessary for this one to work correctly
-    #TODO depends 'health'
-    #health_inpatient
+    #TODO depends nursing
     #health_nursing
-    'depends': ['base','medical'],
+    'depends': ['base','medical','medical_inpatient','medical_extras'],
 
     # always loaded
     'data': [

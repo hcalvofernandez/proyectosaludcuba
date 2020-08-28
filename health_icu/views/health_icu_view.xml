@@ -3,12 +3,7 @@
 <odoo>
     <data>
         <!-- ir.action.act_window Todas las action del menu -->
-        <record id="action_gnuhealth_icu_glasgow_form" model="ir.actions.act_window">
-            <field name="name">GCS </field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.icu.glasgow</field>
-            <field name="view_mode">kanban,form,tree</field>
-        </record>
+
         <record  id="action_gnuhealth_inpatient_icu_form" model="ir.actions.act_window">
             <field name="name">Patient ICU Info</field>
             <field name="type">ir.actions.act_window</field>
@@ -27,13 +22,14 @@
             <field name="res_model">gnuhealth.icu.glasgow</field>
             <!--field name="domain" eval="[('name.icu_admissions', '=', Eval('active_id'))]"/-->
         </record>
-        <record  id="action_gnuhealth_icu_apache2_form" model="ir.actions.act_window">
-            <field name="name">APACHE II</field>
+
+        <record id="action_gnuhealth_icu_ventilation_form" model="ir.actions.act_window">
+            <field name="name">Ventilation</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.icu.apache2</field>
-            <!--field name="domain" eval="[('name.icu_admissions', '=', Eval('active_id'))]"/-->
+            <field name="res_model">gnuhealth.icu.ventilation</field>
             <field name="view_mode">kanban,form,tree</field>
         </record>
+
         <!--record  id="action_gnuhealth_icu_ecg_form1" model="ir.actions.act_window">
             <field name="name">Inpatient ECGs</field>
             <field name="type">ir.actions.act_window</field>
@@ -41,25 +37,35 @@
             <field name="domain" eval="[('inpatient_registration_code.icu_admissions', '=', Eval('active_id'))]" />
             <field name="view_mode">kanban,form,tree</field>
         </record-->
+
         <!-- Menu actions all -->
         <!-- Initial Menu TODO cuando este listo modulo health-inpatient-->
-        <!---menuitem name="Intensive Care" id="gnuhealth_icu_menu"
-                  parent="health_inpatient.gnuhealth_inpatient_menu" sequence="90" />
-        <menuitem action="action_gnuhealth_icu_glasgow_form"
-                  name="ICU Glasgow list"
-                  id="menu_gnuhealth_icu_glasgow_list"
-                  parent="gnuhealth_icu_menu"/>
-        <menuitem action="action_gnuhealth_icu_apache2_form"
-                  name="ICU Apache2 list"
-                  id="menu_gnuhealth_icu_apache2_list"
-                  parent="gnuhealth_icu_menu"/>
-        <menuitem action="action_gnuhealth_icu_ecg_form1"
-                  name="ICU ECGs list"
-                  id="menu_gnuhealth_icu_ecgs_list1"
-                  parent="gnuhealth_icu_menu"/>
+        <menuitem name="Intensive Care" id="gnuhealth_icu_menu"
+                  parent="medical_inpatient.medical_inpatient_root" sequence="90" />
         <menuitem action="action_gnuhealth_inpatient_icu_form"
                   name="Inpatient ICU list"
                   id="menu_gnuhealth_inpatient_icu_list"
-                  parent="gnuhealth_icu_menu" sequence="1"/-->
+                  parent="gnuhealth_icu_menu"
+                  sequence="1"/>
+        <menuitem action="action_gnuhealth_icu_glasgow_form"
+                  name="ICU Glasgow list"
+                  id="menu_gnuhealth_icu_glasgow_list"
+                  parent="gnuhealth_icu_menu"
+                  sequence="2"/>
+        <menuitem action="action_gnuhealth_icu_apache2_form"
+                  name="ICU Apache2 list"
+                  id="menu_gnuhealth_icu_apache2_list"
+                  parent="gnuhealth_icu_menu"
+                  sequence="3"/>
+        <menuitem action="action_gnuhealth_icu_ventilation_form"
+                  name="Ventilation list"
+                  id="menu_gnuhealth_inpatient_ventilation_icu_list"
+                  parent="gnuhealth_icu_menu"
+                  sequence="4"/>
+        <!--menuitem action="action_gnuhealth_icu_ecg_form1"
+                  name="ICU ECGs list"
+                  id="menu_gnuhealth_icu_ecgs_list1"
+                  parent="gnuhealth_icu_menu"/-->
+
     </data>
 </odoo>

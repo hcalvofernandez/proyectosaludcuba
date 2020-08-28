@@ -30,10 +30,10 @@ __all__ = ['InpatientRegistration', 'InpatientIcu', 'Glasgow', 'ApacheII',
            'PatientRounding']
 class InpatientRegistration(models.Model):
     """Patient admission History"""
-    _name = 'gnuhealth.inpatient.registration'
     _description = "Patient admission History"
     _order = 'id,name'
-    _table = 'gnuhealth_inpatient_registration'
+    _table = 'medical_inpatient_registration'
+    _inherit = "medical.inpatient.registration"
     icu = fields.Boolean('ICU', help='Shows if patient was admitted to'
                                      ' the Intensive Care Unit during the hospitalization period')
     icu_admissions = fields.One2many('gnuhealth.inpatient.icu',
@@ -44,29 +44,28 @@ class InpatientIcu(models.Model):
     _description = "Patient ICU Information"
     _order = 'id,name'
     _table = 'gnuhealth_inpatient_icu'
-    def icu_duration(self, name):
-        if self.discharged_from_icu:
-            end = self.icu_discharge_date
-        else:
-            end = datetime.now()
-        return end.date() - self.icu_admission_date.date()
-
-    name = fields.Many2one('gnuhealth.inpatient.registration',
+    name = fields.Many2one('medical.inpatient.registration',
                            'Registration Code', required=True)
-    admitted = fields.Boolean('Admitted', help="Will be set when the patient \
-        is currently admitted at ICU")
+    admitted = fields.Boolean('Admitted',
+                              help="Will be set when the patient is currently admitted at ICU",default=False)
     icu_admission_date = fields.Datetime('ICU Admission',
                                          help="ICU Admission Date", required=True)
     discharged_from_icu = fields.Boolean('Discharged')
-    icu_discharge_date = fields.Datetime('Discharge',
-                                      states={
-                                          'discharged_from_icu':[('invisible',False)
-                                              ,('required',True)]})
-    # depends=['discharged_from_icu'])
-    #TODO a compute field icu_stay = fields.Function(fields.TimeDelta('Duration'), 'icu_duration')
-    icu_stay = fields.Datetime('icu_duration')
+    icu_discharge_date = fields.Datetime('Discharge'
+                                    ,compute='icu_duration',store=True,
+                                     states={
+                                         'discharged_from_icu':[('invisible',False)
+                                             ,('required',True)]})
+    icu_stay = fields.Datetime('ICU stay',
+        compute='icu_duration',store=True)
     mv_history = fields.One2many('gnuhealth.icu.ventilation',
                                  'name', "Mechanical Ventilation History")
+    @api.depends('discharged_from_icu')
+    def icu_duration(self):
+        if self.discharged_from_icu:
+            end = datetime.now()
+            self.icu_discharge_date = end.date()
+            self.icu_stay = end.date() - self.icu_admission_date.date()
     @classmethod
     def __setup__(cls):
         super(InpatientIcu, cls).__setup__()
@@ -106,7 +105,7 @@ class Glasgow(models.Model):
     _description = 'Glasgow Coma Scale'
     _order = 'id,name'
     _table = 'gnuhealth_icu_glasgow'
-    name = fields.Many2one('gnuhealth.inpatient.registration',
+    name = fields.Many2one('medical.inpatient.registration',
                            'Registration Code', required=True)
     evaluation_date = fields.Datetime('Date', help="Date / Time",
                                       required=True)
@@ -167,7 +166,7 @@ class ApacheII(models.Model):
     _description = 'Apache II scoring'
     _order = 'id,name'
     _table = 'gnuhealth_icu_apache2'
-    name = fields.Many2one('gnuhealth.inpatient.registration',
+    name = fields.Many2one('medical.inpatient.registration',
                            'Registration Code', required=True)
     score_date = fields.Datetime('Date', help="Date of the score",
                                  required=True)
@@ -196,15 +195,12 @@ class ApacheII(models.Model):
         ('blank', '-'),
         ('me', 'Medical or emergency postoperative'),
         ('el', 'elective postoperative')],
-        'Hospital Admission Type',)
-    #TODO is domain in views states={
-    #    'invisible': Not(Bool(('chronic_condition'))),
-    #    'required': Bool(('chronic_condition'))}, sort=False)
+        'Hospital Admission Type',states={'chronic_condition':[('invisible', False),('required',True)]})
     apache_score = fields.Integer('Score')
     #Default FiO2 PaO2 and PaCO2 so we do the A-a gradient
     #calculation with non-null values
     @api.depends('fio2', 'pao2', 'paco2')
-    def on_change_with_aado2(self):
+    def on_change_aado2(self):
         # Calculates the Alveolar-arterial difference
         # based on FiO2, PaCO2 and PaO2 values
         if self.fio2 and self.paco2 and self.pao2:
@@ -213,7 +209,7 @@ class ApacheII(models.Model):
                  'respiratory_rate', 'fio2', 'pao2', 'aado2', 'ph', 'serum_sodium',
                  'serum_potassium', 'serum_creatinine', 'arf', 'wbc', 'hematocrit',
                  'gcs', 'chronic_condition', 'hospital_admission_type')
-    def on_change_with_apache_score(self):
+    def on_change_apache_score(self):
         # Calculate the APACHE SCORE from the variables in the
         total = 0
         # Age
@@ -365,13 +361,13 @@ class MechanicalVentilation(models.Model):
     _description = 'Mechanical Ventilation History'
     _order = 'id'
     _table = 'gnuhealth_icu_ventilation'
-    def mv_duration(self, name):
-        start = end = datetime.now()
-        if self.mv_start:
-            start = self.mv_start
-        if self.mv_end:
-            end = self.mv_end
-        return end.date() - start.date()
+    @api.depends('current_mv')#metodo compute para la duracion
+    def mv_duration(self):
+        if self.current_mv:
+            self.mv_start = datetime.now()
+        else:
+            self.mv_end = datetime.now()
+            self.mv_period = self.mv_end - self.mv_start
     name = fields.Many2one('gnuhealth.inpatient.icu', 'Patient ICU Admission',
                            required=True)
     ventilation = fields.Selection([
@@ -383,22 +379,17 @@ class MechanicalVentilation(models.Model):
                      "Pressure Ventilation, BiPAP-CPAP \n"
                      "ETT - Endotracheal Tube", sort=False)
     ett_size = fields.Integer('ETT Size',
-    states={'ventilation':[('invisible', 'ett')]})#TODO change to false
-    tracheostomy_size = fields.Integer('Tracheostomy size',)
-    #TODO states={
-    #   'invisible': Not(Equal(('ventilation'), 'tracheostomy'))})
+                            states={'ventilation == ett':[('invisible', False)]})
+    tracheostomy_size = fields.Integer('Tracheostomy size',
+                                       states={'ventilation == tracheostomy':[('invisible',False)]})
     mv_start = fields.Datetime('From', help="Start of Mechanical Ventilation",
                                required=True)
-    mv_end = fields.Datetime('To', help="End of Mechanical Ventilation",)
-    #TODO states={
-    #    'invisible': Bool(('current_mv')),
-    #    'required': Not(Bool(('current_mv'))),
-    #    },
-    #depends=['current_mv'])
-    #TODO a compute field mv_period = fields.Function(fields.TimeDelta('Duration'), 'mv_duration')
+    mv_end = fields.Datetime('To', help="End of Mechanical Ventilation",compute=mv_duration,
+                            states={'current_mv': [('invisible', 'True'),('required',True)]})
     mv_period = fields.Datetime('mv_duration')
-    current_mv = fields.Boolean('Current')
+    current_mv = fields.Boolean('Current',default=False)
     remarks = fields.Char('Remarks')
+
     @classmethod
     def __setup__(cls):
         super(MechanicalVentilation, cls).__setup__()
@@ -428,7 +419,6 @@ class ChestDrainageAssessment(models.Model):
     _description = 'Chest Drainage Asessment'
     _order = 'id'
     _table = 'gnuhealth_icu_chest_drainage'
-
     name = fields.Many2one('gnuhealth.patient.rounding', 'Rounding',
                            required=True)
     location = fields.Selection([
@@ -446,12 +436,7 @@ class ChestDrainageAssessment(models.Model):
         'Aspect', sort=False)
     suction = fields.Boolean('Suction')
     suction_pressure = fields.Integer('cm H2O',
-    states = {'suction': [('invisible', False),('required',True)]})
-    #TODO states={
-    #'invisible': Not(Bool(('suction'))),
-    #'required': Bool(('suction')),
-    #},
-    #TODO @api.depends=['suction'])
+                states = {'suction': [('invisible', False),('required',True)]})
     oscillation = fields.Boolean('Oscillation')
     air_leak = fields.Boolean('Air Leak')
     fluid_volume = fields.Integer('Volume')
@@ -469,13 +454,12 @@ class PatientRounding(models.Model):
     # Neurological assesment
     gcs = fields.Many2one('gnuhealth.icu.glasgow', 'GCS',
                           domain=[('name', '=', ('name'))],states=STATES)
-    #TODO depends=['name'],)
     pupil_dilation = fields.Selection([
         ('normal', 'Normal'),
         ('miosis', 'Miosis'),
         ('mydriasis', 'Mydriasis')],
         'Pupil Dilation', sort=False,
-        states=STATES)
+                                states=STATES)
     left_pupil = fields.Integer('L', help="size in mm of left pupil",
                                 states=STATES)
     right_pupil = fields.Integer('R', help="size in mm of right pupil",
@@ -488,7 +472,7 @@ class PatientRounding(models.Model):
         ('sluggish', 'Sluggish'),
         ('nonreactive', 'Nonreactive')],
         'Pupillary Reactivity', sort=False,
-        states=STATES)
+                                states=STATES)
     pupil_consensual_resp = fields.Boolean('Consensual Response',
                                            help="Pupillary Consensual Response",
                                            states=STATES)
@@ -506,13 +490,9 @@ class PatientRounding(models.Model):
     oxygen_mask = fields.Boolean('Oxygen Mask',states=STATES)
     fio2 = fields.Integer('FiO2', states=STATES)
     peep = fields.Boolean('PEEP',states=STATES)
-    peep_pressure = fields.Integer('cm H2O', help="Pressure",)
-    #TODO                         states={
-    # 'invisible': Not(Bool(('peep'))),
-    # 'required': Bool(('peep')),
-    # 'readonly': ('state') == 'done',
-    # },
-    #depends=['peep'])
+    peep_pressure = fields.Integer('cm H2O', help="Pressure",
+                                   states = {'peep': [('invisible', False),('required',True)],
+                                             'state':[('readonly','=','done')]})
     sce = fields.Boolean('SCE', help="Subcutaneous Emphysema",
                          states=STATES)
     lips_lesion = fields.Boolean('Lips lesion',
@@ -544,9 +524,8 @@ class PatientRounding(models.Model):
     # Chest X-Ray
     xray = fields.Binary('Xray', states=STATES)
     # Cardiovascular assessment
-    #TODO ecg = fields.Many2one('gnuhealth.patient.ecg', 'Inpatient ECG',
-    #  domain=[('inpatient_registration_code', '=', ('name'))],states=STATES)
-    #TODO metodo depends=['name'],)
+    ecg = fields.Many2one('medical.patient.ecg', 'Inpatient ECG',
+    domain=[('inpatient_registration_code', '=', ('name'))],states=STATES)
     venous_access = fields.Selection([
         ('blank', '-'),
         ('none', 'None'),
@@ -606,3 +585,5 @@ class PatientRounding(models.Model):
     @staticmethod
     def default_pupil_dilation():
         return 'normal'
+
+

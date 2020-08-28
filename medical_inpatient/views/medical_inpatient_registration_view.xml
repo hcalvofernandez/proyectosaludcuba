@@ -10,8 +10,8 @@
             <field name="model">medical.inpatient.registration</field>
             <field name="arch" type="xml">
                 <form>
-
-                    <header>
+                    <header>						
+						<field name="state" widget="statusbar" options="{'clickable': '1'}" modifiers="{'readonly':true}"/>
                         <button name="button_confirmed"
                                 string="Confirm"
                                 help="Confirm Registration / Make the reservation"
@@ -48,14 +48,16 @@
                                 attrs="{'invisible': [('state', '!=', 'done')]}"/>
                     </header>
                     <sheet>
+					<!-- Add by Yadier para terminar relacion con icu -->
+						<group string="Patient Info" col="4">
+							<field name="name"/>
+							<field name="patient"/>
+							<field name="institution"/>							
+						</group>						
+					<!-- Add by Yadier para terminar relacion con icu -->
                         <notebook>
                             <page string="Administrative data" id="page_admin_data">
-                                <group colspan="4" id="group_admin_data_holder1">
-                                    <group colspan="2" col="6" id="group_admin_data">
-                                        <field name="name"/>
-                                        <field name="patient"/>
-                                        <!--                                        <field name="puid"/>-->
-                                    </group>
+                                <group colspan="4" id="group_admin_data_holder1">                                    
                                     <group colspan="2" id="group_admin_bed">
                                         <field name="bed"/>
                                     </group>
@@ -82,14 +84,11 @@
                                 <newline/>
                                 <group colspan="4" col="10" string="Discharge Info"
                                        id="group_hospitalization_discharge">
-                                    <field name="discharge_reason"/>
-                                    <field name="discharge_dx"/>
-                                    <field name="discharged_by"/>
+										<field name="discharged_by"/>
+										<field name="discharge_reason"/>
+										<field name="discharge_dx"/>                                    
                                 </group>
-
-                                <group colspan="4" col="6" string="Status" id="group_registration_holder1">
-                                    <field name="state"/>
-                                </group>
+                                
                             </page>
 
                             <page string="Nutrition" id="page_inpatient_nutrition">

@@ -34,7 +34,7 @@
                                     <field name="dose"/>
                                     <field name="dose_unit"/>
                                     <field name="qty"/>
-                                    <field name="common_dosage"/>
+                                    <!--field name="common_dosage"/-->
                                 </group>
                                 <newline/>
                                 <field colspan="4" name="admin_times"/>

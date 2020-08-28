@@ -10,17 +10,19 @@
         <field name="model">gnuhealth.icu.glasgow</field>
         <field name="arch" type="xml">
             <form>
-                <group colspan="4">
-                    <field name="name"/>
-                    <field name="evaluation_date"/>
-                </group>
-                <newline/>
-                <group id="group_glasgow_header" colspan="4">
-                    <field name="glasgow_eyes"/>
-                    <field name="glasgow_verbal"/>
-                    <field name="glasgow_motor"/>
-                    <field name="glasgow"/>
-                </group>
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="evaluation_date"/>
+                    </group>
+                    <newline/>
+                    <group id="group_glasgow_header" col="4">
+                        <field name="glasgow_eyes"/>
+                        <field name="glasgow_verbal"/>
+                        <field name="glasgow_motor"/>
+                        <field name="glasgow"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>

@@ -11,15 +11,15 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <label for="name"/>
-                        <field name="name"/>
-                        <label for="code"/>
-                        <field name="code"/>
-                        <newline/>
-                        <separator id="separator_diet_description" colspan="4"
-                                   string="Diet Description and Indications"/>
-                        <newline/>
-                        <field colspan="4" name="description"/>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <newline/>
+                            <separator id="separator_diet_description" colspan="4"
+                                       string="Diet Description and Indications"/>
+                            <newline/>
+                            <field colspan="4" name="description"/>
+                        </group>
                     </sheet>
                 </form>
 
@@ -36,7 +36,6 @@
                     <field name="code"/>
                     <field name="description"/>
                 </tree>
-
             </field>
         </record>
 

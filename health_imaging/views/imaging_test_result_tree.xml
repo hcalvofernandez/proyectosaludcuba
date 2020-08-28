@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <tree string="Imaging Test Result">
                     <field name="patient"/>
-                    <field name="number"/>
+                    <field name="name"/><!--before was number-->
                     <field name="date" />
                     <field name="requested_test"/>
                     <field name="request_date" />

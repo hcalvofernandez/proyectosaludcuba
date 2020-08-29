@@ -1,0 +1,73 @@
+Date : 2020-08-29 16:52:32
+Directory : /home/hanoi/DEV/proyectosaludcuba/medical_inpatient
+Total : 39 files,  2405 codes, 348 comments, 294 blanks, all 3047 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| XML      |         30 |      1,425 |        187 |        151 |      1,763 |
+| Python   |          9 |        980 |        161 |        143 |      1,284 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         39 |      2,405 |        348 |        294 |      3,047 |
+| .idea                                                                                                          |          4 |        261 |          0 |          0 |        261 |
+| data                                                                                                           |          2 |        226 |          1 |         38 |        265 |
+| models                                                                                                         |          2 |        826 |         67 |        121 |      1,014 |
+| security                                                                                                       |          1 |         36 |         34 |         18 |         88 |
+| static                                                                                                         |          5 |        171 |          0 |          8 |        179 |
+| static/description                                                                                             |          5 |        171 |          0 |          8 |        179 |
+| tests                                                                                                          |          2 |          7 |          6 |          7 |         20 |
+| views                                                                                                          |         16 |        671 |        146 |         81 |        898 |
+| wizard                                                                                                         |          5 |        162 |         86 |         17 |        265 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                       | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/.idea/medical_inpatient.iml                                | XML      |         11 |          0 |          0 |         11 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/.idea/misc.xml                                             | XML      |          4 |          0 |          0 |          4 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/.idea/modules.xml                                          | XML      |          8 |          0 |          0 |          8 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/.idea/workspace.xml                                        | XML      |        238 |          0 |          0 |        238 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/__init__.py                                                | Python   |          2 |          4 |          2 |          8 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/__manifest__.py                                            | Python   |         43 |          4 |          2 |         49 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/data/inpatient_diets.xml                                   | XML      |        209 |          0 |         33 |        242 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/data/medical_inpatient_sequence.xml                        | XML      |         17 |          1 |          5 |         23 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/models/__init__.py                                         | Python   |          1 |          4 |          2 |          7 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/models/medical_inpatient.py                                | Python   |        825 |         63 |        119 |      1,007 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/security/access_rights.xml                                 | XML      |         36 |         34 |         18 |         88 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/static/description/cancel.svg                              | XML      |         17 |          0 |          1 |         18 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/static/description/go-home.svg                             | XML      |         41 |          0 |          1 |         42 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/static/description/hospital.svg                            | XML      |         52 |          0 |          1 |         53 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/static/description/meals.svg                               | XML      |         43 |          0 |          3 |         46 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/static/description/ok.svg                                  | XML      |         18 |          0 |          2 |         20 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/tests/__init__.py                                          | Python   |          1 |          3 |          2 |          6 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/tests/test_medical_inpatient.py                            | Python   |          6 |          3 |          5 |         14 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_appointment_form_view_extend.xml             | XML      |         16 |          4 |          4 |         24 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_bed_transfer_view.xml                        | XML      |         37 |         14 |          6 |         57 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_diet_therapeutic_view.xml          | XML      |         47 |          3 |          6 |         56 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_diet_view.xml                      | XML      |         31 |         14 |          4 |         49 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_meal_order_item_view.xml           | XML      |         31 |         14 |          7 |         52 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_meal_order_view.xml                | XML      |         82 |          3 |          7 |         92 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_meal_view.xml                      | XML      |         50 |          3 |          4 |         57 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_med_admin_time_view.xml            | XML      |         36 |         14 |          7 |         57 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_med_log_view.xml                   | XML      |         41 |         14 |          5 |         60 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_medication_view.xml                | XML      |         76 |         15 |          6 |         97 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_menu.xml                           | XML      |         35 |          3 |          2 |         40 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_inpatient_registration_view.xml              | XML      |        146 |          6 |         12 |        164 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_patient_ecg_form_view_extend.xml             | XML      |          5 |         16 |          2 |         23 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_patient_evaluation_form_view_extend.xml      | XML      |          5 |         17 |          2 |         24 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_patient_form_view_extend.xml                 | XML      |         17 |          3 |          4 |         24 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/views/medical_patient_tree_view_extend.xml                 | XML      |         16 |          3 |          3 |         22 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/wizard/__init__.py                                         | Python   |          2 |         22 |          2 |         26 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/wizard/medical_bed_transfer_create_wizard.py               | Python   |         65 |         32 |          5 |        102 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/wizard/medical_bed_transfer_create_wizard_view.xml         | XML      |         33 |          3 |          3 |         39 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/wizard/medical_inpatient_evaluation_create_wizard.py       | Python   |         35 |         26 |          4 |         65 |
+| /home/hanoi/DEV/proyectosaludcuba/medical_inpatient/wizard/medical_inpatient_evaluation_create_wizard_view.xml | XML      |         27 |          3 |          3 |         33 |
+| Total                                                                                                          |          |      2,405 |        348 |        294 |      3,047 |
++----------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -60,18 +60,11 @@ class PatientPregnancy(models.Model):
         pregnancy information is referred by the patient, as a history taking \
         procedure. Please keep in mind that the reverse pregnancy data is \
         subjective"
-        # states={
-        #     'invisible': bool(safe_eval(current_pregnancy)),
-        # }
     )
     reverse_weeks = fields.Integer(
         string="Pr. Weeks",
         help="Number of weeks at \
         the end of pregnancy. Used only with the reverse input method."
-        # states={
-        #     'invisible': Not(Bool(Eval('reverse'))),
-        #     'required': Bool(Eval('reverse')),
-        # }
     )
     lmp = fields.Date(
         string='LMP',
@@ -95,7 +88,7 @@ class PatientPregnancy(models.Model):
     puerperium_monitor = fields.One2many(
         comodel_name='medical.puerperium.monitor',
         inverse_name='name',
-        string='Puerperium monitor'
+        string='Puerperium Monitor'
     )
     current_pregnancy = fields.Boolean(
         string='Current Pregnancy',
@@ -118,31 +111,17 @@ class PatientPregnancy(models.Model):
         ],
         string='Result',
         sort=False
-        # states={
-        #     'invisible': Bool(Eval('current_pregnancy')),
-        #     'required': Not(Bool(Eval('current_pregnancy'))),
-        # }
     )
     pregnancy_end_date = fields.Datetime(
         string='End of Pregnancy'
-        # states={
-        #     'invisible': Bool(Eval('current_pregnancy')),
-        #     'required': Not(Bool(Eval('current_pregnancy'))),
-        # }
     )
     bba = fields.Boolean(
         string='BBA',
         help="Born Before Arrival"
-        # states={
-        #     'invisible': Bool(Eval('current_pregnancy')),
-        # }
     )
     home_birth = fields.Boolean(
         string='Home Birth',
         help="Home Birth"
-        # states={
-        #     'invisible': Bool(Eval('current_pregnancy')),
-        # }
     )
     pregnancy_end_age = fields.Integer(
         string='Weeks',
@@ -213,10 +192,13 @@ class PatientPregnancy(models.Model):
     )
     hb = fields.Selection(
         [
-            ('', ''),
             ('aa', 'AA'),
             ('as', 'AS'),
             ('ss', 'SS'),
+            ('sc', 'SC'),
+            ('cc', 'CC'),
+            ('athal', 'A-THAL'),
+            ('bthal', 'B-THAL'),
         ],
         string='Hb',
         computed='patient_blood_info'
@@ -271,11 +253,11 @@ class PatientPregnancy(models.Model):
     #     if records > 1:
     #         self.raise_user_error('patient_already_pregnant')
 
-    @staticmethod
+    @api.model
     def default_current_pregnancy():
         return True
-    # @staticmethod
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -314,6 +296,7 @@ class PatientPregnancy(models.Model):
 
     def get_warn_icon(self):
         for rec in self:
+            rec.warning_icon = 'medical-normal'
             if rec.warning:
                 rec.warning_icon = 'medical-warning'
 
@@ -438,7 +421,8 @@ class PrenatalEvaluation(models.Model):
     #     readonly=True,
     #     help="Health Professional in charge, or that who entered the information in the system"
     # )
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -456,6 +440,16 @@ class PrenatalEvaluation(models.Model):
         gestational_age = datetime.datetime.date(
             self.evaluation_date) - self.name.lmp
         self.gestational_days = gestational_age.days
+
+    @api.model
+    def default_get(self, fields):
+        res = super(PrenatalEvaluation, self).default_get(fields)
+        res.update(
+            {
+                'evaluation_date': datetime.now()
+            }
+        )
+        return res
 
 
 class PuerperiumMonitor(models.Model):
@@ -528,7 +522,8 @@ class PuerperiumMonitor(models.Model):
     #     readonly=True,
     #     help="Health Professional in charge, or that who entered the information in the system"
     # )
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -538,6 +533,16 @@ class PuerperiumMonitor(models.Model):
     #     pool = Pool()
     #     HealthProf = pool.get('medical.healthprofessional')
     #     return HealthProf.get_health_professional()
+
+    @api.model
+    def default_get(self, fields):
+        res = super(PuerperiumMonitor, self).default_get(fields)
+        res.update(
+            {
+                'date': datetime.now()
+            }
+        )
+        return res
 
 
 class Perinatal(models.Model):
@@ -665,7 +670,8 @@ class Perinatal(models.Model):
     #     'medical.healthprofessional', 'Health Prof', readonly=True,
     #     help="Health Professional in charge, or that who entered the \
     #         information in the system")
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -675,6 +681,16 @@ class Perinatal(models.Model):
     #     pool = Pool()
     #     HealthProf = pool.get('medical.healthprofessional')
     #     return HealthProf.get_health_professional()
+
+    @api.model
+    def default_get(self, fields):
+        res = super(Perinatal, self).default_get(fields)
+        res.update(
+            {
+                'admission_date': datetime.now()
+            }
+        )
+        return res
 
     def get_perinatal_information(self):
         gestational_age = datetime.datetime.date(
@@ -732,6 +748,16 @@ class PerinatalMonitor(models.Model):
         string='Fetus Position',
         sort=False
     )
+
+    @api.model
+    def default_get(self, fields):
+        res = super(PerinatalMonitor, self).default_get(fields)
+        res.update(
+            {
+                'date': datetime.now()
+            }
+        )
+        return res
 
 
 class MedicalPatient(models.Model):
@@ -834,19 +860,16 @@ class MedicalPatient(models.Model):
         comodel_name='medical.patient.mammography_history',
         inverse_name='name',
         string='Mammography History'
-        # states={'invisible': Not(Bool(Eval('mammography')))},
     )
     pap_history = fields.One2many(
         comodel_name='medical.patient.pap_history',
         inverse_name='name',
         string='PAP smear History'
-        # states={'invisible': Not(Bool(Eval('pap_test')))},
     )
     colposcopy_history = fields.One2many(
         comodel_name='medical.patient.colposcopy_history',
         inverse_name='name',
         string='Colposcopy History'
-        # states={'invisible': Not(Bool(Eval('colposcopy')))},
     )
     pregnancy_history = fields.One2many(
         comodel_name='medical.patient.pregnancy',
@@ -891,12 +914,6 @@ class MedicalPatient(models.Model):
                 stillbirths = stillbirths+1
             counter = counter+1
         self.stillbirths = stillbirths
-    # @classmethod
-    # def view_attributes(self):
-    #     return super(MedicalPatient, self).view_attributes() + [
-    #         ('//page[@id="page_gyneco_obs"]', 'states', {
-    #             'invisible': Equal(Eval('biological_sex'), 'm'),
-    #         })]
 
 
 class PatientMenstrualHistory(models.Model):
@@ -966,7 +983,8 @@ class PatientMenstrualHistory(models.Model):
     # healthprof = fields.Many2one(
     #     'medical.healthprofessional', 'Reviewed', readonly=True,
     #     help="Health Professional who reviewed the information")
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -976,18 +994,22 @@ class PatientMenstrualHistory(models.Model):
     #     pool = Pool()
     #     HealthProf = pool.get('medical.healthprofessional')
     #     return HealthProf.get_health_professional()
-    # @staticmethod
-    # def default_evaluation_date():
-    #     return Pool().get('ir.date').today()
-    # @staticmethod
-    # def default_evaluation_date():
-    #     return Pool().get('ir.date').today()
 
-    @staticmethod
+    @api.model
+    def default_get(self, fields):
+        res = super(PatientMenstrualHistory, self).default_get(fields)
+        res.update(
+            {
+                'evaluation_date': datetime.now()
+            }
+        )
+        return res
+
+    @api.model
     def default_frequency():
         return 'eumenorrhea'
 
-    @staticmethod
+    @api.model
     def default_volume():
         return 'normal'
 
@@ -1042,7 +1064,8 @@ class PatientMammographyHistory(models.Model):
     # healthprof = fields.Many2one(
     #     'medical.healthprofessional', 'Reviewed', readonly=True,
     #     help="Health Professional who last reviewed the test")
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -1052,12 +1075,17 @@ class PatientMammographyHistory(models.Model):
     #     pool = Pool()
     #     HealthProf = pool.get('medical.healthprofessional')
     #     return HealthProf.get_health_professional()
-    # @staticmethod
-    # def default_evaluation_date():
-    #     return Pool().get('ir.date').today()
-    # @staticmethod
-    # def default_last_mammography():
-    #     return Pool().get('ir.date').today()
+
+    @api.model
+    def default_get(self, fields):
+        res = super(PatientMammographyHistory, self).default_get(fields)
+        res.update(
+            {
+                'evaluation_date': datetime.now(),
+                'last_mammography': datetime.now()
+            }
+        )
+        return res
 
 
 class PatientPAPHistory(models.Model):
@@ -1115,7 +1143,8 @@ class PatientPAPHistory(models.Model):
     # healthprof = fields.Many2one(
     #     'gnuhealth.healthprofessional', 'Reviewed', readonly=True,
     #     help="Health Professional who last reviewed the test")
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -1125,12 +1154,17 @@ class PatientPAPHistory(models.Model):
     #     pool = Pool()
     #     HealthProf = pool.get('gnuhealth.healthprofessional')
     #     return HealthProf.get_health_professional()
-    # @staticmethod
-    # def default_evaluation_date():
-    #     return Pool().get('ir.date').today()
-    # @staticmethod
-    # def default_last_pap():
-    #     return Pool().get('ir.date').today()
+
+    @api.model
+    def default_get(self, fields):
+        res = super(PatientPAPHistory, self).default_get(fields)
+        res.update(
+            {
+                'evaluation_date': datetime.now(),
+                'last_pap': datetime.now()
+            }
+        )
+        return res
 
 
 class PatientColposcopyHistory(models.Model):
@@ -1183,7 +1217,8 @@ class PatientColposcopyHistory(models.Model):
     # healthprof = fields.Many2one(
     #     'gnuhealth.healthprofessional', 'Reviewed', readonly=True,
     #     help="Health Professional who last reviewed the test")
-    @staticmethod
+
+    @api.model
     def default_institution(self):
         HealthInst = self.env['res.partner']
         institution = HealthInst.get_institution()
@@ -1193,9 +1228,14 @@ class PatientColposcopyHistory(models.Model):
     #     pool = Pool()
     #     HealthProf = pool.get('gnuhealth.healthprofessional')
     #     return HealthProf.get_health_professional()
-    # @staticmethod
-    # def default_evaluation_date():
-    #     return Pool().get('ir.date').today()
-    # @staticmethod
-    # def default_last_colposcopy():
-    #     return Pool().get('ir.date').today()
+
+    @api.model
+    def default_get(self, fields):
+        res = super(PatientColposcopyHistory, self).default_get(fields)
+        res.update(
+            {
+                'evaluation_date': datetime.now(),
+                'last_colposcopy': datetime.now()
+            }
+        )
+        return res

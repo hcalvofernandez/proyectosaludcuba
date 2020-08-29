@@ -14,273 +14,547 @@
 				</p>
 			</field>
 		</record>
-		<!-- Patient Pregnancies
+		<!-- Patient Pregnancies -->
 		<record model="ir.ui.view" id="medical_patient_pregnancy_view">
 			<field name="name">medical_patient_pregnancy</field>
-			<field name="res_model">medical.patient.pregnancy</field>
-			<field name="view_mode">form</field>
+			<field name="model">medical.patient.pregnancy</field>
+			<field name="arch" type="xml">
+				<form>
+					<group colspan="4">
+						<field name="name" />
+						<field name="computed_age" />
+						<field name="lmp" />
+						<field name="institution" />
+					</group>
+					<newline/>
+					<notebook>
+						<page name="general_info" string="General Info">
+							<group>
+								<group string="General">
+									<field name="gravida" />
+									<field name="warning" />
+									<field name="warning_icon" />
+									<field name="reverse"
+										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+									<field name="reverse_weeks" 
+										attrs="{'invisible': [('reverse','=', False)], 'required': [('reverse','=', True)]}"/>
+									<field name="pdd" />
+								</group>
+								<group string="Pregnancy Info" name="pregnancy_info">
+									<field name="current_pregnancy" />
+									<field name="fetuses" />
+									<field name="monozygotic"/>
+									<field name="pregnancy_end_result"
+										attrs="{'invisible': [('current_pregnancy','=', True)], 'required': [('current_pregnancy','=', False)]}"/>
+									<field name="pregnancy_end_date"
+										attrs="{'invisible': [('current_pregnancy','=', True)], 'required': [('current_pregnancy','=', False)]}"/>
+									<field name="pregnancy_end_age" />
+									<field name="bba" 
+										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+									<field name="home_birth" 
+										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+									<field name="iugr" />
+								</group>
+								<group string="Resumed Info" name="resumed_info">
+									<field name="gravidae"/>
+									<field name="premature"/>
+									<field name="abortions"/>
+									<field name="stillbirths"/>
+								</group>
+								<group string="Blood Info" name="blood_info">
+									<field name="blood_type"/>
+									<field name="rh"/>
+									<field name="hb"/>
+								</group>
+							</group>
+						</page>
+						<page name="prenatal_evaluations" string="Prenatal Evaluations">
+							<field name="prenatal_evaluations"
+								colspan="4"
+								context="{'default_name': id}"/>
+						</page>
+						<page name="perinatal" string="Perinatal Info">
+							<field name="perinatal" 
+								colspan="4"
+								context="{'default_name': id}"/>
+						</page>
+						<page name="puerperium_monitor" string="Puerperium Monitor">
+							<field name="puerperium_monitor"
+								colspan="4"
+								context="{'default_name': id}"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_patient_pregnancy_tree">
 			<field name="name">medical_patient_pregnancy_tree</field>
-			<field name="res_model">medical.patient.pregnancy</field>
-			<field name="view_mode">tree</field>
-		</record> -->
-		<!-- Menu entry for Obstetrics histories -->
-		<!--
-		<record model="ir.action.act_window" id="act_pregnancy_form">
-		<field name="name">
-		Obstetric Histories
-		</field>
-		<field name="res_model">
-		medical.patient.pregnancy
-		</field>
+			<field name="model">medical.patient.pregnancy</field>
+			<field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+					<field name="computed_age"/>
+					<field name="fetuses" />
+                </tree>
+            </field>
 		</record>
-		<menuitem name="Obstetrics" id="medical_obstetrics" icon="medical-obstetrics" parent="health.medical_menu" sequence="65" />
-		<menuitem action="act_pregnancy_form" id="medical_patient_pregnancy" icon="medical-list" parent="medical_obstetrics" />
-		<record model="ir.action.act_window.view" id="act_patient_pregnancy_list_view">
-		<field name="sequence" eval="10" />
-		<field name="view" ref="medical_patient_pregnancy_tree" />
-		<field name="act_window" ref="act_pregnancy_form" />
-		</record>
-		<record model="ir.action.act_window.view" id="act_patient_pregnancy_form_view">
-		<field name="sequence" eval="20" />
-		<field name="view" ref="medical_patient_pregnancy_view" />
-		<field name="act_window" ref="act_pregnancy_form" />
-		</record>
-		-->
-		<!-- Shortcut to the Patient Pregnancies -->
-		<!--
-		<record model="ir.action.act_window" id="act_pregnancy_form1">
-		<field name="name">
-		Obstetric History
-		</field>
-		<field name="res_model">
-		medical.patient.pregnancy
-		</field>
-		<field name="domain" eval="[('name', '=', Eval('active_id'))]" pyson="1" />
-		</record>
-		<record model="ir.action.keyword" id="act_open_pregnancy_keyword1">
-		<field name="keyword">
-		form_relate
-		</field>
-		<field name="res_model">
-		medical.patient,-1
-		</field>
-		<field name="action" ref="act_pregnancy_form1" />
-		</record>
-		-->
 		<!-- PRENATAL Evaluation -->
-		<!--
 		<record model="ir.ui.view" id="medical_prenatal_evaluation_view">
-		<field name="res_model">
-		medical.patient.prenatal.evaluation
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_prenatal_evaluation
-		</field>
+			<field name="model">medical.patient.prenatal.evaluation</field>
+			<field name="name">medical_prenatal_evaluation</field>
+			<field name="arch" type="xml">
+				<form string="Prenatal Monitor">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<group>
+										<field name="name" />
+										<field name="institution" />
+										<field name="evaluation_date" />
+										<field name="gestational_weeks" />
+										<field name="gestational_days" />
+										<field name="invasive_placentation" />
+									</group>
+									<group>
+										<field name="hypertension" />
+										<field name="preeclampsia" />
+										<field name="overweight" />
+										<field name="diabetes" />
+									</group>
+									<group>
+										<field name="placenta_previa" />
+										<field name="vasa_previa" />
+										<field name="fundal_height" />
+										<field name="fetus_heart_rate" />
+										<field name="efw" />
+									</group>
+									<group>
+										<field name="fetal_bpd" />
+										<field name="fetal_ac" />
+										<field name="fetal_hc" />
+										<field name="fetal_fl" />
+									</group>
+									<group>
+										<field name="oligohydramnios" />
+										<field name="polihydramnios" />
+										<field name="iugr" />
+										<field name="urinary_activity_signs" />
+										<field name="digestive_activity_signs" />
+									</group>
+								</group>
+							</page>
+							<page name="evaluation" string="Patient Evaluation">
+								<field name="evaluation"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="notes" string="Notes">
+								<field name="notes" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_prenatal_evaluation_tree">
-		<field name="res_model">
-		medical.patient.prenatal.evaluation
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_prenatal_evaluation_tree
-		</field>
+			<field name="model">medical.patient.prenatal.evaluation</field>
+			<field name="name">medical_prenatal_evaluation_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="evaluation_date" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Perinatal -->
-		<!--
 		<record model="ir.ui.view" id="medical_perinatal_view">
-		<field name="res_model">
-		medical.perinatal
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_perinatal
-		</field>
+		<field name="model">medical.perinatal</field>
+		<field name="name">medical_perinatal</field>
+			<field name="arch" type="xml">
+				<form string="Perinatal Monitor">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<group>
+										<field name="name" />
+										<field name="admission_code" />
+										<field name="gravida_number" />
+										<field name="abortion" />
+										<field name="stillbirth" />
+									</group>
+									<group>
+										<field name="admission_date" />
+										<field name="prenatal_evaluations" />
+										<field name="start_labor_mode" />
+										<field name="fetus_presentation" />
+									</group>
+									<group>
+										<field name="gestational_weeks" />
+										<field name="gestational_days" />
+										<field name="dystocia" />
+										<field name="episiotomy" />
+										<field name="vaginal_tearing" />
+									</group>
+									<group>
+										<field name="forceps" />
+										<field name="laceration" />
+										<field name="hematoma" />
+										<field name="episiotomy" />
+									</group>
+									<group>
+										<field name="placenta_incomplete" />
+										<field name="placenta_retained" />
+										<field name="abruptio_placentae" />
+									</group>
+								</group>
+							</page>
+							<page name="monitoring" string="Monitors">
+								<field name="monitoring"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="notes" string="Notes">
+								<field name="notes" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_perinatal_tree">
-		<field name="res_model">
-		medical.perinatal
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_perinatal_tree
-		</field>
+		<field name="model">medical.perinatal</field>
+		<field name="name">medical_perinatal_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="admission_code" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Puerperium -->
-		<!--
 		<record model="ir.ui.view" id="medical_puerperium_monitor_view">
-		<field name="res_model">
-		medical.puerperium.monitor
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_puerperium_monitor
-		</field>
+			<field name="model">medical.puerperium.monitor</field>
+			<field name="name">medical_puerperium_monitor</field>
+			<field name="arch" type="xml">
+				<form string="Puerperium Monitor">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<group>
+										<field name="name" />
+										<field name="institution" />
+										<field name="date" />
+										<field name="systolic" />
+										<field name="diastolic" />
+									</group>
+									<group>
+										<field name="lochia_amount" />
+										<field name="lochia_color" />
+										<field name="lochia_odor" />
+										<field name="uterus_involution" />
+									</group>
+									<group>
+										<field name="frequency" />
+										<field name="temperature" />
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_puerperium_monitor_tree">
-		<field name="res_model">
-		medical.puerperium.monitor
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_puerperium_monitor_tree
-		</field>
+			<field name="model">medical.puerperium.monitor</field>
+			<field name="name">medical_puerperium_monitor_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="date" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Perinatal Monitoring -->
-		<!--
 		<record model="ir.ui.view" id="medical_perinatal_monitor_view">
-		<field name="res_model">
-		medical.perinatal.monitor
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_perinatal_monitor
-		</field>
+			<field name="model">medical.perinatal.monitor</field>
+			<field name="name">medical_perinatal_monitor</field>
+			<field name="arch" type="xml">
+				<form string="Perinatal Monitor">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<group>
+										<field name="name" />
+										<field name="date" />
+										<field name="systolic" />
+										<field name="diastolic" />
+									</group>
+									<group>
+										<field name="contractions" />
+										<field name="frequency" />
+										<field name="dilation" />
+										<field name="f_frequency" />
+									</group>
+									<group>
+										<field name="meconium" />
+										<field name="bleeding" />
+										<field name="fundal_height" />
+										<field name="fetus_position" />
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_perinatal_monitor_tree">
-		<field name="res_model">
-		medical.perinatal.monitor
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_perinatal_monitor_tree
-		</field>
+			<field name="model">medical.perinatal.monitor</field>
+			<field name="name">medical_perinatal_monitor_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="date" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Menstrual history information -->
-		<!--
 		<record model="ir.ui.view" id="medical_menstrual_history_view">
-		<field name="res_model">
-		medical.patient.menstrual_history
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_menstrual_history
-		</field>
+			<field name="model">medical.patient.menstrual_history</field>
+			<field name="name">medical_menstrual_history</field>
+			<field name="arch" type="xml">
+				<form string="Menstrual History">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<field name="name" />
+									<field name="institution" />
+									<field name="evaluation_date" />
+									<field name="lmp" />
+									<field name="lmp_length" />
+								</group>
+								<group>
+									<field name="is_regular" />
+									<field name="dysmenorrhea" />
+									<field name="frequency" />
+									<field name="volume" />
+								</group>
+							</page>
+							<page name="evaluation" string="Evaluation">
+								<field name="evaluation"
+									context="{'default_name': id}"/>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_menstrual_history_tree">
-		<field name="res_model">
-		medical.patient.menstrual_history
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_menstrual_history_tree
-		</field>
+			<field name="model">medical.patient.menstrual_history</field>
+			<field name="name">medical_menstrual_history_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="lmp" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- PAP history information -->
-		<!--
 		<record model="ir.ui.view" id="medical_pap_history_view">
-		<field name="res_model">
-		medical.patient.pap_history
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_pap_history
-		</field>
+			<field name="model">medical.patient.pap_history</field>
+			<field name="name">medical_pap_history</field>
+			<field name="arch" type="xml">
+				<form string="PAP Test History">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<field name="name" />
+									<field name="institution" />
+									<field name="evaluation_date" />
+									<field name="last_pap" />
+									<field name="result" />
+								</group>
+							</page>
+							<page name="evaluation" string="Evaluation">
+								<field name="evaluation"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="comments" string="Remarks">
+								<field name="comments" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_pap_history_tree">
-		<field name="res_model">
-		medical.patient.pap_history
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_pap_history_tree
-		</field>
+			<field name="model">medical.patient.pap_history</field>
+			<field name="name">medical_pap_history_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="result" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Mammography history information -->
-		<!--
 		<record model="ir.ui.view" id="medical_mammography_history_view">
-		<field name="res_model">
-		medical.patient.mammography_history
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_mammography_history
-		</field>
+			<field name="model">medical.patient.mammography_history</field>
+			<field name="name">medical_mammography_history</field>
+			<field name="arch" type="xml">
+				<form string="Mammography">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<field name="name" />
+									<field name="institution" />
+									<field name="evaluation_date" />
+									<field name="last_mammography" />
+									<field name="result" />
+								</group>
+							</page>
+							<page name="evaluation" string="Evaluation">
+								<field name="evaluation"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="comments" string="Remarks">
+								<field name="comments" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_mammography_history_tree">
-		<field name="res_model">
-		medical.patient.mammography_history
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_mammography_history_tree
-		</field>
+			<field name="model">medical.patient.mammography_history</field>
+			<field name="name">medical_mammography_history_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+                    <field name="name"/>
+					<field name="result" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Colposcopy history information -->
-		<!--
 		<record model="ir.ui.view" id="medical_colposcopy_history_view">
-		<field name="res_model">
-		medical.patient.colposcopy_history
-		</field>
-		<field name="view_mode">
-		form
-		</field>
-		<field name="name">
-		medical_colposcopy_history
-		</field>
+			<field name="model">medical.patient.colposcopy_history</field>
+			<field name="name">medical_colposcopy_history</field>
+			<field name="arch" type="xml">
+				<form string="Colposcopy">
+					<sheet>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<field name="name" />
+									<field name="institution" />
+									<field name="evaluation_date" />
+									<field name="last_colposcopy" />
+									<field name="result" />
+								</group>
+							</page>
+							<page name="evaluation" string="Evaluation">
+								<field name="evaluation"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="comments" string="Remarks">
+								<field name="comments" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_colposcopy_history_tree">
-		<field name="res_model">
-		medical.patient.colposcopy_history
-		</field>
-		<field name="view_mode">
-		tree
-		</field>
-		<field name="name">
-		medical_colposcopy_history_tree
-		</field>
+			<field name="model">medical.patient.colposcopy_history</field>
+			<field name="name">medical_colposcopy_history_tree</field>
+			<field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+					<field name="result" />
+                </tree>
+			</field>
 		</record>
-		-->
 		<!-- Include the Gynecological and Obstetric pages into the Patient History -->
-		<!--
 		<record model="ir.ui.view" id="medical_patient_view">
-		<field name="res_model">
-		medical.patient
-		</field>
-		<field name="inherit" ref="health.medical_patient_view_form" />
-		<field name="name">
-		medical_patient
-		</field>
+			<field name="name">medical_patient</field>
+			<field name="model">medical.patient</field>
+			<field name="inherit_id" ref="medical.medical_patient_view_form" />
+			<field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Ginecology"
+                          attrs="{'invisible': [('gender','!=','female')]}">
+						<notebook>
+							<page name="gynecological_info" string="Gynecological Info">
+								<group>
+									<group string="General">
+										<field name="currently_pregnant" />
+										<field name="fertile" />
+										<field name="menarche" 
+											attrs="{'invisible': [('fertile','=', False)]}"/>
+										<field name="menopausal" />
+										<field name="menopause"  
+											attrs="{'invisible': [('menopausal','=', False)]}"/>
+										<field name="mammography" />
+										<field name="mammography_last" 
+											attrs="{'invisible': [('mammography','=', False)]}"/>
+										<field name="breast_self_examination" />
+										<field name="pap_test" />
+										<field name="pap_test_last" 
+											attrs="{'invisible': [('pap_test','=', False)]}"/>
+										<field name="colposcopy" />
+										<field name="colposcopy_last" 
+											attrs="{'invisible': [('colposcopy','=', False)]}"/>
+									</group>
+									<group string="Resumed">
+										<field name="gravida" />
+										<field name="premature" />
+										<field name="abortions" />
+										<field name="stillbirths" />
+										<field name="full_term" />
+										<field name="gpa" />
+										<field name="born_alive" />
+										<field name="deaths_1st_week" />
+										<field name="deaths_2nd_week" />
+									</group>
+								</group>
+							</page>
+							<page name="perinatal" string="Perinatal Info">
+								<field name="perinatal"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="menstrual_history" string="Menstrual History">
+								<field name="menstrual_history"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="mammography_history" string="Mammography History"
+								attrs="{'invisible': [('mammography','=', False)]}">
+								<field name="mammography_history"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="pap_history" string="PAP smear History"
+								attrs="{'invisible': [('pap_test','=', False)]}">
+								<field name="pap_history"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="colposcopy_history" string="Colposcopy History" 
+								attrs="{'invisible': [('colposcopy','=', False)]}">
+								<field name="colposcopy_history"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="pregnancy_history" string="Pregnancy History">
+								<field name="pregnancy_history"
+									context="{'default_name': id}"/>
+							</page>
+						</notebook>
+                    </page>
+                </xpath>
+            </field>
 		</record>
-		-->
 		<menuitem id="gyneco_root_menu" name="Gynecology" sequence="2" web_icon="medical_gyneco,static/description/icon.png" />
 		<menuitem id="gyneco_menu" name="Ginecology" parent="gyneco_root_menu" action="gyneco_pregnancy_action" sequence="1" />
 	</data>

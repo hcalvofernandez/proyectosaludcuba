@@ -2,7 +2,7 @@
 <odoo>
 	<data>
 		<record id="gyneco_pregnancy_action" model="ir.actions.act_window">
-			<field name="name">Gynecology</field>
+			<field name="name">Obstetrics</field>
 			<field name="res_model">medical.patient.pregnancy</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
@@ -21,7 +21,8 @@
 			<field name="arch" type="xml">
 				<form>
 					<group colspan="4">
-						<field name="name" />
+						<field name="name" 
+							options="{'no_create_edit': True}" />
 						<field name="computed_age" />
 						<field name="lmp" />
 						<field name="institution" />
@@ -168,8 +169,8 @@
 		</record>
 		<!-- Perinatal -->
 		<record model="ir.ui.view" id="medical_perinatal_view">
-		<field name="model">medical.perinatal</field>
-		<field name="name">medical_perinatal</field>
+			<field name="model">medical.perinatal</field>
+			<field name="name">medical_perinatal</field>
 			<field name="arch" type="xml">
 				<form string="Perinatal Monitor">
 					<sheet>
@@ -222,8 +223,8 @@
 			</field>
 		</record>
 		<record model="ir.ui.view" id="medical_perinatal_tree">
-		<field name="model">medical.perinatal</field>
-		<field name="name">medical_perinatal_tree</field>
+			<field name="model">medical.perinatal</field>
+			<field name="name">medical_perinatal_tree</field>
 			<field name="arch" type="xml">
 				<tree>
                     <field name="name"/>
@@ -555,7 +556,7 @@
                 </xpath>
             </field>
 		</record>
-		<menuitem id="gyneco_root_menu" name="Gynecology" sequence="2" web_icon="medical_gyneco,static/description/icon.png" />
-		<menuitem id="gyneco_menu" name="Ginecology" parent="gyneco_root_menu" action="gyneco_pregnancy_action" sequence="1" />
+		<menuitem id="gyneco_root_menu" name="Obstetrics" sequence="2" web_icon="medical_gyneco,static/description/icon.png" />
+		<menuitem id="gyneco_pregnancy_menu" name="Obstetrics" parent="gyneco_root_menu" action="gyneco_pregnancy_action" sequence="1" />
 	</data>
 </odoo>

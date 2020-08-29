@@ -1,0 +1,10 @@
+"filename", "language", "Python", "XML", "comment", "blank", "total"
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/__init__.py", "Python", 1, 0, 22, 2, 25
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/__manifest__.py", "Python", 20, 0, 18, 2, 40
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/demo/demo.xml", "XML", 0, 4, 26, 0, 30
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/models/__init__.py", "Python", 1, 0, 1, 2, 4
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/models/medical_gyneco.py", "Python", 1056, 0, 125, 61, 1242
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/static/description/medical_obstetrics.svg", "XML", 0, 77, 0, 10, 87
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/views/medical_gyneco_view.xml", "XML", 0, 552, 10, 1, 563
+"/home/hanoi/DEV/proyectosaludcuba/medical_gyneco/views/views.xml", "XML", 0, 4, 53, 3, 60
+"Total", "-", 1078, 637, 255, 81, 2051

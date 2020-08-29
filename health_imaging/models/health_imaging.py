@@ -147,7 +147,22 @@ class ImagingTestRequest(models.Model):
 
     #open ('health_imaging.wizard_generate_result')
     def generate_results(self):
-        pass
+        """ This opens the xml view specified in xml_id for the current vehicle """
+        self.ensure_one()
+        xml_id = self.env.context.get('xml_id')
+        if xml_id:
+            res = self.env['ir.actions.act_window'].for_xml_id('health_imaging', xml_id)
+            res.update(
+                context=dict(self.env.context,
+                default_patient=self.patient.id,
+                default_requested_test=self.requested_test.id,
+                default_request=self.id,
+                default_request_date=self.date,
+                group_by=False),
+                domain=[('patient', '=', self.patient.id)]
+            )
+            return res
+        return False
 
     def done(self):
         self.state = 'done'

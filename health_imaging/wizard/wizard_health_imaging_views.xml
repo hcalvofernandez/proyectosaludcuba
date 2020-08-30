@@ -7,10 +7,17 @@
             <field name="model">gnuhealth.request.imaging.test</field>
             <field name="arch" type="xml">
                 <form>
-                    <group string="Wizard Request - Test">
-                        <field name="request" />
-                        <field name="test" />
-                    </group>
+                    <sheet>
+                        <group string="Wizard Request - Test">
+                            <field name="request" />
+                            <field name="test" />
+                        </group>
+                        <footer>
+                            <button name="action_done" type="object"
+                                    string="Requested" class="oe_highlight"/>
+                            <button special="cancel" string="Cancel"/>
+                        </footer>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -28,28 +35,14 @@
                             <field name="tests" />
                             <field name="urgent" />
                         </group>
+                        <footer>
+                            <button name="action_done" type="object"
+                                    string="Start Request" class="oe_highlight"/>
+                            <button special="cancel" string="Cancel"/>
+                        </footer>
                     </sheet>
                 </form>
             </field>
         </record>
-        <!-- gnuhealth.patient.imaging.test.request -->
-        <record id="gnuhealth_request_imaging.test_form_view" model="ir.ui.view">
-            <field name="name">gnuhealth.patient.imaging.test.request.form</field>
-            <field name="model">gnuhealth.patient.imaging.test.request</field>
-            <field name="arch" type="xml">
-                <form>
-                    <group string="Request Patient Imaging Test'">
-                        <field name="account_type" invisible="1"/>
-                        <field name="company_id" invisible="1"/>
-                    </group>
-                </form>
-            </field>
-        </record>
-        <!--record id="account_accrual_accounting_wizard_action" model="ir.actions.act_window">
-            <field name="name">Create Accrual Entry for the expense/revenue recognition</field>
-            <field name="res_model">account.accrual.accounting.wizard</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record-->
     </data>
 </odoo>

@@ -33,7 +33,6 @@
         'views/imaging_test_result_tree.xml',
         'views/imaging_test_type_form.xml',
         'views/imaging_test_type_tree.xml',
-        #'views/patient_imaging_test_request_start_form.xml',
         #'wizard/wizard_health_imaging_views.xml', TODO a wizard
         'views/health_imaging_view.xml',
         #data

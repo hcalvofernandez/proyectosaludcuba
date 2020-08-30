@@ -3,7 +3,7 @@ from datetime import  datetime
 
 class TestInpatientIcu(TransactionCase):
 
-    def setUp(self):
+    def set_up(self):
         super(TestInpatientIcu, self).setUp()
         self.model_obj = self.env['gnuhealth.inpatient.icu'].browse(1)
         self.assertFalse(

@@ -11,52 +11,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="health_imaging.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/health_imaging.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="114" column="38" lean-forward="false" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wizard_health_imaging.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="imaging_test_result_form.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/imaging_test_result_form.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="imaging_test_request_form.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/imaging_test_request_form.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>state</find>
       <find>date</find>
       <find>images</find>
       <find>gnuhealth.imaging.test.type</find>
@@ -70,7 +28,6 @@
       <find>menu_patient_imaging_test_request</find>
       <find>imaging.test.request</find>
       <find>gnuhealth.patient.imaging.test.request.start</find>
-      <find>gnuhealth.request.imaging.test</find>
       <find>sta</find>
       <find>open</find>
       <find>acc</find>
@@ -86,6 +43,8 @@
       <find>medical.patient</find>
       <find>gnuhealth.imaging.test.result</find>
       <find>medical</find>
+      <find>gnuhealth.request.imaging.test</find>
+      <find>gnuhealth.patient.imaging.test.request</find>
     </findStrings>
     <replaceStrings>
       <replace>self.env[]</replace>
@@ -124,21 +83,22 @@
         <option value="$PROJECT_DIR$/data/imaging_data.xml" />
         <option value="$PROJECT_DIR$/views/imaging_keyword.xml" />
         <option value="$USER_HOME$/Desktop/gnuhealth-13/original completo/health_imaging/wizard/wizard_health_imaging.py" />
-        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" />
-        <option value="$PROJECT_DIR$/__manifest__.py" />
         <option value="$PROJECT_DIR$/views/imaging_test_tree.xml" />
         <option value="$PROJECT_DIR$/views/imaging_test_type_form.xml" />
         <option value="$PROJECT_DIR$/views/imaging_test_type_tree.xml" />
         <option value="$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml" />
         <option value="$PROJECT_DIR$/views/health_imaging_view.xml" />
         <option value="$PROJECT_DIR$/data/gnuhealth_commands.xml" />
-        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging.py" />
         <option value="$PROJECT_DIR$/views/imaging_test_request_tree.xml" />
         <option value="$PROJECT_DIR$/models/health_imaging.py" />
         <option value="$PROJECT_DIR$/views/imaging_test_result_tree.xml" />
         <option value="$PROJECT_DIR$/views/imaging_test_result_form.xml" />
         <option value="$PROJECT_DIR$/views/imaging_test_request_form.xml" />
         <option value="$PROJECT_DIR$/views/imaging_test_form.xml" />
+        <option value="$PROJECT_DIR$/__manifest__.py" />
+        <option value="D:/Web-Sites/Trabajo Odoo Cuba/proyectosaludcuba-master/original completo/health_imaging/wizard/wizard_health_imaging.py" />
+        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging.py" />
+        <option value="$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml" />
       </list>
     </option>
   </component>
@@ -282,17 +242,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24281392" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23404256" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24281392" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23404256" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1767594" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1767594" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -314,7 +273,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="-- llenando data y security a las modelos --" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -448,20 +409,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/__manifest__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="36" column="64" lean-forward="false" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/imaging_keyword.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="995">
@@ -482,14 +429,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="28" column="17" lean-forward="true" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -548,14 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Web-Sites/Trabajo Odoo Cuba/proyectosaludcuba-master/original completo/health_imaging/wizard/wizard_health_imaging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="20" column="51" lean-forward="false" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/Salva-Odoo-12/fleet_etecsa/models/flota.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -588,14 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/health_imaging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="114" column="38" lean-forward="false" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/imaging_test_request_tree.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -612,10 +535,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging.py">
+    <entry file="file://$PROJECT_DIR$/views/imaging_test_request_form.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+        <state relative-caret-position="-51">
+          <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -628,11 +551,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/imaging_test_request_form.xml">
+    <entry file="file://$PROJECT_DIR$/views/patient_imaging_test_request_start_form.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="52" />
+        <state relative-caret-position="476">
+          <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__manifest__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="35" column="8" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="35" column="75" lean-forward="true" selection-start-line="35" selection-start-column="75" selection-end-line="35" selection-end-column="75" />
+          <folding>
+            <element signature="e#1112#1127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wizard/wizard_health_imaging_views.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="15" column="53" lean-forward="false" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/health_imaging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="111" column="22" lean-forward="true" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Web-Sites/Trabajo Odoo Cuba/proyectosaludcuba-master/original completo/health_imaging/wizard/wizard_health_imaging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding>
+            <element signature="e#1487#2509#0" expanded="false" />
+            <element signature="e#2553#2852#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

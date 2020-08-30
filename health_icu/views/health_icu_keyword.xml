@@ -1,5 +1,6 @@
 <!-- Action keyword -->
-        <!--record model="ir.action.keyword"
+<odoo>
+    <!--record model="ir.action.keyword"
                 id="act_open_ecg_keyword1">
             <field name="keyword">form_relate</field>
             <field name="model">gnuhealth.inpatient.icu,-1</field>
@@ -19,4 +20,6 @@
             <field name="model">gnuhealth.inpatient.icu,-1</field>
             <field name="action" ref="act_apache_form1"/>
         </record-->
+</odoo>
+
 

@@ -33,6 +33,7 @@ class PatientPregnancy(models.Model):
     name = fields.Many2one(
         'medical.patient',
         'Patient',
+        required=True,
         domain=[
             ('gender', '=', 'female')
         ]
@@ -44,7 +45,8 @@ class PatientPregnancy(models.Model):
     computed_age = fields.Char(
         string='Age',
         help='Computed patient age at the moment of LMP',
-        compute='patient_age_at_pregnancy'
+        compute='patient_age_at_pregnancy',
+        default=0
     )
     warning = fields.Boolean(
         string='Warn',
@@ -307,7 +309,11 @@ class PrenatalEvaluation(models.Model):
 
     name = fields.Many2one(
         comodel_name='medical.patient.pregnancy',
-        string='Patient Pregnancy'
+        string='Patient Pregnancy',
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     evaluation = fields.Many2one(
         comodel_name='medical.patient.evaluation',
@@ -458,7 +464,11 @@ class PuerperiumMonitor(models.Model):
 
     name = fields.Many2one(
         comodel_name='medical.patient.pregnancy',
-        string='Patient Pregnancy'
+        string='Patient Pregnancy',
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     date = fields.Datetime(
         string='Date and Time',
@@ -551,7 +561,11 @@ class Perinatal(models.Model):
 
     name = fields.Many2one(
         comodel_name='medical.patient.pregnancy',
-        string='Patient Pregnancy'
+        string='Patient Pregnancy',
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     admission_code = fields.Char(
         string='Code'
@@ -704,7 +718,11 @@ class PerinatalMonitor(models.Model):
 
     name = fields.Many2one(
         comodel_name='medical.perinatal',
-        string='Patient Perinatal Evaluation'
+        string='Patient Perinatal Evaluation',
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     date = fields.Datetime(
         string='Date and Time'
@@ -787,7 +805,8 @@ class MedicalPatient(models.Model):
     )
     mammography_last = fields.Date(
         string='Last mammography',
-        help="Enter the date of the last mammography"
+        help="Enter the date of the last mammography",
+        compute='get_test_info'
     )
     breast_self_examination = fields.Boolean(
         string='Breast self-examination',
@@ -799,7 +818,8 @@ class MedicalPatient(models.Model):
     )
     pap_test_last = fields.Date(
         string='Last PAP test',
-        help="Enter the date of the last Papanicolau test"
+        help="Enter the date of the last Papanicolau test",
+        compute='get_test_info'
     )
     colposcopy = fields.Boolean(
         string='Colposcopy',
@@ -807,7 +827,8 @@ class MedicalPatient(models.Model):
     )
     colposcopy_last = fields.Date(
         string='Last colposcopy',
-        help="Enter the date of the last colposcopy"
+        help="Enter the date of the last colposcopy",
+        compute='get_test_info'
     )
     gravida = fields.Integer(
         string='Pregnancies',
@@ -846,11 +867,6 @@ class MedicalPatient(models.Model):
         string='Deceased after 2nd week',
         help="Number of babies that die after the second week"
     )
-    perinatal = fields.One2many(
-        comodel_name='medical.perinatal',
-        inverse_name='name',
-        string='Perinatal Info'
-    )
     menstrual_history = fields.One2many(
         comodel_name='medical.patient.menstrual_history',
         inverse_name='name',
@@ -876,6 +892,26 @@ class MedicalPatient(models.Model):
         inverse_name='name',
         string='Pregnancies'
     )
+
+    def get_test_info(self):
+        if len(self.pap_history):
+            self.pap_test = True
+            self.pap_test_last = self.pap_history[-1].evaluation_date
+        else:
+            self.pap_test = False
+            self.pap_test_last = ''
+        if len(self.colposcopy_history):
+            self.colposcopy = True
+            self.colposcopy_last = self.colposcopy_history[-1].evaluation_date
+        else:
+            self.colposcopy = False
+            self.colposcopy_last = ''
+        if len(self.mammography_history):
+            self.mammography = True
+            self.mammography_last = self.mammography_history[-1].evaluation_date
+        else:
+            self.mammography = False
+            self.mammography_last = ''
 
     def get_pregnancy_info(self):
         self.currently_pregnant = False
@@ -924,7 +960,10 @@ class PatientMenstrualHistory(models.Model):
         comodel_name='medical.patient',
         string='Patient',
         readonly=True,
-        required=True
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     evaluation = fields.Many2one(
         comodel_name='medical.patient.evaluation',
@@ -1021,8 +1060,10 @@ class PatientMammographyHistory(models.Model):
     name = fields.Many2one(
         comodel_name='medical.patient',
         string='Patient',
-        readonly=True,
-        required=True
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     evaluation = fields.Many2one(
         comodel_name='medical.patient.evaluation',
@@ -1076,13 +1117,20 @@ class PatientMammographyHistory(models.Model):
     #     HealthProf = pool.get('medical.healthprofessional')
     #     return HealthProf.get_health_professional()
 
+    @api.depends('name')
+    def on_change_name(self):
+        if len(self.name.pap_history):
+            mammography_last = self.name.mammography_history[-1]
+            self.last_mammography = mammography_last.evaluation_date
+        else:
+            self.last_mammography = ''
+
     @api.model
     def default_get(self, fields):
         res = super(PatientMammographyHistory, self).default_get(fields)
         res.update(
             {
-                'evaluation_date': datetime.now(),
-                'last_mammography': datetime.now()
+                'evaluation_date': datetime.now()
             }
         )
         return res
@@ -1095,8 +1143,10 @@ class PatientPAPHistory(models.Model):
     name = fields.Many2one(
         comodel_name='medical.patient',
         string='Patient',
-        readonly=True,
-        required=True
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     evaluation = fields.Many2one(
         comodel_name='medical.patient.evaluation',
@@ -1160,11 +1210,18 @@ class PatientPAPHistory(models.Model):
         res = super(PatientPAPHistory, self).default_get(fields)
         res.update(
             {
-                'evaluation_date': datetime.now(),
-                'last_pap': datetime.now()
+                'evaluation_date': datetime.now()
             }
         )
         return res
+
+    @api.depends('name')
+    def on_change_name(self):
+        if len(self.name.pap_history):
+            pap_test_last = self.name.pap_history[-1]
+            self.last_pap = pap_test_last.evaluation_date
+        else:
+            self.last_pap = ''
 
 
 class PatientColposcopyHistory(models.Model):
@@ -1174,8 +1231,10 @@ class PatientColposcopyHistory(models.Model):
     name = fields.Many2one(
         comodel_name='medical.patient',
         string='Patient',
-        readonly=True,
-        required=True
+        required=True,
+        domain=[
+            ('gender', '=', 'female')
+        ]
     )
     evaluation = fields.Many2one(
         comodel_name='medical.patient.evaluation',
@@ -1234,8 +1293,15 @@ class PatientColposcopyHistory(models.Model):
         res = super(PatientColposcopyHistory, self).default_get(fields)
         res.update(
             {
-                'evaluation_date': datetime.now(),
-                'last_colposcopy': datetime.now()
+                'evaluation_date': datetime.now()
             }
         )
         return res
+
+    @api.depends('name')
+    def on_change_name(self):
+        if len(self.name.colposcopy_history):
+            colposcopy_last = self.name.colposcopy_history[-1]
+            self.last_colposcopy = colposcopy_last.evaluation_date
+        else:
+            self.last_colposcopy = ''

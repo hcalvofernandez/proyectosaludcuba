@@ -5,7 +5,10 @@
         <record id="seq_medical_appointment" model="ir.sequence">
             <field name="name">Appointment</field>
             <field name="code">medical.appointment</field>
-            <field name="prefix">APP ${year}/</field>
+            <field name="prefix">APP %(range_year)s/</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
             <field eval="0" name="padding"/>
         </record>
 

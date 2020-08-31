@@ -1013,19 +1013,19 @@ msgstr "Este campo marca el embarazo actual"
 
 msgctxt "help:gnuhealth.patient.pregnancy,gravidae:"
 msgid "Number of pregnancies, computed from Obstetric history"
-msgstr ""
+msgstr "Número de embarazos, calculado a partir de la historia obstétrica"
 
 msgctxt "help:gnuhealth.patient.pregnancy,healthprof:"
 msgid "Health Professional who created this initial obstetric record"
-msgstr ""
+msgstr "Profesional de la salud que creó este registro obstétrico inicial"
 
 msgctxt "help:gnuhealth.patient.pregnancy,home_birth:"
 msgid "Home Birth"
-msgstr ""
+msgstr "Lugar de Nacimiento"
 
 msgctxt "help:gnuhealth.patient.pregnancy,institution:"
 msgid "Health center where this initial obstetric record was created"
-msgstr ""
+msgstr "Centro de salud donde se creó este registro obstétrico inicial"
 
 msgctxt "help:gnuhealth.patient.pregnancy,lmp:"
 msgid "Last Menstrual Period"

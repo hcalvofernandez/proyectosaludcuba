@@ -59,28 +59,35 @@ class DietTherapeutic(models.Model):
         ('code_uniq', 'unique (code)', 'The Diet code already exists!'),
     ]
 
-
 class InpatientRegistration(models.Model):
     _description = 'Patient admission History'
     _name = 'medical.inpatient.registration'
+    # TODO Cambiar pk falta healt_inpatient_calendar inherit?
+    """Medical Inpatient Registration"""
+    @api.model
+    def _default_institution(self):
+        #TODO Cambiar pk falta healt_inpatient_calendar
+        return self.env['res.partner'].search([('is_institution','=',True)], limit=1)
 
     @api.model
-    def _get_default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
+    def _default_patient(self):
+        # TODO Cambiar pk falta healt_inpatient_calendar
+        return self.env['medical.patient'].search([], limit=1)
 
     name = fields.Char(
         'Registration Code',
         readonly=True,
-        index=True
+        index=True,
+        copy=False,
+        default='New',
     )
     patient = fields.Many2one(
         'medical.patient',
         'Patient',
         required=True,
         index=True,
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar) readonly=True,
+        default=_default_patient,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -109,7 +116,7 @@ class InpatientRegistration(models.Model):
         'Hospitalization date',
         required=True,
         index=True,
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -118,7 +125,7 @@ class InpatientRegistration(models.Model):
     discharge_date = fields.Datetime(
         'Expected Discharge Date',
         required=True,
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -128,7 +135,7 @@ class InpatientRegistration(models.Model):
         'res.partner',
         'Attending Physician',
         domain=[('is_healthprof', '=', True)],
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -138,7 +145,7 @@ class InpatientRegistration(models.Model):
         'res.partner',
         'Operating Physician',
         domain=[('is_healthprof', '=', True)],
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -148,7 +155,7 @@ class InpatientRegistration(models.Model):
         'medical.pathology',
         'Reason for Admission',
         help="Reason for Admission",
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -158,7 +165,7 @@ class InpatientRegistration(models.Model):
     bed = fields.Many2one(
         'medical.hospital.bed',
         'Hospital Bed',
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -187,7 +194,7 @@ class InpatientRegistration(models.Model):
         'medical.inpatient.diet',
         'name',
         'Meals / Diet Program',
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -196,7 +203,7 @@ class InpatientRegistration(models.Model):
 
     nutrition_notes = fields.Text(
         'Nutrition notes / directions',
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -204,7 +211,7 @@ class InpatientRegistration(models.Model):
     )
     discharge_plan = fields.Text(
         'Discharge Plan',
-        readonly=True,
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar)  readonly=True,
         states={
             'done': [('readonly', True)],
             'finished': [('readonly', True)],
@@ -220,7 +227,6 @@ class InpatientRegistration(models.Model):
     )
     state = fields.Selection(
         [
-            ('none', ''),
             ('free', 'free'),
             ('cancelled', 'cancelled'),
             ('confirmed', 'confirmed'),
@@ -231,7 +237,7 @@ class InpatientRegistration(models.Model):
         'Status',
         index=True,
         default='free',
-        readonly=True
+        #TODO cuando salgan los modulos que faltan ahora (solo para probar) readonly=True
     )
 
     bed_transfers = fields.One2many('medical.bed.transfer',
@@ -278,7 +284,8 @@ class InpatientRegistration(models.Model):
         'res.partner',
         'Institution',
         readonly=True,
-        default=_get_default_institution
+        default=_default_institution,
+        domain=[('is_institution','=',True)],
     )
 
     # puid = fields.Char(
@@ -336,7 +343,6 @@ class InpatientRegistration(models.Model):
     def button_discharge(self):
         self.ensure_one()
         Bed = self.env['medical.hospital.bed']
-
         signing_hp = self.env['res.partner'].get_health_professional()
         if not signing_hp:
             raise UserError(
@@ -367,9 +373,7 @@ class InpatientRegistration(models.Model):
     def button_admission(self):
         self.ensure_one()
         Bed = self.env['medical.hospital.bed']
-
         Company = self.env['res.company']
-
         timezone = None
         company_id = self._context.get('company')
         if company_id:
@@ -397,19 +401,19 @@ class InpatientRegistration(models.Model):
                         'You need to set up the company timezone.'
                     ))
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        vals_list = [x.copy() for x in vals_list]
-        for values in vals_list:
-            if not values.get('name'):
-                values['name'] = self.env['ir.sequence'].next_by_code('medical.inpatient.registration')
-        return super(InpatientRegistration, self).create(vals_list)
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                'medical.inpatient.registration') or 'New INPAC'
+        result = super(InpatientRegistration, self).create(vals)
+        return result
 
-    @api.constrains('admission_reason', 'state', 'discharge_dx')
-    def validate(self):
-        super(InpatientRegistration, self).validate()
-        for registration in self:
-            registration.check_discharge_context()
+    # @api.constrains('admission_reason', 'state', 'discharge_dx')
+    # def validate(self):
+    #     super(InpatientRegistration, self).validate()
+    #     for registration in self:
+    #         registration.check_discharge_context()
 
     def check_discharge_context(self):
         if ((not self.discharge_reason or not self.discharge_dx
@@ -447,7 +451,6 @@ class InpatientRegistration(models.Model):
         rec = self._search(expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid)
         return models.lazy_name_get(self.browse(rec).with_user(name_get_uid))
 
-
 class BedTransfer(models.Model):
     _description = 'Bed transfers'
     _name = 'medical.bed.transfer'
@@ -471,7 +474,6 @@ class BedTransfer(models.Model):
         'Reason'
     )
 
-
 class Appointment(models.Model):
     _name = 'medical.appointment'
     _inherit = 'medical.appointment'
@@ -481,10 +483,6 @@ class Appointment(models.Model):
         'Inpatient Registration',
         help="Enter the patient hospitalization code"
     )
-
-
-
-
 
 class MedicalPatient(models.Model):
     """Inherit patient model and add the patient status to the patient."""
@@ -536,7 +534,6 @@ class MedicalPatient(models.Model):
             d = 'not in'
 
         return [('id', d, query_res)]
-
 
 class InpatientMedication(models.Model):
     _description = 'Inpatient Medication'
@@ -673,7 +670,6 @@ class InpatientMedication(models.Model):
     def on_change_with_course_completed(self):
         return not (self.is_active or self.discontinued)
 
-
 class InpatientMedicationAdminTimes(models.Model):
     _description = 'Inpatient Medication Admin Times'
     _name = "medical.inpatient.medication.admin_time"
@@ -698,7 +694,6 @@ class InpatientMedicationAdminTimes(models.Model):
         'Remarks',
         help='specific remarks for this dose'
     )
-
 
 class InpatientMedicationLog(models.Model):
     _description = 'Inpatient Medication Log History'
@@ -756,7 +751,6 @@ class InpatientMedicationLog(models.Model):
                     'No health professional associated to this user!'
                 ))
 
-
 class InpatientDiet(models.Model):
     _description = 'Inpatient Diet'
     _name = "medical.inpatient.diet"
@@ -774,7 +768,6 @@ class InpatientDiet(models.Model):
         'Remarks / Directions',
         help='specific remarks for this diet / patient'
     )
-
 
 class InpatientMeal(models.Model):
     _description = 'Inpatient Meal'
@@ -820,7 +813,6 @@ class InpatientMeal(models.Model):
         if self.name:
             return self.name.name
 
-
 class InpatientMealOrderItem(models.Model):
     _description = 'Inpatient Meal Item'
     _name = "medical.inpatient.meal.order.item"
@@ -839,7 +831,6 @@ class InpatientMealOrderItem(models.Model):
         'Remarks'
     )
 
-
 class InpatientMealOrder(models.Model):
     _description = 'Inpatient Meal Order'
     _name = "medical.inpatient.meal.order"
@@ -850,7 +841,6 @@ class InpatientMealOrder(models.Model):
 
     @api.model
     def _default_health_professional(self):
-        # pool = Pool()
         return self.env['res.partner'].get_health_professional()
 
     name = fields.Many2one(
@@ -873,47 +863,39 @@ class InpatientMealOrder(models.Model):
         required=True,
         sort=False
     )
-
     meal_item = fields.One2many(
         'medical.inpatient.meal.order.item',
         'name',
         'Items'
     )
-
     meal_order = fields.Char(
         'Order',
         readonly=True
     )
-
     health_professional = fields.Many2one(
         'res.partner',
         'Health Professional',
         domain=[('is_healthprof', '=', True)],
-        default=_default_health_professional
+        #default=_default_health_professional
     )
-
     remarks = fields.Text(
         'Remarks'
     )
-
     meal_warning = fields.Boolean(
         'Warning',
         help="The patient has special needs on meals"
     )
-
     meal_warning_ack = fields.Boolean(
         'Ack',
         help="Check if you have verified the warnings on the"
              " patient meal items"
     )
-
     order_date = fields.Datetime(
         'Date',
         help='Order date',
         required=True,
-        default=_default_order_date
+        #default=_default_order_date
     )
-
     state = fields.Selection(
         [
             ('none', ''),
@@ -927,7 +909,6 @@ class InpatientMealOrder(models.Model):
         readonly=True,
         default='draft'
     )
-
     @api.model_create_multi
     def create(self, vals_list):
         vals_list = [x.copy() for x in vals_list]
@@ -985,7 +966,6 @@ class InpatientMealOrder(models.Model):
     def button_done(self):
         self.ensure_one()
         self.write({'state': 'done'})
-
 #Evaluation
 class PatientEvaluation(models.Model):
     _name = 'medical.patient.evaluation'
@@ -995,7 +975,6 @@ class PatientEvaluation(models.Model):
                                                   'IPC',
                                                   help="Enter the patient hospitalization code")
     description = fields.Text('Remark')
-
 # ECG
 class PatientECG(models.Model):
     _name = 'medical.patient.ecg'

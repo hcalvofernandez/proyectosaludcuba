@@ -5,8 +5,8 @@
             <field name="model">medical.patient</field>
             <field name="inherit_id" ref="medical.medical_patient_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//group[@name='group_medical_general']" position="after">
-                    <group string="Blood Info" name="blood_info">
+                <xpath expr="//group[@name='group_medical_general']" position="after" >
+                    <group string="Blood Info" name="blood_info" col="4">
                         <field name="blood_type"/>
                         <field name="rh"/>
                         <field name="hb"/>
@@ -29,7 +29,7 @@
                 <xpath expr="//notebook" position="inside">
                     <page string="Institution"
                           attrs="{'invisible': [('is_institution','=',False)]}">
-                        <group>
+                        <group col="4">
                             <field name="code" attrs="{'required': [('is_institution', '=', True)]}"/>
                             <newline/>
                             <field name="institution_type" attrs="{'required': [('is_institution', '=', True)]}"/>
@@ -66,7 +66,7 @@
                 <xpath expr="//notebook" position="inside">
                     <page string="HealthProfessional"
                           attrs="{'invisible': [('is_healthprof','=',False)]}">
-                        <group>
+                        <group col="4">
                             <field name="code_healthprof"/>
                             <field name="institution"/>
                             <field name="specialties"/>
@@ -82,21 +82,31 @@
             <field name="model">medical.appointment</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <field name="state"
+                               widget="statusbar"
+                               options="{'clickable': '1'}"/>
+                    </header>
                     <sheet>
-                        <group colspan="4" col="6" id="appointment_header">
+                        <group colspan="4" col="4" id="appointment_header">
                             <field name="name"/>
-                            <field name="institution"/>
-                            <field name="healthprof"/>
+                            <field name="institution"
+                                   options="{'no_create': True}"
+                                   attrs="{'no_create': True }"/>
+                            <field name="healthprof"
+                                   options="{'no_create': True}"
+                                   attrs="{'no_create': True }"/>
                             <field name="patient"
-                                   attrs="{ 'required': [('state', '!=', 'free')] }"/>
+                                   options="{'no_create': True}"
+                                   attrs="{ 'required': [('state', '!=', 'free')],'no_create': True }"
+                                    />
                             <field name="appointment_date"/>
                             <field name="visit_type"/>
                             <field name="urgency"/>
                             <field name="appointment_type"/>
-                            <field name="state"/>
                         </group>
                         <newline/>
-                        <group colspan="4" id="doc_appointment_header">
+                        <group colspan="2" id="doc_appointment_header" col="4">
                             <field name="speciality"/>
                         </group>
                         <separator string="Information" id="sepatator_appointment_notes"/>
@@ -156,19 +166,17 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <label for="name"/>
-                        <field name="name" context="{'default_is_bed': True}"/>
-                        <label for="institution"/>
-                        <field name="institution"/>
-                        <!--                        <label for="ward"/>-->
-                        <!--                        <field name="ward"/>-->
-                        <label for="bed_type"/>
-                        <field name="bed_type"/>
-                        <label for="telephone_number"/>
-                        <field name="telephone_number"/>
-                        <label for="state"/>
-                        <field name="state"/>
-                        <newline/>
+                        <header>
+                            <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                        </header>
+                        <group string="Hospital Bed" col="4">
+                            <field name="name" context="{'default_is_bed': True}"/>
+                            <field name="institution"/>
+                            <!-- <field name="ward"/>-->
+                            <field name="bed_type"/>
+                            <field name="telephone_number"/>
+                            <newline/>
+                        </group>
                         <group colspan="4" id="group_bed_extra_info">
                             <field name="extra_info"/>
                         </group>
@@ -193,10 +201,9 @@
                 <tree>
                     <field name="name"/>
                     <field name="institution"/>
-                    <!--                    <field name="ward"/>-->
+                    <!-- <field name="ward"/>-->
                     <field name="state"/>
                 </tree>
-
             </field>
         </record>
 
@@ -221,7 +228,7 @@
             <field name="arch" type="xml">
                 <notebook position="inside">
                     <page string="Medical" name="medical">
-                        <group>
+                        <group col="4">
                             <field name="is_medicament"/>
                             <field name="is_medical_supply"/>
                             <field name="is_vaccine"/>

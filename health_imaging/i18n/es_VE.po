@@ -1,0 +1,29 @@
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_VE\n"
+
+#. module: health_imaging
+msgctxt "error:gnuhealth.imaging.test.result:"
+msgid "The test ID code must be unique"
+msgstr "El código de identificación de la prueba debe ser único"
+
+#. module: health_imaging
+msgctxt "field:gnuhealth.imaging.test,active:"
+msgid "Active"
+msgstr "Activo"
+
+#. module: health_imaging
+msgctxt "field:gnuhealth.imaging.test,code:"
+msgid "Code"
+msgstr "Código"

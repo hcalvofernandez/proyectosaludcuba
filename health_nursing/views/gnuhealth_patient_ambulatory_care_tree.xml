@@ -6,13 +6,13 @@
 <data>
     <record id='gnuhealth_patient_ambulatory_care_view_tree' model='ir.ui.view'>
         <field name="name">Patient Ambulatory Care</field>
-        <field name="model">gnuhealth.patient.ambulatory_care</field>
+        <field name="model">gnuhealth.patient.ambulatory.care</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="warning" icon="fa-warning" />
-                <field name="name" tree_invisible="1"/>
+                <field name="warning"  />
+                <field name="name" />
                 <field name="patient" />
-                <field name="session_start"  widget="date"/>
+                <field name="session_start" />
                 <field name="health_professional" />
                 <field name="evolution" />
             </tree>

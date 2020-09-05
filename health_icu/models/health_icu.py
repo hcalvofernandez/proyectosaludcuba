@@ -481,7 +481,7 @@ class ChestDrainageAssessment(models.Model):
 class PatientRounding(models.Model):
     # Nursing Rounding for ICU
     # Inherit and append to the existing model the new functionality for ICU
-    _name = 'gnuhealth.patient.rounding'
+    _inherit = 'gnuhealth.patient.rounding'
     _description = 'Chest Drainage Asessment'
     _order = 'id'
     _table = 'gnuhealth_patient_rounding'

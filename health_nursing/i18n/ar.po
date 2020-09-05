@@ -1,7 +1,7 @@
 # Nab3a <asn09@aub.edu.lb>, 2016.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-01-08 12:27+0000\n"
+"PO-Revision-Date: 2016-01-08 12:16+0000\n"
 "Last-Translator: Nab3a <asn09@aub.edu.lb>\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -9,640 +9,404 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1452256021.0\n"
+"X-POOTLE-MTIME: 1452255399.0\n"
 
-msgctxt "error:gnuhealth.patient.ambulatory_care:"
-msgid "No health professional associated to this user"
-msgstr "لا خبير صحي مرتبط بهذا المستخدم"
-
-msgctxt "error:gnuhealth.patient.rounding:"
-msgid "No health professional associated to this user"
-msgstr "لا خبير صحي مرتبط بهذا المستخدم"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,comments:"
-msgid "Comments"
-msgstr "تعليقات"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,create_date:"
-msgid "Create Date"
-msgstr "تاريخ الإنشاء"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,create_uid:"
-msgid "Create User"
-msgstr "إنشاء مستخدم"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,id:"
-msgid "ID"
-msgstr "المعرف"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,name:"
-msgid "Session"
-msgstr "جلسة"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,procedure:"
+msgctxt "field:gnuhealth.imaging.test,code:"
 msgid "Code"
-msgstr "رمز"
+msgstr "الرمز"
 
-msgctxt "field:gnuhealth.ambulatory_care_procedure,rec_name:"
-msgid "Name"
-msgstr "الاسم"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,write_date:"
-msgid "Write Date"
-msgstr "كتابة معلومات"
-
-msgctxt "field:gnuhealth.ambulatory_care_procedure,write_uid:"
-msgid "Write User"
-msgstr "كتابة مستخدم"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,base_condition:"
-msgid "Condition"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,bpm:"
-msgid "Heart Rate"
-msgstr "معدل ضربات القلب"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,create_date:"
+msgctxt "field:gnuhealth.imaging.test,create_date:"
 msgid "Create Date"
 msgstr "أنشئ معلومات"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,create_uid:"
+msgctxt "field:gnuhealth.imaging.test,create_uid:"
 msgid "Create User"
-msgstr "إنشاء مستخدم"
+msgstr "إنشاء مستخدم "
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,diastolic:"
-msgid "Diastolic Pressure"
-msgstr "الضغط الانبساطي"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,evaluation:"
-msgid "Related Evaluation"
-msgstr "التقييم المتصل"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,evolution:"
-msgid "Evolution"
-msgstr "تطور"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,glycemia:"
-msgid "Glycemia"
-msgstr "سكر الدم"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,health_professional:"
-msgid "Health Professional"
-msgstr "الصحة المهنية"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,id:"
+msgctxt "field:gnuhealth.imaging.test,id:"
 msgid "ID"
-msgstr "المعرف"
+msgstr "المُعرّف"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,name:"
+msgctxt "field:gnuhealth.imaging.test,name:"
+msgid "Name"
+msgstr "الاسم"
+
+msgctxt "field:gnuhealth.imaging.test,product:"
+msgid "Service"
+msgstr "خدمة"
+
+msgctxt "field:gnuhealth.imaging.test,rec_name:"
+msgid "Name"
+msgstr "الاسم"
+
+msgctxt "field:gnuhealth.imaging.test,test_type:"
+msgid "Type"
+msgstr "النوع"
+
+msgctxt "field:gnuhealth.imaging.test,write_date:"
+msgid "Write Date"
+msgstr "كتابة معلومات"
+
+msgctxt "field:gnuhealth.imaging.test,write_uid:"
+msgid "Write User"
+msgstr "كتابة مستخدم"
+
+msgctxt "field:gnuhealth.imaging.test.request,comment:"
+msgid "Comment"
+msgstr "تعليق"
+
+msgctxt "field:gnuhealth.imaging.test.request,create_date:"
+msgid "Create Date"
+msgstr "أنشئ معلومات"
+
+msgctxt "field:gnuhealth.imaging.test.request,create_uid:"
+msgid "Create User"
+msgstr "إنشاء مستخدم "
+
+msgctxt "field:gnuhealth.imaging.test.request,date:"
+msgid "Date"
+msgstr "تاريخ"
+
+msgctxt "field:gnuhealth.imaging.test.request,doctor:"
+msgid "Doctor"
+msgstr "طبيب"
+
+msgctxt "field:gnuhealth.imaging.test.request,id:"
 msgid "ID"
-msgstr "المعرف"
+msgstr "المُعرّف"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,next_session:"
-msgid "Next Session"
-msgstr "الجلسة القادمة"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,ordering_professional:"
-msgid "Requested by"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,osat:"
-msgid "Oxygen Saturation"
-msgstr "تشبع الأكسجين"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,patient:"
+msgctxt "field:gnuhealth.imaging.test.request,patient:"
 msgid "Patient"
 msgstr "المريض"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,procedures:"
-msgid "Procedures"
-msgstr "الإجراءات"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,rec_name:"
+msgctxt "field:gnuhealth.imaging.test.request,rec_name:"
 msgid "Name"
 msgstr "الاسم"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,respiratory_rate:"
-msgid "Respiratory Rate"
-msgstr "المعدل التنفسي"
+msgctxt "field:gnuhealth.imaging.test.request,request:"
+msgid "Request"
+msgstr "طلب"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,session_end:"
-msgid "End"
-msgstr "انهاء"
+msgctxt "field:gnuhealth.imaging.test.request,requested_test:"
+msgid "Test"
+msgstr "الاختبار"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,session_notes:"
-msgid "Notes"
-msgstr "مذكرات"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,session_number:"
-msgid "Session #"
-msgstr "جلسة #"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,session_start:"
-msgid "Start"
-msgstr "بدء"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,signed_by:"
-msgid "Signed by"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,state:"
+msgctxt "field:gnuhealth.imaging.test.request,state:"
 msgid "State"
-msgstr ""
+msgstr "الحالة"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,systolic:"
-msgid "Systolic Pressure"
-msgstr "الضغط الانقباضي"
+msgctxt "field:gnuhealth.imaging.test.request,urgent:"
+msgid "Urgent"
+msgstr "مٌستعجل"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,temperature:"
-msgid "Temperature"
-msgstr "درجة الحرارة"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,warning:"
-msgid "Warning"
-msgstr "تحذير"
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,warning_icon:"
-msgid "Warning Icon"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.ambulatory_care,write_date:"
+msgctxt "field:gnuhealth.imaging.test.request,write_date:"
 msgid "Write Date"
 msgstr "كتابة معلومات"
 
-msgctxt "field:gnuhealth.patient.ambulatory_care,write_uid:"
+msgctxt "field:gnuhealth.imaging.test.request,write_uid:"
 msgid "Write User"
 msgstr "كتابة مستخدم"
 
-msgctxt "field:gnuhealth.patient.rounding,bpm:"
-msgid "Heart Rate"
-msgstr "معدل ضربات القلب"
+msgctxt "field:gnuhealth.imaging.test.result,comment:"
+msgid "Comment"
+msgstr "تعليق"
 
-msgctxt "field:gnuhealth.patient.rounding,code:"
-msgid "Code"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.rounding,create_date:"
+msgctxt "field:gnuhealth.imaging.test.result,create_date:"
 msgid "Create Date"
 msgstr "أنشئ معلومات"
 
-msgctxt "field:gnuhealth.patient.rounding,create_uid:"
+msgctxt "field:gnuhealth.imaging.test.result,create_uid:"
 msgid "Create User"
-msgstr "إنشاء مستخدم"
+msgstr "إنشاء مستخدم "
 
-msgctxt "field:gnuhealth.patient.rounding,depression:"
-msgid "Depression signs"
-msgstr "علامات الاكتئاب"
+msgctxt "field:gnuhealth.imaging.test.result,date:"
+msgid "Date"
+msgstr "تاريخ"
 
-msgctxt "field:gnuhealth.patient.rounding,diastolic:"
-msgid "Diastolic Pressure"
-msgstr "الضغط الانبساطي"
+msgctxt "field:gnuhealth.imaging.test.result,doctor:"
+msgid "Doctor"
+msgstr "طبيب"
 
-msgctxt "field:gnuhealth.patient.rounding,diuresis:"
-msgid "Diuresis"
-msgstr "إدرار البول"
-
-msgctxt "field:gnuhealth.patient.rounding,environmental_assessment:"
-msgid "Environment"
-msgstr "البيئة"
-
-msgctxt "field:gnuhealth.patient.rounding,evaluation_end:"
-msgid "End"
-msgstr "انهاء"
-
-msgctxt "field:gnuhealth.patient.rounding,evaluation_start:"
-msgid "Start"
-msgstr "بدء"
-
-msgctxt "field:gnuhealth.patient.rounding,evolution:"
-msgid "Evolution"
-msgstr "تطور "
-
-msgctxt "field:gnuhealth.patient.rounding,glycemia:"
-msgid "Glycemia"
-msgstr "سكر الدم"
-
-msgctxt "field:gnuhealth.patient.rounding,health_professional:"
-msgid "Health Professional"
-msgstr "الصحة المهنية"
-
-msgctxt "field:gnuhealth.patient.rounding,id:"
+msgctxt "field:gnuhealth.imaging.test.result,id:"
 msgid "ID"
-msgstr "المعرف"
+msgstr "المُعرّف"
 
-msgctxt "field:gnuhealth.patient.rounding,name:"
-msgid "Registration Code"
-msgstr "رمز التسجيل"
+msgctxt "field:gnuhealth.imaging.test.result,images:"
+msgid "Images"
+msgstr "الصور"
 
-msgctxt "field:gnuhealth.patient.rounding,osat:"
-msgid "Oxygen Saturation"
-msgstr "تشبع الأكسجين"
+msgctxt "field:gnuhealth.imaging.test.result,number:"
+msgid "Number"
+msgstr "رقم"
 
-msgctxt "field:gnuhealth.patient.rounding,pain:"
-msgid "Pain"
-msgstr "ألم"
+msgctxt "field:gnuhealth.imaging.test.result,patient:"
+msgid "Patient"
+msgstr "المريض"
 
-msgctxt "field:gnuhealth.patient.rounding,pain_level:"
-msgid "Pain"
-msgstr "ألم"
-
-msgctxt "field:gnuhealth.patient.rounding,personal_needs:"
-msgid "Personal needs"
-msgstr "الاحتياجات الشخصية "
-
-msgctxt "field:gnuhealth.patient.rounding,position:"
-msgid "Position"
-msgstr "المنصب"
-
-msgctxt "field:gnuhealth.patient.rounding,potty:"
-msgid "Potty"
-msgstr "مشاية أطفال"
-
-msgctxt "field:gnuhealth.patient.rounding,procedures:"
-msgid "Procedures"
-msgstr "الإجراءات"
-
-msgctxt "field:gnuhealth.patient.rounding,proximity:"
-msgid "Proximity"
-msgstr "قرب"
-
-msgctxt "field:gnuhealth.patient.rounding,pump:"
-msgid "Pumps"
-msgstr "مضخات"
-
-msgctxt "field:gnuhealth.patient.rounding,rec_name:"
+msgctxt "field:gnuhealth.imaging.test.result,rec_name:"
 msgid "Name"
 msgstr "الاسم"
 
-msgctxt "field:gnuhealth.patient.rounding,report_end_date:"
-msgid "End Date"
-msgstr ""
+msgctxt "field:gnuhealth.imaging.test.result,request:"
+msgid "Request"
+msgstr "طلب"
 
-msgctxt "field:gnuhealth.patient.rounding,report_end_time:"
-msgid "End Time"
-msgstr ""
+msgctxt "field:gnuhealth.imaging.test.result,request_date:"
+msgid "Requested Date"
+msgstr "تاريخ الطلب"
 
-msgctxt "field:gnuhealth.patient.rounding,report_start_date:"
-msgid "Start Date"
-msgstr ""
+msgctxt "field:gnuhealth.imaging.test.result,requested_test:"
+msgid "Test"
+msgstr "الاختبار"
 
-msgctxt "field:gnuhealth.patient.rounding,report_start_time:"
-msgid "Start Time"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.rounding,respiratory_rate:"
-msgid "Respiratory Rate"
-msgstr "المعدل التنفسي"
-
-msgctxt "field:gnuhealth.patient.rounding,round_summary:"
-msgid "Round Summary"
-msgstr "موجز الجولة "
-
-msgctxt "field:gnuhealth.patient.rounding,signed_by:"
-msgid "Signed by"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.rounding,state:"
-msgid "State"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.rounding,systolic:"
-msgid "Systolic Pressure"
-msgstr "الضغط الانقباضي"
-
-msgctxt "field:gnuhealth.patient.rounding,temperature:"
-msgid "Temperature"
-msgstr "درجة الحرارة"
-
-msgctxt "field:gnuhealth.patient.rounding,urinary_catheter:"
-msgid "Urinary Catheter"
-msgstr "القسطرة البولية"
-
-msgctxt "field:gnuhealth.patient.rounding,warning:"
-msgid "Warning"
-msgstr "تحذير"
-
-msgctxt "field:gnuhealth.patient.rounding,warning_icon:"
-msgid "Warning Icon"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.rounding,weight:"
-msgid "Weight"
-msgstr ""
-
-msgctxt "field:gnuhealth.patient.rounding,write_date:"
+msgctxt "field:gnuhealth.imaging.test.result,write_date:"
 msgid "Write Date"
 msgstr "كتابة معلومات"
 
-msgctxt "field:gnuhealth.patient.rounding,write_uid:"
+msgctxt "field:gnuhealth.imaging.test.result,write_uid:"
 msgid "Write User"
 msgstr "كتابة مستخدم"
 
-msgctxt "field:gnuhealth.rounding_procedure,create_date:"
+msgctxt "field:gnuhealth.imaging.test.type,code:"
+msgid "Code"
+msgstr "الرمز"
+
+msgctxt "field:gnuhealth.imaging.test.type,create_date:"
 msgid "Create Date"
 msgstr "أنشئ معلومات"
 
-msgctxt "field:gnuhealth.rounding_procedure,create_uid:"
+msgctxt "field:gnuhealth.imaging.test.type,create_uid:"
 msgid "Create User"
-msgstr "إنشاء مستخدم"
+msgstr "إنشاء مستخدم "
 
-msgctxt "field:gnuhealth.rounding_procedure,id:"
+msgctxt "field:gnuhealth.imaging.test.type,id:"
 msgid "ID"
-msgstr "المعرف"
+msgstr "المُعرّف"
 
-msgctxt "field:gnuhealth.rounding_procedure,name:"
-msgid "Rounding"
-msgstr "التقريب"
-
-msgctxt "field:gnuhealth.rounding_procedure,notes:"
-msgid "Notes"
-msgstr "مذكرات"
-
-msgctxt "field:gnuhealth.rounding_procedure,procedure:"
-msgid "Code"
-msgstr "رمز"
-
-msgctxt "field:gnuhealth.rounding_procedure,rec_name:"
+msgctxt "field:gnuhealth.imaging.test.type,name:"
 msgid "Name"
 msgstr "الاسم"
 
-msgctxt "field:gnuhealth.rounding_procedure,write_date:"
+msgctxt "field:gnuhealth.imaging.test.type,rec_name:"
+msgid "Name"
+msgstr "الاسم"
+
+msgctxt "field:gnuhealth.imaging.test.type,write_date:"
 msgid "Write Date"
 msgstr "كتابة معلومات"
 
-msgctxt "field:gnuhealth.rounding_procedure,write_uid:"
+msgctxt "field:gnuhealth.imaging.test.type,write_uid:"
 msgid "Write User"
 msgstr "كتابة مستخدم"
 
-msgctxt "field:gnuhealth.sequences,ambulatory_care_sequence:"
-msgid "Health Ambulatory Care"
-msgstr "العناية الإسعافية الصحية"
+msgctxt "field:gnuhealth.patient.imaging.test.request.start,date:"
+msgid "Date"
+msgstr "تاريخ"
 
-msgctxt "field:gnuhealth.sequences,patient_rounding_sequence:"
-msgid "Health Rounding"
+msgctxt "field:gnuhealth.patient.imaging.test.request.start,doctor:"
+msgid "Doctor"
+msgstr "طبيب"
+
+msgctxt "field:gnuhealth.patient.imaging.test.request.start,id:"
+msgid "ID"
+msgstr "المُعرّف"
+
+msgctxt "field:gnuhealth.patient.imaging.test.request.start,patient:"
+msgid "Patient"
+msgstr "المريض"
+
+msgctxt "field:gnuhealth.patient.imaging.test.request.start,tests:"
+msgid "Tests"
+msgstr "الاختبار"
+
+msgctxt "field:gnuhealth.patient.imaging.test.request.start,urgent:"
+msgid "Urgent"
+msgstr "مٌستعجل"
+
+msgctxt "field:gnuhealth.request-imaging-test,id:"
+msgid "ID"
+msgstr "المُعرّف"
+
+msgctxt "field:gnuhealth.request-imaging-test,request:"
+msgid "Request"
+msgstr "طلب"
+
+msgctxt "field:gnuhealth.request-imaging-test,test:"
+msgid "Test"
+msgstr "الاختبار"
+
+msgctxt "field:gnuhealth.sequences,imaging_request_sequence:"
+msgid "Imaging Request Sequence"
+msgstr "تسلسل طلبات الصور"
+
+msgctxt "field:gnuhealth.sequences,imaging_sequence:"
+msgid "Imaging Sequence"
+msgstr "تسلسل الصور"
+
+msgctxt "help:gnuhealth.patient.imaging.test.request.start,doctor:"
+msgid "Doctor who Request the lab tests."
+msgstr "الطبيب الذي طلب الفحص المعملى."
+
+msgctxt "model:gnuhealth.imaging.test,name:"
+msgid "Imaging Test"
 msgstr ""
 
-msgctxt "help:gnuhealth.ambulatory_care_procedure,procedure:"
-msgid "Procedure Code, for example ICD-10-PCS Code 7-character string"
-msgstr "قانون الإجراءات، على سبيل المثال ICD-10-PCS سلسلة كود 7 أحرف"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,bpm:"
-msgid "Heart rate expressed in beats per minute"
-msgstr "معدل ضربات القلب مقاسةبعدد النبضات في الدقيقة"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,evolution:"
-msgid "Check your judgement of current patient condition"
-msgstr "تحقق حكمك من حالة المريض الحالية"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,glycemia:"
-msgid "Blood Glucose level"
-msgstr "مستوى السكر في الدم"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,osat:"
-msgid "Oxygen Saturation(arterial)."
-msgstr "تشبع الأكسجين (الشرايين)."
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,procedures:"
-msgid ""
-"List of the procedures in this session. Please enter the first one as the "
-"main procedure"
-msgstr ""
-"قائمة من الإجراءات الواردة في هذه الدورة. الرجاء إدخال أول واحد كما الإجراء "
-"الرئيسي"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,respiratory_rate:"
-msgid "Respiratory rate expressed in breaths per minute"
-msgstr "المعدل التنفسي معبر عنه حسب عدد التنفسات بالدقيقة"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,signed_by:"
-msgid "Health Professional that signed the session"
+msgctxt "model:gnuhealth.imaging.test.request,name:"
+msgid "Imaging Test Request"
 msgstr ""
 
-msgctxt "help:gnuhealth.patient.ambulatory_care,temperature:"
-msgid "Temperature in celsius"
-msgstr "درجة الحرارة بالمئوية"
-
-msgctxt "help:gnuhealth.patient.ambulatory_care,warning:"
-msgid ""
-"Check this box to alert the supervisor about this session. A warning icon "
-"will be shown in the session list"
+msgctxt "model:gnuhealth.imaging.test.result,name:"
+msgid "Imaging Test Result"
 msgstr ""
 
-msgctxt "help:gnuhealth.patient.rounding,bpm:"
-msgid "Heart rate expressed in beats per minute"
-msgstr "معدل ضربات القلب مقاسةبعدد النبضات في الدقيقة"
-
-msgctxt "help:gnuhealth.patient.rounding,depression:"
-msgid "Check this if the patient shows signs of depression"
-msgstr "تحقق هذا إذا كان المريض يظهر علامات الاكتئاب"
-
-msgctxt "help:gnuhealth.patient.rounding,diuresis:"
-msgid "volume in ml"
-msgstr "حجم في الملي"
-
-msgctxt "help:gnuhealth.patient.rounding,environmental_assessment:"
-msgid "Environment assessment . State any disorder in the room."
-msgstr "تقييم البيئة. تذكر أي اضطراب في الغرفة."
-
-msgctxt "help:gnuhealth.patient.rounding,evolution:"
-msgid "Check your judgement of current patient condition"
-msgstr "تحقق من حكمك على حالة المريض الحالية"
-
-msgctxt "help:gnuhealth.patient.rounding,glycemia:"
-msgid "Blood Glucose level"
-msgstr "مستوى السكر في الدم"
-
-msgctxt "help:gnuhealth.patient.rounding,osat:"
-msgid "Oxygen Saturation(arterial)."
-msgstr "تشبع الأكسجين (الشرايين)."
-
-msgctxt "help:gnuhealth.patient.rounding,pain:"
-msgid "Check if the patient is in pain"
-msgstr "تحقق مما إذا كان المريض يتألم"
-
-msgctxt "help:gnuhealth.patient.rounding,pain_level:"
-msgid "Enter the pain level, from 1 to 10"
-msgstr "أدخل مستوى الألم، 1-10"
-
-msgctxt "help:gnuhealth.patient.rounding,personal_needs:"
-msgid "Check if the patient requests anything"
-msgstr "معرفة ما اذا كان المريض قد طلب أي شيء"
-
-msgctxt "help:gnuhealth.patient.rounding,position:"
-msgid "Check if the patient needs to be repositioned or is unconfortable"
-msgstr "تحقق مما إذا كان المريض بحاجة إلى تعديل أوضاعه أو غير مرتاح"
-
-msgctxt "help:gnuhealth.patient.rounding,potty:"
-msgid "Check if the patient needs to urinate / defecate"
-msgstr "معرفة ما اذا كان المريض بحاجة إلى التبول / التبرز"
-
-msgctxt "help:gnuhealth.patient.rounding,procedures:"
-msgid ""
-"List of the procedures in this rounding. Please enter the first one as the "
-"main procedure"
-msgstr ""
-"قائمة من الإجراءات المذكورة في هذا التقريب. الرجاء إدخال أول واحد كما "
-"الإجراء الرئيسي"
-
-msgctxt "help:gnuhealth.patient.rounding,proximity:"
-msgid "Check if personal items, water, alarm, ... are not in easy reach"
-msgstr "تحقق مما إذا البنود الشخصية، والمياه، المنبه، ... ليست في متناول اليد"
-
-msgctxt "help:gnuhealth.patient.rounding,pump:"
-msgid "Check if there is any issues with the pumps - IVs ... "
-msgstr "تحقق مما إذا كان هناك أي مشاكل مع مضخات - معدات التغذية الوريدية ..."
-
-msgctxt "help:gnuhealth.patient.rounding,respiratory_rate:"
-msgid "Respiratory rate expressed in breaths per minute"
-msgstr "المعدل التنفسي معبر عنه حسب عدد التنفسات بالدقيقة"
-
-msgctxt "help:gnuhealth.patient.rounding,signed_by:"
-msgid "Health Professional that signed the rounding"
+msgctxt "model:gnuhealth.imaging.test.type,name:"
+msgid "Imaging Test Type"
 msgstr ""
 
-msgctxt "help:gnuhealth.patient.rounding,temperature:"
-msgid "Temperature in celsius"
-msgstr "درجة الحرارة بالمئوية"
-
-msgctxt "help:gnuhealth.patient.rounding,warning:"
-msgid ""
-"Check this box to alert the supervisor about this patient rounding. A "
-"warning icon will be shown in the rounding list"
+msgctxt "model:gnuhealth.patient.imaging.test.request.start,name:"
+msgid "Request Patient Imaging Test Start"
 msgstr ""
 
-msgctxt "help:gnuhealth.patient.rounding,weight:"
-msgid "Measured weight, in kg"
+msgctxt "model:gnuhealth.request-imaging-test,name:"
+msgid "Request - Test"
+msgstr "طلب - اختبار"
+
+msgctxt "model:ir.action,name:act_imaging_test_request_view"
+msgid "Imaging Test Request"
 msgstr ""
 
-msgctxt "help:gnuhealth.rounding_procedure,procedure:"
-msgid "Procedure Code, for example ICD-10-PCS Code 7-character string"
-msgstr "قانون الإجراءات، على سبيل المثال ICD-10-PCS سلسلة كود 7 أحرف"
-
-msgctxt "model:gnuhealth.ambulatory_care_procedure,name:"
-msgid "Ambulatory Care Procedure"
-msgstr "إجراءات الرعاية الإسعافية"
-
-msgctxt "model:gnuhealth.patient.ambulatory_care,name:"
-msgid "Patient Ambulatory Care"
-msgstr "العناية الإسعافية المريض"
-
-msgctxt "model:gnuhealth.patient.rounding,name:"
-msgid "Patient Rounding"
-msgstr "زيارة المريض"
-
-msgctxt "model:gnuhealth.rounding_procedure,name:"
-msgid "Rounding - Procedure"
-msgstr "الزيارة - إجراء"
-
-msgctxt "model:ir.action,name:action_gnuhealth_patient_ambulatory_care_view"
-msgid "Ambulatory Care"
-msgstr "الرعاية الإسعافية"
-
-msgctxt "model:ir.action,name:action_gnuhealth_patient_rounding_view"
-msgid "Roundings"
-msgstr "الزيارات"
-
-msgctxt "model:ir.action,name:report_round_nursing"
-msgid "Nursing rounds"
+msgctxt "model:ir.action,name:act_imaging_test_request_view2"
+msgid "Imaging Test Request"
 msgstr ""
 
-msgctxt "model:ir.sequence,name:seq_gnuhealth_ambulatory_care"
-msgid "Ambulatory Care"
-msgstr "الرعاية الإسعافية"
-
-msgctxt "model:ir.sequence,name:seq_gnuhealth_patient_rounding"
-msgid "Patient Rounding"
+msgctxt "model:ir.action,name:act_imaging_test_result_view"
+msgid "Imaging Test Result"
 msgstr ""
 
-msgctxt "model:ir.sequence.type,name:seq_type_gnuhealth_ambulatory_care"
-msgid "Ambulatory Care"
-msgstr "الرعاية الإسعافية"
-
-msgctxt "model:ir.sequence.type,name:seq_type_gnuhealth_patient_rounding"
-msgid "Patient Rounding"
+msgctxt "model:ir.action,name:act_imaging_test_result_view2"
+msgid "Imaging Test Results"
 msgstr ""
 
-msgctxt "model:ir.ui.menu,name:gnuhealth_nursing_menu"
-msgid "Nursing"
-msgstr "التمريض"
-
-msgctxt "model:ir.ui.menu,name:menu_gnuhealth_patient_ambulatory_care_list"
-msgid "Ambulatory Care"
-msgstr "الرعاية الإسعافية"
-
-msgctxt "model:ir.ui.menu,name:menu_gnuhealth_patient_rounding_list"
-msgid "Roundings"
-msgstr "الزيارات"
-
-msgctxt "model:res.group,name:group_health_nursing"
-msgid "Health Nursing"
-msgstr "التمريض الصحي"
-
-msgctxt "model:res.group,name:group_health_nursing_admin"
-msgid "Health Nursing Administration"
-msgstr "إدارة التمريض الصحي "
-
-msgctxt "model:res.user,name:user_demo_nurse"
-msgid "Health Nurse"
-msgstr "التمريض الصحي"
-
-msgctxt "selection:gnuhealth.patient.ambulatory_care,evolution:"
-msgid ""
+msgctxt "model:ir.action,name:act_imaging_test_type_view"
+msgid "Imaging Test Type"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.ambulatory_care,evolution:"
-msgid "Improving"
-msgstr "التحسين"
-
-msgctxt "selection:gnuhealth.patient.ambulatory_care,evolution:"
-msgid "Initial"
-msgstr "البداية"
-
-msgctxt "selection:gnuhealth.patient.ambulatory_care,evolution:"
-msgid "Status Quo"
-msgstr "الوضع الراهن"
-
-msgctxt "selection:gnuhealth.patient.ambulatory_care,evolution:"
-msgid "Worsening"
-msgstr "تدهور"
-
-msgctxt "selection:gnuhealth.patient.ambulatory_care,state:"
-msgid ""
+msgctxt "model:ir.action,name:act_imaging_test_view"
+msgid "Imaging Test"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.ambulatory_care,state:"
+msgctxt "model:ir.action,name:patient_imaging_test_request"
+msgid "Request Imaging Test"
+msgstr ""
+
+msgctxt "model:ir.action,name:wizard_generate_result"
+msgid "Generate Result"
+msgstr ""
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_imaging_test_request_domain_all"
+msgid "All"
+msgstr "الكل"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_imaging_test_request_domain_done"
 msgid "Done"
+msgstr "تم"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_imaging_test_request_domain_draft"
+msgid "Draft"
+msgstr "مسودة"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_imaging_test_request_domain_requested"
+msgid "Requested"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.ambulatory_care,state:"
-msgid "In Progress"
+msgctxt "model:ir.sequence,name:seq_gnuhealth_imaging_test"
+msgid "Imaging Test"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.rounding,evolution:"
-msgid ""
+msgctxt "model:ir.sequence,name:seq_gnuhealth_imaging_test_request"
+msgid "Imaging Test Request"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.rounding,evolution:"
-msgid "Improving"
-msgstr "تحسين"
-
-msgctxt "selection:gnuhealth.patient.rounding,evolution:"
-msgid "Status Quo"
-msgstr "الوضع الراهن"
-
-msgctxt "selection:gnuhealth.patient.rounding,evolution:"
-msgid "Worsening"
-msgstr "تدهور"
-
-msgctxt "selection:gnuhealth.patient.rounding,state:"
-msgid ""
+msgctxt "model:ir.sequence.type,name:seq_type_gnuhealth_imaging_test"
+msgid "Imaging Test"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.rounding,state:"
+msgctxt "model:ir.sequence.type,name:seq_type_gnuhealth_imaging_test_request"
+msgid "Imaging Test Request"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_imaging"
+msgid "Imaging"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_imaging_test_parent"
+msgid "Imaging"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_imaging_test_request_view"
+msgid "Imaging Test Request"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_imaging_test_result_view"
+msgid "Imaging Test Result"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_imaging_test_type"
+msgid "Imaging Test Type"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_imaging_test_view"
+msgid "Imaging Test"
+msgstr ""
+
+msgctxt "model:ir.ui.menu,name:menu_patient_imaging_test_request"
+msgid "Request Imaging Test"
+msgstr ""
+
+msgctxt "model:product.category,name:product_category_imagingservices"
+msgid "Imaging Services"
+msgstr ""
+
+msgctxt "model:product.template,name:product_template_ctscancharges"
+msgid "CT Scan charges"
+msgstr ""
+
+msgctxt "model:product.template,name:product_template_mricharges"
+msgid "MRI charges"
+msgstr ""
+
+msgctxt "model:product.template,name:product_template_petscancharges"
+msgid "PET Scan charges"
+msgstr ""
+
+msgctxt "model:product.template,name:product_template_ultrasoundcharges"
+msgid "Ultrasound charges"
+msgstr ""
+
+msgctxt "model:product.template,name:product_template_xraycharges"
+msgid "X-ray charges"
+msgstr ""
+
+msgctxt "selection:gnuhealth.imaging.test.request,state:"
 msgid "Done"
+msgstr "تم"
+
+msgctxt "selection:gnuhealth.imaging.test.request,state:"
+msgid "Draft"
+msgstr "مسودة"
+
+msgctxt "selection:gnuhealth.imaging.test.request,state:"
+msgid "Requested"
 msgstr ""
 
-msgctxt "selection:gnuhealth.patient.rounding,state:"
-msgid "In Progress"
-msgstr ""
+msgctxt "wizard_button:gnuhealth.patient.imaging.test.request,start,end:"
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgctxt "wizard_button:gnuhealth.patient.imaging.test.request,start,request:"
+msgid "Request"
+msgstr "طلب"

@@ -23,42 +23,10 @@
 ##############################################################################
 import pytz
 from datetime import datetime
-
-from dask.array import equal
 from odoo import api, fields, models, _
 
-__all__ = ['GnuHealthSequences', 'GnuHealthSequenceSetup',
-    'PatientRounding', 'RoundingProcedure',
+__all__ = ['PatientRounding', 'RoundingProcedure',
     'PatientAmbulatoryCare', 'AmbulatoryCareProcedure']
-
-sequences = ['ambulatory_care_sequence', 'patient_rounding_sequence']
-
-class GnuHealthSequences(models.Model ):
-    "Standard Sequences for GNU Health"
-    _name = "gnuhealth.sequences"
-    ambulatory_care_sequence = fields.Many2Many('ir.sequence',
-        'Health Ambulatory Care', domain=[
-            ('code', '=', 'gnuhealth.ambulatory_care')
-        ])
-    patient_rounding_sequence = fields.Many2one('ir.sequence',
-        'Health Rounding', domain=[
-            ('code', '=', 'gnuhealth.patient.rounding')
-        ])
-
-# SEQUENCE SETUP
-class GnuHealthSequenceSetup(models.Model):
-    """GNU Health Sequences Setup"""
-    _name = 'gnuhealth.sequence.setup'
-    _description = "Health Sequences Setup"
-
-    patient_rounding_sequence = fields.Many2one('ir.sequence', 
-        'Patient Rounding Sequence', required=True,
-        domain=[('code', '=', 'gnuhealth.patient.rounding')])
-    ambulatory_care_sequence = fields.Many2one('ir.sequence', 
-        'Ambulatory Care Sequence', required=True,
-        domain=[('code', '=', 'gnuhealth.patient.ambulatory_care')])
-
-# END SEQUENCE SETUP
 
 # Class : PatientRounding
 # Assess the patient and evironment periodically
@@ -71,99 +39,105 @@ class PatientRounding(models.Model ):
     _order = 'id,name'
     _table = 'gnuhealth_patient_rounding'
 
-    STATES = {'readonly': eval('state') == 'done'}
+    #TODO in views STATES = {'readonly': ('state', "==" ,'done')}
 
-    name = fields.Many2one('gnuhealth.inpatient.registration',
-        'Registration Code', required=True, states=STATES)
-    code = fields.Char('Code',  states=STATES,readonly=True, required=True, copy=False, default='New')
-    health_professional = fields.Many2one('gnuhealth.healthprofessional',
+    name = fields.Many2one('medical.inpatient.registration',
+                           #old relation 'gnuhealth.inpatient.registration'
+        'Registration Code', required=True,)#states=STATES
+    code = fields.Char('Code',  readonly=True, required=True, copy=False, default='New')#states=STATES,
+    health_professional = fields.Many2one('res.partner',
+                                          # old relation 'gnuhealth.healthprofessional'
         'Health Professional', readonly=True)
-    evaluation_start = fields.Datetime('Start', required=True, states=STATES)
-    evaluation_end = fields.Datetime('End', readonly=True)
+    evaluation_start = fields.Datetime('Start',
+                                       default= fields.Datetime.now,
+                                       required=True,)# TODO in views states=STATES)
+    evaluation_end = fields.Datetime('End',
+                                     default=fields.Datetime.now(),
+                                     readonly=True)
 
     state = fields.Selection([
-        (None, ''),
         ('draft', 'In Progress'),
         ('done', 'Done'),
         ], 'State', readonly=True)
 
     environmental_assessment = fields.Char('Environment', help="Environment"
-        " assessment . State any disorder in the room.",states=STATES)
+        " assessment . State any disorder in the room.",)#states=STATES)
 
     weight = fields.Integer('Weight',
-        help="Measured weight, in kg",states=STATES)
+        help="Measured weight, in kg",)#states=STATES)
 
     # The 6 P's of rounding
     pain = fields.Boolean('Pain',
-        help="Check if the patient is in pain", states=STATES)
+        help="Check if the patient is in pain",)# states=STATES)
     pain_level = fields.Integer('Pain', help="Enter the pain level, from 1 to "
-            "10", states={'invisible': ~eval('pain'),
-            'readonly': eval('state') == 'done'})
+            "10", )
+             #todo IN VIEWS  states={'invisible': ~eval('pain'),
+            #'readonly': eval('state') == 'done'})
 
     potty = fields.Boolean('Potty', help="Check if the patient needs to "
-        "urinate / defecate", states=STATES)
+        "urinate / defecate",)# states=STATES)
     position = fields.Boolean('Position', help="Check if the patient needs to "
-        "be repositioned or is unconfortable", states=STATES)
+        "be repositioned or is unconfortable",)# states=STATES)
     proximity = fields.Boolean('Proximity', help="Check if personal items, "
-        "water, alarm, ... are not in easy reach",states=STATES)
+        "water, alarm, ... are not in easy reach",)#states=STATES)
     pump = fields.Boolean('Pumps', help="Check if there is any issues with "
-        "the pumps - IVs ... ", states=STATES)
+        "the pumps - IVs ... ",)# states=STATES)
     personal_needs = fields.Boolean('Personal needs', help="Check if the "
-        "patient requests anything", states=STATES)
+        "patient requests anything",)# states=STATES)
 
     # Vital Signs
-    systolic = fields.Integer('Systolic Pressure',states=STATES)
-    diastolic = fields.Integer('Diastolic Pressure', states=STATES)
+    systolic = fields.Integer('Systolic Pressure',)#states=STATES)
+    diastolic = fields.Integer('Diastolic Pressure',)# states=STATES)
     bpm = fields.Integer('Heart Rate',
-        help='Heart rate expressed in beats per minute', states=STATES)
+        help='Heart rate expressed in beats per minute',)# states=STATES)
     respiratory_rate = fields.Integer('Respiratory Rate',
-        help='Respiratory rate expressed in breaths per minute', states=STATES)
+        help='Respiratory rate expressed in breaths per minute',)# states=STATES)
     osat = fields.Integer('Oxygen Saturation',
-        help='Oxygen Saturation(arterial).', states=STATES)
+        help='Oxygen Saturation(arterial).',)# states=STATES)
     temperature = fields.Float('Temperature',
-        help='Temperature in celsius', states=STATES)
+        help='Temperature in celsius',)# states=STATES)
 
     # Diuresis
 
-    diuresis = fields.Integer('Diuresis',help="volume in ml", states=STATES)
-    urinary_catheter = fields.Boolean('Urinary Catheter', states=STATES)
+    diuresis = fields.Integer('Diuresis',help="volume in ml",)# states=STATES)
+    urinary_catheter = fields.Boolean('Urinary Catheter',)# states=STATES)
 
     #Glycemia
-    glycemia = fields.Integer('Glycemia', help='Blood Glucose level', states=STATES)
+    glycemia = fields.Integer('Glycemia', help='Blood Glucose level',)# states=STATES)
 
     depression = fields.Boolean('Depression signs', help="Check this if the "
-        "patient shows signs of depression", states=STATES)
+        "patient shows signs of depression",)# states=STATES)
     evolution = fields.Selection([
-        (None, ''),    
         ('n', 'Status Quo'),
         ('i', 'Improving'),
         ('w', 'Worsening'),
         ], 'Evolution', help="Check your judgement of current "
-        "patient condition", sort=False, states=STATES)
-    round_summary = fields.Text('Round Summary', states=STATES)
+        "patient condition", sort=False,)# states=STATES)
+    round_summary = fields.Text('Round Summary',)# states=STATES)
 
     signed_by = fields.Many2one(
-        'gnuhealth.healthprofessional', 'Signed by', readonly=True,
-        states={'invisible': equal(eval('state'), 'draft')},
+        'res.partner', 'Signed by', readonly=True,
+        #old raltion gnuhealth.healthprofessional
+        # TODO in views states={'invisible': equal(eval('state'), 'draft')},
         help="Health Professional that signed the rounding")
 
 
     warning = fields.Boolean('Warning', help="Check this box to alert the "
         "supervisor about this patient rounding. A warning icon will be shown "
-        "in the rounding list", states=STATES)
-    warning_icon = fields.Function(fields.Char('Warning Icon'), 'get_warn_icon')
-    procedures = fields.One2many('gnuhealth.rounding_procedure', 'name',
+        "in the rounding list",)# states=STATES)
+    warning_icon = fields.Char('Warning Icon')
+    procedures = fields.One2many('gnuhealth.rounding.procedure', 'name',
         'Procedures', help="List of the procedures in this rounding. Please "
-        "enter the first one as the main procedure", states=STATES)
+        "enter the first one as the main procedure",)# states=STATES)
 
-    report_start_date = fields.Function(fields.Date('Start Date'), 
-        'get_report_start_date')
-    report_start_time = fields.Function(fields.Time('Start Time'), 
-        'get_report_start_time')
-    report_end_date = fields.Function(fields.Date('End Date'), 
-        'get_report_end_date')
-    report_end_time = fields.Function(fields.Time('End Time'), 
-        'get_report_end_time')
+    report_start_date = fields.Date('Start Date')
+        #TODO compute = 'get_report_start_date')
+    report_start_time = fields.Datetime('Start Time')
+        #TODO compute = 'get_report_start_time')
+    report_end_date = fields.Date('End Date')
+        #TODO compute ='get_report_end_date')
+    report_end_time = fields.Datetime('End Time')
+        #TODO compute = 'get_report_end_time')
 
     # @staticmethod
     # def default_health_professional():
@@ -174,25 +148,25 @@ class PatientRounding(models.Model ):
 
     @staticmethod
     def default_evaluation_start():
-        return datetime.now()
+        return
 
     @staticmethod
     def default_state():
         return 'draft'
 
-    @classmethod
-    def __setup__(cls):
-        super(PatientRounding, cls).__setup__()
-        cls._error_messages.update({
-            'health_professional_warning':
-                    'No health professional associated to this user',
-        })
-        cls._buttons.update({
-            'end_rounding': {
-                'invisible': ~eval('state').in_(['draft']),
-            }})
-
-        cls._order.insert(0, ('evaluation_start', 'DESC'))
+    # @classmethod
+    # def __setup__(cls):
+    #     super(PatientRounding, cls).__setup__()
+    #     cls._error_messages.update({
+    #         'health_professional_warning':
+    #                 'No health professional associated to this user',
+    #     })
+    #     cls._buttons.update({
+    #         'end_rounding': {
+    #             'invisible': ~eval('state').in_(['draft']),
+    #         }})
+    #
+    #     cls._order.create(0, ('evaluation_start', 'DESC'))
 
     # @classmethod
     # @.button
@@ -213,8 +187,8 @@ class PatientRounding(models.Model ):
     @api.model
     def create(self, vals):
         if vals.get('code', 'New') == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'gnuhealth.patient_rounding') or 'New'
+            vals['code'] = self.env['ir.sequence'].next_by_code(
+                'gnuhealth.patient.rounding') or 'New'
         result = super(PatientRounding, self).create(vals)
         return result
 
@@ -241,7 +215,7 @@ class PatientRounding(models.Model ):
         dt = self.evaluation_start
         return datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone).date()
 
-    def get_report_start_time(self, name):
+    def get_report_start_time(self):
         Company = self.env.get('company.company')
 
         timezone = None
@@ -254,7 +228,7 @@ class PatientRounding(models.Model ):
         dt = self.evaluation_start
         return datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone).time()
 
-    def get_report_end_date(self, name):
+    def get_report_end_date(self):
         Company = self.env.get('company.company')
 
         timezone = None
@@ -267,7 +241,7 @@ class PatientRounding(models.Model ):
         dt = self.evaluation_end
         return datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone).date()
 
-    def get_report_end_time(self, name):
+    def get_report_end_time(self):
         Company = self.env.get('company.company')
 
         timezone = None
@@ -280,14 +254,15 @@ class PatientRounding(models.Model ):
         dt = self.evaluation_end
         return datetime.astimezone(dt.replace(tzinfo=pytz.utc), timezone).time()
 
-    def get_warn_icon(self, name):
+    def get_warn_icon(self):
         if self.warning:
             return 'gnuhealth-warning'
 
 class RoundingProcedure(models.Model ):
     """Rounding - Procedure"""
-    _name = 'gnuhealth.rounding_procedure'
+    _name = 'gnuhealth.rounding.procedure'
     _description = "Rounding - Procedure"
+    _table = "gnuhealth_rounding_procedure"
 
     name = fields.Many2one('gnuhealth.patient.rounding', 'Rounding')
     procedure = fields.Many2one('gnuhealth.procedure', 'Code', required=True,
@@ -297,73 +272,82 @@ class RoundingProcedure(models.Model ):
 
 class PatientAmbulatoryCare(models.Model):
     """Patient Ambulatory Care"""
-    _name = 'gnuhealth.patient.ambulatory_care'
+    _name = 'gnuhealth.patient.ambulatory.care'
     _description = 'Patient Ambulatory Care'
+    _table = "gnuhealth_patient_ambulatory_care"
 
-    STATES = {'readonly': eval('state') == 'done'}
+    #TODO IN VIEWS STATES = {'readonly': eval('state') == 'done'}
 
     name = fields.Char('ID', readonly=True, required=True, copy=False, default='New')
     patient = fields.Many2one('medical.patient', 'Patient',
-     required=True, states=STATES)
+     required=True, )#states=STATES)
 
     state = fields.Selection([
-        (None, ''),
         ('draft', 'In Progress'),
         ('done', 'Done'),
         ], 'State', readonly=True,default ='draft')
 
-    base_condition = fields.Many2one('gnuhealth.pathology', 'Condition',
-        states=STATES)
-    evaluation = fields.Many2one('gnuhealth.patient.evaluation',
-        'Related evaluation', domain=[('patient', '=', eval('patient'))],
-        depends=['patient'], states=STATES)
-    ordering_professional = fields.Many2one('gnuhealth.healthprofessional',
-        'Requested by', states=STATES)
-    health_professional = fields.Many2one('gnuhealth.healthprofessional',
+    #TODO todavia no esta implementada esta relacion
+    # base_condition = fields.Many2one('gnuhealth.pathology', 'Condition',
+    #    )#states=STATES)
+    #TODO todavia no esta implementada esta relacion
+    # evaluation = fields.Many2one('gnuhealth.patient.evaluation',
+    #    'Related evaluation', domain=[('patient', '=', eval('patient'))],
+     #   depends=['patient'], )#states=STATES)
+    ordering_professional = fields.Many2one('res.partner',
+        #old relation with gnuhealth.healthprofessional
+        'Requested by', )#states=STATES)
+    health_professional = fields.Many2one('res.partner',
+         # old relation with gnuhealth.healthprofessional
         'Health Professional', readonly=True)
-    procedures = fields.One2many('gnuhealth.ambulatory_care_procedure', 'name',
-        'Procedures', states=STATES,
+    procedures = fields.One2many('gnuhealth.ambulatory.care.procedure', 'name',
+        'Procedures',
+         #states=STATES,
         help="List of the procedures in this session. Please enter the first "
         "one as the main procedure")
-    session_number = fields.Integer('Session #', states=STATES)
-    session_start = fields.Datetime('Start', required=True, states=STATES)
+    session_number = fields.Integer('Session #', )#states=STATES)
+    session_start = fields.Datetime('Start', required=True, )#states=STATES)
 
     # Vital Signs
-    systolic = fields.Integer('Systolic Pressure', states=STATES)
-    diastolic = fields.Integer('Diastolic Pressure', states=STATES)
-    bpm = fields.Integer('Heart Rate',states=STATES,
+    systolic = fields.Integer('Systolic Pressure', )#states=STATES)
+    diastolic = fields.Integer('Diastolic Pressure', )#states=STATES)
+    bpm = fields.Integer('Heart Rate',
+                         #states=STATES,
         help='Heart rate expressed in beats per minute')
-    respiratory_rate = fields.Integer('Respiratory Rate',states=STATES,
+    respiratory_rate = fields.Integer('Respiratory Rate',
+                                      #states=STATES,
         help='Respiratory rate expressed in breaths per minute')
-    osat = fields.Integer('Oxygen Saturation',states=STATES,
+    osat = fields.Integer('Oxygen Saturation',
+                          #states=STATES,
         help='Oxygen Saturation(arterial).')
-    temperature = fields.Float('Temperature',states=STATES,
+    temperature = fields.Float('Temperature',
+                               #states=STATES,
         help='Temperature in celsius')
 
     warning = fields.Boolean('Warning', help="Check this box to alert the "
         "supervisor about this session. A warning icon will be shown in the "
-        "session list",states=STATES)
-    warning_icon = fields.Function(fields.Char('Warning Icon'), 'get_warn_icon')
+        "session list",)#states=STATES)
+    warning_icon = fields.Char('Warning Icon')
 
     #Glycemia
     glycemia = fields.Integer('Glycemia', help='Blood Glucose level',
-        states=STATES)
+        )#states=STATES)
 
     evolution = fields.Selection([
-        (None, ''),
         ('initial', 'Initial'),
         ('n', 'Status Quo'),
         ('i', 'Improving'),
         ('w', 'Worsening'),
         ], 'Evolution', help="Check your judgement of current "
-        "patient condition", sort=False, states=STATES)
+        "patient condition", sort=False, )#states=STATES)
     session_end = fields.Datetime('End', readonly=True)
-    next_session = fields.Datetime('Next Session', states=STATES)
-    session_notes = fields.Text('Notes', states=STATES)
+    next_session = fields.Datetime('Next Session', )#states=STATES)
+    session_notes = fields.Text('Notes', )#states=STATES)
 
     signed_by = fields.Many2one(
-        'gnuhealth.healthprofessional', 'Signed by', readonly=True,
-        states={'invisible': equal(eval('state'), 'draft')},
+        'res.partner', 'Signed by', readonly=True,
+        #old relation gnuhealth.healthprofessional
+        # TODO in views states={'invisible': equal(eval('state'), 'draft')},
         help="Health Professional that signed the session")
 
     @staticmethod
@@ -375,19 +359,19 @@ class PatientAmbulatoryCare(models.Model):
         return
 
 
-    @classmethod
-    def __setup__(cls):
-        super(PatientAmbulatoryCare, cls).__setup__()
-        cls._error_messages.update({
-            'health_professional_warning':
-                    'No health professional associated to this user',
-        })
-        cls._buttons.update({
-            'end_session': {
-                'invisible': ~eval('state').in_(['draft']),
-            }})
-
-        cls._order.insert(0, ('session_start', 'DESC'))
+    # @classmethod
+    # def __setup__(cls):
+    #     super(PatientAmbulatoryCare, cls).__setup__()
+    #     cls._error_messages.update({
+    #         'health_professional_warning':
+    #                 'No health professional associated to this user',
+    #     })
+    #     cls._buttons.update({
+    #         'end_session': {
+    #             'invisible': ~eval('state').in_(['draft']),
+    #         }})
+    #
+    #     cls._order.insert(0, ('session_start', 'DESC'))
 
     # @classmethod
     # @.button
@@ -417,7 +401,7 @@ class PatientAmbulatoryCare(models.Model):
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code(
-                'gnuhealth.ambulatory_care') or 'New'
+                'gnuhealth.ambulatory.care') or 'New'
         result = super(PatientAmbulatoryCare, self).create(vals)
         return result
 
@@ -438,21 +422,23 @@ class PatientAmbulatoryCare(models.Model):
 
 class AmbulatoryCareProcedure(models.Model ):
     """Ambulatory Care Procedure"""
-    _name = 'gnuhealth.ambulatory_care_procedure'
+    _name = 'gnuhealth.ambulatory.care.procedure'
     _description = 'Ambulatory Care Procedure'
+    _table = "gnuhealth_ambulatory_care_procedure"
 
-    name = fields.Many2one('gnuhealth.patient.ambulatory_care', 'Session')
+    name = fields.Many2one('gnuhealth.patient.ambulatory.care', 'Session')
     procedure = fields.Many2one('gnuhealth.procedure', 'Code', required=True,
         index=True,
         help="Procedure Code, for example ICD-10-PCS Code 7-character string")
     comments = fields.Char('Comments')
 
 
-#clase echa x Yadier TODO arreglar cuando se herede de la verdadera
+#clase echa x Yadier TODO arreglar  o quitar cuando se herede de la verdadera
 class GnuhealthProcedure(models.Model ):
     """Gnuhealth Procedure"""
     _name = 'gnuhealth.procedure'
     _description = 'Gnuhealth Procedure'
+    _table = "gnuhealth_procedure"
 
     name = fields.Char('Procedure')#antiguamente procedure
     notes = fields.Text('notes')

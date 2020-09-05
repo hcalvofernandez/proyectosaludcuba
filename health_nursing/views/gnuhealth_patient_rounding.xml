@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Ing. Yadier Abel de Quesada yadierq87@gmail.com-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+<odoo>
+    <record id="gnuhealth_patient_rounding_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth.patient.rounding.form.view</field>
+        <field name="model">gnuhealth.patient.rounding</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet string="Patient Rounding" modifiers="{}">
+
+                    <notebook>
+                        <page string="Main" id="rounding_main">
+                            <group colspan="2" col="4" id="group_admin_data">
+                                <field name="name"/>
+                                <field name="health_professional"/>
+                                <field name="evaluation_start"/>
+                                <field name="code"/>
+                                <newline/>
+                            </group>
+                            <newline/>
+                            <group colspan="4" col="4" id="group_environment_data">
+                                <field name="environmental_assessment"/>
+                                <field name="warning"/>
+                            </group>
+                            <newline/>
+                            <group colspan="4" col="7" id="the_six_p_wiew" string="Six P's">
+                                <field name="pain"/>
+                                <field name="pain_level"/>
+                                <field name="potty"/>
+                                <field name="position"/>
+                                <newline/>
+                                <field name="proximity"/>
+                                <field name="pump"/>
+                                <field name="personal_needs"/>
+                            </group>
+                            <newline/>
+                            <group colspan="4" col="6" string="Vital Signs" id="group_patient_rounding_vital_signs">
+                                <field name="temperature"/>
+                                <field name="systolic"/>
+                                <field name="diastolic"/>
+                                <field name="bpm"/>
+                                <field name="respiratory_rate"/>
+                                <field name="osat"/>
+                            </group>
+                            <newline/>
+                            <group colspan="4" col="6" id="group_patient_rounding_others" string="Other">
+                                <field name="weight"/>
+                                <field name="diuresis"/>
+                                <field name="urinary_catheter"/>
+                                <field name="glycemia"/>
+                                <field name="depression"/>
+                            </group>
+                            <newline/>
+                            <separator string="Round summary" id="separator_round_summary"/>
+                            <newline/>
+                            <field name="round_summary"/>
+                            <newline/>
+                            <group colspan="4" col="6" id="group_patient_rounding_footer">
+                                <field name="evaluation_end"/>
+                                <field name="signed_by"/>
+                                <field name="evolution"/>
+                                <button name="end_rounding" help="End this rounding" string="End rounding" icon="tryton-go-next" confirm="End this rounding ?"/>
+                            </group>
+
+                        </page>
+                        <page string="Procedures" id="rounding_procedures">
+                            <field name="procedures"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -293,7 +293,7 @@ class PatientAmbulatoryCare(models.Model):
     #TODO todavia no esta implementada esta relacion
     # evaluation = fields.Many2one('gnuhealth.patient.evaluation',
     #    'Related evaluation', domain=[('patient', '=', eval('patient'))],
-     #   depends=['patient'], )#states=STATES)
+    #   depends=['patient'], )#states=STATES)
     ordering_professional = fields.Many2one('res.partner',
         #old relation with gnuhealth.healthprofessional
         'Requested by', )#states=STATES)

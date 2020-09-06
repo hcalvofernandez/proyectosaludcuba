@@ -53,7 +53,7 @@ class InpatientIcu(models.Model):
                            'Registration Code', required=True)
     admitted = fields.Boolean('Admitted',
                               help="Will be set when the patient is currently admitted at ICU",
-                              default='default_admitted')
+                              default=True)
     icu_admission_date = fields.Datetime('ICU Admission',
                                          help="ICU Admission Date", required=True)
     discharged_from_icu = fields.Boolean('Discharged')
@@ -85,12 +85,10 @@ class InpatientIcu(models.Model):
         for record in self:
             if record.icu_admission_date:
                 if record.icu_admission_date > datetime.utcnow():
-                    _logger.info('export stock level for %s', datetime.utcnow())
-                    raise ValidationError(_("Datetime value is incorrect"))
+                    raise ValidationError(_("Admission date value is incorrect %s" % record.icu_admission_date))
             if record.icu_admission_date and record.icu_discharge_date:
                 if record.icu_admission_date > record.icu_discharge_date:
-                    _logger.info('export stock level for %s', record.icu_discharge_date)
-                    raise ValidationError(_("Datetime value is incorrect!"))
+                    raise ValidationError(_("Discharge date value is incorrect! %s" % record.icu_discharge_date))
     @classmethod
     def __setup__(cls):
         super(InpatientIcu, cls).__setup__()
@@ -111,9 +109,6 @@ class InpatientIcu(models.Model):
                        (str(self.name.id),))
         if cursor.fetchone()[0] > 1:
             self.raise_user_error('patient_already_at_icu')
-    @staticmethod
-    def default_admitted():
-        return True
 
 class Glasgow(models.Model):
     """Glasgow Coma Scale"""
@@ -419,7 +414,7 @@ class MechanicalVentilation(models.Model):
                              default=datetime.now())
     mv_period = fields.Char(compute=mv_duration,store=True)
     current_mv = fields.Boolean('Current',
-                                default="default_current_mv")
+                                default=True)
     remarks = fields.Char('Remarks')
 
     @api.constrains('name')
@@ -447,9 +442,7 @@ class MechanicalVentilation(models.Model):
                        (str(self.name.id),))
         if cursor.fetchone()[0] > 1:
             self.raise_user_error('patient_already_on_mv')
-    @staticmethod
-    def default_current_mv():
-        return True
+
 class ChestDrainageAssessment(models.Model):
     """Chest Drainage Asessment"""
     _name = 'gnuhealth.icu.chest.drainage'
@@ -497,14 +490,14 @@ class PatientRounding(models.Model):
         ('mydriasis', 'Mydriasis')],
         'Pupil Dilation',
         sort=False,
-        default="default_pupil_dilation",
+        default='normal',
         states=STATES)
     left_pupil = fields.Integer('L', help="size in mm of left pupil",
                                 states=STATES)
     right_pupil = fields.Integer('R', help="size in mm of right pupil",
                                  states=STATES)
     anisocoria = fields.Boolean('Anisocoria',
-                                default='default_anisocoria',
+                                default=True,
                                 compute="compute_anisocoria",
                                 states=STATES)
     pupillary_reactivity = fields.Selection([
@@ -624,11 +617,6 @@ class PatientRounding(models.Model):
                 self.anisocoria = False
             else:
                 self.anisocoria = True
-    @staticmethod
-    def default_pupil_dilation():
-        return 'normal'
-    @staticmethod
-    def default_anisocoria():
-        return True
+
 
 

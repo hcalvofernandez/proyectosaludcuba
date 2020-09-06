@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
 	<data>
-		<!-- Patient Pregnancies -->
+<!-- Patient Pregnancies -->
 		<record id="gyneco_pregnancy_action" model="ir.actions.act_window">
 			<field name="name">Obstetrics</field>
 			<field name="res_model">medical.patient.pregnancy</field>
@@ -20,71 +20,73 @@
 			<field name="model">medical.patient.pregnancy</field>
 			<field name="arch" type="xml">
 				<form>
-					<group colspan="4">
-						<field name="name" 
-							options="{'no_create_edit': True}" />
-						<field name="computed_age" />
-						<field name="lmp" />
-						<field name="institution" />
-					</group>
-					<newline/>
-					<notebook>
-						<page name="general_info" string="General Info">
-							<group>
-								<group string="General">
-									<field name="gravida" />
-									<field name="warning" />
-									<field name="warning_icon" />
-									<field name="reverse"
-										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
-									<field name="reverse_weeks" 
-										attrs="{'invisible': [('reverse','=', False)], 'required': [('reverse','=', True)]}"/>
-									<field name="pdd" />
+					<sheet>
+						<group colspan="4">
+							<field name="name" 
+								options="{'no_create_edit': True}" />
+							<field name="computed_age" />
+							<field name="lmp" />
+							<field name="institution" />
+						</group>
+						<newline/>
+						<notebook>
+							<page name="general_info" string="General Info">
+								<group>
+									<group string="General">
+										<field name="gravida" />
+										<field name="warning" />
+										<field name="warning_icon" />
+										<field name="reverse"
+											attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+										<field name="reverse_weeks" 
+											attrs="{'invisible': [('reverse','=', False)], 'required': [('reverse','=', True)]}"/>
+										<field name="pdd" />
+									</group>
+									<group string="Pregnancy Info" name="pregnancy_info">
+										<field name="current_pregnancy" />
+										<field name="fetuses" />
+										<field name="monozygotic"/>
+										<field name="pregnancy_end_result"
+											attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+										<field name="pregnancy_end_date"
+											attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+										<field name="pregnancy_end_age" />
+										<field name="bba" 
+											attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+										<field name="home_birth" 
+											attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
+										<field name="iugr" />
+									</group>
+									<group string="Resumed Info" name="resumed_info">
+										<field name="gravidae"/>
+										<field name="premature"/>
+										<field name="abortions"/>
+										<field name="stillbirths"/>
+									</group>
+									<group string="Blood Info" name="blood_info">
+										<field name="blood_type"/>
+										<field name="rh"/>
+										<field name="hb"/>
+									</group>
 								</group>
-								<group string="Pregnancy Info" name="pregnancy_info">
-									<field name="current_pregnancy" />
-									<field name="fetuses" />
-									<field name="monozygotic"/>
-									<field name="pregnancy_end_result"
-										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
-									<field name="pregnancy_end_date"
-										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
-									<field name="pregnancy_end_age" />
-									<field name="bba" 
-										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
-									<field name="home_birth" 
-										attrs="{'invisible': [('current_pregnancy','=', True)]}"/>
-									<field name="iugr" />
-								</group>
-								<group string="Resumed Info" name="resumed_info">
-									<field name="gravidae"/>
-									<field name="premature"/>
-									<field name="abortions"/>
-									<field name="stillbirths"/>
-								</group>
-								<group string="Blood Info" name="blood_info">
-									<field name="blood_type"/>
-									<field name="rh"/>
-									<field name="hb"/>
-								</group>
-							</group>
-						</page>
-						<page name="prenatal_evaluations" string="Prenatal Evaluations">
-							<field name="prenatal_evaluations"
-								colspan="4"
-								context="{'default_name': id}"/>
-						</page>
-						<page name="perinatal" string="Perinatal Info">
-							<field name="perinatal" 
-								colspan="4"
-								context="{'default_name': id}"/>
-						</page>
-						<page name="puerperium_monitor" string="Puerperium Monitor">
-							<field name="puerperium_monitor"
-								colspan="4"
-								context="{'default_name': id}"/>
-						</page>
-					</notebook>
+							</page>
+							<page name="prenatal_evaluations" string="Prenatal Evaluations">
+								<field name="prenatal_evaluations"
+									colspan="4"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="perinatal" string="Perinatal Info">
+								<field name="perinatal" 
+									colspan="4"
+									context="{'default_name': id}"/>
+							</page>
+							<page name="puerperium_monitor" string="Puerperium Monitor">
+								<field name="puerperium_monitor"
+									colspan="4"
+									context="{'default_name': id}"/>
+							</page>
+						</notebook>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -544,25 +546,6 @@
 			<field name="view_id" ref="gyneco_gynecology_tree"/>
 			<field name="act_window_id" ref="gyneco_gynecology_action"/>
 		</record>
-		<!-- Gynecology Kanban -->
-		<record model="ir.ui.view" id="gyneco_gynecology_kanban">
-			<field name="model">medical.patient</field>
-			<field name="name">medical_gynecology_kanban</field>
-			<field name="mode">extension</field>
-			<field name="inherit_id" ref="medical.medical_patient_view_kanban" />
-			<field name="arch" type="xml">
-				<kanban position="attributes">
-					<attribute name="delete">0</attribute>
-					<attribute name="create">0</attribute>
-				</kanban>
-			</field>
-		</record>
-		<record id="gyneco_gynecology_action_kanban" model="ir.actions.act_window.view">
-			<field name="sequence" eval="2"/>
-			<field name="view_mode">kanban</field>
-			<field name="view_id" ref="gyneco_gynecology_kanban"/>
-			<field name="act_window_id" ref="gyneco_gynecology_action"/>
-		</record>
 		<!-- Include the Gynecological and Obstetric pages into the Patient History -->
 		<record model="ir.ui.view" id="medical_patient_view">
 			<field name="name">medical_patient</field>
@@ -645,13 +628,58 @@
             </field>
 		</record>
 		<!-- Menu Items -->
-		<menuitem id="obstetrics_root_menu" name="Obstetrics" sequence="2" web_icon="medical_gyneco,static/description/pregnant.png" />
-		<menuitem id="gynecology_root_menu" name="Gynecology" sequence="2" web_icon="medical_gyneco,static/description/uterus.png" />
-		<menuitem id="gyneco_pregnancy_menu" name="Obstetrics" parent="obstetrics_root_menu" action="gyneco_pregnancy_action" sequence="1" />
-		<menuitem id="gyneco_ginecology_menu" name="Gynecology" parent="gynecology_root_menu" action="gyneco_gynecology_action" sequence="1" />
-		<menuitem id="gyneco_ginecology_test_menu" name="Gynecological Test" parent="gynecology_root_menu" sequence="1" />
-		<menuitem id="gyneco_ginecology_pap_test_menu" name="PAP Test" parent="gyneco_ginecology_test_menu" action="gyneco_gynecology_pap_test_action" sequence="1" />
-		<menuitem id="gyneco_ginecology_colposcopy_test_menu" name="Colposcopy Test" parent="gyneco_ginecology_test_menu" action="gyneco_gynecology_colposcopy_test_action" sequence="1" />
-		<menuitem id="gyneco_ginecology_mammography_test_menu" name="Mammography Test" parent="gyneco_ginecology_test_menu" action="gyneco_gynecology_mammography_test_action" sequence="1" />
+		<menuitem
+			id="obstetrics_root_menu"
+			name="Obstetrics"
+			sequence="2"
+			web_icon="medical_gyneco,static/description/pregnant.png"
+		/>
+		<menuitem
+			id="gynecology_root_menu"
+			name="Gynecology"
+			sequence="2"
+			web_icon="medical_gyneco,static/description/uterus.png"
+		/>
+		<menuitem
+			id="gyneco_pregnancy_menu"
+			name="Obstetrics"
+			sequence="1"
+			parent="obstetrics_root_menu"
+			action="gyneco_pregnancy_action"
+		/>
+		<menuitem
+			id="gyneco_gynecology_menu"
+			name="Gynecology"
+			sequence="1"
+			parent="gynecology_root_menu"
+			action="gyneco_gynecology_action"
+		/>
+		<menuitem
+			id="gyneco_gynecology_test_menu"
+			name="Gynecological Test"
+			sequence="1"
+			parent="gynecology_root_menu"
+		/>
+		<menuitem
+			id="gyneco_gynecology_pap_test_menu"
+			name="PAP Test"
+			sequence="1"
+			parent="gyneco_gynecology_test_menu"
+			action="gyneco_gynecology_pap_test_action"
+		/>
+		<menuitem
+			id="gyneco_gynecology_colposcopy_test_menu"
+			name="Colposcopy Test"
+			sequence="1"
+			parent="gyneco_gynecology_test_menu"
+			action="gyneco_gynecology_colposcopy_test_action"
+		/>
+		<menuitem
+			id="gyneco_gynecology_mammography_test_menu"
+			name="Mammography Test"
+			sequence="1"
+			parent="gyneco_gynecology_test_menu"
+			action="gyneco_gynecology_mammography_test_action"
+		/>
 	</data>
 </odoo>

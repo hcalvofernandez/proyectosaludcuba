@@ -140,19 +140,15 @@ class PatientPregnancy(models.Model):
         sort=False
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # TODO: Doctor Relation
-    # healthprof = fields.Many2one(
-    #     comodel_name='medical.healthprofessional',
-    #     string='Health Prof',
-    #     readonly=True,
-    #     help="Health Professional who created this initial obstetric record"
-    # )
+    healthprof = fields.Many2one(
+        string='Health Prof',
+        comodel_name='medical.healthprofessional',
+        help='Health Professional who created this initial obstetric record',
+        readonly=True,
+    )
     gravidae = fields.Integer(
         string='Pregnancies',
         help="Number of pregnancies, computed from Obstetric history",
@@ -226,49 +222,34 @@ class PatientPregnancy(models.Model):
         self.blood_type = self.name.blood_type
         self.rh = self.name.rh
         self.hb = self.name.hb
-    # @classmethod
-    # def __setup__(self):
-    #     super(PatientPregnancy, self).__setup__()
-    #     t = self.__table__()
-    #     self._sql_constraints += [
-    #         ('gravida_uniq', Unique(t, t.name, t.gravida),
-    #             'This pregnancy code for this patient already exists'),
-    #     ]
-    #     self._order.insert(0, ('lmp', 'DESC'))
-    #     self._error_messages.update({
-    #         'patient_already_pregnant': 'Our records indicate that the patient'
-    #         ' is already pregnant !'})
-    # @classmethod
-    # def validate(self, pregnancies):
-    #     super(PatientPregnancy, self).validate(pregnancies)
-    #     for pregnancy in pregnancies:
-    #         pregnancy.check_patient_current_pregnancy()
-    # def check_patient_current_pregnancy(self):
-    #     ''' Check for only one current pregnancy in the patient '''
-    #     pregnancy = Table('gnuhealth_patient_pregnancy')
-    #     cursor = Transaction().connection.cursor()
-    #     patient_id = int(self.name.id)
-    #     cursor.execute(*pregnancy.select(Count(pregnancy.name),
-    #                                      where=(pregnancy.current_pregnancy == 'true') &
-    #                                      (pregnancy.name == patient_id)))
-    #     records = cursor.fetchone()[0]
-    #     if records > 1:
-    #         self.raise_user_error('patient_already_pregnant')
+
+    @api.depends('name')
+    def validate(self, pregnancies):
+        super(PatientPregnancy, self).validate(pregnancies)
+        for pregnancy in pregnancies:
+            pregnancy.check_patient_current_pregnancy()
+
+    def check_patient_current_pregnancy(self):
+        ''' Check for only one current pregnancy in the patient '''
+        if self.current_pregnancy:
+            raise UserError(
+                _(
+                    'Our records indicate that the patient'
+                    ' is already pregnant !'
+                )
+            )
+
+    _sql_constraints = [
+        (
+            'gravida_uniq',
+            'unique(name)',
+            'This pregnancy code for this patient already exists'
+        ),
+    ]
 
     @api.model
     def default_current_pregnancy():
         return True
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('medical.healthprofessional')
-    #     return HealthProf.get_health_professional()
 
     @api.depends('reverse_weeks', 'pregnancy_end_date')
     def on_change_with_lmp(self):
@@ -415,29 +396,16 @@ class PrenatalEvaluation(models.Model):
         string="Notes"
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     comodel_name='medical.healthprofessional',
-    #     string='Health Prof',
-    #     readonly=True,
-    #     help="Health Professional in charge, or that who entered the information in the system"
-    # )
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('medical.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Health Prof',
+        help='Health Professional in charge, or that who entered the \
+            information in the system',
+        readonly=True,
+    )
 
     def get_patient_evaluation_data(self):
         gestational_age = datetime.datetime.date(
@@ -520,29 +488,15 @@ class PuerperiumMonitor(models.Model):
         help="Distance between the symphysis pubis and the uterine fundus (S-FD) in cm"
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     comodel_name='medical.healthprofessional',
-    #     string='Health Prof',
-    #     readonly=True,
-    #     help="Health Professional in charge, or that who entered the information in the system"
-    # )
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('medical.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Health Prof',
+        help="Health Professional in charge, or that who entered the information in the system",
+        readonly=True,
+    )
 
     @api.model
     def default_get(self, fields):
@@ -674,27 +628,16 @@ class Perinatal(models.Model):
         string='Notes'
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     'medical.healthprofessional', 'Health Prof', readonly=True,
-    #     help="Health Professional in charge, or that who entered the \
-    #         information in the system")
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('medical.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Health Prof',
+        help="Health Professional in charge, or that who entered the \
+            information in the system",
+        readonly=True,
+    )
 
     @api.model
     def default_get(self, fields):
@@ -1013,26 +956,15 @@ class PatientMenstrualHistory(models.Model):
         sort=False
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     'medical.healthprofessional', 'Reviewed', readonly=True,
-    #     help="Health Professional who reviewed the information")
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('medical.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Reviewed',
+        help="Health Professional who reviewed the information",
+        readonly=True,
+    )
 
     @api.model
     def default_get(self, fields):
@@ -1096,26 +1028,15 @@ class PatientMammographyHistory(models.Model):
         string='Remarks'
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     'medical.healthprofessional', 'Reviewed', readonly=True,
-    #     help="Health Professional who last reviewed the test")
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('medical.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Reviewed',
+        help="Health Professional who last reviewed the test",
+        readonly=True,
+    )
 
     @api.depends('name')
     def on_change_name(self):
@@ -1184,26 +1105,15 @@ class PatientPAPHistory(models.Model):
         string='Remarks'
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     'gnuhealth.healthprofessional', 'Reviewed', readonly=True,
-    #     help="Health Professional who last reviewed the test")
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('gnuhealth.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Reviewed',
+        help="Health Professional who last reviewed the test",
+        readonly=True,
+    )
 
     @api.model
     def default_get(self, fields):
@@ -1267,26 +1177,15 @@ class PatientColposcopyHistory(models.Model):
         string='Remarks'
     )
     institution = fields.Many2one(
-        comodel_name='res.partner',
+        comodel_name='medical.institution',
         string='Institution',
-        domain=[
-            ('is_institution', '=', True)
-        ]
     )
-    # healthprof = fields.Many2one(
-    #     'gnuhealth.healthprofessional', 'Reviewed', readonly=True,
-    #     help="Health Professional who last reviewed the test")
-
-    @api.model
-    def default_institution(self):
-        HealthInst = self.env['res.partner']
-        institution = HealthInst.get_institution()
-        return institution
-    # @staticmethod
-    # def default_healthprof():
-    #     pool = Pool()
-    #     HealthProf = pool.get('gnuhealth.healthprofessional')
-    #     return HealthProf.get_health_professional()
+    healthprof = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Reviewed',
+        help="Health Professional who last reviewed the test",
+        readonly=True,
+    )
 
     @api.model
     def default_get(self, fields):

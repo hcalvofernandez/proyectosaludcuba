@@ -8,7 +8,7 @@
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
 				<p class="oe_view_nocontent_create">
-					No Lab registered
+					No Patient Lab Test Results registered
 				</p>
 				<p>
 					You can add some register
@@ -35,8 +35,8 @@
 								<field name="request_order" />
 								<field name="pathology" />
 								<newline />
-								<field name="critearea" colspan="4" 
-									context="{'default_test': True}" />
+								<field name="critearea" colspan="4"
+									view_ids="medical_lab.test_critearea_view_tree_lab,medical_lab.test_critearea_view_form_lab"/>
 							</group>
 						</page>
 						<page string="Extra Info" id="lab_extra_info">
@@ -66,6 +66,45 @@
 				</tree>
 			</field>
 		</record>
+		<record model="ir.ui.view" id="test_critearea_view_tree_lab">
+            <field name="name">test_critearea_tree_lab</field>
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="10"/>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="warning"/>
+					<field name="excluded"/>
+					<field name="name" icon="lab_warning_icon"/>
+					<field name="result"/>
+					<field name="result_text"/>
+					<field name="lower_limit"/>
+					<field name="upper_limit"/>
+					<field name="units"/>
+					<field name="remarks"/>
+				</tree>
+			</field>
+        </record>
+        <record model="ir.ui.view" id="test_critearea_view_form_lab">
+            <field name="name">test_critearea_form_lab</field>
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="20"/>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="warning"/>
+						<field name="excluded"/>
+						<field name="name"/>
+						<field name="result"/>
+						<field name="units"/>
+						<field name="result_text"/>
+						<field name="lower_limit"/>
+						<field name="upper_limit"/>
+						<field name="normal_range"/>
+						<field name="remarks"/>
+					</group>
+				</form>
+			</field>
+        </record>
 		<!-- Lab Test -->
 		<record model="ir.actions.act_window" id="medical_lab_test_request_action">
 			<field name="name">Lab Test Requests</field>
@@ -91,7 +130,7 @@
 						<field name="name" />
 						<field name="date" />
 						<field name="patient_id" />
-						<!-- <field name="doctor_id"/> -->
+						<field name="doctor_id"/>
 						<field name="urgent" />
 						<field name="state" readonly="1" />
 					</group>
@@ -108,7 +147,7 @@
 					<field name="date" widget="date" />
 					<field name="date" widget="time" />
 					<field name="patient_id" />
-					<!-- <field name="doctor_id"/> -->
+					<field name="doctor_id"/>
 					<field name="state" readonly="1" />
 					<field name="urgent" />
 				</tree>
@@ -177,7 +216,8 @@
 								<field name="active" />
 							</group>
 							<newline />
-							<field name="critearea" colspan="4" />
+							<field name="critearea" colspan="4"
+								view_ids="medical_lab.test_critearea_view_tree_test_type,medical_lab.test_critearea_view_form_test_type"/>
 							<field name="product_id" />
 						</page>
 						<page string="Extra Info" id="test_type_extra_info">
@@ -200,6 +240,42 @@
 				</tree>
 			</field>
 		</record>
+        <record model="ir.ui.view" id="test_critearea_view_form_test_type">
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="20"/>
+            <field name="name">test_critearea_form_test_type</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="name"/>
+						<field name="units"/>
+						<field name="sequence"/>
+						<newline/>
+						<field name="lower_limit"/>
+						<field name="upper_limit"/>
+						<newline/>
+						<separator colspan="4" id="analyte_reference" string="Reference Value / Range"/>
+						<newline/>
+						<field colspan="4" name="normal_range"/>
+					</group>
+				</form>
+			</field>
+        </record>
+        <record model="ir.ui.view" id="test_critearea_view_tree_test_type">
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="10"/>
+            <field name="name">test_critearea_tree_test_type</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="sequence"/>
+					<field name="name"/>
+					<field name="lower_limit"/>
+					<field name="upper_limit"/>
+					<field name="normal_range"/>
+					<field name="units"/>
+				</tree>
+			</field>
+        </record>
 		<!-- Lab Test Results -->
 		<record model="ir.actions.act_window" id="medical_lab_test_critearea_action">
 			<field name="name">Lab Test Critearea</field>
@@ -220,33 +296,18 @@
 			<field name="priority" eval="20" />
 			<field name="arch" type="xml">
 				<form>
-					<group
-						attrs="{'invisible': [('test','=', True)]}">
-						<field name="warning"/>
-						<field name="excluded"/>
+					<group>
 						<field name="name"/>
-						<field name="result"/>
 						<field name="units"/>
-						<field name="result_text"/>
+						<field name="sequence"/>
+						<newline/>
 						<field name="lower_limit"/>
 						<field name="upper_limit"/>
-						<field name="normal_range"/>
-						<field name="remarks"/>
-					</group>
-					<group
-						attrs="{'invisible': [('test','=', False)]}">
-						<field name="name" />
-						<field name="units" />
-						<field name="sequence" />
-						<field name="lower_limit" />
-						<field name="upper_limit" />
 					</group>
 					<separator colspan="4" id="analyte_reference" string="Reference Value / Range" />
 					<group>
 						<field colspan="4" name="normal_range" />
 					</group>
-					<field name="test"
-						attrs="{'invisible': True}" />
 				</form>
 			</field>
 		</record>
@@ -265,7 +326,7 @@
 				</tree>
 			</field>
 		</record>
-		<!-- Shortcut to the Lab Reports from the Patient
+		<!-- Shortcut to the Lab Reports from the Patient -->
 		<record model="ir.actions.act_window" id="act_patient_lab_history_form1">
 		<field name="name">Lab: Reports</field>
 		<field name="res_model">medical.lab</field>
@@ -277,19 +338,31 @@
 		<field name="model">medical.patient,-1</field>
 		<field name="action" ref="act_patient_lab_history_form1"/>
 		</record>
-		-->
-		<!-- PATIENT HEALTH CONDITION
+		<!-- PATIENT HEALTH CONDITION -->
 		<record model="ir.ui.view" id="view_medical_patient_diseases_view_form">
-		<field name="model">medical.patient.disease</field>
-		<field name="inherit" ref="medical.medical_patient_diseases_view_form"/>
-		<field name="name">medical_patient_medical_condition_form</field>
+			<field name="name">medical_patient_medical_condition_form</field>
+			<field name="model">medical.patient.disease</field>
+			<field name="inherit_id" ref="medical_disease.medical_patient_view_disease_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='complementary_informations']" position="before">
+					<group string="Laboratory" colspan="4" id="group_lab_info">
+						<field name="lab_confirmed"/>
+						<field name="lab_test"
+							attrs="{'invisible': [('lab_confirmed','=', False)]}"/>
+					</group>
+				</xpath>
+			</field>
 		</record>
 		<record model="ir.ui.view" id="tree_medical_patient_diseases">
-		<field name="model">medical.patient.disease</field>
-		<field name="inherit" ref="medical.medical_patient_diseases_tree"/>
-		<field name="name">medical_patient_medical_condition_tree</field>
+			<field name="name">medical_patient_medical_condition_tree</field>
+			<field name="model">medical.patient.disease</field>
+			<field name="inherit_id" ref="medical_disease.medical_patient_view_disease_tree"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='state']" position="after">
+					<field name="lab_confirmed"/>
+				</xpath>
+			</field>
 		</record>
-		-->
 		<!-- Menu Items -->
 		<menuitem
             id="lab_root_menu"

@@ -25,92 +25,6 @@ from odoo import models, fields, api
 from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta, date
 
-# __all__ = ['MedicalSequences', 'MedicalSequenceSetup',
-#     'PatientData', 'TestType', 'Lab',
-#     'MedicalLabTestUnits', 'MedicalTestCritearea',
-#     'MedicalPatientLabTest','PatientHealthCondition']
-
-# sequences = ['lab_sequence', 'lab_request_sequence']
-
-# class MedicalSequences(ModelSingleton, models.Model):
-#     "Standard Sequences for GNU Health"
-#     _name = "medical.sequences"
-
-#     lab_sequence = fields.MultiValue(fields.Many2one('ir.sequence',
-#         'Lab Sequence', domain=[('code', '=', 'medical.lab')],
-#         required=True))
-#     lab_request_sequence = fields.MultiValue(fields.Many2one('ir.sequence',
-#         'Patient Lab Request Sequence', required=True,
-#         domain=[('code', '=', 'medical.patient.lab.test')]))
-
-#     @classmethod
-#     def multivalue_model(cls, field):
-#         pool = Pool()
-
-#         if field in sequences:
-#             return pool.get('medical.sequence.setup')
-#         return super(MedicalSequences, cls).multivalue_model(field)
-
-
-#     @classmethod
-#     def default_lab_request_sequence(cls):
-#         return cls.multivalue_model(
-#             'lab_request_sequence').default_lab_request_sequence()
-
-#     @classmethod
-#     def default_lab_sequence(cls):
-#         return cls.multivalue_model(
-#             'lab_sequence').default_lab_sequence()
-
-
-# # SEQUENCE SETUP
-# class MedicalSequenceSetup(ModelSQL, ValueMixin):
-#     'GNU Health Sequences Setup'
-#     _name = 'medical.sequence.setup'
-
-#     lab_request_sequence = fields.Many2one('ir.sequence',
-#         'Lab Request Sequence', required=True,
-#         domain=[('code', '=', 'medical.patient.lab.test')])
-
-
-#     lab_sequence = fields.Many2one('ir.sequence',
-#         'Lab Result Sequence', required=True,
-#         domain=[('code', '=', 'medical.lab')])
-
-#     @classmethod
-#     def __register__(cls, module_name):
-#         TableHandler = backend.get('TableHandler')
-#         exist = TableHandler.table_exist(cls._table)
-
-#         super(MedicalSequenceSetup, cls).__register__(module_name)
-
-#         if not exist:
-#             cls._migrate_MultiValue([], [], [])
-
-#     @classmethod
-#     def _migrate_property(cls, field_names, value_names, fields):
-#         field_names.extend(sequences)
-#         value_names.extend(sequences)
-#         migrate_property(
-#             'medical.sequences', field_names, cls, value_names,
-#             fields=fields)
-
-#     @classmethod
-#     def default_lab_request_sequence(cls):
-#         pool = Pool()
-#         ModelData = pool.get('ir.model.data')
-#         return ModelData.get_id(
-#             'health_lab', 'seq_medical_lab_request')
-
-#     @classmethod
-#     def default_lab_sequence(cls):
-#         pool = Pool()
-#         ModelData = pool.get('ir.model.data')
-#         return ModelData.get_id(
-#             'health_lab', 'seq_medical_lab_test')
-
-# # END SEQUENCE SETUP , MIGRATION FROM FIELDS.MultiValue
-
 
 class MedicalPatient(models.Model):
     _inherit = 'medical.patient'
@@ -168,30 +82,13 @@ class TestType(models.Model):
         )
         return res
 
-#     @classmethod
-#     def __setup__(cls):
-#         super(TestType, cls).__setup__()
-#         t = cls.__table__()
-#         cls._sql_constraints = [
-#             ('code_uniq', Unique(t, t.name),
-#              'The Lab Test code must be unique')
-#         ]
-
-#     @classmethod
-#     def check_xml_record(cls, records, values):
-#         return True
-
-#     @classmethod
-#     def search_rec_name(cls, name, clause):
-#         """ Search for the full name and the code """
-#         field = None
-#         for field in ('name', 'code'):
-#             tests = cls.search([(field,) + tuple(clause[1:])], limit=1)
-#             if tests:
-#                 break
-#         if tests:
-#             return [(field,) + tuple(clause[1:])]
-#         return [(cls._rec_name,) + tuple(clause[1:])]
+    _sql_constraints = [
+        (
+            'code_uniq',
+            'unique(name)',
+            'The Lab Test code must be unique'
+        )
+    ]
 
 
 class Lab(models.Model):
@@ -213,7 +110,7 @@ class Lab(models.Model):
     patient = fields.Many2one(
         comodel_name='medical.patient',
         string='Patient',
-        help="Patient ID", 
+        help="Patient ID",
         required=True,
         index=True
     )
@@ -285,45 +182,28 @@ class Lab(models.Model):
                     res_text = analyte.result_text
                 if analyte.result:
                     res = str(analyte.result) + " "
-                summ = summ + analyte.rec_name + " "  + \
-                    res +  res_text + "\n"
+                summ = summ + analyte.rec_name + " " + \
+                    res + res_text + "\n"
         self.analytes_summary = summ
 
-#     @classmethod
-#     def __setup__(cls):
-#         super(Lab, cls).__setup__()
-#         t = cls.__table__()
-#         cls._sql_constraints = [
-#             ('id_uniq', Unique(t, t.name),
-#              'The test ID code must be unique')
-#         ]
-#         cls._order.insert(0, ('date_requested', 'DESC'))
+    _sql_constraints = [
+        (
+            'id_uniq',
+            'unique(name)',
+            'The test ID code must be unique'
+        )
+    ]
 
+    @api.model
+    def _create_vals(self, vals):
+        vals = super(Lab, self)._create_vals(vals)
+        if not vals.get('name'):
+            Seq = self.env['ir.sequence']
+            vals['name'] = Seq.sudo().next_by_code(
+                self._name,
+            )
+        return vals
 
-#     @classmethod
-#     def create(cls, vlist):
-#         Sequence = Pool().get('ir.sequence')
-#         Config = Pool().get('medical.sequences')
-
-#         vlist = [x.copy() for x in vlist]
-#         for values in vlist:
-#             if not values.get('name'):
-#                 config = Config(1)
-#                 values['name'] = Sequence.get_id(
-#                     config.lab_sequence.id)
-
-#         return super(Lab, cls).create(vlist)
-
-#     @classmethod
-#     def search_rec_name(cls, name, clause):
-#         if clause[1].startswith('!') or clause[1].startswith('not '):
-#             bool_op = 'AND'
-#         else:
-#             bool_op = 'OR'
-#         return [bool_op,
-#             ('patient',) + tuple(clause[1:]),
-#             ('name',) + tuple(clause[1:]),
-#             ]
 
 class MedicalLabTestUnits(models.Model):
     _name = 'medical.lab.test.units'
@@ -338,19 +218,13 @@ class MedicalLabTestUnits(models.Model):
         index=True
     )
 
-#     @classmethod
-#     def __setup__(cls):
-#         super(MedicalLabTestUnits, cls).__setup__()
-#         t = cls.__table__()
-#         cls._sql_constraints = [
-#             ('name_uniq', Unique(t, t.name),
-#              'The Unit name must be unique')
-#         ]
-
-
-#     @classmethod
-#     def check_xml_record(cls, records, values):
-#         return True
+    _sql_constraints = [
+        (
+            'name_uniq',
+            'unique(name)',
+            'The Unit name must be unique'
+        )
+    ]
 
 
 class MedicalTestCritearea(models.Model):
@@ -447,15 +321,6 @@ class MedicalTestCritearea(models.Model):
             if (self.result > self.upper_limit):
                 self.warning = True
 
-#     @classmethod
-#     def __setup__(cls):
-#         super(MedicalTestCritearea, cls).__setup__()
-#         cls._order.insert(0, ('sequence', 'ASC'))
-
-#     @classmethod
-#     def check_xml_record(cls, records, values):
-#         return True
-
 
 class MedicalPatientLabTest(models.Model):
     _name = 'medical.patient.lab.test'
@@ -488,12 +353,12 @@ class MedicalPatientLabTest(models.Model):
         required=True,
         index=True
     )
-    # doctor_id = fields.Many2one(
-    #     comodel_name='medical.healthprofessional',
-    #     string='Doctor',
-    #     help="Doctor who Request the lab test.",
-    #     index=True
-    # )
+    doctor_id = fields.Many2one(
+        string='Doctor',
+        comodel_name='medical.healthprofessional',
+        help='Doctor who Request the lab test',
+        readonly=True,
+    )
     request = fields.Integer(
         string='Order',
         readonly=True
@@ -513,64 +378,33 @@ class MedicalPatientLabTest(models.Model):
         )
         return res
 
-#     @classmethod
-#     def __setup__(cls):
-#         super(MedicalPatientLabTest, cls).__setup__()
-#         cls._order.insert(0, ('date', 'DESC'))
-#         cls._order.insert(1, ('request', 'DESC'))
-#         cls._order.insert(2, ('name', 'ASC'))
+    @api.model
+    def _create_vals(self, vals):
+        vals = super(MedicalPatientLabTest, self)._create_vals(vals)
+        if not vals.get('request'):
+            Seq = self.env['ir.sequence']
+            vals['request'] = Seq.sudo().next_by_code(
+                self._name,
+            )
+        return vals
 
-#     @staticmethod
-#     def default_doctor_id():
-#         User = Pool().get('res.user')
-#         user = User(Transaction().user)
-#         uid = int(user.id)
 
-#         parties = Pool().get('party.party').search([
-#                 ('internal_user', '=', uid)])
-#         if parties:
-#             doctors = Pool().get('medical.healthprofessional').search([
-#                     ('name', '=', parties[0].id)])
-#             if doctors:
-#                 return doctors[0].id
-#         else:
-#             return False
+class PatientHealthCondition(models.Model):
+    _inherit = 'medical.patient.disease'
+    _description = 'Patient Conditions History'
 
-#     @classmethod
-#     def create(cls, vlist):
-#         Sequence = Pool().get('ir.sequence')
-#         Config = Pool().get('medical.sequences')
+    lab_confirmed = fields.Boolean(
+        string='Lab Confirmed',
+        help='Confirmed by laboratory test'
+    )
 
-#         vlist = [x.copy() for x in vlist]
-#         for values in vlist:
-#             if not values.get('request'):
-#                 config = Config(1)
-#                 values['request'] = Sequence.get_id(
-#                     config.lab_request_sequence.id)
-
-#         return super(MedicalPatientLabTest, cls).create(vlist)
-
-#     @classmethod
-#     def copy(cls, tests, default=None):
-#         if default is None:
-#             default = {}
-#         default = default.copy()
-#         default['request'] = None
-#         default['date'] = cls.default_date()
-#         return super(MedicalPatientLabTest, cls).copy(tests,
-#             default=default)
-
-# class PatientHealthCondition(models.Model):
-#     'Patient Conditions History'
-#     _name = 'medical.patient.disease'
-
-#     # Adds lab confirmed and the link to the test to the
-#     # Patient health Condition
-
-#     lab_confirmed = fields.Boolean('Lab Confirmed', help='Confirmed by'
-#         ' laboratory test')
-
-#     lab_test = fields.Many2one('medical.lab','Lab Test',
-#         domain=[('patient', '=', Eval('name'))], depends=['name'],
-#         states={'invisible': Not(Bool(Eval('lab_confirmed')))},
-#         help='Lab test that confirmed the condition')
+    lab_test = fields.Many2one(
+        comodel_name='medical.lab',
+        string='Lab Test',
+        # domain=[
+        #     ('patient_id', '=', 'name')
+        # ],
+        depends=['name'],
+        # states={'invisible': Not(Bool(Eval('lab_confirmed')))},
+        help='Lab test that confirmed the condition'
+    )

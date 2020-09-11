@@ -17,6 +17,7 @@
         'security/ir.model.access.csv',
         # 'views/template.xml',
         'views/views.xml',
+        'views/evaluation.xml',
         'data/medical_extras_sequence.xml',
     ],
     'demo': [

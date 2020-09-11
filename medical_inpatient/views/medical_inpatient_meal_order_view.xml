@@ -10,43 +10,44 @@
             <field name="model">medical.inpatient.meal.order</field>
             <field name="arch" type="xml">
                 <form>
-                    <header>
-                        <field name="state" widget="statusbar" options="{'clickable': '1'}" />
-                        <button name="button_cancel"
+                    <sheet>
+                        <group id="inpatient_meal_order_header" col="10" colspan="4">
+                            <field name="name"/>
+                            <field name="meal_order"/>
+                            <field name="mealtime"/>
+                            <field name="meal_warning"/>
+                            <field name="meal_warning_ack"/>
+                        </group>
+                        <newline/>
+                        <field colspan="4" name="meal_item"/>
+                        <newline/>
+                        <field colspan="4" name="remarks"/>
+                        <newline/>
+                        <group id="inpatient_meal_order_footer" col="10" colspan="4">
+                            <field name="state"/>
+                            <field name="order_date"/>
+                            <button name="button_cancel"
                                     help="Cancel order"
                                     string="Cancel"
-                                    icon="fa-trash-o"
+                                    icon="icon-cancel"
                                     confirm="Cancel the this meal order ?"
                                     type="object"
                                     attrs="{'invisible': [('state', '!=', 'ordered')]}"/>
                             <button name="button_generate"
                                     help="Create order"
                                     string="Generate"
-                                    icon="fa-thumbs-up"
+                                    icon="icon-ok"
                                     confirm="Generate the meal order ?"
                                     type="object"
                                     attrs="{'invisible': [('state', 'in', ['ordered','done'])]}"/>
                             <button name="button_done"
                                     help="The meal order is done"
                                     string="Done"
-                                    icon="fa-home"
+                                    icon="icon-home"
                                     confirm="The meal order will be closed"
                                     type="object"
                                     attrs="{'invisible': [('state', '!=', 'ordered')]}"/>
-                    </header>
-                    <sheet>
-                        <group id="inpatient_meal_order_header" col="4" colspan="4" string="Order Data">
-                            <field name="name"/>
-                            <field name="order_date"/>
                             <field name="health_professional"/>
-                            <field name="meal_order"/>
-                            <field name="mealtime"/>
-                            <field name="meal_warning"/>
-                            <field name="meal_warning_ack"/>
-                        </group>
-                        <group id="inpatient_meal_order_footer" col="4" colspan="4">
-                            <field colspan="4" name="meal_item"/>
-                            <field colspan="4" name="remarks"/>
                         </group>
                     </sheet>
                 </form>

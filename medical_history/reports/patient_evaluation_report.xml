@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="patient_evaluation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <style>
+                            td{
+                            font-size:16px;text-align:justify;
+                            }l10n_cu_contract_sale
+                            h5{text-align: center;font-size: 14px;}
+                            h2{text-align: left;font-size: 14px;}
+                            h1{text-align: left;font-size: 14px;}
+                            p { font-size: 12pt; font-family:Arial;text-align:justify; }
+                            thead,th{ background-color: transparent; font-size: 11pt; font-family:Arial; }
+                            span { font-size: 12pt; font-family:Arial;text-align:justify; }
+                        </style>
+
+                        <table class="table table-condensed">
+	                	     <tr>
+		    					<td style="width:150;text-align: left;">
+		    						<span> <b>Patient Name:</b> </span> <span t-esc="o.patient.name"/>
+		    					</td>
+
+                                <td style="width:100;text-align: left;">
+		    						<span> <b>DoB:</b> </span>
+                                    <span t-field="o.patient.birthdate_date" t-field-options='{"format": "d/MM/y"}'/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+		    						<span> <b>Sex:</b> </span>
+                                    <t t-if="o.patient.gender == 'female'" >
+			                          <t t-set="sex" t-value="'Female'"/>
+			                        </t>
+			                       <t t-if="o.gender == 'male'" >
+			                          <t t-set="sex" t-value="'Male'"/>
+			                        </t>
+                                     <t t-if="o.gender == 'other'" >
+			                          <t t-set="sex" t-value="'Other'"/>
+			                        </t>
+			                      <span t-esc="sex"/>
+		    					</td>
+                             </tr>
+                            <tr>
+		    					<td style="width:150;text-align: left;">
+                                    <span> <b>Ethnicity:</b></span> <!--<span t-esc="o.ethnic_group.name"/>-->
+		    					</td>
+
+                                <td style="width:100;text-align: left;">
+		    						<span> <b>Marital Status:</b> </span>  <span t-esc="marital_status(o.patient.id)"/>
+
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+		    						<span> <b>Occupation:</b> </span>  <!--<span t-esc="o.occupation.name"/>-->
+		    					</td>
+                             </tr>
+                             <tr>
+		    					<td style="width:150;text-align: left;">
+                                    <span> <b>Evaluation date:</b></span>
+                                    <span t-field="o.report_evaluation_date" t-field-options='{"format": "d/MM/y"}'/>
+		    					</td>
+
+                                <td style="width:100;text-align: left;">
+		    						<span> <b>Information Source:</b> </span>
+                                    <span t-esc="o.information_source"/>
+		    					</td>
+                             </tr>
+                        </table>
+
+                        <div style="page-break-inside: avoid">
+                            <span><b> Chief Complaint </b></span><br/>
+                             <span t-esc="o.chief_complaint"/>
+                        </div>
+                        <br/>
+                        <span><b> History of Present Illness </b></span><br/>
+                             <span t-field="o.present_illness"/>
+                        <br/>
+                        <div style="page-break-inside: avoid">
+                            <span><b> Clinical and Physical examination </b></span><br/>
+                             <span t-field="o.evaluation_summary"/>
+                        </div>
+                        <br/>
+                        <h5>
+                            <span><b> Vital Signs </b></span><br/>
+                        </h5>
+                        <table class="table table-bordered">
+	                	     <tr>
+		    					<td style="width:50;text-align: left;">
+                                    <span> <b>Temperature</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.temperature"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                    <span> <b>Blood Pressure</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                      <span> <b>Systolic</b> </span>
+                                      <span t-esc="o.systolic"/><br/>
+                                      <span> <b>Diastolic</b> </span>
+                                      <span t-esc="o.diastolic"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+
+		    					</td>
+                             </tr>
+                            <tr>
+		    					<td style="width:50;text-align: left;">
+                                    <span> <b>Heart rate </b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.bpm"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                    <span> <b>Respiratory Rate</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                      <span t-esc="o.respiratory_rate"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                     <span> <b>Oxygen Saturation</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                      <span t-esc="o.osat"/>
+		    					</td>
+                             </tr>
+                        </table>
+
+                         <br/>
+                        <span><b> Anthropometry </b></span><br/>
+
+                         <table class="table table-bordered">
+	                	     <tr>
+		    					<td style="width:50;text-align: left;">
+                                    <span> <b>Height</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.height"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                    <span> <b>Waist</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.abdominal_circ"/>
+		    					</td>
+                                <td style="width:50;text-align: left;">
+                                    <span> <b>BMI</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.bmi"/>
+		    					</td>
+                             </tr>
+                            <tr>
+		    					<td style="width:50;text-align: left;">
+                                    <span> <b>Weight </b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.weight"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                    <span> <b>Hip</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                      <span t-esc="o.hip"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                     <span> <b>WHR</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                      <span t-esc="o.whr"/>
+		    					</td>
+                             </tr>
+                        </table>
+
+                        <br/>
+                        <span><b> Level of Conciousness / Glasgow Scale </b></span><br/>
+
+                        <table class="table table-bordered">
+	                	     <tr>
+		    					<td style="width:50;text-align: left;">
+                                    <span> <b>Eyes</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="loc_eyes(o.id)"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                    <span> <b>Verbal</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="loc_verbal(o.id)"/>
+		    					</td>
+                                <td style="width:50;text-align: left;">
+                                    <span> <b>Motor</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="loc_motor(o.id)"/>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                    <span> <b>Total Glasgowor</b> </span>
+		    					</td>
+                                 <td style="width:50;text-align: left;">
+                                   <span t-esc="o.loc"/>
+		    					 </td>
+
+                             </tr>
+                        </table>
+
+                        <br/>
+                        <span><b> Signs and Symptoms </b></span><br/>
+                         <table class="table table-bordered">
+	                	     <tr>
+		    					<td style="width:50;text-align: left;">
+                                    <span> <b>Type</b> </span>
+		    					</td>
+                                 <td style="width:150;text-align: left;">
+                                    <span> <b>Clinical finding</b> </span>
+		    					</td>
+                                 <td style="width:100;text-align: left;">
+                                    <span> <b>Comments</b> </span>
+		    					</td>
+                             </tr>
+                             <tr t-foreach="clinical" t-as="o.signs_and_symptoms">
+                                 <td style="width:50;text-align: left;">
+                                     <span t-esc="clinical.sign_or_symptom"/>
+		    					 </td>
+                                 <td style="width:150;text-align: left;">
+                                     <span t-esc="clinical.clinical.name"/>
+		    					 </td>
+                                 <td style="width:150;text-align: left;">
+                                     <span t-esc="clinical.comments"/>
+		    					 </td>
+
+                             </tr>
+                         </table>
+
+                        <br/>
+                        <span><b> Presumptive Diagnosis :</b></span><br/>
+<!--                        <t t-if="o.diagnosis">-->
+<!--                             <span t-esc="o.diagnosis.name"/>-->
+<!--                        </t>-->
+
+                        <br/>
+                        <span><b> Other Hypotheses / DDx</b></span><br/>
+                        <table class="table table-bordered">
+                            <tr t-foreach="ddx" t-as="o.diagnostic_hypothesis">
+                                 <td style="width:100;text-align: left;">
+                                     <span t-esc="ddx.pathology.name"/>
+		    					 </td>
+                                 <td style="width:100;text-align: left;">
+                                     <span t-esc="ddx.comments"/>
+		    					 </td>
+                             </tr>
+                        </table>
+
+                         <br/>
+                        <span><b> Information about the Diagnosis </b></span><br/>
+                         <span t-field="o.info_diagnosis"/>
+                         <br/>
+                        <span><b> Care Plan </b></span><br/>
+                         <span t-field="o.directions"/>
+                        <br/>
+                        <br/>
+                        <span><b> Discharge reason : </b></span>  <span t-esc="discharge_reason(o.id)"/>
+                         <br/> <br/>
+
+                        <span><b> Personal History</b></span><br/>
+                            <table class="table table-bordered">
+                                <tr>
+                                     <td style="width:100;text-align: left;">
+                                         <span> <b>Automated report about patient important conditions</b> </span>
+                                     </td>
+                                     <td style="width:100;text-align: left;">
+                                          <span> <b>Annotations about the patient conditions and history</b> </span>
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td style="width:100;text-align: left;">
+                                         <span t-esc="o.patient.critical_summary"/>
+                                     </td>
+                                     <td style="width:100;text-align: left;">
+                                         <span t-esc="o.patient.critical_info"/>
+                                     </td>
+                                 </tr>
+                            </table>
+
+                            <br/>
+                            <span><b> Disease</b></span><br/><br/>
+                              <table class="table table-bordered">
+                                    <tr>
+                                         <td style="width:40;text-align: left;">
+                                             <span> <b>Disease</b> </span>
+                                         </td>
+                                         <td style="width:40;text-align: left;">
+                                              <span> <b>Severity</b> </span>
+                                         </td>
+                                        <td style="width:40;text-align: left;">
+                                              <span> <b>Status</b> </span>
+                                         </td>
+                                        <td style="width:40;text-align: left;">
+                                              <span> <b>Active</b> </span>
+                                         </td>
+                                        <td style="width:40;text-align: left;">
+                                              <span> <b>Infectious</b> </span>
+                                         </td>
+                                        <td style="width:40;text-align: left;">
+                                              <span> <b>Diagnosed</b> </span>
+                                         </td>
+                                         <td style="width:40;text-align: left;">
+                                              <span> <b>Remarks</b> </span>
+                                         </td>
+                                     </tr>
+                               </table>
+
+                              <span><b> Surgeries</b></span><br/>
+
+
+                              <span><b> Immunizations</b></span><br/>
+
+                               <table class="table table-bordered">
+                                    <tr>
+                                         <td style="width:50;text-align: left;">
+                                             <span> <b>Vaccine</b> </span>
+                                         </td>
+                                         <td style="width:50;text-align: left;">
+                                              <span> <b>Dose</b> </span>
+                                         </td>
+                                        <td style="width:50;text-align: left;">
+                                              <span> <b>Date</b> </span>
+                                         </td>
+                                        <td style="width:50;text-align: left;">
+                                              <span> <b>Next Dose</b> </span>
+                                         </td>
+                                        <td style="width:50;text-align: left;">
+                                              <span> <b>Observations</b> </span>
+                                         </td>
+                                     </tr>
+
+                                     <tr t-foreach="o.patient.vaccination_ids" t-as="vaccination">
+                                         <td style="width50;text-align: left;">
+                                             <span t-esc="vaccination.vaccine_id.name"/>
+                                         </td>
+                                         <td style="width:50;text-align: left;">
+                                             <span t-esc="vaccination.dose"/>
+                                         </td>
+                                         <td style="width:50;text-align: left;">
+                                             <span t-esc="vaccination.date"/>
+                                         </td>
+                                        <td style="width:50;text-align: left;">
+                                             <span t-esc="vaccination.next_dose_date"/>
+                                         </td>
+                                        <td style="width:50;text-align: left;">
+                                             <span t-esc="vaccination.observations"/>
+                                         </td>
+                                     </tr>
+                               </table>
+                              <br/>
+                              <span><b> Family History and Genetic Information</b></span><br/>
+                               <br/>
+                             <span><b> Family Information</b></span><br/>
+
+                            <table class="table table-bordered">
+                                  <tr t-foreach="o.patient.family_history" t-as="family_member">
+                                        <td style="width:100;text-align: left;">
+                                            <span t-esc="relative(family_member.id)"/>
+                                        </td>
+                                        <td style="width:100;text-align: left;">
+                                            <span t-esc="xory(family_member.id)"/>
+                                       </td>
+                                        <td style="width:100;text-align: left;">
+                                             <span t-esc="family_member.name.name"/>
+                                         </td>
+
+                                    </tr>
+                               </table>
+
+                              <br/>
+                             <span><b> Patient Genetic Information</b></span><br/>
+
+                              <table class="table table-bordered">
+                                  <tr t-foreach="o.patient.genetic_risks" t-as="gene">
+                                         <td style="width:100;text-align: left;">
+                                             <span t-esc="gene.disease_gene.name"/>
+                                         </td>
+                                        <td style="width:100;text-align: left;">
+                                             <span t-esc="gene.disease_gene.long_name"/>
+                                         </td>
+
+                                    </tr>
+                               </table>
+
+                             <br/>
+                             <span><b> Socioeconomics</b></span><br/>
+                            <br/>
+                             <span><b> Lifestyle</b></span><br/>
+                             <span t-field="o.patient.lifestyle_info"/><br/>
+                             <span><b> Sexuality:</b></span>
+                            <span t-esc="sexual_preferences(o.patient.id)"/>
+
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

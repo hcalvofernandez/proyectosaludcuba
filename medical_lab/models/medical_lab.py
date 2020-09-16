@@ -171,7 +171,6 @@ class Lab(models.Model):
         )
         return res
 
-    @api.model
     def get_analytes_summary(self):
         summ = ""
         for analyte in self.critearea:
@@ -182,7 +181,7 @@ class Lab(models.Model):
                     res_text = analyte.result_text
                 if analyte.result:
                     res = str(analyte.result) + " "
-                summ = summ + analyte.rec_name + " " + \
+                summ = summ + analyte.name + " " + \
                     res + res_text + "\n"
         self.analytes_summary = summ
 

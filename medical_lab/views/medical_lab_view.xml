@@ -326,18 +326,17 @@
 				</tree>
 			</field>
 		</record>
-		<!-- Shortcut to the Lab Reports from the Patient -->
+		<!-- Shortcut to the Lab Reports from the Patient
 		<record model="ir.actions.act_window" id="act_patient_lab_history_form1">
-		<field name="name">Lab: Reports</field>
-		<field name="res_model">medical.lab</field>
-		<field name="domain" eval="[('patient', '=', Eval('active_id'))]" pyson="1"/>
+			<field name="name">Lab: Reports</field>
+			<field name="res_model">medical.lab</field>
+			<field name="domain" eval="[('patient', '=', eval('active_id'))]" pyson="1"/>
 		</record>
-		<record model="ir.action.keyword"
-		id="act_open_patient_lab_history_keyword1">
-		<field name="keyword">form_relate</field>
-		<field name="model">medical.patient,-1</field>
-		<field name="action" ref="act_patient_lab_history_form1"/>
-		</record>
+		<record model="ir.action.keyword" id="act_open_patient_lab_history_keyword1">
+			<field name="keyword">form_relate</field>
+			<field name="model">medical.patient,-1</field>
+			<field name="action" ref="act_patient_lab_history_form1"/>
+		</record> -->
 		<!-- PATIENT HEALTH CONDITION -->
 		<record model="ir.ui.view" id="view_medical_patient_diseases_view_form">
 			<field name="name">medical_patient_medical_condition_form</field>

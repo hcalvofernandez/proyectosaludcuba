@@ -3,6 +3,7 @@
     Copyright 2008 Luis Falcon <lfalcon@gnusolidario.org>
     Copyright 2016 LasLabs Inc.
     Copyright 2020 LabViv.
+    License GPL-3.0 or later (http://www.gnu.org/licenses/gpl).
 -->
 <odoo>
     <record id="medical_patient_view_tree" model="ir.ui.view">
@@ -33,25 +34,24 @@
             </xpath>
             <xpath expr="//div[@name='buttons']" position="inside">
                 <button
-                    name="toggle_active"
-                    type="object"
-                    class="oe_stat_button"
-                    icon="fa-archive"
+                        name="toggle_active"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-archive"
                 >
                     <field
-                        name="active"
-                        widget="boolean_button"
-                        options='{"terminology": "archive"}'
-                />
-                    </button>
+                            name="active"
+                            widget="boolean_button"
+                            options='{"terminology": "archive"}'
+                    />
+                </button>
             </xpath>
             <xpath expr="//group[@name='main_data']">
                 <group name="main">
                     <field
-                        name="parent_id"
-                        colspan="2"
-                        string="Representante legal"
-
+                            name="parent_id"
+                            colspan="2"
+                            string="Representante legal"
                     />
                 </group>
             </xpath>
@@ -64,17 +64,17 @@
             </xpath> -->
             <xpath expr="//notebook" position="inside">
                 <page name="medical" string="Medico" autofocus="True">
-                    <group name="group_medical_buttons" class="oe_button_box" col="6">
+                    <group name="group_medical_buttons" class="oe_button_box" col="4">
                         <button
-                            name="toggle_is_pregnant"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-venus"
+                                name="toggle_is_pregnant"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-venus"
                         >
                             <field
-                                name="is_pregnant"
-                                widget="boolean_button"
-                                options='{
+                                    name="is_pregnant"
+                                    widget="boolean_button"
+                                    options='{
                                     "terminology": {
                                         "string_true": "Pregnant",
                                         "string_hover_true": "Switch to Not Pregnant",
@@ -103,10 +103,10 @@
                 <div>
                     <field name='weight' string="Peso" class="oe_inline" />
                     <field
-                        name='weight_uom'
-                        class="oe_inline"
-                        placeholder="Unidad de medida"
-                        string="Unidad de medida"
+                            name='weight_uom'
+                            class="oe_inline"
+                            placeholder="Unidad de medida"
+                            string="Unidad de medida"
                     />
                 </div>
             </xpath>
@@ -127,7 +127,7 @@
             </xpath>
             <xpath expr="//ul[@name='entity_details']/li" position="before">
                 <li name="field_dob" t-if="record.birthdate_date.raw_value">
-                    <strong>DOB:</strong> <field name="birthdate_date" />
+                    <strong>Date Of Birth:</strong> <field name="birthdate_date" />
                 </li>
                 <li name="field_age_gender" t-if="record.birthdate_date.raw_value &amp;&amp; record.gender.raw_value">
                     <field name="age"/> - <field name="gender"/>

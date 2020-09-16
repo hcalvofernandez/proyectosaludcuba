@@ -1,7 +1,7 @@
 # Copyright 2008 Luis Falcon <falcon@gnuhealth.org>
 # Copyright 2016 LasLabs Inc.
 # Copyright 2020 LabViv.
-
+# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).
 
 from datetime import datetime
 from odoo import _, api, fields, models
@@ -37,7 +37,7 @@ class ResPartner(models.Model):
     )
     weight = fields.Float()
     weight_uom = fields.Many2one(
-        string="Weight unit",
+        string="Peso",
         comodel_name="uom.uom",
         default=lambda s: s.env['res.lang'].default_uom_by_category('Weight'),
         domain=lambda self: [(

@@ -49,3 +49,4 @@ POST- Instalación:
 - Ajustes -> Traducciones -> Términos Traducidos:
     - Cambiar Valor de Traducción: «¡No se encontrarón archivos!» por «No hay registros. Cree uno.».
 
+hacer una rama por cada modulo nuevo en produccion 

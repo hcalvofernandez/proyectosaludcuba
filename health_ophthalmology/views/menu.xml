@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="ophthalmology_evaluation_action" model="ir.actions.act_window">
+			<field name="name">Ophthalmology</field>
+			<field name="res_model">gnuhealth.ophthalmology.evaluation</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					<!-- Add Text Here -->
+				</p>
+				<p>
+					<!-- More details about what a user can do with this object will be OK -->
+				</p>
+			</field>
+		</record>
+		<menuitem id="opthalmology_root_menu" name="Health Ophthalmology" sequence="2" web_icon="health_ophthalmology,static/description/icon.png" />
+		<menuitem id="opthalmology_menu" name="Health Ophthalmology" parent="opthalmology_root_menu" action="ophthalmology_evaluation_action" sequence="1" />
+	</data>
+</odoo>

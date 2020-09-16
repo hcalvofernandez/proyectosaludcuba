@@ -1,0 +1,240 @@
+<odoo>
+    <data>
+        <record id="view_medical_patient_extends_form" model="ir.ui.view">
+            <field name="name">medical.patient.extends.form</field>
+            <field name="model">medical.patient</field>
+            <field name="inherit_id" ref="medical.medical_patient_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='group_medical_general']" position="after">
+                    <group string="Blood Info" name="blood_info">
+                        <field name="blood_type"/>
+                        <field name="rh"/>
+                        <field name="hb"/>
+                    </group>
+                </xpath>
+                 <xpath expr="//group[@name='group_medical_general_left']/field[@name='gender']" position="after">
+                      <field name="marital_status"/>
+                 </xpath>
+            </field>
+        </record>
+
+        <record id="medical_institution_form" model="ir.ui.view">
+            <field name="name">res.partner.medical.institution.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">17</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="company_type" position="after">
+                    <group>
+                        <field name="is_institution"/>
+                    </group>
+                </field>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Institution"
+                          attrs="{'invisible': [('is_institution','=',False)]}">
+                        <group>
+                            <field name="code" attrs="{'required': [('is_institution', '=', True)]}"/>
+                            <newline/>
+                            <field name="institution_type" attrs="{'required': [('is_institution', '=', True)]}"/>
+                            <!-- <field name="main_specialty"/> -->
+                            <field name="public_level" attrs="{'required': [('is_institution', '=', True)]}"/>
+                            <field name="teaching"/>
+                            <field name="heliport"/>
+                            <newline/>
+                            <field name="trauma_center"/>
+                            <field name="trauma_level"
+                                   attrs="{'invisible': [('trauma_center','=',False)]}"/>
+                            <newline/>
+                            <field name="beds"/>
+                            <field name="operating_room"/>
+                            <field name="or_number"
+                                   attrs="{'invisible': [('operating_room','=',False)]}"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="medical_healthprofessional_view" model="ir.ui.view">
+            <field name="name">res.partner.medical.healthprofessional.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">17</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="company_type" position="after">
+                    <group>
+                        <field name="is_healthprof"/>
+                    </group>
+                </field>
+                <xpath expr="//notebook" position="inside">
+                    <page string="HealthProfessional"
+                          attrs="{'invisible': [('is_healthprof','=',False)]}">
+                        <group>
+                            <field name="code_healthprof"/>
+                            <field name="institution"/>
+                            <field name="specialties"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="medical_appointment_form" model="ir.ui.view">
+            <field name="name">medical.appointment.form.view</field>
+            <field name="model">medical.appointment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group colspan="4" col="6" id="appointment_header">
+                            <field name="name"/>
+                            <field name="institution"/>
+                            <field name="healthprof"/>
+                            <field name="patient"
+                                   attrs="{ 'required': [('state', '!=', 'free')] }"/>
+                            <field name="appointment_date"/>
+                            <field name="visit_type"/>
+                            <field name="urgency"/>
+                            <field name="appointment_type"/>
+                            <field name="state"/>
+                        </group>
+                        <newline/>
+                        <group colspan="4" id="doc_appointment_header">
+                            <field name="speciality"/>
+                        </group>
+                        <separator string="Information" id="sepatator_appointment_notes"/>
+                        <newline/>
+                        <field name="comments" colspan="4"/>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="medical_appointment_tree" model="ir.ui.view">
+            <field name="name">medical.appointment.tree.view</field>
+            <field name="model">medical.appointment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <button name="checked_in"
+                            help="The patient has arrived and is waiting"
+                            string="Checked in"
+                            attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                    <field name="appointment_date" string="Date"/>
+                    <field name="patient"/>
+                    <button name="no_show"
+                            help="The patient did not show up"
+                            string="No show"
+                            attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                    <field name="state"/>
+                    <field name="visit_type"/>
+                    <field name="appointment_type"/>
+                    <field name="urgency"/>
+                    <field name="speciality"/>
+                    <field name="healthprof"/>
+                    <field name="institution" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="medical_appointment_action">
+            <field name="name">Medical Appointment</field>
+            <field name="res_model">medical.appointment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="medical_appointment_menu"
+                name="Medical Appointment"
+                parent="medical.medical_root"
+                action="medical_appointment_action"
+        />
+
+        <record id="medical_hospital_bed_form" model="ir.ui.view">
+            <field name="name">medical.hospital.bed.form.view</field>
+            <field name="model">medical.hospital.bed</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <label for="name"/>
+                        <field name="name" context="{'default_is_bed': True}"/>
+                        <label for="institution"/>
+                        <field name="institution"/>
+                        <!--                        <label for="ward"/>-->
+                        <!--                        <field name="ward"/>-->
+                        <label for="bed_type"/>
+                        <field name="bed_type"/>
+                        <label for="telephone_number"/>
+                        <field name="telephone_number"/>
+                        <label for="state"/>
+                        <field name="state"/>
+                        <newline/>
+                        <group colspan="4" id="group_bed_extra_info">
+                            <field name="extra_info"/>
+                        </group>
+                        <newline/>
+                        <group colspan="4" id="group_bed_status">
+                            <button name="fix_bed" help="Click when Bed has been fixed / cleaned" string="Fix Bed"
+                                    icon="icon-ok"
+                                    confirm="Confirm that the bed has been cleaned / fixed and is now ready to use"
+                                    attrs="{'invisible': ['|', '|', ('state', '=', 'free'), ('state', '=', 'occupied'), ('state', '=', 'reserved')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="medical_hospital_bed_tree" model="ir.ui.view">
+            <field name="name">medical.hospital.bed.tree.view</field>
+            <field name="model">medical.hospital.bed</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="institution"/>
+                    <!--                    <field name="ward"/>-->
+                    <field name="state"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="medical_hospital_bed_action">
+            <field name="name">Hospital Bed</field>
+            <field name="res_model">medical.hospital.bed</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="medical_hospital_bed_menu"
+                name="Hospital Bed"
+                parent="medical.medical_root"
+                action="medical_hospital_bed_action"
+        />
+
+        <record id="product_template_form_view_extend" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="priority">6</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Medical" name="medical">
+                        <group>
+                            <field name="is_medicament"/>
+                            <field name="is_medical_supply"/>
+                            <field name="is_vaccine"/>
+                            <field name="is_bed"/>
+                            <field name="is_insurance_plan"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</odoo>

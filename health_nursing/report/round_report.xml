@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_gnuhealth_patient_rounding">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page card" style="">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th  colspan="3" >Round Code:
+                                            <span class="" t-field="o.code"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th  colspan="3" >Health Professional:
+                                            <span class="" t-field="o.health_professional.name"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th> Patient: <span t-field="o.name"/> </th>
+                                        <td> PUID: <span class="fa fa-2x fa-check-square-o"/> </td>
+                                        <td> Sex: <span class="" t-field="o.name.patient.gender"/> </td>
+                                        <!-- TODO falta el sexo -->
+                                    </tr>
+                                    <tr>
+                                        <th colspan="1">
+                                            Start: <span t-field="o.evaluation_start"/>
+                                        </th>
+                                        <th colspan="2">
+                                            End: <span  t-field="o.evaluation_end"/>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table">
+                                <tr>
+                                    <th>BP</th>
+                                    <th>Temp. (C)</th>
+                                    <th>Heart rate</th>
+                                    <th>Resp. rate</th>
+                                    <th>O2 Sat (%)</th>
+                                </tr>
+                                <tr>
+                                    <td><span t-field="o.systolic"/> / <span t-field="o.diastolic"/> </td>
+                                    <td><span t-field="o.temperature"/> </td>
+                                    <td><span t-field="o.bpm"/> </td>
+                                    <td><span t-field="o.respiratory_rate"/> </td>
+                                    <td><span t-field="o.osat"/> </td>
+                                </tr>
+                                <tr>
+                                    <th>Weight (kg)</th>
+                                    <th>Glycemia</th>
+                                    <th>Diuresis</th>
+                                    <th>Pain</th>
+                                    <th>Evolution</th>
+                                </tr>
+                                <tr>
+                                    <td><span t-field="o.weight"/> </td>
+                                    <td><span t-field="o.glycemia"/> </td>
+                                    <td><span t-field="o.diuresis"/> </td>
+                                    <!-- TODO <if test="round.pain == True"> Yes<if test="round.pain_level">;
+                                     Level: <round.pain_level></if></if><if test="round.pain == False">No</if>
+                                     -->
+                                    <!-- TODO <if test="round.evolution == 'n'">Status quo</if><if test="round.evolution == 'w'">
+                                    Worsening</if><if test="round.evolution == 'i'">Improving</if>-->
+
+                                </tr>
+                            </table>
+
+                            <div>
+                                <ul><h3>Procedures</h3></ul>
+                                <t t-foreach="o.procedures" t-as="proc">
+                                    <li> <span t-esc="proc.description"/> </li>
+                                </t>
+                            </div>
+
+                            <div>
+                                <h3>Summary</h3>
+                                <p><span class=" " t-field="o.round_summary"/></p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

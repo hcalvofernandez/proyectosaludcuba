@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Ing. Yadier Abel de Quesada yadierq87@gmail.com-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+<odoo>
+    <data>
+        <record id='gnuhealth_procedure_view_tree' model='ir.ui.view'>
+            <field name="name">gnuhealth procedure</field>
+            <field name="model">gnuhealth.procedure</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="notes"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

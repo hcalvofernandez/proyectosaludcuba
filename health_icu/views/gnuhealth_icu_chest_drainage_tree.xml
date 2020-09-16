@@ -1,6 +1,5 @@
 <odoo>
     <data>
-
         <record id='gnuhealth_icu_chest_drainage_view_tree' model='ir.ui.view'>
             <field name="name">ICU Test Drainage</field>
             <field name="model">gnuhealth.icu.chest.drainage</field>
@@ -18,6 +17,5 @@
                 </tree>
             </field>
         </record>
-
     </data>
 </odoo>

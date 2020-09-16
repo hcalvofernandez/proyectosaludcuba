@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
 <!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Yadieq87@gmail.com -->
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
@@ -9,17 +10,19 @@
         <field name="model">gnuhealth.icu.ventilation</field>
         <field name="arch" type="xml">
             <form>
-                <group id="group_icu_ventilation" colspan="4" col="8" string="Mechanical Ventilation">
-                    <field name="current_mv"/>
-                    <field name="mv_start"/>
-                    <field name="mv_end"/>
-                    <field name="mv_period"/>
-                    <field name="ventilation"/>
-                    <field name="ett_size"/>
-                    <field name="tracheostomy_size"/>
-                </group>
-                <newline/>
-                <field name="remarks"/>
+                <sheet>
+                    <group id="group_icu_ventilation" col="4" string="Mechanical Ventilation">
+                        <field name="current_mv"/>
+                        <field name="mv_start"/>
+                        <field name="mv_end" attrs="{'invisible': [('current_mv','=',True)] }"/>
+                        <field name="mv_period" attrs="{'invisible': [('current_mv','=',True)]}"/>
+                        <field name="ventilation"/>
+                        <field name="ett_size" attrs="{'invisible': [('ventilation','!=','ett')]}"/>
+                        <field name="tracheostomy_size" attrs="{'invisible': [('ventilation','!=','tracheostomy')]}"/>
+                        <newline/>
+                        <field name="remarks" colspan="4"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>

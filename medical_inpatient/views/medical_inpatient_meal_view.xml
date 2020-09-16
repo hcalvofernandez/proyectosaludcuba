@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <record id="medical_inpatient_meal_form_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.meal.form.view</field>
+            <field name="model">medical.inpatient.meal</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="institution" context="{'default_is_institution': True}"/>
+                            <newline/>
+                        </group>
+                        <group colspan="4" col="6" id="meal_diet_types">
+                            <field name="diet_therapeutic"/>
+                            <field name="diet_belief"/>
+                            <field name="diet_vegetarian"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="medical_inpatient_meal_tree_view" model="ir.ui.view">
+            <field name="name">medical.inpatient.meal.tree.view</field>
+            <field name="model">medical.inpatient.meal</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="diet_therapeutic"/>
+                    <field name="diet_vegetarian"/>
+                    <field name="diet_belief"/>
+                    <field name="institution"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="medical_inpatient_meal_action">
+            <field name="name">Inpatient Meal</field>
+            <field name="res_model">medical.inpatient.meal</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="medical_meal_menu"
+                name="Inpatient Meal"
+                parent="medical_inpatient_meal_menu"
+                action="medical_inpatient_meal_action"
+        />
+    </data>
+</odoo>

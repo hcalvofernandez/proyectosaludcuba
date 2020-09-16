@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--# Copyright 2020 Yadieq87@gmail.com -->
 <odoo>
     <data>
-
         <record id='gnuhealth_imaging_test_view_tree' model='ir.ui.view'>
             <field name="name">Imaging Test </field>
             <field name="model">gnuhealth.imaging.test</field>
@@ -14,6 +14,5 @@
                 </tree>
             </field>
         </record>
-
     </data>
 </odoo>

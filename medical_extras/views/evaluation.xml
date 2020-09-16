@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+        <record id="medical_patient_evaluation_tree" model="ir.ui.view">
+            <field name="name">medical.patient.evaluation.tree</field>
+            <field name="model">medical.patient.evaluation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="patient"/>
+                    <field name="gender"/>
+                    <field name="evaluation_start"/>
+                    <field name="evaluation_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+<!--       <record id="medical_signs_and_symptoms_tree" model="ir.ui.view">-->
+<!--            <field name="name">medical.signs_and_symptoms.tree</field>-->
+<!--            <field name="model">medical.signs_and_symptoms</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="sign_or_symptom"/>-->
+<!--                    <field name="clinical"/>-->
+<!--                    <field name="comments"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+       <record id="medical_patient_evaluation_form" model="ir.ui.view">
+            <field name="name">medical.patient.evaluation.form.view</field>
+            <field name="model">medical.patient.evaluation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                         <div class="oe_title">
+                            <label for="patient" class="oe_edit_only"/>
+                            <h1><field name="patient"/></h1>
+                         </div>
+                        <group>
+                            <group>
+                                <field name="gender"/>
+                                <field name="computed_age"/>
+                            </group>
+                             <group>
+                                 <field name="visit_type"/>
+                                 <field name="code"/>
+                            </group>
+                        </group>
+                        <notebook>
+                             <page string="Main Info">
+                                 <group col="9" colspan="4" string="Chief Complaint">
+                                       <field name="chief_complaint"/>
+                                       <field name="information_source"/>
+                                       <field name="reliable_info"/>
+                                 </group>
+                                 <newline/>
+                                 <separator string="Present Illness" colspan="4"/>
+                                 <field name="present_illness" colspan="4"/>
+                                 <newline/>
+                                 <separator string="Clinical and Physical exam" colspan="4"/>
+                                 <field name="evaluation_summary" colspan="4"/>
+                                 <newline/>
+<!--                                <group string="Main Condition">-->
+<!--                                    <field name="diagnosis" colspan="4"/>-->
+<!--                                </group>-->
+                                 <newline/>
+                                 <separator string="Treatment Plan" colspan="4"/>
+                                 <field name="directions" colspan="4"/>
+                                <newline/>
+                                <group>
+                                     <group>
+                                         <field name="state"/>
+                                         <field name="evaluation_start"/>
+                                         <field name="report_evaluation_date"/>
+                                     </group>
+                                     <group>
+                                        <field name="evaluation_endtime"/>
+                                        <field name="discharge_reason"/>
+                                    </group>
+                                </group>
+                             </page>
+                             <page string="Clinical">
+                                    <group colspan="4" col="6" string="Vital Signs" >
+                                        <field name="temperature"/>
+                                        <field name="systolic"/>
+                                        <field name="diastolic"/>
+                                        <field name="bpm"/>
+                                        <field name="respiratory_rate"/>
+                                        <field name="osat"/>
+                                    </group>
+                                  <newline/>
+                                 <group colspan="4" col="6" string="Anthropometry" >
+                                        <field name="weight"/>
+                                        <field name="height"/>
+                                        <field name="bmi"/>
+                                        <field name="abdominal_circ"/>
+                                        <field name="hip"/>
+                                        <field name="whr"/>
+                                        <field name="head_circumference"/>
+                                 </group>
+<!--                                 <newline/>-->
+<!--                                 <field name="signs_and_symptoms"/>-->
+                             </page>
+                             <page string="Mental">
+                                <group string="Psychological Assessment" colspan="4" >
+                                    <field name="psychological_assessment" height="200"/>
+                                </group>
+                                <newline/>
+                                <group string="Glasgow Coma Scale" colspan="4">
+                                    <field name="loc"/>
+                                    <field name="loc_eyes"/>
+                                    <field name="loc_verbal"/>
+                                    <field name="loc_motor"/>
+                                </group>
+                                <newline/>
+                             </page>
+
+                        </notebook>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+
+
+
+
+       <record model="ir.actions.act_window" id="action_medical_patient_evaluation">
+            <field name="name">Patient evaluation</field>
+            <field name="res_model">medical.patient.evaluation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="medical_patient_evaluation"
+                  name="Evaluation"
+                  sequence="21"
+                  parent="medical.medical_root"
+                  />
+
+        <menuitem id="evaluation_menu"
+                  name="Patient evaluation"
+                  parent="medical_patient_evaluation"
+                  sequence="1"
+                  action="action_medical_patient_evaluation"
+                  />
+
+   </data>
+</odoo>

@@ -1,112 +1,54 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2020 Yadieq87@gmail.com -->
 <odoo>
     <data>
         <!-- ir.action.act_window Todas las action del menu -->
-        <record model="ir.action.act_window" id="action_gnuhealth_icu_glasgow_form">
-            <field name="name">GCS</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.icu.glasgow</field>
-            <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
-        </record>
 
-        <record model="ir.action.act_window" id="action_gnuhealth_icu_ecg_form1">
-            <field name="name">ECGs</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.patient.ecg</field>
-            <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record model="ir.action.act_window" id="action_gnuhealth_inpatient_icu_form">
+        <record  id="action_gnuhealth_inpatient_icu_form" model="ir.actions.act_window">
             <field name="name">Patient ICU Info</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">gnuhealth.inpatient.icu</field>
             <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
         </record>
-
-        <record model="ir.action.act_window" id="action_gnuhealth_icu_apache2_form">
+        <record  id="action_gnuhealth_icu_apache2_form" model="ir.actions.act_window">
             <field name="name">APACHE II Score</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">gnuhealth.icu.apache2</field>
             <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
         </record>
-
-        <record model="ir.action.act_window" id="action_gnuhealth_icu_glasgow_form">
+        <record  id="action_gnuhealth_icu_glasgow_form" model="ir.actions.act_window">
             <field name="name">Glasgow Coma Scale</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">gnuhealth.icu.glasgow</field>
-            <field name="domain" eval="[('name.icu_admissions', '=', Eval('active_id'))]" pyson="1"/>
-            <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
         </record>
 
-        <record model="ir.action.act_window" id="action_gnuhealth_icu_apache2_form">
-            <field name="name">APACHE II</field>
+        <record id="action_gnuhealth_icu_ventilation_form" model="ir.actions.act_window">
+            <field name="name">Ventilation</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.icu.apache2</field>
-            <field name="domain" eval="[('name.icu_admissions', '=', Eval('active_id'))]" pyson="1"/>
+            <field name="res_model">gnuhealth.icu.ventilation</field>
             <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
         </record>
-
-        <record model="ir.action.act_window" id="action_gnuhealth_icu_ecg_form1">
-            <field name="name">Inpatient ECGs</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">gnuhealth.patient.ecg</field>
-            <field name="domain" eval="[('inpatient_registration_code.icu_admissions', '=', Eval('active_id'))]" pyson="1"/>
-            <field name="view_mode">kanban,form,tree</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <!-- Action keyword -->
-        <!--record model="ir.action.keyword"
-                id="act_open_ecg_keyword1">
-            <field name="keyword">form_relate</field>
-            <field name="model">gnuhealth.inpatient.icu,-1</field>
-            <field name="action" ref="act_ecg_form1"/>
-        </record>
-
-        <record model="ir.action.keyword"
-                id="act_open_glasgow_keyword1">
-            <field name="keyword">form_relate</field>
-            <field name="model">gnuhealth.inpatient.icu,-1</field>
-            <field name="action" ref="act_glasgow_form1"/>
-        </record>
-
-        <record model="ir.action.keyword"
-                id="act_open_apache_keyword1">
-            <field name="keyword">form_relate</field>
-            <field name="model">gnuhealth.inpatient.icu,-1</field>
-            <field name="action" ref="act_apache_form1"/>
-        </record-->
 
         <!-- Menu actions all -->
-        <!-- Initial Menu -->
+        <!-- Initial Menu TODO cuando este listo modulo health-inpatient-->
         <menuitem name="Intensive Care" id="gnuhealth_icu_menu"
-                  parent="health_inpatient.gnuhealth_inpatient_menu" sequence="900" icon="gnuhealth-icu"/>
-
-        <menuitem action="action_gnuhealth_icu_glasgow_form"
-                  name="ICU Glasgow list"
-                  id="menu_gnuhealth_icu_glasgow_list" icon="gnuhealth-list"
-                  parent="gnuhealth_icu_menu"/>
-
-        <menuitem action="action_gnuhealth_icu_apache2_form"
-                  name="ICU Apache2 list"
-                  id="menu_gnuhealth_icu_apache2_list" icon="gnuhealth-list"
-                  parent="gnuhealth_icu_menu"/>
-
-        <menuitem action="action_gnuhealth_icu_ecg_form1"
-                  name="ICU ECGs list"
-                  id="menu_gnuhealth_icu_ecgs_list1" icon="gnuhealth-list"
-                  parent="gnuhealth_icu_menu"/>
-
+                  parent="medical_inpatient.medical_inpatient_root" sequence="90" />
         <menuitem action="action_gnuhealth_inpatient_icu_form"
                   name="Inpatient ICU list"
-                  id="menu_gnuhealth_inpatient_icu_list" icon="gnuhealth-list"
-                  parent="gnuhealth_icu_menu" sequence="1"/>
+                  id="menu_gnuhealth_inpatient_icu_list"
+                  parent="gnuhealth_icu_menu"
+                  sequence="1"/>
+        <menuitem action="action_gnuhealth_icu_glasgow_form"
+                  name="ICU Glasgow list"
+                  id="menu_gnuhealth_icu_glasgow_list"
+                  parent="gnuhealth_icu_menu"
+                  sequence="2"/>
+        <menuitem action="action_gnuhealth_icu_apache2_form"
+                  name="ICU Apache2 list"
+                  id="menu_gnuhealth_icu_apache2_list"
+                  parent="gnuhealth_icu_menu"
+                  sequence="3"/>
+
 
     </data>
 </odoo>

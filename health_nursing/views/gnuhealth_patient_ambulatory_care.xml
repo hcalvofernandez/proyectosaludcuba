@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Ing. Yadier Abel de Quesada yadierq87@gmail.com-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+<odoo>
+    <record id="gnuhealth_patient_ambulatory_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth_patient_ambulatory.form.view</field>
+        <field name="model">gnuhealth.patient.ambulatory.care</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>                                   
+                    <button name="end_session" help="End this session" string="End" 
+                            icon="fa-close" confirm="End this session ?"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet string="Apache 2" modifiers="{}">
+                    <group col="4">
+                        <notebook>
+                            <page string="Main" id="ambulatory_care_main">
+                                <group  id="ambulatory_care_main_data" col="4">
+                                    <field name="patient"/>
+                                    <field name="name"/>
+                                    <field name="health_professional"/>
+                                    <!--<field name="base_condition"/>-->
+                                    <!--<field name="evaluation"/>-->
+                                    <field name="session_number"/>
+                                </group>
+                                <newline/>
+                                <group  col="6" string="Vital Signs" id="group_ambulatory_care_vital_signs">                                    
+                                    <field name="temperature"/>
+                                    <field name="systolic"/>
+                                    <field name="diastolic"/>
+                                    <field name="bpm"/>
+                                    <field name="respiratory_rate"/>
+                                    <field name="osat"/>
+                                </group>
+                                <newline/>
+                                <group  col="6" id="group_patient_care_others" string="Misc">
+                                    <field name="glycemia"/>
+                                    <field name="evolution"/>
+                                </group>
+                                <field  name="procedures"/>
+                                <newline/>
+                                <separator  string="Summary" id="separator_round_summary"/>
+                                <newline/>
+                                <field  name="session_notes"/>
+                                <newline/>
+                                <group  col="4" id="ambulatory_care_finish">
+                                    <field name="warning"/>
+                                    <field name="session_start"/>
+                                    <field name="ordering_professional"/>
+                                    <field name="session_end"/>
+                                    <field name="next_session"/>
+                                    <field name="signed_by"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Ing. Yadier Abel de Quesada yadierq87@gmail.com-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+<data>
+    <record id='gnuhealth_patient_ambulatory_care_view_tree' model='ir.ui.view'>
+        <field name="name">Patient Ambulatory Care</field>
+        <field name="model">gnuhealth.patient.ambulatory.care</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="warning"  />
+                <field name="name" />
+                <field name="patient" />
+                <field name="session_start" />
+                <field name="health_professional" />
+                <field name="evolution" />
+            </tree>
+        </field>
+    </record>
+</data>

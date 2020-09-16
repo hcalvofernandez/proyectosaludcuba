@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report string="Nursing rounds"
+                id="action_report_mod_instrumento_pago"
+                model="gnuhealth.patient.rounding"
+                report_type="qweb-pdf"
+                name="health_nursing.report_gnuhealth_patient_rounding"
+                file="health_nursing.round_report"
+                attachment_use="True"
+                print_report_name="'Nursing rounds - %s ' % object.code"
+        />
+    </data>
+</odoo>

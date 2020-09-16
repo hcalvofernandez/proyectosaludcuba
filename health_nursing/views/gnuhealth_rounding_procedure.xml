@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Ing. Yadier Abel de Quesada yadierq87@gmail.com-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+<odoo>
+    <record id="gnuhealth_procedure_form_view" model="ir.ui.view">
+        <field name="name">gnuhealth.procedure.form.view</field>
+        <field name="model">gnuhealth.procedure</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Procedure" modifiers="{}">
+                <group col="4">
+                    <field name="name"/>
+                    <newline/>
+                    <separator string="Procedure Details / Incidents" colspan="4" id="separator_procedure_details"/>
+                    <newline/>
+                    <field name="notes" colspan="4"/>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

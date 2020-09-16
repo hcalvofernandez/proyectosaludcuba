@@ -12,14 +12,15 @@
     """,
 
     'author': "GNU Solidario",
+    'author_name': "Yadier A. De Quesada",
+    'author_email':"yadierq87@gmail.com",
     'website': "https://www.gnuhealth.org",
 
     'category': 'Healthcare Industry',
     'version': '0.0.1',
 
     # any module necessary for this one to work correctly
-    #TODO depends 'health'
-    'depends': ['base'],
+    'depends': ['base','medical'],
 
     # always loaded
     'data': [
@@ -32,7 +33,8 @@
         'views/imaging_test_result_tree.xml',
         'views/imaging_test_type_form.xml',
         'views/imaging_test_type_tree.xml',
-        'views/patient_imaging_test_request_start_form.xml',
+        #'wizard/wizard_health_imaging_views.xml', TODO a wizard
+        'views/health_imaging_view.xml',
         #data
         'data/gnuhealth_commands.xml',
         'data/health_imaging_sequences.xml',

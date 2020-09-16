@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Ing. Yadier Abel de Quesada yadierq87@gmail.com-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+<odoo>
+    <data>
+        <!-- Rounding view -->
+        <record  id="action_gnuhealth_patient_rounding_form" model="ir.actions.act_window">
+            <field name="name">Patient Rounding</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gnuhealth.patient.rounding</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+        <!-- Outpatient Care view -->
+        <record  id="action_gnuhealth_patient_ambulatory_care_form" model="ir.actions.act_window">
+            <field name="name">Patient Ambulatory Care</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gnuhealth.patient.ambulatory.care</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+        <!-- Initial Menu -->
+        <!-- old parent parent="health.gnuhealth_menu"-->
+        <menuitem name="Nursing" id="gnuhealth_nursing_menu"
+                  parent="medical_inpatient.medical_inpatient_root"
+                  sequence="900"
+                  icon="fa-hospital"/>
+
+        <menuitem action="action_gnuhealth_patient_rounding_form"
+                  name="Patient Rounding"
+                  sequence="3"
+                  id="menu_gnuhealth_patient_rounding_list"
+                  parent="gnuhealth_nursing_menu"/>
+
+        <menuitem action="action_gnuhealth_patient_ambulatory_care_form"
+                  name="Patient Ambulatory Care"
+                  sequence="5"
+                  id="menu_gnuhealth_patient_ambulatory_care_list"
+                  parent="gnuhealth_nursing_menu"/>
+    </data>
+</odoo>

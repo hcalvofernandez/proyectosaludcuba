@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="medical_appointment_form_view_extend">
+            <field name="name">medical.appointment.form.view.extend</field>
+            <field name="model">medical.appointment</field>
+            <field name="inherit_id" ref="medical_extras.medical_appointment_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <field name="institution" position="after">
+<!--                    <label for="inpatient_registration_code"/>-->
+                    <field name="inpatient_registration_code"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
+

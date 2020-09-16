@@ -4,6 +4,7 @@
 #    GNU Health: The Free Health and Hospital Information System
 #    Copyright (C) 2008-2020 Luis Falcon <lfalcon@gnusolidario.org>
 #    Copyright (C) 2011-2020 GNU Solidario <health@gnusolidario.org>
+#    Copyright (C) 2020 Yadier Abel <yadierq87@gmail.com>
 #
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,72 +23,83 @@
 ##############################################################################
 
 from odoo import api, fields, models, _
-from datetime import date, datetime, timedelta
+from datetime import  datetime
+from dateutil.relativedelta import relativedelta
+from odoo.exceptions import UserError, ValidationError
+import logging
+_logger = logging.getLogger(__name__)
+
 
 __all__ = ['InpatientRegistration', 'InpatientIcu', 'Glasgow', 'ApacheII',
            'MechanicalVentilation', 'ChestDrainageAssessment',
            'PatientRounding']
-
 class InpatientRegistration(models.Model):
     """Patient admission History"""
-    _name = 'gnuhealth.inpatient.registration'
     _description = "Patient admission History"
     _order = 'id,name'
-    _table = 'gnuhealth_inpatient_registration'
-
+    _table = 'medical_inpatient_registration'
+    _inherit = "medical.inpatient.registration"
     icu = fields.Boolean('ICU', help='Shows if patient was admitted to'
                                      ' the Intensive Care Unit during the hospitalization period')
     icu_admissions = fields.One2many('gnuhealth.inpatient.icu',
                                      'name', "ICU Admissions")
-
 class InpatientIcu(models.Model):
     """Patient ICU Information"""
     _name = 'gnuhealth.inpatient.icu'
     _description = "Patient ICU Information"
     _order = 'id,name'
     _table = 'gnuhealth_inpatient_icu'
-
-    def icu_duration(self, name):
-        if self.discharged_from_icu:
-            end = self.icu_discharge_date
-        else:
-            end = datetime.now()
-        return end.date() - self.icu_admission_date.date()
-
-    name = fields.Many2one('gnuhealth.inpatient.registration',
+    name = fields.Many2one('medical.inpatient.registration',
                            'Registration Code', required=True)
-
-    admitted = fields.Boolean('Admitted', help="Will be set when the patient \
-        is currently admitted at ICU")
-
+    admitted = fields.Boolean('Admitted',
+                              help="Will be set when the patient is currently admitted at ICU",
+                              default=True)
     icu_admission_date = fields.Datetime('ICU Admission',
                                          help="ICU Admission Date", required=True)
     discharged_from_icu = fields.Boolean('Discharged')
-    icu_discharge_date = fields.Datetime('Discharge', )
-    #TODO                                  states={
-    #     'invisible': Not(Bool(('discharged_from_icu'))),
-    #     'required': Bool(('discharged_from_icu')),
-    #     },
-    # depends=['discharged_from_icu'])
-    #TODO a compute field icu_stay = fields.Function(fields.TimeDelta('Duration'), 'icu_duration')
-    icu_stay = fields.Datetime( 'icu_duration')
-
+    icu_discharge_date = fields.Datetime('Discharge'
+                                    ,compute='icu_duration',store=True,)
+    icu_stay = fields.Char('ICU stay',
+                            compute='icu_duration',store=True)
     mv_history = fields.One2many('gnuhealth.icu.ventilation',
                                  'name', "Mechanical Ventilation History")
-
+    #validar if discharged then addmited false
+    @api.onchange('discharged_from_icu')
+    def on_change_discharged_from_icu(self):
+        if self.discharged_from_icu:
+            self.admitted = False
+        else:
+            self.admitted = True
+    @api.depends('discharged_from_icu')
+    def icu_duration(self):
+        if self.discharged_from_icu:
+            end = datetime.now()
+            self.icu_discharge_date = end
+            if self.icu_admission_date:
+                rd = relativedelta(end.date(),self.icu_admission_date.date())
+                self.icu_stay =  str(rd.years) + " years " + " " + str(rd.months) \
+                                 + " months" + " " + str(rd.days) + " days"
+    @api.constrains('icu_admission_date',
+                    'icu_discharge_date')
+    def _check_admission_dates(self):
+        for record in self:
+            if record.icu_admission_date:
+                if record.icu_admission_date > datetime.utcnow():
+                    raise ValidationError(_("Admission date value is incorrect %s" % record.icu_admission_date))
+            if record.icu_admission_date and record.icu_discharge_date:
+                if record.icu_admission_date > record.icu_discharge_date:
+                    raise ValidationError(_("Discharge date value is incorrect! %s" % record.icu_discharge_date))
     @classmethod
     def __setup__(cls):
         super(InpatientIcu, cls).__setup__()
         cls._error_messages.update({
             'patient_already_at_icu': 'Our records indicate that the patient'
                                       ' is already admitted at ICU'})
-
     @classmethod
     def validate(cls, inpatients):
         super(InpatientIcu, cls).validate(inpatients)
         for inpatient in inpatients:
             inpatient.check_patient_admitted_at_icu()
-
     def check_patient_admitted_at_icu(self):
         # Verify that the patient is not at ICU already
         cursor = self.env.cr
@@ -98,48 +110,40 @@ class InpatientIcu(models.Model):
         if cursor.fetchone()[0] > 1:
             self.raise_user_error('patient_already_at_icu')
 
-    @staticmethod
-    def default_admitted():
-        return True
-
-    @api.depends('discharged_from_icu')
-    def on_change_with_admitted(self):
-        # Reset the admission flag when the patient is discharged from ICU
-        if self.discharged_from_icu:
-            res = False
-        else:
-            res = True
-        return res
-
 class Glasgow(models.Model):
-    'Glasgow Coma Scale'
+    """Glasgow Coma Scale"""
     _name = 'gnuhealth.icu.glasgow'
     _description = 'Glasgow Coma Scale'
     _order = 'id,name'
     _table = 'gnuhealth_icu_glasgow'
-
-    name = fields.Many2one('gnuhealth.inpatient.registration',
-                           'Registration Code', required=True)
-
-    evaluation_date = fields.Datetime('Date', help="Date / Time",
-                                      required=True)
-
+    name = fields.Many2one('medical.inpatient.registration',
+                           'Registration Code',
+                           required=True)
+    evaluation_date = fields.Datetime('Date',
+                                      help="Date / Time",
+                                      required=True,
+                                      default=lambda self: fields.Datetime.today())
     glasgow = fields.Integer('Glasgow',
+                             compute ='compute_glasgow',
+                             store=True,
                              help='Level of Consciousness - on Glasgow Coma Scale :  < 9 severe -'
-                                  ' 9-12 Moderate, > 13 minor')
+                                  ' 9-12 Moderate, > 13 minor',
+                             default=15)
     glasgow_eyes = fields.Selection([
         ('1', '1 : Does not Open Eyes'),
         ('2', '2 : Opens eyes in response to painful stimuli'),
         ('3', '3 : Opens eyes in response to voice'),
         ('4', '4 : Opens eyes spontaneously'),
-    ], 'Eyes', sort=False)
+    ], 'Eyes', sort=False,
+        default="4")
     glasgow_verbal = fields.Selection([
         ('1', '1 : Makes no sounds'),
         ('2', '2 : Incomprehensible sounds'),
         ('3', '3 : Utters inappropriate words'),
         ('4', '4 : Confused, disoriented'),
         ('5', '5 : Oriented, converses normally'),
-    ], 'Verbal', sort=False)
+    ], 'Verbal', sort=False,
+        default="5")
     glasgow_motor = fields.Selection([
         ('1', '1 : Makes no movement'),
         ('2', '2 : Extension to painful stimuli - decerebrate response -'),
@@ -148,53 +152,41 @@ class Glasgow(models.Model):
         ('4', '4 : Flexion / Withdrawal to painful stimuli'),
         ('5', '5 : localizes painful stimuli'),
         ('6', '6 : Obeys commands'),
-    ], 'Motor', sort=False)
-
-    @staticmethod
-    def default_glasgow_eyes():
-        return '4'
-
-    @staticmethod
-    def default_glasgow_verbal():
-        return '5'
-
-    @staticmethod
-    def default_glasgow_motor():
-        return '6'
-
-    @staticmethod
-    def default_glasgow():
-        return 15
-
-    # Default uation date
-    @staticmethod
-    def default_uation_date():
-        return datetime.now()
-
-    @api.depends('glasgow_verbal', 'glasgow_motor', 'glasgow_eyes')
-    def on_change_with_glasgow(self):
-        return int(self.glasgow_motor) + int(self.glasgow_eyes) + \
-               int(self.glasgow_verbal)
-
-    # Return the Glasgow Score with each component
-    def get_rec_name(self, name):
-        if self.name:
-            res = str(self.glasgow) + ': ' + 'E' + self.glasgow_eyes + ' V' + \
-                  self.glasgow_verbal + ' M' + self.glasgow_motor
-        return res
-
+    ], 'Motor', sort=False,
+        default="6")
+    glasgow_score = fields.Char("Glasgow Score",
+                                compute='compute_glasgow_score',
+                                store=True)
+    @api.depends('glasgow_verbal',
+                 'glasgow_motor',
+                 'glasgow_eyes')
+    def compute_glasgow(self):
+        res = 0
+        if self.glasgow_motor:
+            res += int(self.glasgow_motor)
+        if self.glasgow_eyes:
+            res += int(self.glasgow_eyes)
+        if self.glasgow_verbal:
+            res += int(self.glasgow_verbal)
+        self.glasgow = res
+    @api.depends('glasgow_verbal',
+                 'glasgow_motor',
+                 'glasgow_eyes')
+    def compute_glasgow_score(self):
+        if self.name and self.glasgow and self.glasgow_verbal\
+                and self.glasgow_eyes and self.glasgow_motor:
+            self.glasgow_score = str(self.glasgow) + ': ' + 'E' + self.glasgow_eyes +\
+                             ' V' +  self.glasgow_verbal + ' M' + self.glasgow_motor
 class ApacheII(models.Model):
     """Apache II scoring"""
     _name = 'gnuhealth.icu.apache2'
     _description = 'Apache II scoring'
     _order = 'id,name'
     _table = 'gnuhealth_icu_apache2'
-
-    name = fields.Many2one('gnuhealth.inpatient.registration',
+    name = fields.Many2one('medical.inpatient.registration',
                            'Registration Code', required=True)
     score_date = fields.Datetime('Date', help="Date of the score",
                                  required=True)
-
     age = fields.Integer('Age', help='Patient age in years')
     temperature = fields.Float('Temperature', help='Rectal temperature')
     mean_ap = fields.Integer('MAP', help='Mean Arterial Pressure')
@@ -203,48 +195,43 @@ class ApacheII(models.Model):
     fio2 = fields.Float('FiO2')
     pao2 = fields.Integer('PaO2')
     paco2 = fields.Integer('PaCO2')
-    aado2 = fields.Integer('A-a DO2')
-
+    aado2 = fields.Integer('A-a DO2',
+                           compute='compute_aado2',
+                           store=True)
     ph = fields.Float('pH')
     serum_sodium = fields.Integer('Sodium')
     serum_potassium = fields.Float('Potassium')
     serum_creatinine = fields.Float('Creatinine')
     arf = fields.Boolean('ARF', help='Acute Renal Failure')
     wbc = fields.Float('WBC', help="White blood cells x 1000 - if you"
-                                   " want to input 4500 wbc / ml, type in 4.5")
+                                  " want to input 4500 wbc / ml, type in 4.5")
     hematocrit = fields.Float('Hematocrit')
     gcs = fields.Integer('GSC', help='Last Glasgow Coma Scale'
                                      ' You can use the GSC calculator from the Patient uation Form.')
     chronic_condition = fields.Boolean('Chronic condition',
                                        help='Organ Failure or immunocompromised patient')
     hospital_admission_type = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('me', 'Medical or emergency postoperative'),
         ('el', 'elective postoperative')],
         'Hospital Admission Type',)
-    #TODO is domain in views states={
-    #    'invisible': Not(Bool(('chronic_condition'))),
-    #    'required': Bool(('chronic_condition'))}, sort=False)
-
-    apache_score = fields.Integer('Score')
-
+    apache_score = fields.Integer('Score',
+                                  compute='compute_apache_score',
+                                  store=True)
     #Default FiO2 PaO2 and PaCO2 so we do the A-a gradient
     #calculation with non-null values
-
     @api.depends('fio2', 'pao2', 'paco2')
-    def on_change_with_aado2(self):
+    def compute_aado2(self):
         # Calculates the Alveolar-arterial difference
         # based on FiO2, PaCO2 and PaO2 values
         if self.fio2 and self.paco2 and self.pao2:
-            return (713 * self.fio2) - (self.paco2 / 0.8) - self.pao2
-
+            self.aado2 = (713 * self.fio2) - (self.paco2 / 0.8) - self.pao2
     @api.depends('age', 'temperature', 'mean_ap', 'heart_rate',
                  'respiratory_rate', 'fio2', 'pao2', 'aado2', 'ph', 'serum_sodium',
                  'serum_potassium', 'serum_creatinine', 'arf', 'wbc', 'hematocrit',
                  'gcs', 'chronic_condition', 'hospital_admission_type')
-    def on_change_with_apache_score(self):
+    def compute_apache_score(self):
         # Calculate the APACHE SCORE from the variables in the
-
         total = 0
         # Age
         if self.age:
@@ -256,7 +243,6 @@ class ApacheII(models.Model):
                 total = total + 5
             elif self.age > 74:
                 total = total + 6
-
         # Temperature
         if self.temperature:
             if ((38.5 <= self.temperature < 39) or
@@ -269,7 +255,6 @@ class ApacheII(models.Model):
                 total = total + 3
             elif self.temperature >= 41 or self.temperature < 30:
                 total = total + 4
-
         # Mean Arterial Pressure (MAP)
         if self.mean_ap:
             if ((110 <= self.mean_ap < 130) or
@@ -279,7 +264,6 @@ class ApacheII(models.Model):
                 total = total + 3
             elif 160 <= self.mean_ap or self.mean_ap < 50:
                 total = total + 4
-
         # Heart Rate
         if self.heart_rate:
             if ((55 <= self.heart_rate < 70) or
@@ -335,7 +319,7 @@ class ApacheII(models.Model):
         if self.serum_sodium:
             if 150 <= self.serum_sodium < 155:
                 total = total + 1
-            elif ((155 <= self.serum_sodium < 160) or
+            elif ((self.serum_sodium >= 155 < 160) or
                       (120 <= self.serum_sodium < 130)):
                 total = total + 2
             elif ((160 <= self.serum_sodium < 180) or
@@ -343,7 +327,6 @@ class ApacheII(models.Model):
                 total = total + 3
             elif 180 <= self.serum_sodium or self.serum_sodium < 111:
                 total = total + 4
-
         # Serum Potassium
         if self.serum_potassium:
             if ((3 <= self.serum_potassium < 3.5) or
@@ -355,7 +338,6 @@ class ApacheII(models.Model):
                 total = total + 3
             elif 7 <= self.serum_potassium or self.serum_potassium < 2.5:
                 total = total + 4
-
         # Serum Creatinine
         if self.serum_creatinine:
             arf_factor = 1
@@ -369,7 +351,6 @@ class ApacheII(models.Model):
                 total = total + 3 * arf_factor
             elif self.serum_creatinine >= 3.5:
                 total = total + 4 * arf_factor
-
         # Hematocrit
         if self.hematocrit:
             if 46 <= self.hematocrit < 50:
@@ -379,7 +360,6 @@ class ApacheII(models.Model):
                 total = total + 2
             elif self.hematocrit >= 60 or self.hematocrit < 20:
                 total = total + 4
-
         # WBC ( x 1000 )
         if self.wbc:
             if 15 <= self.wbc < 20:
@@ -389,32 +369,32 @@ class ApacheII(models.Model):
                 total = total + 2
             elif self.wbc >= 40 or self.wbc < 1:
                 total = total + 4
-
         # Immnunocompromised or severe organ failure
         if self.chronic_condition:
             if self.hospital_admission_type == 'me':
                 total = total + 5
             else:
                 total = total + 2
-        return total
-
+        self.apache_score = total
 class MechanicalVentilation(models.Model):
     """Mechanical Ventilation History"""
     _name = 'gnuhealth.icu.ventilation'
     _description = 'Mechanical Ventilation History'
     _order = 'id'
     _table = 'gnuhealth_icu_ventilation'
-
-    def mv_duration(self, name):
+    #metodo compute para la duracion
+    @api.depends('current_mv','mv_start')
+    def mv_duration(self):
         start = end = datetime.now()
         if self.mv_start:
             start = self.mv_start
         if self.mv_end:
             end = self.mv_end
-        return end.date() - start.date()
+        if self.current_mv is False and self.mv_start and self.mv_end:
+            rd = relativedelta(end.date(), start.date())
+            self.mv_period = str(rd.years) + " years " + " " + str(rd.months) + " months" + " " + str(rd.days) + " days"
     name = fields.Many2one('gnuhealth.inpatient.icu', 'Patient ICU Admission',
                            required=True)
-
     ventilation = fields.Selection([
         ('none', 'None - Maintains Own'),
         ('nppv', 'Non-Invasive Positive Pressure'),
@@ -423,41 +403,36 @@ class MechanicalVentilation(models.Model):
         'Type', help="NPPV = Non-Invasive Positive "
                      "Pressure Ventilation, BiPAP-CPAP \n"
                      "ETT - Endotracheal Tube", sort=False)
-
     ett_size = fields.Integer('ETT Size',)
-    #TODO states={
-    #  'invisible': Not(Equal(('ventilation'), 'ett'))})
-
     tracheostomy_size = fields.Integer('Tracheostomy size',)
-    #TODO states={
-    #   'invisible': Not(Equal(('ventilation'), 'tracheostomy'))})
-
-    mv_start = fields.Datetime('From', help="Start of Mechanical Ventilation",
-                               required=True)
-    mv_end = fields.Datetime('To', help="End of Mechanical Ventilation",)
-    #TODO states={
-    #    'invisible': Bool(('current_mv')),
-    #    'required': Not(Bool(('current_mv'))),
-    #    },
-    #depends=['current_mv'])
-    #TODO a compute field mv_period = fields.Function(fields.TimeDelta('Duration'), 'mv_duration')
-    mv_period = fields.Datetime('mv_duration')
-    current_mv = fields.Boolean('Current')
+    mv_start = fields.Datetime('Date start mechanical Ventilation',
+                               help="Start of Mechanical Ventilation",
+                               required=True,
+                               default=datetime.now())
+    mv_end = fields.Datetime('Date End of Mechanical Ventilation',
+                             help="End of Mechanical Ventilation",
+                             default=datetime.now())
+    mv_period = fields.Char(compute=mv_duration,store=True)
+    current_mv = fields.Boolean('Current',
+                                default=True)
     remarks = fields.Char('Remarks')
+
+    @api.constrains('name')
+    def _check_currents_dates(self):
+        if self.current_mv is False and self.mv_start and self.mv_end:
+            if self.mv_start > self.mv_end:
+                raise ValidationError('Must have different dates!')
 
     @classmethod
     def __setup__(cls):
         super(MechanicalVentilation, cls).__setup__()
-        cls._error_messages.update({
-            'patient_already_on_mv': 'Our records indicate that the patient'
-                                     ' is already on Mechanical Ventilation !'})
-
+        cls._error_messages.update(dict(patient_already_on_mv='Our records indicate that the patient'
+                                                              ' is already on Mechanical Ventilation !'))
     @classmethod
     def validate(cls, inpatients):
         super(MechanicalVentilation, cls).validate(inpatients)
         for inpatient in inpatients:
             inpatient.check_patient_current_mv()
-
     def check_patient_current_mv(self):
         # Check for only one current mechanical ventilation on patient
         cursor = self.env.cr
@@ -468,27 +443,22 @@ class MechanicalVentilation(models.Model):
         if cursor.fetchone()[0] > 1:
             self.raise_user_error('patient_already_on_mv')
 
-    @staticmethod
-    def default_current_mv():
-        return True
-
 class ChestDrainageAssessment(models.Model):
     """Chest Drainage Asessment"""
     _name = 'gnuhealth.icu.chest.drainage'
     _description = 'Chest Drainage Asessment'
     _order = 'id'
     _table = 'gnuhealth_icu_chest_drainage'
-
     name = fields.Many2one('gnuhealth.patient.rounding', 'Rounding',
                            required=True)
     location = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('rl', 'Right Pleura'),
         ('ll', 'Left Pleura'),
         ('mediastinum', 'Mediastinum')],
         'Location', sort=False)
     fluid_aspect = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('serous', 'Serous'),
         ('bloody', 'Bloody'),
         ('chylous', 'Chylous'),
@@ -496,64 +466,54 @@ class ChestDrainageAssessment(models.Model):
         'Aspect', sort=False)
     suction = fields.Boolean('Suction')
     suction_pressure = fields.Integer('cm H2O',)
-    #TODO states={
-    #'invisible': Not(Bool(('suction'))),
-    #'required': Bool(('suction')),
-    #},
-    #TODO @api.depends=['suction'])
+    #TODO move to visual attrs states = {'suction': [('invisible', False),('required',True)]})
     oscillation = fields.Boolean('Oscillation')
     air_leak = fields.Boolean('Air Leak')
     fluid_volume = fields.Integer('Volume')
     remarks = fields.Char('Remarks')
-
 class PatientRounding(models.Model):
     # Nursing Rounding for ICU
     # Inherit and append to the existing model the new functionality for ICU
-    _name = 'gnuhealth.patient.rounding'
+    _inherit = 'gnuhealth.patient.rounding'
     _description = 'Chest Drainage Asessment'
     _order = 'id'
     _table = 'gnuhealth_patient_rounding'
-
     STATES = {'done':[('readonly', True)]}
     icu_patient = fields.Boolean('ICU', help='Check this box if this is'
                                              'an Intensive Care Unit rounding.', states=STATES)
     # Neurological assesment
     gcs = fields.Many2one('gnuhealth.icu.glasgow', 'GCS',
-                          domain=[('name', '=', ('name'))],states=STATES)
-    #TODO depends=['name'],)
-
+                          domain=[('name', '=', 'name')], states=STATES)
     pupil_dilation = fields.Selection([
         ('normal', 'Normal'),
         ('miosis', 'Miosis'),
         ('mydriasis', 'Mydriasis')],
-        'Pupil Dilation', sort=False,
+        'Pupil Dilation',
+        sort=False,
+        default='normal',
         states=STATES)
-
     left_pupil = fields.Integer('L', help="size in mm of left pupil",
                                 states=STATES)
     right_pupil = fields.Integer('R', help="size in mm of right pupil",
                                  states=STATES)
-
     anisocoria = fields.Boolean('Anisocoria',
+                                default=True,
+                                compute="compute_anisocoria",
                                 states=STATES)
-
     pupillary_reactivity = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('brisk', 'Brisk'),
         ('sluggish', 'Sluggish'),
         ('nonreactive', 'Nonreactive')],
         'Pupillary Reactivity', sort=False,
-        states=STATES)
-
+                                states=STATES)
     pupil_consensual_resp = fields.Boolean('Consensual Response',
                                            help="Pupillary Consensual Response",
                                            states=STATES)
-
     # Respiratory assesment
     # Mechanical ventilation information is on the patient ICU general info
-
     respiration_type = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('regular', 'Regular'),
         ('deep', 'Deep'),
         ('shallow', 'Shallow'),
@@ -561,40 +521,30 @@ class PatientRounding(models.Model):
         ('intercostal', 'Intercostal')],
         'Respiration', sort=False,
         states=STATES)
-
     oxygen_mask = fields.Boolean('Oxygen Mask',states=STATES)
     fio2 = fields.Integer('FiO2', states=STATES)
-
     peep = fields.Boolean('PEEP',states=STATES)
-
-    peep_pressure = fields.Integer('cm H2O', help="Pressure",)
-    #TODO                         states={
-    # 'invisible': Not(Bool(('peep'))),
-    # 'required': Bool(('peep')),
-    # 'readonly': ('state') == 'done',
-    # },
-    #depends=['peep'])
-
+    peep_pressure = fields.Integer('cm H2O', help="Pressure",
+                                   states = {'peep': [('invisible', False),('required',True)],
+                                             'state':[('readonly','=','done')]})
     sce = fields.Boolean('SCE', help="Subcutaneous Emphysema",
                          states=STATES)
     lips_lesion = fields.Boolean('Lips lesion',
                                  states=STATES)
     oral_mucosa_lesion = fields.Boolean('Oral mucosa lesion',
                                         states=STATES)
-
     # Chest expansion characteristics
     chest_expansion = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('symmetric', 'Symmetrical'),
         ('asymmetric', 'Asymmetrical')],
         'Expansion', sort=False,states=STATES)
     paradoxical_expansion = fields.Boolean('Paradoxical',
                                            help="Paradoxical Chest Expansion", states=STATES)
     tracheal_tug = fields.Boolean('Tracheal Tug',states=STATES)
-
     # Trachea position
     trachea_alignment = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('midline', 'Midline'),
         ('right', 'Deviated right'),
         ('left', 'Deviated left')],
@@ -604,15 +554,14 @@ class PatientRounding(models.Model):
     # Chest Drainages
     chest_drainages = fields.One2many('gnuhealth.icu.chest.drainage',
                                       'name', "Drainages",
-                                      states=STATES)
+                                       states=STATES)
     # Chest X-Ray
     xray = fields.Binary('Xray', states=STATES)
     # Cardiovascular assessment
-    #TODO ecg = fields.Many2one('gnuhealth.patient.ecg', 'Inpatient ECG',
-    #  domain=[('inpatient_registration_code', '=', ('name'))],states=STATES)
-    #TODO metodo depends=['name'],)
+    ecg = fields.Many2one('medical.patient.ecg', 'Inpatient ECG',
+                          domain=[('inpatient_registration_code', '=', 'name')], states=STATES)
     venous_access = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('none', 'None'),
         ('central', 'Central catheter'),
         ('peripheral', 'Peripheral')],
@@ -626,7 +575,7 @@ class PatientRounding(models.Model):
     dialysis = fields.Boolean('Dialysis',
                               states=STATES)
     edema = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('none', 'None'),
         ('peripheral', 'Peripheral'),
         ('anasarca', 'Anasarca')],
@@ -640,20 +589,20 @@ class PatientRounding(models.Model):
                                            states=STATES)
     # Abdomen & Digestive
     vomiting = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('none', 'None'),
         ('vomiting', 'Vomiting'),
         ('hematemesis', 'Hematemesis')],
         'Vomiting', sort=False, states=STATES)
     bowel_sounds = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('normal', 'Normal'),
         ('increased', 'Increased'),
         ('decreased', 'Decreased'),
         ('absent', 'Absent')],
         'Bowel Sounds', sort=False, states=STATES)
     stools = fields.Selection([
-        ('blank', '-'),
+        ('none', '-'),
         ('normal', 'Normal'),
         ('constipation', 'Constipation'),
         ('diarrhea', 'Diarrhea'),
@@ -662,12 +611,12 @@ class PatientRounding(models.Model):
     peritonitis = fields.Boolean('Peritonitis signs', states=STATES)
 
     @api.depends('left_pupil', 'right_pupil')
-    def on_change_with_anisocoria(self):
-        if (self.left_pupil == self.right_pupil):
-            return False
-        else:
-            return True
+    def compute_anisocoria(self):
+        if self.left_pupil and self.right_pupil:
+            if int(self.left_pupil) == int(self.right_pupil):
+                self.anisocoria = False
+            else:
+                self.anisocoria = True
 
-    @staticmethod
-    def default_pupil_dilation():
-        return 'normal'
+
+

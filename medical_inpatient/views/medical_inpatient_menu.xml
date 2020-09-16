@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <menuitem
+                id="medical_inpatient_root"
+                name="Hospitalizations"
+                sequence="10"
+                web_icon="medical_inpatient,static/description/icon.png"
+        />
+        <menuitem
+                id="medical_inpatient_menu"
+                name="Hospitalization"
+                parent="medical_inpatient_root"
+                sequence="10"
+        />
+        <menuitem
+                id="medical_therapeutic_diet_menu"
+                name="Therapeutic diets"
+                parent="medical_inpatient_root"
+                sequence="11"
+        />
+        <menuitem
+                id="medical_inpatient_meal_menu"
+                name="Inpatient Meals"
+                parent="medical_inpatient_root"
+                sequence="12"
+        />
+        <menuitem
+                id="medical_inpatient_meal_order_menu"
+                name="Meal Orders"
+                parent="medical_inpatient_root"
+                sequence="13"
+        />
+    </data>
+</odoo>

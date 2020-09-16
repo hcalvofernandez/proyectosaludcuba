@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- BEGIN INPATIENT ADMINISTRATION GROUP ACCESS RIGHTS -->
+
+        <!-- Create the Health Inpatient Administration group -->
+        <record model="res.groups" id="group_medical_inpatient_admin">
+            <field name="name">Medical Inpatient Administration</field>
+        </record>
+
+        <!-- Assign the Group to the "admin" user -->
+
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
+        </record>
+
+        <!-- Access to Menus -->
+
+        <record model="ir.ui.menu"
+                id="medical_inpatient.medical_inpatient_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
+        </record>
+
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_bed_transfer_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_diet_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
+
+        <record model="ir.ui.menu"
+                id="medical_inpatient.medical_diet_therapeutic_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_inpatient.medical_inpatient_meal_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
+        </record>
+
+        <record model="ir.ui.menu"
+                id="medical_inpatient.medical_inpatient_meal_order_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
+        </record>
+
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_meal_order_item_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_medication_admin_time_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_medication_log_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.menu"-->
+<!--                id="medical_inpatient.medical_inpatient_medication_menu">-->
+<!--            <field name="groups_id"-->
+<!--                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>-->
+<!--        </record>-->
+
+        <record model="ir.ui.menu"
+                id="medical_inpatient.medical_inpatient_registration_menu">
+            <field name="groups_id"
+                   eval="[(4, ref('medical_inpatient.group_medical_inpatient_admin'))]"/>
+        </record>
+
+    </data>
+</odoo>

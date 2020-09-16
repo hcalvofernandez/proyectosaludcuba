@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<!-- Patient Lab Test Results -->
+		<record model="ir.actions.act_window" id="medical_lab_action">
+			<field name="name">Patient Lab Test Results</field>
+			<field name="res_model">medical.lab</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No Patient Lab Test Results registered
+				</p>
+				<p>
+					You can add some register
+				</p>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_view">
+			<field name="model">medical.lab</field>
+			<field name="name">medical_lab</field>
+			<field name="arch" type="xml">
+				<form>
+					<notebook>
+						<page string="Main Info" id="lab_main_info">
+							<group>
+								<field name="name" />
+								<field name="test" />
+								<field name="date_analysis" />
+								<newline />
+								<field name="patient" />
+								<field name="pathologist" />
+								<newline />
+								<field name="date_requested" />
+								<field name="requestor" />
+								<field name="request_order" />
+								<field name="pathology" />
+								<newline />
+								<field name="critearea" colspan="4"
+									view_ids="medical_lab.test_critearea_view_tree_lab,medical_lab.test_critearea_view_form_lab"/>
+							</group>
+						</page>
+						<page string="Extra Info" id="lab_extra_info">
+							<group id="lab_result_extra_info" colspan="4">
+								<separator colspan="4" string="Notes" id="separator_notes" />
+								<field name="results" />
+								<newline />
+								<separator colspan="4" string="Diagnosis" id="separator_diagnosis" />
+								<field name="diagnosis" />
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_tree">
+			<field name="model">medical.lab</field>
+			<field name="name">medical_lab_tree</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="test" />
+					<field name="request_order" />
+					<field name="patient" />
+					<field name="date_analysis" widget="date" />
+					<field name="analytes_summary" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="test_critearea_view_tree_lab">
+            <field name="name">test_critearea_tree_lab</field>
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="10"/>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="warning"/>
+					<field name="excluded"/>
+					<field name="name" icon="lab_warning_icon"/>
+					<field name="result"/>
+					<field name="result_text"/>
+					<field name="lower_limit"/>
+					<field name="upper_limit"/>
+					<field name="units"/>
+					<field name="remarks"/>
+				</tree>
+			</field>
+        </record>
+        <record model="ir.ui.view" id="test_critearea_view_form_lab">
+            <field name="name">test_critearea_form_lab</field>
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="20"/>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="warning"/>
+						<field name="excluded"/>
+						<field name="name"/>
+						<field name="result"/>
+						<field name="units"/>
+						<field name="result_text"/>
+						<field name="lower_limit"/>
+						<field name="upper_limit"/>
+						<field name="normal_range"/>
+						<field name="remarks"/>
+					</group>
+				</form>
+			</field>
+        </record>
+		<!-- Lab Test -->
+		<record model="ir.actions.act_window" id="medical_lab_test_request_action">
+			<field name="name">Lab Test Requests</field>
+			<field name="res_model">medical.patient.lab.test</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No Lab Test Requests registered
+				</p>
+				<p>
+					You can add some register
+				</p>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_request_form">
+			<field name="name">medical_lab_test_request_form</field>
+			<field name="model">medical.patient.lab.test</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="request" />
+						<newline />
+						<field name="name" />
+						<field name="date" />
+						<field name="patient_id" />
+						<field name="doctor_id"/>
+						<field name="urgent" />
+						<field name="state" readonly="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_request_tree">
+			<field name="name">medical_lab_test_request_tree</field>
+			<field name="model">medical.patient.lab.test</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="request" />
+					<field name="name" />
+					<field name="date" widget="date" />
+					<field name="date" widget="time" />
+					<field name="patient_id" />
+					<field name="doctor_id"/>
+					<field name="state" readonly="1" />
+					<field name="urgent" />
+				</tree>
+			</field>
+		</record>
+		<!-- Lab Test Units -->
+		<record model="ir.actions.act_window" id="medical_lab_test_units_action">
+			<field name="name">Lab Test Units</field>
+			<field name="res_model">medical.lab.test.units</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No Lab Test Units registered
+				</p>
+				<p>
+					You can add some register
+				</p>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_units_form">
+			<field name="name">medical_lab_test_units_form</field>
+			<field name="model">medical.lab.test.units</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="name" />
+						<field name="code" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_units_tree">
+			<field name="name">medical_lab_test_units_tree</field>
+			<field name="model">medical.lab.test.units</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		<!-- Lab Test Type / Model -->
+		<record model="ir.actions.act_window" id="medical_lab_test_type_action">
+			<field name="name">Lab Test Types</field>
+			<field name="res_model">medical.lab.test_type</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No Lab Test Types registered
+				</p>
+				<p>
+					You can add some register
+				</p>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_type_view">
+			<field name="name">medical_lab_test</field>
+			<field name="model">medical.lab.test_type</field>
+			<field name="arch" type="xml">
+				<form>
+					<notebook>
+						<page string="Main Info" id="test_type_main_info">
+							<group id="labtest_header" col="6" colspan="4">
+								<field name="name" />
+								<field name="code" />
+								<field name="active" />
+							</group>
+							<newline />
+							<field name="critearea" colspan="4"
+								view_ids="medical_lab.test_critearea_view_tree_test_type,medical_lab.test_critearea_view_form_test_type"/>
+							<field name="product_id" />
+						</page>
+						<page string="Extra Info" id="test_type_extra_info">
+							<group>
+								<field name="info" />
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_type_tree">
+			<field name="name">medical_lab_test_tree</field>
+			<field name="model">medical.lab.test_type</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="active" />
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+        <record model="ir.ui.view" id="test_critearea_view_form_test_type">
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="20"/>
+            <field name="name">test_critearea_form_test_type</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="name"/>
+						<field name="units"/>
+						<field name="sequence"/>
+						<newline/>
+						<field name="lower_limit"/>
+						<field name="upper_limit"/>
+						<newline/>
+						<separator colspan="4" id="analyte_reference" string="Reference Value / Range"/>
+						<newline/>
+						<field colspan="4" name="normal_range"/>
+					</group>
+				</form>
+			</field>
+        </record>
+        <record model="ir.ui.view" id="test_critearea_view_tree_test_type">
+            <field name="model">medical.lab.test.critearea</field>
+            <field name="priority" eval="10"/>
+            <field name="name">test_critearea_tree_test_type</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="sequence"/>
+					<field name="name"/>
+					<field name="lower_limit"/>
+					<field name="upper_limit"/>
+					<field name="normal_range"/>
+					<field name="units"/>
+				</tree>
+			</field>
+        </record>
+		<!-- Lab Test Results -->
+		<record model="ir.actions.act_window" id="medical_lab_test_critearea_action">
+			<field name="name">Lab Test Critearea</field>
+			<field name="res_model">medical.lab.test_type</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No Lab Test Critearea registered
+				</p>
+				<p>
+					You can add some register
+				</p>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_critearea_form">
+			<field name="name">test_critearea_form_test_type</field>
+			<field name="model">medical.lab.test.critearea</field>
+			<field name="priority" eval="20" />
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="name"/>
+						<field name="units"/>
+						<field name="sequence"/>
+						<newline/>
+						<field name="lower_limit"/>
+						<field name="upper_limit"/>
+					</group>
+					<separator colspan="4" id="analyte_reference" string="Reference Value / Range" />
+					<group>
+						<field colspan="4" name="normal_range" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_test_critearea_tree">
+			<field name="name">test_critearea_tree_test_type</field>
+			<field name="model">medical.lab.test.critearea</field>
+			<field name="priority" eval="10" />
+			<field name="arch" type="xml">
+				<tree>
+					<field name="sequence" />
+					<field name="name" />
+					<field name="lower_limit" />
+					<field name="upper_limit" />
+					<field name="normal_range" />
+					<field name="units" />
+				</tree>
+			</field>
+		</record>
+		<!-- Shortcut to the Lab Reports from the Patient -->
+		<record model="ir.actions.act_window" id="act_patient_lab_history_form1">
+		<field name="name">Lab: Reports</field>
+		<field name="res_model">medical.lab</field>
+		<field name="domain" eval="[('patient', '=', Eval('active_id'))]" pyson="1"/>
+		</record>
+		<record model="ir.action.keyword"
+		id="act_open_patient_lab_history_keyword1">
+		<field name="keyword">form_relate</field>
+		<field name="model">medical.patient,-1</field>
+		<field name="action" ref="act_patient_lab_history_form1"/>
+		</record>
+		<!-- PATIENT HEALTH CONDITION -->
+		<record model="ir.ui.view" id="view_medical_patient_diseases_view_form">
+			<field name="name">medical_patient_medical_condition_form</field>
+			<field name="model">medical.patient.disease</field>
+			<field name="inherit_id" ref="medical_disease.medical_patient_view_disease_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='complementary_informations']" position="before">
+					<group string="Laboratory" colspan="4" id="group_lab_info">
+						<field name="lab_confirmed"/>
+						<field name="lab_test"
+							attrs="{'invisible': [('lab_confirmed','=', False)]}"/>
+					</group>
+				</xpath>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="tree_medical_patient_diseases">
+			<field name="name">medical_patient_medical_condition_tree</field>
+			<field name="model">medical.patient.disease</field>
+			<field name="inherit_id" ref="medical_disease.medical_patient_view_disease_tree"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='state']" position="after">
+					<field name="lab_confirmed"/>
+				</xpath>
+			</field>
+		</record>
+		<!-- Menu Items -->
+		<menuitem
+            id="lab_root_menu"
+            name="Laboratory"
+            sequence="2"
+            web_icon="medical_lab,static/description/icon.png"
+        />
+		<menuitem
+            id="medical_laboratory_menu"
+            name="Laboratory"
+            sequence="1"
+            parent="lab_root_menu"
+        />
+		<menuitem
+            id="lab_test_menu"
+            name="Patient Lab Test Results"
+            sequence="1"
+            parent="medical_laboratory_menu"
+            action="medical_lab_action"
+        />
+		<menuitem
+			id="medical_labtest_request"
+			name="Lab Test Requests"
+			sequence="20"
+			parent="medical_laboratory_menu"
+			action="medical_lab_test_request_action"
+		/>
+		<menuitem
+			id="medical_conf_laboratory"
+			name="Configuration"
+			sequence="1"
+			parent="lab_root_menu"
+		/>
+		<menuitem
+			id="lab_unit_conf_menu"
+			name="Lab Test Units"
+			sequence="1"
+			parent="medical_conf_laboratory"
+			action="medical_lab_test_units_action"
+		/>
+		<menuitem
+			id="menu_medical_lab_test_type_action"
+			name="Lab Test Types"
+			sequence="2"
+			parent="medical_conf_laboratory"
+			action="medical_lab_test_type_action"
+		/>
+		<menuitem
+			id="medical_lab_test_critearea_menu"
+			name="Lab Test Critearea"
+			sequence="30"
+			parent="medical_conf_laboratory"
+			action="medical_lab_test_critearea_action"
+		/>
+	</data>
+</odoo>

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
 <!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Yadieq87@gmail.com -->
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 
 <odoo>
@@ -9,19 +10,25 @@
         <field name="model">gnuhealth.inpatient.icu</field>
         <field name="arch" type="xml">
             <form>
-                <group colspan="4">
-                    <field name="name"/>
-                    <field name="admitted"/>
-                </group>
-                <newline/>
-                <group id="icu_group_dates" string="Period" col="8" colspan="4">
-                    <field name="icu_admission_date"/>
-                    <field name="icu_stay"/>
-                    <field name="discharged_from_icu"/>
-                    <field name="icu_discharge_date"/>
-                </group>
-                <newline/>
-                <field name="mv_history" colspan="4"/>
+                <sheet>
+                    <group col="4">
+                        <field name="name"
+                               options="{'no_create': True}"
+                                attrs="{'no_create': True}"/>
+                        <field name="admitted"/>
+                    </group>
+                    <newline/>
+                    <group id="icu_group_dates" string="Period"  col="4">
+                        <field name="icu_admission_date"/>
+                        <field name="icu_stay"/>
+                        <field name="discharged_from_icu"/>
+                        <field name="icu_discharge_date"
+                               attrs="{'invisible': [('discharged_from_icu','=',False)],
+                                        'required': [('discharged_from_icu','=',True)]}"/>
+                    </group>
+                    <newline/>
+                    <field name="mv_history" col="4"/>
+                </sheet>
             </form>
         </field>
     </record>

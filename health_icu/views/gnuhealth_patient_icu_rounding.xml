@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
 <!--# Copyright 2020 LabViv-->
+<!--# Copyright 2020 Yadieq87@gmail.com -->
 <!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
 <odoo>
     <data>
-
         <record model="ir.ui.view" id="gnuhealth_patient_icu_rounding_view">
             <field name="model">gnuhealth.patient.rounding</field>
-            <field name="inherit" ref="health_nursing.gnuhealth_patient_rounding_view" />
+            <field name="inherit" ref="medical_inpatient.medical_inpatient_registration_form_view" />
             <field name="name">gnuhealth_patient_icu_rounding</field>
             <form>
                 <xpath expr="/form/notebook/page/group/label[@name='warning']" position="replace"/>
@@ -18,7 +18,7 @@
                         <field name="warning"/>
                     </group>
                 </xpath>
-                <xpath expr="/form/notebook/page[@id='rounding_main']" position="after">
+                <xpath expr="/form/notebook/page[@id='page_care_plan']" position="after">
                     <page id="rounding_icu" string="ICU">
                         <group id="group_rounding_icu_neurologic" colspan="4" col="8" string="Neurologic">
                             <field name="gcs"/>
@@ -32,7 +32,7 @@
                             <field name="pupil_consensual_resp"/>
                         </group>
                         <newline/>
-                        <group colspan="4" id="group_rounding_icu_respiratory" string="Respiratory">
+                        <group col="4" id="group_rounding_icu_respiratory" string="Respiratory">
                             <group id="chest_icu_main">
                                 <field name="oxygen_mask"/>
                                 <field name="fio2"/>
@@ -58,12 +58,12 @@
                         </group>
                         <field name="chest_drainages" colspan="4"/>
                         <newline/>
-                        <group colspan="4" id="group_rounding_icu_cardio" string="Cardiovascular">
+                        <group col="4" id="group_rounding_icu_cardio" string="Cardiovascular">
                             <group id="icu_cardio_ecg" colspan="4" col="4">
                                 <field name="ecg" colspan="3"/>
                             </group>
                             <newline/>
-                            <group id="icu_vessel_access" colspan="4" col="10">
+                            <group id="icu_vessel_access" col="4" >
                                 <field name="venous_access"/>
                                 <field name="swan_ganz"/>
                                 <field name="arterial_access"/>
@@ -71,14 +71,14 @@
                                 <field name="edema"/>
                             </group>
                         </group>
-                        <group id="icu_skin" string="Blood and Skin" colspan="4" col="10">
+                        <group id="icu_skin" string="Blood and Skin"  col="4">
                             <field name="bacteremia"/>
                             <field name="ssi"/>
                             <field name="wound_dehiscence"/>
                             <field name="cellulitis"/>
                             <field name="necrotizing_fasciitis"/>
                         </group>
-                        <group id="digestive" string="Digestive and Abdomen" colspan="4" col="10">
+                        <group id="digestive" string="Digestive and Abdomen" col="10">
                             <field name="vomiting"/>
                             <field name="bowel_sounds"/>
                             <field name="stools"/>
@@ -88,6 +88,5 @@
                 </xpath>
             </form>
         </record>
-
     </data>
 </odoo>

@@ -13,16 +13,15 @@
     """,
 
     'author': "GNU Solidario",
+	'author_name': "Yadier A. De Quesada",
+	'author_email': "yadierq87@gmail.com",
     'website': "https://www.gnuhealth.org",
 
     'category': 'Healthcare Industry',
     'version': '0.0.1',
 
     # any module necessary for this one to work correctly
-    #TODO depends 'health'
-    #health_inpatient
-    #health_nursing
-    'depends': ['base'],
+    'depends': ['base','medical','medical_inpatient','medical_extras','health_nursing'],
 
     # always loaded
     'data': [
@@ -37,7 +36,7 @@
         'views/gnuhealth_icu_ventilation_tree.xml',
         'views/gnuhealth_inpatient_icu_form.xml',
         'views/gnuhealth_inpatient_icu_tree.xml',
-        'views/gnuhealth_patient_icu_rounding.xml',
+        #'views/gnuhealth_patient_icu_rounding.xml',
         'views/health_icu_view.xml',
     ],
     'installable': True,

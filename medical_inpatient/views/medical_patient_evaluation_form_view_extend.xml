@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Copyright 2011-2020 GNU Solidario <health@gnusolidario.org>-->
+<!--# Copyright 2020 LabViv-->
+<!--# License GPL-3.0 or later (http://www.gnu.org/licenses/gpl.html).-->
+
+<odoo>
+    <data>
+        <!--todo import patient.evaluation from health-->
+        <!-- Include inpatient registration on evaluation form -->
+<!--        <record model="ir.ui.view" id="medical_patient_evaluation_view_form_extend">-->
+        <!--            <field name="name">medical.patient.evaluation.view.form.extend</field>-->
+        <!--            <field name="model">medical.patient.evaluation</field>-->
+        <!--            <field name="inherit_id" ref="medical.medical_patient_evaluation_view"/>-->
+        <!--            <field name="priority" eval="20"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name=evaluation_type]" position="after">-->
+        <!--                    <label for="inpatient_registration_code"/>-->
+        <!--                    <field name="inpatient_registration_code"/>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

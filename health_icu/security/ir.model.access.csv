@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_gnuhealth_inpatient_registration,gnuhealth.inpatient.registration,model_gnuhealth_inpatient_registration,base.group_user,1,1,1,1
+access_medical_inpatient_registration,medical.inpatient.registration,model_medical_inpatient_registration,base.group_user,1,1,1,1
 access_gnuhealth_inpatient_icu,gnuhealth.inpatient.icu,model_gnuhealth_inpatient_icu,base.group_user,1,1,1,1
 access_gnuhealth_icu_glasgow,gnuhealth.icu.glasgow,model_gnuhealth_icu_glasgow,base.group_user,1,1,1,1
 access_gnuhealth_icu_apache2,gnuhealth.icu.apache2,model_gnuhealth_icu_apache2,base.group_user,1,1,1,1

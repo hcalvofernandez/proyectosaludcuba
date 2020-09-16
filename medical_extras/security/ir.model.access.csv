@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_pathology,access_medical_pathology,model_medical_pathology,base.group_user,1,1,1,1
+access_medical_appointment,access_medical_appointment,model_medical_appointment,base.group_user,1,1,1,1
+access_medical_specialty,access_medical_specialty,model_medical_specialty,base.group_user,1,1,1,1
+access_medical_hp_specialty,access_medical_hp_specialty,model_medical_hp_specialty,base.group_user,1,1,1,1
+access_medical_hospital_bed,access_medical_hospital_bed,model_medical_hospital_bed,base.group_user,1,1,1,1
+access_medical_medicament_category,access_medical_medicament_category,model_medical_medicament_category,base.group_user,1,1,1,1
+access_medical_medicament,access_medical_medicament,model_medical_medicament,base.group_user,1,1,1,1
+access_medical_drug_form,access_medical_drug_form,model_medical_drug_form,base.group_user,1,1,1,1
+access_medical_drug_route,access_medical_drug_route,model_medical_drug_route,base.group_user,1,1,1,1
+access_medical_dose_unit,access_medical_dose_unit,model_medical_dose_unit,base.group_user,1,1,1,1

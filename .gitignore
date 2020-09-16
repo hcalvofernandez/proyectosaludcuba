@@ -25,3 +25,5 @@ build/
 *.dat
 *.swp
 .idea/
+proyectosaludcuba.iml
+misc.xml

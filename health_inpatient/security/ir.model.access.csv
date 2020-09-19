@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_health_inpatient_registration_group_health_inpatient_admin,gnuhealth.inpatient.registration.group.health.inpatient.admin,health_inpatient.model_health_inpatient_registration,group_health_inpatient_admin,1,1,1,1

@@ -125,10 +125,6 @@
             </field>
         </record>
 
-
-
-
-
        <record model="ir.actions.act_window" id="action_medical_patient_evaluation">
             <field name="name">Patient evaluation</field>
             <field name="res_model">medical.patient.evaluation</field>
@@ -138,7 +134,7 @@
 
         <menuitem id="medical_patient_evaluation"
                   name="Evaluation"
-                  sequence="21"
+                  sequence="30"
                   parent="medical.medical_root"
                   />
 

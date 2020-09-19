@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
+    'name': "Medical History",
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Medical Laboratory Module""",
 
     'description': """
         GNU Health personal and medical history package
@@ -14,7 +14,6 @@
     'version': '0.0.1',
     'depends': [
                 'medical_extras',
-                'medical_genetics',
                 'medical_gyneco',
                 'health_lifestyle',
                 'health_vaccination'

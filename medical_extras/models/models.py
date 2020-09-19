@@ -59,6 +59,13 @@ class MedicalPatientExtends(models.Model):
         help='Write any important information on the patient\'s condition,'
         ' surgeries, allergies, ...')
 
+    genetic_risks = fields.One2many('medical.patient.genetic.risk',
+                                    'patient',
+                                    'Genetic Information')
+    family_history = fields.One2many('medical.patient.family.diseases',
+                                     'patient',
+                                     'Family History')
+
 
 class MedicalInstitution(models.Model):
     _name = 'res.partner'
@@ -906,3 +913,75 @@ class DrugDoseUnits(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'The Unit must be unique!'),
     ]
+
+
+class PatientGeneticRisk(models.Model):
+    _description = 'Patient Genetic Information'
+    _name = 'medical.patient.genetic.risk'
+
+    patient = fields.Many2one('medical.patient',
+                              'Patient',
+                              index=True)
+    disease_gene = fields.Many2one('medical.disease.gene',
+                                   'Gene',
+                                   required=True)
+
+
+class DiseaseGene(models.Model):
+    _description = 'Disease Genes'
+    _name = 'medical.disease.gene'
+
+    name = fields.Char('Gene Name',
+                       required=True,
+                       index=True)
+    protein_name = fields.Char('Protein Code',
+                               help="Encoding Protein Code, such as UniProt protein name",
+                               index=True)
+    long_name = fields.Char('Official Long Name',
+                            translate=True)
+    gene_id = fields.Char('Gene ID',
+                          help="default code from NCBI Entrez database.",
+                          index=True)
+    chromosome = fields.Char('Chromosome',
+                             help="Name of the affected chromosome",
+                             index=True)
+    location = fields.Char('Location',
+                           help="Locus of the chromosome")
+
+    info = fields.Text('Information',
+                       help="Extra Information")
+
+
+class FamilyDiseases(models.Model):
+    _description = 'Family History'
+    _name = 'medical.patient.family.diseases'
+
+    patient = fields.Many2one('medical.patient',
+                              'Patient',
+                              index=True)
+    name = fields.Many2one('medical.pathology',
+                           'Condition',
+                           required=True)
+    xory = fields.Selection([('none', ''),
+                             ('m', 'Maternal'),
+                             ('f', 'Paternal'),
+                             ('s', 'Sibling'), ],
+                            'Maternal or Paternal',
+                            index=True)
+
+    relative = fields.Selection([('mother', 'Mother'),
+                                 ('father', 'Father'),
+                                 ('brother', 'Brother'),
+                                 ('sister', 'Sister'),
+                                 ('aunt', 'Aunt'),
+                                 ('uncle', 'Uncle'),
+                                 ('nephew', 'Nephew'),
+                                 ('niece', 'Niece'),
+                                 ('grandfather', 'Grandfather'),
+                                 ('grandmother', 'Grandmother'),
+                                 ('cousin', 'Cousin'), ],
+                                'Relative',
+                                help='First degree = siblings, mother and father\n'
+                                     'Second degree = Uncles, nephews and Nieces\n'
+                                     'Third degree = Grandparents and cousins',
+                                required=True)

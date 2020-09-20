@@ -4,3 +4,4 @@ access_medical_lab,access_medical_lab,model_medical_lab,base.group_user,1,1,1,1
 access_medical_patient_lab_test,access_medical_patient_lab_test,model_medical_patient_lab_test,base.group_user,1,1,1,1
 access_medical_lab_test_units,access_medical_lab_test_units,model_medical_lab_test_units,base.group_user,1,1,1,1
 access_medical_lab_test_critearea,access_medical_lab_test_critearea,model_medical_lab_test_critearea,base.group_user,1,1,1,1
+access_medical_lab_categories,access_medical_lab_categories,model_medical_lab_categories,base.group_user,1,1,1,1

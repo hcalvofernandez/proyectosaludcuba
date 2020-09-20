@@ -126,6 +126,7 @@
 				<form>
 					<group>
 						<field name="request" />
+						<field name="category" />
 						<newline />
 						<field name="name" />
 						<field name="date" />
@@ -186,6 +187,44 @@
 				<tree>
 					<field name="name" />
 					<field name="code" />
+				</tree>
+			</field>
+		</record>
+		<!-- Lab Test Category -->
+		<record model="ir.actions.act_window" id="medical_lab_categories_action">
+			<field name="name">Lab Test Category</field>
+			<field name="res_model">medical.lab.categories</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					No Lab Test Categories registered
+				</p>
+				<p>
+					You can add some register
+				</p>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_categories_form">
+			<field name="name">medical_lab_categories_form</field>
+			<field name="model">medical.lab.categories</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<field name="name" />
+						<field name="detail" />
+						<field name="conditions" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="medical_lab_categories_tree">
+			<field name="name">medical_lab_categories_tree</field>
+			<field name="model">medical.lab.categories</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="detail" />
+					<field name="conditions" />
 				</tree>
 			</field>
 		</record>
@@ -403,9 +442,16 @@
 			action="medical_lab_test_units_action"
 		/>
 		<menuitem
+			id="lab_categories_menu"
+			name="Lab Test Categories"
+			sequence="2"
+			parent="medical_conf_laboratory"
+			action="medical_lab_categories_action"
+		/>
+		<menuitem
 			id="menu_medical_lab_test_type_action"
 			name="Lab Test Types"
-			sequence="2"
+			sequence="4"
 			parent="medical_conf_laboratory"
 			action="medical_lab_test_type_action"
 		/>

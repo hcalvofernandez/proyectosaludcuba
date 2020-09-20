@@ -226,6 +226,32 @@ class MedicalLabTestUnits(models.Model):
     ]
 
 
+class MedicalLabCategories(models.Model):
+    _name = 'medical.lab.categories'
+    _description = 'Lab Test Categories'
+
+    name = fields.Char(
+        string='Category',
+        index=True
+    )
+    detail = fields.Char(
+        string='Detail',
+        index=True
+    )
+    conditions = fields.Char(
+        string='Conditions',
+        index=True
+    )
+
+    sql_constraints = [
+        (
+            'name_uniq',
+            'unique(name)',
+            'The Cayegory name must be unique'
+        )
+    ]
+
+
 class MedicalTestCritearea(models.Model):
     _name = 'medical.lab.test.critearea'
     _description = 'Lab Test Critearea'
@@ -365,6 +391,10 @@ class MedicalPatientLabTest(models.Model):
     urgent = fields.Boolean(
         string='Urgent'
     )
+    category = fields.Many2one(
+        comodel_name='medical.lab.categories',
+        string='Category',
+        help='Category of this lab test')
 
     @api.model
     def default_get(self, fields):

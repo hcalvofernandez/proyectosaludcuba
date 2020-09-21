@@ -9,7 +9,7 @@
             <field name="model">medical.hospital.bed</field>
             <field name="inherit_id" ref="medical_extras.medical_hospital_bed_form"/>
             <field name="arch" type="xml">
-                  <xpath expr="/form/sheet/group" position="before">
+                  <xpath expr="/form/sheet/group" position="after">
                       <label for="calendar"/>
                       <field name="calendar"/>
                  </xpath>

@@ -16,11 +16,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {
-    'name': 'gnuhealth_inpatient_calendar',
+    'name': 'medical_inpatient_calendar',
     'summary': 'GNU Health package for hospitalization calendar functionality',
     'version': '0.0.1',
     'category': 'Medical',
     'depends': [
+        'medical_extras',
         'medical_inpatient',
         'calendar',
         #'health_calendar', TODO incluir

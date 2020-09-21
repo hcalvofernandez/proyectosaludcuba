@@ -448,7 +448,7 @@ class InpatientRegistration(models.Model):
         return models.lazy_name_get(self.browse(rec).with_user(name_get_uid))
 
 
-class BedTransfer(models.Model):
+class o BedTransfer(models.Model):
     _description = 'Bed transfers'
     _name = 'medical.bed.transfer'
 

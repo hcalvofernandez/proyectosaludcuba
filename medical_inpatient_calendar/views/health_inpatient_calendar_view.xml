@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+    <!-- Health center Bed -->
+        <!-- Health center Bed -->
+         <record id="medical_hospital_bed_form_view_inherit" model="ir.ui.view">
+            <field name="name">medical.hospital.bed.form.view.inherit</field>
+            <field name="model">medical.hospital.bed</field>
+            <field name="inherit_id" ref="medical_extras.medical_hospital_bed_form"/>
+            <field name="arch" type="xml">
+                  <xpath expr="/form/sheet/group" position="before">
+                      <label for="calendar"/>
+                      <field name="calendar"/>
+                 </xpath>
+            </field>
+        </record>
+
+           <!-- Patient hospitalization and bed registration (in-patient registration) -->
+
+        <record id="medical_inpatient_registration_inherit" model="ir.ui.view">
+            <field name="name">medical.inpatient.registration.inherit</field>
+            <field name="model">medical.inpatient.registration</field>
+            <field name="inherit_id" ref="medical_inpatient.medical_inpatient_registration_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/group/group/field[@name='discharge_date']" position="after">
+                       <field name="event"/>
+                 </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

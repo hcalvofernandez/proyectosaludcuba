@@ -1,50 +1,24 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    GNU Health: The Free Health and Hospital Information System
-#    # Package : Health Inpatient Calendar
-#    Copyright (C) 2008-2018  Luis Falcon <falcon@gnuhealth.org>
-#    Copyright (C) 2011-2012  Sebastián Marró <smarro@thymbra.com>
-#    Copyright (C) 2008-2018  GNU Solidario <health@gnusolidario.org>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from trytond.model import ModelView, ModelSQL, fields
-from trytond.pool import Pool
-
 
 __all__ = ['HospitalBed', 'InpatientRegistration']
 
 from odoo import api, fields, models, _
 
+
 class HospitalBed(models.Model):
     "Add Calendar to Hospital Bed"
-    _name = "gnuhealth.hospital.bed"
-    _description = "Add Calendar to Hospital Bed"
+    _inherit = "medical.hospital.bed"
 
-    calendar = fields.Many2One('calendar.calendar', 'Calendar')
+    calendar = fields.Many2one('calendar.event', 'Calendar')
 
 
 class InpatientRegistration(models.Model):
     'Add Calendar to the Inpatient Registration'
-    __name__ = 'gnuhealth.inpatient.registration'
+    _inherit = 'medical.inpatient.registration'
 
-    event = fields.Many2One('calendar.event', 'Calendar Event', readonly=True,
+    event = fields.Many2one('calendar.event', 'Calendar Event', readonly=True,
         help="Calendar Event")
 
-    @classmethod
     def confirmed(self, registrations):
         super(InpatientRegistration, self).confirmed(registrations)
 

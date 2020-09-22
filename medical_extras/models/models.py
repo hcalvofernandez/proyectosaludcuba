@@ -985,3 +985,102 @@ class FamilyDiseases(models.Model):
                                      'Second degree = Uncles, nephews and Nieces\n'
                                      'Third degree = Grandparents and cousins',
                                 required=True)
+
+
+class DomiciliaryUnit(models.Model):
+    _name = 'medical.du'
+    _description = 'Domiciliary Unit'
+
+    name = fields.Char('Code', required=True)
+    desc = fields.Char('Desc')
+    address_street = fields.Char('Street')
+    address_street_number = fields.Integer('Number')
+    address_street_bis = fields.Char('Apartment')
+
+    address_district = fields.Char(
+        'District', help="Neighborhood, Village, Barrio....")
+
+    address_municipality = fields.Char(
+        'Municipality', help="Municipality, Township, county ..")
+    address_city = fields.Char('City')
+    address_zip = fields.Char('Zip Code')
+    address_country = fields.Many2one(
+        'country.country', 'Country', help='Country')
+
+    # address_subdivision = fields.Many2one(
+    #     'country.subdivision', 'Subdivision',
+    #     domain=[('country', '=', 'address_country')],
+    #     depends=['address_country'])
+
+    # operational_sector = fields.Many2one(
+    #     'gnuhealth.operational_sector', 'Operational Sector')
+
+    picture = fields.Binary('Picture')
+
+    latitude = fields.Integer('Latitude', digits=(3, 14))
+    longitude = fields.Integer('Longitude', digits=(4, 14))
+    altitude = fields.Integer('Altitude', help="Altitude in meters")
+
+    urladdr = fields.Char(
+        'OSM Map',
+        help="Locates the DU on the Open Street Map by default")
+
+    # Text Representation
+    address_repr = fields.Text("DU Address"
+        'get_du_address')
+
+    # Infrastructure
+
+    dwelling = fields.Selection([
+
+        ('single_house', 'Single / Detached House'),
+        ('apartment', 'Apartment'),
+        ('townhouse', 'Townhouse'),
+        ('factory', 'Factory'),
+        ('building', 'Building'),
+        ('mobilehome', 'Mobile House'),
+        ], 'Type', sort=False)
+
+    materials = fields.Selection([
+
+        ('concrete', 'Concrete'),
+        ('adobe', 'Adobe'),
+        ('wood', 'Wood'),
+        ('mud', 'Mud / Straw'),
+        ('stone', 'Stone'),
+        ], 'Material', sort=False)
+
+    roof_type = fields.Selection([
+
+        ('concrete', 'Concrete'),
+        ('adobe', 'Adobe'),
+        ('wood', 'Wood'),
+        ('mud', 'Mud'),
+        ('thatch', 'Thatched'),
+        ('stone', 'Stone'),
+        ], 'Roof', sort=False)
+
+    total_surface = fields.Integer('Surface', help="Surface in sq. meters")
+    bedrooms = fields.Integer('Bedrooms')
+    bathrooms = fields.Integer('Bathrooms')
+
+    housing = fields.Selection([
+
+        ('0', 'Shanty, deficient sanitary conditions'),
+        ('1', 'Small, crowded but with good sanitary conditions'),
+        ('2', 'Comfortable and good sanitary conditions'),
+        ('3', 'Roomy and excellent sanitary conditions'),
+        ('4', 'Luxury and excellent sanitary conditions'),
+        ], 'Conditions',
+        help="Housing and sanitary living conditions", sort=False)
+
+    sewers = fields.Boolean('Sanitary Sewers')
+    water = fields.Boolean('Running Water')
+    trash = fields.Boolean('Trash recollection')
+    electricity = fields.Boolean('Electrical supply')
+    gas = fields.Boolean('Gas supply')
+    telephone = fields.Boolean('Telephone')
+    television = fields.Boolean('Television')
+    internet = fields.Boolean('Internet')
+
+    # members = fields.One2many('party.party', 'du', 'Members', readonly=True)

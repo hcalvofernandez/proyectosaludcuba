@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_medical_chagas_du_survey">
+            <field name="name">Chagas DU Survey</field>
+            <field name="res_model">medical.chagas_du_survey</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="medical_chagas_du_survey_tree" model="ir.ui.view">
+            <field name="name">medical.chagas.du.survey.tree.view</field>
+            <field name="model">medical.chagas_du_survey</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="du"/>
+                    <field name="triatomines"/>
+                    <field name="nymphs"/>
+                    <field name="du_fumigation"/>
+                    <field name="du_paint"/>
+                    <field name="survey_date"/>
+                    <field name="du_status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="medical_chagas_du_survey_form" model="ir.ui.view">
+            <field name="name">medical.chagas.du.survey.form.view</field>
+            <field name="model">medical.chagas_du_survey</field>
+            <field name="arch" type="xml">
+                <form>
+                     <header>
+                        <button string="In progress" name="button_progress" states="draft" type="object" class="oe_highlight"
+                                groups="base.group_user"/>
+                         <button string="Close" name="button_close" states="in_progress" type="object" class="oe_highlight"
+                                groups="base.group_user"/>
+                         <button string="Cancel" name="button_cancelled" states="close,in_progress" type="object" class="oe_highlight"
+                                groups="base.group_user"/>
+                         <button string="Draft" name="button_draft" states="cancel" type="object" class="oe_highlight"
+                                groups="base.group_user"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,close,cancel"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="du"/>
+                                <field name="survey_date"/>
+                                <field name="du_status"/>
+                            </group>
+                            <group>
+                                 <field name="triatomines"/>
+                                 <field name="nymphs"/>
+                                 <field name="t_in_house"/>
+                                 <field name="t_peri"/>
+                                 <field name="vector"/>
+                                 <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Areas to Improve">
+                                <field name="droof"/>
+                                <field name="dwall"/>
+                                <field name="dfloor"/>
+                                <field name="dperi"/>
+                            </group>
+                            <group string="Preventive Measures">
+                                <field name="bugtraps"/>
+                                <field name="du_fumigation"/>
+                                <field name="fumigation_date" attrs="{'invisible':[('du_fumigation', '=', False)]}"/>
+                                <field name="du_paint"/>
+                                <field name="paint_date" attrs="{'invisible':[('du_paint', '=', False)]}"/>
+                            </group>
+                        </group>
+                        <newline/>
+                        <separator string="Notes"/>
+                        <newline/>
+                        <field name="observations" />
+                        <newline/>
+                        <field name="next_survey_date"/>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+         <menuitem id="menu_du_survey"
+                  name="Chagas DU Survey"
+                  parent="medical_ntd.menu_medical_ntd"
+                  sequence="1"
+                  action="action_medical_chagas_du_survey"
+                  />
+
+ 
+
+
+
+    </data>
+</odoo>

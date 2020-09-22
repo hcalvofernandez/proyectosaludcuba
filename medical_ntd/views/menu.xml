@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <menuitem name="NTD"
+              id="menu_medical_ntd"
+               web_icon="medical_ntd,static/description/tropical.png"
+               />
+
+</odoo>

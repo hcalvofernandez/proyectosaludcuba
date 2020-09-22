@@ -1,0 +1,365 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* medical_ntd_chagas
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-22 20:54+0000\n"
+"PO-Revision-Date: 2020-09-22 20:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: medical_ntd_chagas
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "Areas to Improve"
+msgstr "Áreas a mejorar"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__bugtraps
+msgid "Bug traps"
+msgstr "Trampas de insectos"
+
+#. module: medical_ntd_chagas
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__state__cancel
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: medical_ntd_chagas
+#: model:ir.model,name:medical_ntd_chagas.model_medical_chagas_du_survey
+msgid "Chagas DU Entomological Survey"
+msgstr "Encuesta Entomológica Chagas DU"
+
+#. module: medical_ntd_chagas
+#: model:ir.actions.act_window,name:medical_ntd_chagas.action_medical_chagas_du_survey
+#: model:ir.ui.menu,name:medical_ntd_chagas.menu_du_survey
+msgid "Chagas DU Survey"
+msgstr "Encuesta Chagas DU"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__nymphs
+msgid "Check this box if triatomine nymphs were found"
+msgstr "Marque esta casilla si se encontraron ninfas de triatominos"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__triatomines
+msgid "Check this box if triatomines were found"
+msgstr "Marque esta casilla si se encontraron triatominos"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__t_peri
+msgid "Check this box if triatomines were found in the peridomiciliary area"
+msgstr ""
+"Marque esta casilla si se encontraron triatominos en el área "
+"peridomiciliaria"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__t_in_house
+msgid "Check this box if triatomines were found inside the house"
+msgstr "Marque esta casilla si se encontraron triatominos dentro de la casa"
+
+#. module: medical_ntd_chagas
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__state__close
+msgid "Closed"
+msgstr "Cerrada"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: medical_ntd_chagas
+#: model:res.groups,name:medical_ntd_chagas.ntd_consultant
+msgid "Consultant"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__dfloor
+msgid "Current floor can host triatomines"
+msgstr "El piso actual puede albergar triatomineses"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__du
+msgid "DU"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__du_status
+msgid "DU status compared to last visit"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__survey_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__t_in_house
+msgid "Domiciliary"
+msgstr "Domiciliario"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__du
+msgid "Domiciliary Unit"
+msgstr "Unidad domiciliaria"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__state__draft
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__dfloor
+msgid "Floor"
+msgstr "Piso"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__du_fumigation
+msgid "Fumigation"
+msgstr "Fumigación"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__fumigation_date
+msgid "Fumigation Date"
+msgstr "Fecha de fumigación"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__id
+msgid "ID"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__du_status__better
+msgid "Improved"
+msgstr "Mejorada"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__state__in_progress
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "In progress"
+msgstr "En progreso"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__du_status__initial
+msgid "Initial"
+msgstr "Inicial"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__du_paint
+msgid "Insecticide Paint"
+msgstr "Pintura insecticida"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__fumigation_date
+msgid "Last Fumigation Date"
+msgstr "Fecha de la última fumigación"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey____last_update
+msgid "Last Modified on"
+msgstr "Última modificación"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__paint_date
+msgid "Last Paint Date"
+msgstr "Última fecha de pintura"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: medical_ntd_chagas
+#: model:ir.module.category,name:medical_ntd_chagas.ntd_category
+msgid "NTD"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: code:addons/medical_ntd_chagas/models/medical_ntd_chagas.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__next_survey_date
+msgid "Next survey"
+msgstr "Siguiente encuesta"
+
+#. module: medical_ntd_chagas
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "Notes"
+msgstr "Nota"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__nymphs
+msgid "Nymphs"
+msgstr "Ninfas"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__observations
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__vector__p_megistus
+msgid "P. megistus"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__paint_date
+msgid "Paint Date"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__dperi
+msgid "Peri domiciliary area can host triatomines"
+msgstr "El área peri domiciliaria puede albergar triatominos"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__t_peri
+msgid "Peri-Domiciliary"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__dperi
+msgid "Peri-domicilary"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model_terms:ir.ui.view,arch_db:medical_ntd_chagas.medical_chagas_du_survey_form
+msgid "Preventive Measures"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__vector__r_prolixus
+msgid "R. prolixus"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:res.groups,name:medical_ntd_chagas.ntd_responsible
+msgid "Responsible"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__droof
+msgid "Roof"
+msgstr "Techo"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__droof
+msgid "Roof materials or state can host triatomines"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__state
+msgid "State"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__du_status
+msgid "Status"
+msgstr "Estado"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__name
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__name
+msgid "Survey Code"
+msgstr "Código de encuesta"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__vector__t_brasilensis
+msgid "T. brasilensis"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__vector__t_dimidiata
+msgid "T. dimidiata"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__vector__t_infestans
+msgid "T. infestans"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__du_fumigation
+msgid "The DU has been fumigated"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__du_paint
+msgid "The DU has been treated with insecticide-containing paint"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__bugtraps
+msgid "The DU has traps to detect triatomines"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__triatomines
+msgid "Triatomines"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__du_status__unchanged
+msgid "Unchanged"
+msgstr "No cambiar"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__vector
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__vector
+msgid "Vector"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,help:medical_ntd_chagas.field_medical_chagas_du_survey__dwall
+msgid "Wall materials or state can host triatomines"
+msgstr ""
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields,field_description:medical_ntd_chagas.field_medical_chagas_du_survey__dwall
+msgid "Walls"
+msgstr "Paredes"
+
+#. module: medical_ntd_chagas
+#: model:ir.model.fields.selection,name:medical_ntd_chagas.selection__medical_chagas_du_survey__du_status__worse
+msgid "Worsen"
+msgstr "Empeorar"

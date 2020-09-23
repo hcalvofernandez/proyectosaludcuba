@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">        
+        <!-- Category -->
+	 	<record model="ir.module.category" id="ntd_category">
+	        <field name="name">NTD dengue</field>
+	        <field name="sequence">16</field>
+	    </record>
+
+        <!-- Group -->
+	    <record model="res.groups" id="ntd_responsible">
+	        <field name="name">Responsible</field>
+	        <field name="category_id" ref="ntd_category"/>
+	    </record>
+
+		 <record model="res.groups" id="ntd_consultant">
+	        <field name="name">Consultant</field>
+	        <field name="category_id" ref="ntd_category"/>
+	    </record>
+
+    </data>
+</odoo>
+

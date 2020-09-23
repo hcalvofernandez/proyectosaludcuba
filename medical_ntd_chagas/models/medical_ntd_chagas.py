@@ -38,7 +38,8 @@ class ChagasDUSurvey(models.Model):
         ('unchanged', 'Unchanged'),
         ('better', 'Improved'),
         ('worse', 'Worsen'),
-        ], 'Status',
+        ],
+        'Status',
         help="DU status compared to last visit",
         required=True,
         sort=False,
@@ -117,6 +118,13 @@ class ChagasDUSurvey(models.Model):
                                  index=True,
                                  required=True,
                                  default=lambda self: self.env.company.id)
+
+    user_id = fields.Many2one(
+                             'res.users',
+                             "Approved by",
+                             default=lambda self: self.env.uid,
+                             readonly=True,
+                             copy=False)
 
     @api.model
     def create(self, vals):

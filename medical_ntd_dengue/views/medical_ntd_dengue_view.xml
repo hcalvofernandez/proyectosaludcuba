@@ -2,17 +2,17 @@
 <odoo>
     <data>
 
-        <record model="ir.actions.act_window" id="action_medical_chagas_du_survey">
-            <field name="name">Chagas DU Survey</field>
-            <field name="res_model">medical.chagas_du_survey</field>
+        <record model="ir.actions.act_window" id="action_medical_dengue_du_survey">
+            <field name="name">Dengue DU Survey</field>
+            <field name="res_model">medical.dengue_du_survey</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <record id="medical_chagas_du_survey_search" model="ir.ui.view">
-        <field name="name">medical.chagas.du.survey.search</field>
-        <field name="model">medical.chagas_du_survey</field>
+        <record id="medical_dengue_du_survey_search" model="ir.ui.view">
+        <field name="name">medical.dengue.du.survey.search</field>
+        <field name="model">medical.dengue_du_survey</field>
             <field name="arch" type="xml">
-                <search>
+                <search string="Dengue">
                     <field name="name"/>
                     <field name="du"/>
                     <field name="company_id"/>
@@ -28,27 +28,24 @@
             </field>
         </record>
 
-        <record id="medical_chagas_du_survey_tree" model="ir.ui.view">
-            <field name="name">medical.chagas.du.survey.tree.view</field>
-            <field name="model">medical.chagas_du_survey</field>
+        <record id="medical_dengue_du_survey_tree" model="ir.ui.view">
+            <field name="name">medical.dengue.du.survey.tree.view</field>
+            <field name="model">medical.dengue_du_survey</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
                     <field name="du"/>
-                    <field name="triatomines"/>
-                    <field name="nymphs"/>
-                    <field name="du_fumigation"/>
-                    <field name="du_paint"/>
+                    <field name="aedes_larva"/>
                     <field name="survey_date"/>
                     <field name="du_status"/>
                 </tree>
             </field>
         </record>
 
-        <record id="medical_chagas_du_survey_form" model="ir.ui.view">
-            <field name="name">medical.chagas.du.survey.form.view</field>
-            <field name="model">medical.chagas_du_survey</field>
+        <record id="medical_dengue_du_survey_form" model="ir.ui.view">
+            <field name="name">medical.dengue.du.survey.form.view</field>
+            <field name="model">medical.dengue_du_survey</field>
             <field name="arch" type="xml">
                 <form>
                      <header>
@@ -74,28 +71,26 @@
                                 <field name="du_status"/>
                             </group>
                             <group>
-                                 <field name="triatomines"/>
-                                 <field name="nymphs"/>
-                                 <field name="t_in_house"/>
-                                 <field name="t_peri"/>
-                                 <field name="vector"/>
+                                 <field name="aedes_larva"/>
+                                 <field name="larva_in_house"/>
+                                 <field name="larva_peri"/>
                                  <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                             </group>
                         </group>
                         <group>
                             <group string="Areas to Improve">
-                                <field name="droof"/>
-                                <field name="dwall"/>
-                                <field name="dfloor"/>
-                                <field name="dperi"/>
+                                <field name="old_tyres"/>
+                                <field name="animal_water_container"/>
+                                <field name="flower_vase"/>
+                                <field name="potted_plant"/>
+                                <field name="tree_holes"/>
+                                <field name="rock_holes"/>
                             </group>
                             <group string="Preventive Measures">
-                                <field name="bugtraps"/>
+                                <field name="ovitraps"/>
                                 <field name="du_fumigation"/>
                                 <field name="fumigation_date" attrs="{'invisible':[('du_fumigation', '=', False)]}"/>
-                                <field name="du_paint"/>
-                                <field name="paint_date" attrs="{'invisible':[('du_paint', '=', False)]}"/>
-                                 <field name="user_id" invisible="1"/>
+                                <field name="user_id" invisible="1"/>
                             </group>
                         </group>
                         <newline/>
@@ -109,11 +104,12 @@
             </field>
         </record>
 
-         <menuitem id="menu_du_survey"
-                  name="Chagas DU Survey"
+         <menuitem id="menu_dengue_du_survey"
+                  name="Dengue DU Survey"
                   parent="medical_ntd.menu_medical_ntd"
                   sequence="1"
-                  action="action_medical_chagas_du_survey"
+                  action="action_medical_dengue_du_survey"
                   />
+
     </data>
 </odoo>

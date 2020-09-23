@@ -1,0 +1,338 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* medical_ntd_dengue
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-23 20:52+0000\n"
+"PO-Revision-Date: 2020-09-23 20:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__animal_water_container
+msgid "Animal Water containers"
+msgstr "Contenedores de agua para animales"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__animal_water_container
+msgid "Animal water containers not scrubbed or clean"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__user_id
+msgid "Approved by"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+msgid "Areas to Improve"
+msgstr "Áreas a mejorar"
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__state__cancel
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__ovitraps
+msgid "Check if ovitraps are in place"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__larva_peri
+msgid "Check this box if larva were found in the peridomiciliary area"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__aedes_larva
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__larva_in_house
+msgid "Check this box if larvae were found inside the house"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__state__close
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__name
+msgid "Code"
+msgstr "Código"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__company_id
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "Company"
+msgstr "Compañia"
+
+#. module: medical_ntd_dengue
+#: model:res.groups,name:medical_ntd_dengue.ntd_consultant
+msgid "Consultant"
+msgstr "Consultor"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__du
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "DU"
+msgstr "DU"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__du_status
+msgid "DU status compared to last visit"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__survey_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "Dengue"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.actions.act_window,name:medical_ntd_dengue.action_medical_dengue_du_survey
+#: model:ir.model,name:medical_ntd_dengue.model_medical_dengue_du_survey
+#: model:ir.ui.menu,name:medical_ntd_dengue.menu_dengue_du_survey
+msgid "Dengue DU Survey"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__larva_in_house
+msgid "Domiciliary"
+msgstr "Domiciliario"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__du
+msgid "Domiciliary Unit"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__state__draft
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__flower_vase
+msgid "Flower vase"
+msgstr "Florero"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__flower_vase
+msgid "Flower vases without scrubbing or cleaning"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__du_fumigation
+msgid "Fumigation"
+msgstr "Fumigación"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__fumigation_date
+msgid "Fumigation Date"
+msgstr "Fecha de fumigación"
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "Group By"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__id
+msgid "ID"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__du_status__better
+msgid "Improved"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__state__in_progress
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_search
+msgid "In progress"
+msgstr "En progreso"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__du_status__initial
+msgid "Initial"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__aedes_larva
+msgid "Larvae"
+msgstr "Larvas"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__fumigation_date
+msgid "Last Fumigation Date"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.module.category,name:medical_ntd_dengue.ntd_category
+msgid "NTD dengue"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: code:addons/medical_ntd_dengue/models/medical_ntd_dengue.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__next_survey_date
+msgid "Next survey"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+msgid "Notes"
+msgstr "Nota"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__old_tyres
+msgid "Old vehicle tyres found"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__ovitraps
+msgid "Ovitraps"
+msgstr "Ovitrampas"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__larva_peri
+msgid "Peri-Domiciliary"
+msgstr "Peri-Domiciliario"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__potted_plant
+msgid "Potted Plants"
+msgstr "Plantas en macetas"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__potted_plant
+msgid "Potted Plants with saucers"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model_terms:ir.ui.view,arch_db:medical_ntd_dengue.medical_dengue_du_survey_form
+msgid "Preventive Measures"
+msgstr "Medidas preventivas"
+
+#. module: medical_ntd_dengue
+#: model:res.groups,name:medical_ntd_dengue.ntd_responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__rock_holes
+msgid "Rock holes"
+msgstr "Agujeros en roca"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__state
+msgid "State"
+msgstr "Estado"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__du_status
+msgid "Status"
+msgstr "Estado"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__name
+msgid "Survey Code"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__du_fumigation
+msgid "The DU has been fumigated"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__tree_holes
+msgid "Tree holes"
+msgstr "Agujeros en árboles"
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,field_description:medical_ntd_dengue.field_medical_dengue_du_survey__old_tyres
+msgid "Tyres"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__du_status__unchanged
+msgid "Unchanged"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields.selection,name:medical_ntd_dengue.selection__medical_dengue_du_survey__du_status__worse
+msgid "Worsen"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__rock_holes
+msgid "unfilled rock holes"
+msgstr ""
+
+#. module: medical_ntd_dengue
+#: model:ir.model.fields,help:medical_ntd_dengue.field_medical_dengue_du_survey__tree_holes
+msgid "unfilled tree holes"
+msgstr ""

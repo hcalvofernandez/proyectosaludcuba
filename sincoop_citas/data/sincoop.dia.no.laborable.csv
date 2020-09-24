@@ -1,0 +1,14 @@
+id,name:id,name,dia,mes,tipo,gencal,activo
+dnl001,dnl001,"Sábados",0,0,"lot",gen,True
+dnl002,dnl002,"Domingos",0,0,"lot",gen,True
+dnl003,dnl003,"Año nuevo",1,1,"lot",cal,True
+dnl004,dnl004,"Carnaval y Semana Santa",0,0,"lot",gen,True
+dnl005,dnl005,"Día del trabajador y la trabajadora",1,5,"lot",cal,True
+dnl006,dnl006,"Víspera de navidad",24,12,"lot",cal,True
+dnl007,dnl007,"Navidad",25,12,"lot",cal,True
+dnl008,dnl008,"Noche vieja",31,12,"lot",cal,True
+dnl009,dnl009,"Declaración de Independencia",19,4,"lfn",cal,True
+dnl010,dnl010,"Batalla de Carabobo",24,6,"lfn",cal,True
+dnl011,dnl011,"Firma del Acta de Independencia",5,7,"lfn",cal,True
+dnl012,dnl012,"Natalicio de El Libertador",24,7,"lfn",cal,True
+dnl013,dnl013,"Día de la Resistencia Indígena",12,10,"lfn",cal,True

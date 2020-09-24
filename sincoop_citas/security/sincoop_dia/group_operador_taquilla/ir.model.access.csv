@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acc_sc_taquilla_unica_group_operador01,sc_taquilla_unica_group_operador01,sincoop_taquilla_unica.model_sincoop_dia,sincoop_config.group_operador_taquilla_unica,1,0,0,0

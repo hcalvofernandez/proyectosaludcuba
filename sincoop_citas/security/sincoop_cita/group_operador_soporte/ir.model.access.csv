@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acc_sc_cita_group_ope_sopo_01,sincoop_citas_soporte,sincoop_citas.model_sincoop_cita,sincoop_config.group_operador_soporte,1,0,0,0

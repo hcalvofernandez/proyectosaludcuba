@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_sincoop_dias_no_laborables_form">
+            <field name="name">sincoop.dia.no.laborable.form</field>
+            <field name="model">sincoop.dia.no.laborable</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Días no laborables">
+                    <header>
+                        <button
+                            name="inicializar"
+                            string="Calcular fechas para este año"
+                            type="object"
+                            groups="base.group_system"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('gencal','=','cal')]}"
+                        />
+                    </header>
+                    <group col="2" colspan="2">
+                        <field name="name"/>
+                        <field name="dia"/>
+                        <field name="mes"/>
+                        <field name="tipo"/>
+                        <field name="taquilla_id" widget="many2many_tags"/>
+                        <field name="gencal"/>
+                        <field name="activo"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sincoop_dias_no_laborables_tree">
+            <field name="name">sincoop.dia.no.laborable.tree</field>
+            <field name="model">sincoop.dia.no.laborable</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Días no laborables">
+                    <!-- Buscar la forma de filtrar sábados y domingos -->
+                    <field name="fecha"/>
+                    <field name="name"/>
+                    <field name="dia"/>
+                    <field name="mes"/>
+                    <field name="tipo"/>
+                    <field name="taquilla_id"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_sincoop_dias_no_laborables_calendar">
+            <field name="name">sincoop.dia.no.laborable.calendar</field>
+            <field name="model">sincoop.dia.no.laborable</field>
+            <field name="arch" type="xml">
+                <calendar
+                    mode="month"
+                    date_start="fecha"
+                    color="mes"
+                >
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_sincoop_dias_no_laborables">
+            <field name="name">Días de fiesta</field>
+            <field name="res_model">sincoop.dia.no.laborable</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_sincoop_dias_no_laborables_tree"/>
+            <field name="domain">[('fecha','=',False)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Días de fiesta
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_sincoop_fechas_no_laborables">
+            <field name="name">Fechas no laborables</field>
+            <field name="res_model">sincoop.dia.no.laborable</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_sincoop_dias_no_laborables_calendar"/>
+            <field name="domain">[('fecha','!=',False)]</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Fechas no laborables
+                </p>
+            </field>
+        </record>
+        <menuitem name="Días de fiesta"
+            sequence="0"
+            id="dias_fiesta"
+            action="action_sincoop_dias_no_laborables"
+            parent="sincoop_config.sincoop_config_general"
+        />
+        <menuitem name="Fechas no laborables"
+            sequence="10"
+            id="no_laborables"
+            action="action_sincoop_fechas_no_laborables"
+            parent="sincoop_config.sincoop_config_general"
+        />
+    </data>
+</openerp>

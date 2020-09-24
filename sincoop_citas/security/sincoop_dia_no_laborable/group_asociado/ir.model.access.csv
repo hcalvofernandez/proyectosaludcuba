@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acc_sc_dia_no_laborable_group_asoc01,sc_dia_no_laborable_group_asoc,sincoop_citas.model_sincoop_dia_no_laborable,sincoop_config.group_asociado,1,0,0,0

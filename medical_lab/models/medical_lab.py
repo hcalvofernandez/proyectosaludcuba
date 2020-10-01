@@ -21,7 +21,7 @@
 #
 ##############################################################################
 import datetime
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta, date
 
@@ -37,8 +37,378 @@ class MedicalPatient(models.Model):
     )
 
 
-class TestType(models.Model):
-    _name = 'medical.lab.test_type'
+class MedicalPatientDisease(models.Model):
+    _inherit = 'medical.patient.disease'
+    _description = 'Patient Conditions History'
+
+    lab_confirmed = fields.Boolean(
+        string='Lab Confirmed',
+        help='Confirmed by laboratory test'
+    )
+
+    lab_test = fields.Many2one(
+        comodel_name='medical.lab.test.result',
+        string='Lab Test',
+        # domain=[
+        #     ('patient_id', '=', 'name')
+        # ],
+        depends=['name'],
+        # states={'invisible': Not(Bool(Eval('lab_confirmed')))},
+        help='Lab test that confirmed the condition'
+    )
+
+
+class MedicalPatientLabTest(models.Model):
+    _name = 'medical.patient.lab.test'
+    _description = 'Patient Lab Test'
+
+    name = fields.Char(
+        string='Order',
+        readonly=True,
+        required=True,
+        copy=False,
+        default='New'
+    )
+    test_type = fields.Many2one(
+        comodel_name='medical.lab.test.type',
+        string='Test Type',
+        required=True,
+        index=True
+    )
+    date = fields.Datetime(
+        string='Date',
+        index=True
+    )
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('tested', 'Tested'),
+            ('ordered', 'Ordered'),
+            ('cancel', 'Cancel'),
+        ],
+        string='State',
+        readonly=True,
+        index=True
+    )
+    patient_id = fields.Many2one(
+        comodel_name='medical.patient',
+        string='Patient',
+        required=True,
+        index=True
+    )
+    doctor_id = fields.Many2one(
+        string='Doctor',
+        comodel_name='medical.healthprofessional',
+        help='Doctor who Request the lab test',
+        readonly=True,
+    )
+    urgent = fields.Boolean(
+        string='Urgent'
+    )
+    category = fields.Many2one(
+        comodel_name='medical.lab.categories',
+        string='Category',
+        help='Category of this lab test'
+    )
+    test_result = fields.One2many(
+        comodel_name='medical.lab.test.result',
+        inverse_name='test_request',
+        string='Result'
+    )
+    result_count = fields.Char(
+        string='Result'
+    )
+
+    def get_result(self):
+        self.ensure_one()
+        result_id = self.test_result.id
+        view_id = self.env.ref('medical_lab.medical_lab_test_result_form').id
+        return {
+            'name': _('Lab Test Result'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'medical.lab.test.result',
+            'res_id': result_id,
+            'view_id': view_id,
+            'views': [(view_id, 'form')],
+            'context': {
+                'default_test_request': self.id,
+                'default_patient': self.patient_id.id,
+                'default_date_requested': self.date,
+                'default_test': self.test_type.id
+            }
+        }
+
+
+    @api.model
+    def default_get(self, fields):
+        res = super(MedicalPatientLabTest, self).default_get(fields)
+        res.update(
+            {
+                'date': datetime.now(),
+                'state': 'draft'
+            }
+        )
+        return res
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                self._name
+            ) or 'New'
+        result = super(MedicalPatientLabTest, self).create(vals)
+        return result
+
+
+class MedicalLabTestResult(models.Model):
+    _name = 'medical.lab.test.result'
+    _description = 'Lab Test Results'
+
+    name = fields.Char(
+        string='ID',
+        help="Lab result ID",
+        readonly=True,
+        required=True,
+        copy=False,
+        default='New'
+    )
+    test = fields.Many2one(
+        comodel_name='medical.lab.test.type',
+        string='Test type',
+        help="Lab test type",
+        readonly=True,
+        required=True,
+        index=True
+    )
+    patient = fields.Many2one(
+        comodel_name='medical.patient',
+        string='Patient',
+        help="Patient ID",
+        required=True,
+        readonly=True,
+        index=True
+    )
+    pathologist = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Pathologist',
+        help="Pathologist",
+        index=True
+    )
+    requestor = fields.Many2one(
+        comodel_name='medical.healthprofessional',
+        string='Physician',
+        help="Doctor who requested the test",
+        index=True
+    )
+    results = fields.Text(
+        string='Results'
+    )
+    diagnosis = fields.Text(
+        string='Diagnosis'
+    )
+    value = fields.One2many(
+        comodel_name='medical.lab.test.value',
+        inverse_name='test_result',
+        string='Value Critearea'
+    )
+    date_requested = fields.Datetime(
+        string='Date requested',
+        required=True,
+        readonly=True,
+        index=True
+    )
+    date_analysis = fields.Datetime(
+        string='Date of the Analysis',
+        index=True
+    )
+    test_request = fields.Many2one(
+        comodel_name='medical.patient.lab.test',
+        readonly=True,
+        string='Request'
+    )
+    pathology = fields.Many2one(
+        comodel_name='medical.pathology',
+        string='Pathology',
+        help='Pathology confirmed / associated to this lab test.'
+    )
+    analytes_summary = fields.Text(
+        string='Summary'
+        # ,
+        # compute='get_analytes_summary'
+    )
+
+    @api.model
+    def default_get(self, fields):
+        res = super(MedicalLabTestResult, self).default_get(fields)
+        res.update(
+            {
+                'date_analysis': datetime.now()
+            }
+        )
+        return res
+
+    # def get_analytes_summary(self):
+    #     summ = ""
+    #     for analyte in self.critearea:
+    #         if analyte.result or analyte.result_text:
+    #             res = ""
+    #             res_text = ""
+    #             if analyte.result_text:
+    #                 res_text = analyte.result_text
+    #             if analyte.result:
+    #                 res = str(analyte.result) + " "
+    #             summ = summ + analyte.name + " " + \
+    #                 res + res_text + "\n"
+    #     self.analytes_summary = summ
+
+    _sql_constraints = [
+        (
+            'id_uniq',
+            'unique(name)',
+            'The test ID code must be unique'
+        )
+    ]
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                self._name
+            ) or 'New'
+        result = super(MedicalLabTestResult, self).create(vals)
+        return result
+
+    @api.onchange('test')
+    def onchange_test(self):
+        if self.test and self.test.critearea:
+            value_ids = self.test.critearea.filtered(
+                lambda r: not r.test
+            )
+            value_id = value_ids[0] if value_ids else False
+            self.value = [
+                (0, 0, {
+                    'name': line.name,
+                    'lower_limit': line.lower_limit,
+                    'upper_limit': line.upper_limit,
+                    'units': line.units
+                }) for line in value_ids
+            ]
+
+
+class MedicalLabTestValue(models.Model):
+    _name = 'medical.lab.test.value'
+    _description = 'Lab Test Result Value'
+
+    result = fields.Float(
+        string='Value'
+    )
+    result_text = fields.Char(
+        string='Result - Text',
+        help='Non-numeric results. For'
+        'example qualitative values, morphological, colors ...'
+    )
+    warning = fields.Boolean(
+        string='Warn',
+        help='Warns the patient about this'
+        ' analyte result'
+        ' It is useful to contextualize the result to each patient status'
+        ' like age, sex, comorbidities, ...'
+    )
+    test_result = fields.Many2one(
+        comodel_name='medical.lab.test.result',
+        string='Test Result'
+    )
+    name = fields.Char(
+        string='Analyte',
+        required=True,
+        index=True,
+        translate=True
+    )
+    lower_limit = fields.Float(
+        string='Lower Limit'
+    )
+    upper_limit = fields.Float(
+        string='Upper Limit'
+    )
+    units = fields.Many2one(
+        comodel_name='medical.lab.test.units',
+        readonly=True,
+        string='Units'
+    )
+    lab_warning_icon = fields.Char(
+        string='Lab Warning Icon',
+        compute='get_lab_warning_icon',
+        default='medical-normal'
+    )
+
+    @api.model
+    def get_lab_warning_icon(self):
+        if (self.warning):
+            self.lab_warning_icon = 'medical-warning'
+
+    @api.depends('result')
+    def on_change_with_warning(self):
+        if (self.result and self.lower_limit):
+            if (self.result < self.lower_limit):
+                self.warning = True
+
+        if (self.result and self.upper_limit):
+            if (self.result > self.upper_limit):
+                self.warning = True
+
+
+class MedicalLabCategories(models.Model):
+    _name = 'medical.lab.categories'
+    _description = 'Lab Test Categories'
+
+    name = fields.Char(
+        string='Category',
+        index=True
+    )
+    detail = fields.Char(
+        string='Detail',
+        index=True
+    )
+    conditions = fields.Char(
+        string='Conditions',
+        index=True
+    )
+
+    sql_constraints = [
+        (
+            'name_uniq',
+            'unique(name)',
+            'The Category name must be unique'
+        )
+    ]
+
+
+class MedicalLabTestUnits(models.Model):
+    _name = 'medical.lab.test.units'
+    _description = 'Lab Test Units'
+
+    name = fields.Char(
+        string='Unit',
+        index=True
+    )
+    code = fields.Char(
+        string='Code',
+        index=True
+    )
+
+    _sql_constraints = [
+        (
+            'name_uniq',
+            'unique(name)',
+            'The Unit name must be unique'
+        )
+    ]
+
+
+class MedicalLabTestType(models.Model):
+    _name = 'medical.lab.test.type'
     _description = 'Type of Lab test'
 
     name = fields.Char(
@@ -74,7 +444,7 @@ class TestType(models.Model):
 
     @api.model
     def default_get(self, fields):
-        res = super(TestType, self).default_get(fields)
+        res = super(MedicalLabTestType, self).default_get(fields)
         res.update(
             {
                 'active': True
@@ -91,168 +461,7 @@ class TestType(models.Model):
     ]
 
 
-class Lab(models.Model):
-    _name = 'medical.lab'
-    _description = 'Patient Lab Test Results'
-
-    name = fields.Char(
-        string='ID',
-        help="Lab result ID",
-        readonly=True
-    )
-    test = fields.Many2one(
-        comodel_name='medical.lab.test_type',
-        string='Test type',
-        help="Lab test type",
-        required=True,
-        index=True
-    )
-    patient = fields.Many2one(
-        comodel_name='medical.patient',
-        string='Patient',
-        help="Patient ID",
-        required=True,
-        index=True
-    )
-    pathologist = fields.Many2one(
-        comodel_name='medical.healthprofessional',
-        string='Pathologist',
-        help="Pathologist",
-        index=True
-    )
-    requestor = fields.Many2one(
-        comodel_name='medical.healthprofessional',
-        string='Physician',
-        help="Doctor who requested the test",
-        index=True
-    )
-    results = fields.Text(
-        string='Results'
-    )
-    diagnosis = fields.Text(
-        string='Diagnosis'
-    )
-    critearea = fields.One2many(
-        comodel_name='medical.lab.test.critearea',
-        inverse_name='medical_lab_id',
-        string='Lab Test Critearea'
-    )
-    date_requested = fields.Datetime(
-        string='Date requested',
-        required=True,
-        index=True
-    )
-    date_analysis = fields.Datetime(
-        string='Date of the Analysis',
-        index=True
-    )
-    request_order = fields.Integer(
-        string='Request',
-        readonly=True
-    )
-    pathology = fields.Many2one(
-        comodel_name='medical.pathology',
-        string='Pathology',
-        help='Pathology confirmed / associated to this lab test.'
-    )
-    analytes_summary = fields.Text(
-        string='Summary',
-        compute='get_analytes_summary'
-    )
-
-    @api.model
-    def default_get(self, fields):
-        res = super(Lab, self).default_get(fields)
-        res.update(
-            {
-                'date_requested': datetime.now(),
-                'date_analysis': datetime.now()
-            }
-        )
-        return res
-
-    def get_analytes_summary(self):
-        summ = ""
-        for analyte in self.critearea:
-            if analyte.result or analyte.result_text:
-                res = ""
-                res_text = ""
-                if analyte.result_text:
-                    res_text = analyte.result_text
-                if analyte.result:
-                    res = str(analyte.result) + " "
-                summ = summ + analyte.name + " " + \
-                    res + res_text + "\n"
-        self.analytes_summary = summ
-
-    _sql_constraints = [
-        (
-            'id_uniq',
-            'unique(name)',
-            'The test ID code must be unique'
-        )
-    ]
-
-    @api.model
-    def _create_vals(self, vals):
-        vals = super(Lab, self)._create_vals(vals)
-        if not vals.get('name'):
-            Seq = self.env['ir.sequence']
-            vals['name'] = Seq.sudo().next_by_code(
-                self._name,
-            )
-        return vals
-
-
-class MedicalLabTestUnits(models.Model):
-    _name = 'medical.lab.test.units'
-    _description = 'Lab Test Units'
-
-    name = fields.Char(
-        string='Unit',
-        index=True
-    )
-    code = fields.Char(
-        string='Code',
-        index=True
-    )
-
-    _sql_constraints = [
-        (
-            'name_uniq',
-            'unique(name)',
-            'The Unit name must be unique'
-        )
-    ]
-
-
-class MedicalLabCategories(models.Model):
-    _name = 'medical.lab.categories'
-    _description = 'Lab Test Categories'
-
-    name = fields.Char(
-        string='Category',
-        index=True
-    )
-    detail = fields.Char(
-        string='Detail',
-        index=True
-    )
-    conditions = fields.Char(
-        string='Conditions',
-        index=True
-    )
-
-    sql_constraints = [
-        (
-            'name_uniq',
-            'unique(name)',
-            'The Cayegory name must be unique'
-        )
-    ]
-
-
-class MedicalTestCritearea(models.Model):
+class MedicalLabTestCritearea(models.Model):
     _name = 'medical.lab.test.critearea'
     _description = 'Lab Test Critearea'
 
@@ -269,14 +478,6 @@ class MedicalTestCritearea(models.Model):
         string='Excluded',
         help='Select this option when this analyte is excluded from the test'
     )
-    result = fields.Float(
-        string='Value'
-    )
-    result_text = fields.Char(
-        string='Result - Text',
-        help='Non-numeric results. For'
-        'example qualitative values, morphological, colors ...'
-    )
     remarks = fields.Char(
         string='Remarks'
     )
@@ -289,24 +490,17 @@ class MedicalTestCritearea(models.Model):
     upper_limit = fields.Float(
         string='Upper Limit'
     )
-    warning = fields.Boolean(
-        string='Warn',
-        help='Warns the patient about this'
-        ' analyte result'
-        ' It is useful to contextualize the result to each patient status'
-        ' like age, sex, comorbidities, ...'
-    )
     units = fields.Many2one(
         comodel_name='medical.lab.test.units',
         string='Units'
     )
     test_type_id = fields.Many2one(
-        comodel_name='medical.lab.test_type',
+        comodel_name='medical.lab.test.type',
         string='Test type',
         index=True
     )
     medical_lab_id = fields.Many2one(
-        comodel_name='medical.lab',
+        comodel_name='medical.lab.test.result',
         string='Test Cases',
         index=True
     )
@@ -314,20 +508,9 @@ class MedicalTestCritearea(models.Model):
         string='Sequence'
     )
 
-    lab_warning_icon = fields.Char(
-        string='Lab Warning Icon',
-        compute='get_lab_warning_icon',
-        default='medical-normal'
-    )
-
-    @api.model
-    def get_lab_warning_icon(self):
-        if (self.warning):
-            self.lab_warning_icon = 'medical-warning'
-
     @api.model
     def default_get(self, fields):
-        res = super(MedicalTestCritearea, self).default_get(fields)
+        res = super(MedicalLabTestCritearea, self).default_get(fields)
         res.update(
             {
                 'excluded': False,
@@ -335,105 +518,3 @@ class MedicalTestCritearea(models.Model):
             }
         )
         return res
-
-    @api.depends('result', 'lower_limit', 'upper_limit')
-    def on_change_with_warning(self):
-        if (self.result and self.lower_limit):
-            if (self.result < self.lower_limit):
-                self.warning = True
-
-        if (self.result and self.upper_limit):
-            if (self.result > self.upper_limit):
-                self.warning = True
-
-
-class MedicalPatientLabTest(models.Model):
-    _name = 'medical.patient.lab.test'
-    _description = 'Patient Lab Test'
-
-    name = fields.Many2one(
-        comodel_name='medical.lab.test_type',
-        string='Test Type',
-        required=True,
-        index=True
-    )
-    date = fields.Datetime(
-        string='Date',
-        index=True
-    )
-    state = fields.Selection(
-        [
-            ('draft', 'Draft'),
-            ('tested', 'Tested'),
-            ('ordered', 'Ordered'),
-            ('cancel', 'Cancel'),
-        ],
-        string='State',
-        readonly=True,
-        index=True
-    )
-    patient_id = fields.Many2one(
-        comodel_name='medical.patient',
-        string='Patient',
-        required=True,
-        index=True
-    )
-    doctor_id = fields.Many2one(
-        string='Doctor',
-        comodel_name='medical.healthprofessional',
-        help='Doctor who Request the lab test',
-        readonly=True,
-    )
-    request = fields.Integer(
-        string='Order',
-        readonly=True
-    )
-    urgent = fields.Boolean(
-        string='Urgent'
-    )
-    category = fields.Many2one(
-        comodel_name='medical.lab.categories',
-        string='Category',
-        help='Category of this lab test')
-
-    @api.model
-    def default_get(self, fields):
-        res = super(MedicalPatientLabTest, self).default_get(fields)
-        res.update(
-            {
-                'date': datetime.now(),
-                'state': 'draft'
-            }
-        )
-        return res
-
-    @api.model
-    def _create_vals(self, vals):
-        vals = super(MedicalPatientLabTest, self)._create_vals(vals)
-        if not vals.get('request'):
-            Seq = self.env['ir.sequence']
-            vals['request'] = Seq.sudo().next_by_code(
-                self._name,
-            )
-        return vals
-
-
-class PatientHealthCondition(models.Model):
-    _inherit = 'medical.patient.disease'
-    _description = 'Patient Conditions History'
-
-    lab_confirmed = fields.Boolean(
-        string='Lab Confirmed',
-        help='Confirmed by laboratory test'
-    )
-
-    lab_test = fields.Many2one(
-        comodel_name='medical.lab',
-        string='Lab Test',
-        # domain=[
-        #     ('patient_id', '=', 'name')
-        # ],
-        depends=['name'],
-        # states={'invisible': Not(Bool(Eval('lab_confirmed')))},
-        help='Lab test that confirmed the condition'
-    )

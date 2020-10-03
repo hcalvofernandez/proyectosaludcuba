@@ -344,6 +344,10 @@
 								<field name="active" />
 							</group>
 							<newline />
+							<group>
+								<field name="category"
+										options="{'no_create_edit': True}" />
+							</group>
 							<field name="critearea" colspan="4"
 								view_ids="medical_lab.test_critearea_view_tree_test_type,medical_lab.test_critearea_view_form_test_type"/>
 							<field name="product_id" />

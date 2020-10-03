@@ -69,10 +69,16 @@ class MedicalPatientLabTest(models.Model):
         copy=False,
         default='New'
     )
+    category = fields.Many2one(
+        comodel_name='medical.lab.categories',
+        string='Category',
+        help='Category of this lab test'
+    )
     test_type = fields.Many2one(
         comodel_name='medical.lab.test.type',
         string='Test Type',
         required=True,
+        domain= "[('category', '=', category)]",
         index=True
     )
     date = fields.Datetime(
@@ -104,11 +110,6 @@ class MedicalPatientLabTest(models.Model):
     )
     urgent = fields.Boolean(
         string='Urgent'
-    )
-    category = fields.Many2one(
-        comodel_name='medical.lab.categories',
-        string='Category',
-        help='Category of this lab test'
     )
     test_result = fields.One2many(
         comodel_name='medical.lab.test.result',
@@ -423,6 +424,11 @@ class MedicalLabTestType(models.Model):
         help="Short name - code for the test",
         required=True,
         index=True
+    )
+    category = fields.Many2one(
+        comodel_name='medical.lab.categories',
+        string='Category',
+        help='Category of this lab test'
     )
     info = fields.Text(
         string='Description'

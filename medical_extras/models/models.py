@@ -59,6 +59,7 @@ class MedicalPatientExtends(models.Model):
         help='Write any important information on the patient\'s condition,'
         ' surgeries, allergies, ...')
 
+<<<<<<< HEAD
     genetic_risks = fields.One2many('medical.patient.genetic.risk',
                                     'patient',
                                     'Genetic Information')
@@ -66,6 +67,8 @@ class MedicalPatientExtends(models.Model):
                                      'patient',
                                      'Family History')
 
+=======
+>>>>>>> pruebas
 
 class MedicalInstitution(models.Model):
     _name = 'res.partner'
@@ -913,6 +916,7 @@ class DrugDoseUnits(models.Model):
     _sql_constraints = [
         ('name_uniq', 'unique (name)', 'The Unit must be unique!'),
     ]
+<<<<<<< HEAD
 
 
 class PatientGeneticRisk(models.Model):
@@ -1084,3 +1088,5 @@ class DomiciliaryUnit(models.Model):
     internet = fields.Boolean('Internet')
 
     # members = fields.One2many('party.party', 'du', 'Members', readonly=True)
+=======
+>>>>>>> pruebas

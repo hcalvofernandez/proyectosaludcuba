@@ -21,6 +21,36 @@ Poryecto de migración de GNU Health a Odoo versión 13
 - Para generar los brazaletes con QR:
         sudo apt-get install libfreetype6-dev
 - sudo pip3.8 install phonenumbers pyqrcodeng pypng
+<<<<<<< HEAD
+=======
+
+
+Instalación:
+
+- Entrar en modo debug (?debug=1#).
+- Actualizar lista de módulos.
+- Instalar módulo website.
+- Instalar módulo web_responsive.
+- Instalar módulo backend_theme.
+- Instalar módulo territorial_pd.
+- Instalar módulo l10n_ve_base.
+- Instalar módulo todos los demás módulos:
+
+-i health_lifestyle,medical,\ vzla_legal
+
+
+POST- Instalación:
+
+- Administrador -> Preferences:
+    - Language: Seleccionar Español VE.
+    - Timezone: America/Caracas. Guardar.
+- Settings -> General Settings -> Languages -> Manage Languages:
+    - Activar: Spanish VE.
+    - Establecer Lunes como primer día de la semana. Guardar.
+    - Archivar inglés.
+- Ajustes -> Traducciones -> Términos Traducidos:
+    - Cambiar Valor de Traducción: «¡No se encontrarón archivos!» por «No hay registros. Cree uno.».
+>>>>>>> pruebas
 
 
 Instalación:

@@ -23,7 +23,11 @@
     'author': "GNU Solidario",
     'website': "https://www.gnuhealth.org",
     'category': 'Medical',
+<<<<<<< HEAD
     'version': '13.0.3',
+=======
+    'version': '13.0.2',
+>>>>>>> pruebas
     'depends': ['base', 'medical', 'medical_disease'],
     'data': [
         'security/ir.model.access.csv',

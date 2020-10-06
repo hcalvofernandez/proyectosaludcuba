@@ -21,7 +21,11 @@
 #
 ##############################################################################
 import datetime
+<<<<<<< HEAD
 from odoo import models, fields, api, _
+=======
+from odoo import models, fields, api
+>>>>>>> pruebas
 from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta, date
 
@@ -37,6 +41,7 @@ class MedicalPatient(models.Model):
     )
 
 
+<<<<<<< HEAD
 class MedicalPatientDisease(models.Model):
     _inherit = 'medical.patient.disease'
     _description = 'Patient Conditions History'
@@ -149,10 +154,54 @@ class MedicalPatientLabTest(models.Model):
             {
                 'date': datetime.now(),
                 'state': 'draft'
+=======
+class TestType(models.Model):
+    _name = 'medical.lab.test_type'
+    _description = 'Type of Lab test'
+
+    name = fields.Char(
+        string='Test',
+        help="Test type, eg X-Ray, hemogram,biopsy...",
+        required=True,
+        index=True,
+        translate=True
+    )
+    code = fields.Char(
+        string='Code',
+        help="Short name - code for the test",
+        required=True,
+        index=True
+    )
+    info = fields.Text(
+        string='Description'
+    )
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        string='Service',
+        required=True
+    )
+    critearea = fields.One2many(
+        comodel_name='medical.lab.test.critearea',
+        inverse_name='test_type_id',
+        string='Test Cases'
+    )
+    active = fields.Boolean(
+        string='Active',
+        index=True
+    )
+
+    @api.model
+    def default_get(self, fields):
+        res = super(TestType, self).default_get(fields)
+        res.update(
+            {
+                'active': True
+>>>>>>> pruebas
             }
         )
         return res
 
+<<<<<<< HEAD
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
@@ -166,10 +215,25 @@ class MedicalPatientLabTest(models.Model):
 class MedicalLabTestResult(models.Model):
     _name = 'medical.lab.test.result'
     _description = 'Lab Test Results'
+=======
+    _sql_constraints = [
+        (
+            'code_uniq',
+            'unique(name)',
+            'The Lab Test code must be unique'
+        )
+    ]
+
+
+class Lab(models.Model):
+    _name = 'medical.lab'
+    _description = 'Patient Lab Test Results'
+>>>>>>> pruebas
 
     name = fields.Char(
         string='ID',
         help="Lab result ID",
+<<<<<<< HEAD
         readonly=True,
         required=True,
         copy=False,
@@ -180,6 +244,14 @@ class MedicalLabTestResult(models.Model):
         string='Test type',
         help="Lab test type",
         readonly=True,
+=======
+        readonly=True
+    )
+    test = fields.Many2one(
+        comodel_name='medical.lab.test_type',
+        string='Test type',
+        help="Lab test type",
+>>>>>>> pruebas
         required=True,
         index=True
     )
@@ -188,7 +260,10 @@ class MedicalLabTestResult(models.Model):
         string='Patient',
         help="Patient ID",
         required=True,
+<<<<<<< HEAD
         readonly=True,
+=======
+>>>>>>> pruebas
         index=True
     )
     pathologist = fields.Many2one(
@@ -209,25 +284,41 @@ class MedicalLabTestResult(models.Model):
     diagnosis = fields.Text(
         string='Diagnosis'
     )
+<<<<<<< HEAD
     value = fields.One2many(
         comodel_name='medical.lab.test.value',
         inverse_name='test_result',
         string='Value Critearea'
+=======
+    critearea = fields.One2many(
+        comodel_name='medical.lab.test.critearea',
+        inverse_name='medical_lab_id',
+        string='Lab Test Critearea'
+>>>>>>> pruebas
     )
     date_requested = fields.Datetime(
         string='Date requested',
         required=True,
+<<<<<<< HEAD
         readonly=True,
+=======
+>>>>>>> pruebas
         index=True
     )
     date_analysis = fields.Datetime(
         string='Date of the Analysis',
         index=True
     )
+<<<<<<< HEAD
     test_request = fields.Many2one(
         comodel_name='medical.patient.lab.test',
         readonly=True,
         string='Request'
+=======
+    request_order = fields.Integer(
+        string='Request',
+        readonly=True
+>>>>>>> pruebas
     )
     pathology = fields.Many2one(
         comodel_name='medical.pathology',
@@ -235,21 +326,34 @@ class MedicalLabTestResult(models.Model):
         help='Pathology confirmed / associated to this lab test.'
     )
     analytes_summary = fields.Text(
+<<<<<<< HEAD
         string='Summary'
         # ,
         # compute='get_analytes_summary'
+=======
+        string='Summary',
+        compute='get_analytes_summary'
+>>>>>>> pruebas
     )
 
     @api.model
     def default_get(self, fields):
+<<<<<<< HEAD
         res = super(MedicalLabTestResult, self).default_get(fields)
         res.update(
             {
+=======
+        res = super(Lab, self).default_get(fields)
+        res.update(
+            {
+                'date_requested': datetime.now(),
+>>>>>>> pruebas
                 'date_analysis': datetime.now()
             }
         )
         return res
 
+<<<<<<< HEAD
     # def get_analytes_summary(self):
     #     summ = ""
     #     for analyte in self.critearea:
@@ -263,6 +367,22 @@ class MedicalLabTestResult(models.Model):
     #             summ = summ + analyte.name + " " + \
     #                 res + res_text + "\n"
     #     self.analytes_summary = summ
+=======
+    @api.model
+    def get_analytes_summary(self):
+        summ = ""
+        for analyte in self.critearea:
+            if analyte.result or analyte.result_text:
+                res = ""
+                res_text = ""
+                if analyte.result_text:
+                    res_text = analyte.result_text
+                if analyte.result:
+                    res = str(analyte.result) + " "
+                summ = summ + analyte.rec_name + " " + \
+                    res + res_text + "\n"
+        self.analytes_summary = summ
+>>>>>>> pruebas
 
     _sql_constraints = [
         (
@@ -273,6 +393,7 @@ class MedicalLabTestResult(models.Model):
     ]
 
     @api.model
+<<<<<<< HEAD
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code(
@@ -384,6 +505,16 @@ class MedicalLabCategories(models.Model):
             'The Category name must be unique'
         )
     ]
+=======
+    def _create_vals(self, vals):
+        vals = super(Lab, self)._create_vals(vals)
+        if not vals.get('name'):
+            Seq = self.env['ir.sequence']
+            vals['name'] = Seq.sudo().next_by_code(
+                self._name,
+            )
+        return vals
+>>>>>>> pruebas
 
 
 class MedicalLabTestUnits(models.Model):
@@ -408,6 +539,7 @@ class MedicalLabTestUnits(models.Model):
     ]
 
 
+<<<<<<< HEAD
 class MedicalLabTestType(models.Model):
     _name = 'medical.lab.test.type'
     _description = 'Type of Lab test'
@@ -468,6 +600,9 @@ class MedicalLabTestType(models.Model):
 
 
 class MedicalLabTestCritearea(models.Model):
+=======
+class MedicalTestCritearea(models.Model):
+>>>>>>> pruebas
     _name = 'medical.lab.test.critearea'
     _description = 'Lab Test Critearea'
 
@@ -484,6 +619,17 @@ class MedicalLabTestCritearea(models.Model):
         string='Excluded',
         help='Select this option when this analyte is excluded from the test'
     )
+<<<<<<< HEAD
+=======
+    result = fields.Float(
+        string='Value'
+    )
+    result_text = fields.Char(
+        string='Result - Text',
+        help='Non-numeric results. For'
+        'example qualitative values, morphological, colors ...'
+    )
+>>>>>>> pruebas
     remarks = fields.Char(
         string='Remarks'
     )
@@ -496,17 +642,35 @@ class MedicalLabTestCritearea(models.Model):
     upper_limit = fields.Float(
         string='Upper Limit'
     )
+<<<<<<< HEAD
+=======
+    warning = fields.Boolean(
+        string='Warn',
+        help='Warns the patient about this'
+        ' analyte result'
+        ' It is useful to contextualize the result to each patient status'
+        ' like age, sex, comorbidities, ...'
+    )
+>>>>>>> pruebas
     units = fields.Many2one(
         comodel_name='medical.lab.test.units',
         string='Units'
     )
     test_type_id = fields.Many2one(
+<<<<<<< HEAD
         comodel_name='medical.lab.test.type',
+=======
+        comodel_name='medical.lab.test_type',
+>>>>>>> pruebas
         string='Test type',
         index=True
     )
     medical_lab_id = fields.Many2one(
+<<<<<<< HEAD
         comodel_name='medical.lab.test.result',
+=======
+        comodel_name='medical.lab',
+>>>>>>> pruebas
         string='Test Cases',
         index=True
     )
@@ -514,9 +678,26 @@ class MedicalLabTestCritearea(models.Model):
         string='Sequence'
     )
 
+<<<<<<< HEAD
     @api.model
     def default_get(self, fields):
         res = super(MedicalLabTestCritearea, self).default_get(fields)
+=======
+    lab_warning_icon = fields.Char(
+        string='Lab Warning Icon',
+        compute='get_lab_warning_icon',
+        default='medical-normal'
+    )
+
+    @api.model
+    def get_lab_warning_icon(self):
+        if (self.warning):
+            self.lab_warning_icon = 'medical-warning'
+
+    @api.model
+    def default_get(self, fields):
+        res = super(MedicalTestCritearea, self).default_get(fields)
+>>>>>>> pruebas
         res.update(
             {
                 'excluded': False,
@@ -524,3 +705,104 @@ class MedicalLabTestCritearea(models.Model):
             }
         )
         return res
+<<<<<<< HEAD
+=======
+
+    @api.depends('result', 'lower_limit', 'upper_limit')
+    def on_change_with_warning(self):
+        if (self.result and self.lower_limit):
+            if (self.result < self.lower_limit):
+                self.warning = True
+
+        if (self.result and self.upper_limit):
+            if (self.result > self.upper_limit):
+                self.warning = True
+
+
+class MedicalPatientLabTest(models.Model):
+    _name = 'medical.patient.lab.test'
+    _description = 'Patient Lab Test'
+
+    name = fields.Many2one(
+        comodel_name='medical.lab.test_type',
+        string='Test Type',
+        required=True,
+        index=True
+    )
+    date = fields.Datetime(
+        string='Date',
+        index=True
+    )
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('tested', 'Tested'),
+            ('ordered', 'Ordered'),
+            ('cancel', 'Cancel'),
+        ],
+        string='State',
+        readonly=True,
+        index=True
+    )
+    patient_id = fields.Many2one(
+        comodel_name='medical.patient',
+        string='Patient',
+        required=True,
+        index=True
+    )
+    doctor_id = fields.Many2one(
+        string='Doctor',
+        comodel_name='medical.healthprofessional',
+        help='Doctor who Request the lab test',
+        readonly=True,
+    )
+    request = fields.Integer(
+        string='Order',
+        readonly=True
+    )
+    urgent = fields.Boolean(
+        string='Urgent'
+    )
+
+    @api.model
+    def default_get(self, fields):
+        res = super(MedicalPatientLabTest, self).default_get(fields)
+        res.update(
+            {
+                'date': datetime.now(),
+                'state': 'draft'
+            }
+        )
+        return res
+
+    @api.model
+    def _create_vals(self, vals):
+        vals = super(MedicalPatientLabTest, self)._create_vals(vals)
+        if not vals.get('request'):
+            Seq = self.env['ir.sequence']
+            vals['request'] = Seq.sudo().next_by_code(
+                self._name,
+            )
+        return vals
+
+
+class PatientHealthCondition(models.Model):
+    _inherit = 'medical.patient.disease'
+    _description = 'Patient Conditions History'
+
+    lab_confirmed = fields.Boolean(
+        string='Lab Confirmed',
+        help='Confirmed by laboratory test'
+    )
+
+    lab_test = fields.Many2one(
+        comodel_name='medical.lab',
+        string='Lab Test',
+        # domain=[
+        #     ('patient_id', '=', 'name')
+        # ],
+        depends=['name'],
+        # states={'invisible': Not(Bool(Eval('lab_confirmed')))},
+        help='Lab test that confirmed the condition'
+    )
+>>>>>>> pruebas

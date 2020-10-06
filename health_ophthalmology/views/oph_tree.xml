@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
@@ -15,4 +16,23 @@
         </record>
     </data>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="gnuhealth_ophthalmology_evaluation_view_tree" model="ir.ui.view">
+            <field name="name">gnuhealth.ophthalmology.evaluation.tree</field>
+            <field name="model">gnuhealth.ophthalmology.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="patient"/>
+                    <field name="visit_date"/>
+                    <field name="health_professional"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+
+>>>>>>> pruebas
 </odoo>

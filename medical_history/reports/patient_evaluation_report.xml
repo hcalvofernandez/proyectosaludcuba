@@ -239,9 +239,15 @@
 
                         <br/>
                         <span><b> Presumptive Diagnosis :</b></span><br/>
+<<<<<<< HEAD
                         <t t-if="o.diagnosis">
                              <span t-esc="o.diagnosis.name"/>
                         </t>
+=======
+<!--                        <t t-if="o.diagnosis">-->
+<!--                             <span t-esc="o.diagnosis.name"/>-->
+<!--                        </t>-->
+>>>>>>> pruebas
 
                         <br/>
                         <span><b> Other Hypotheses / DDx</b></span><br/>

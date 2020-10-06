@@ -8,9 +8,13 @@ access_medical_medicament_category,access_medical_medicament_category,model_medi
 access_medical_medicament,access_medical_medicament,model_medical_medicament,base.group_user,1,1,1,1
 access_medical_drug_form,access_medical_drug_form,model_medical_drug_form,base.group_user,1,1,1,1
 access_medical_drug_route,access_medical_drug_route,model_medical_drug_route,base.group_user,1,1,1,1
+<<<<<<< HEAD
 access_medical_dose_unit,access_medical_dose_unit,model_medical_dose_unit,base.group_user,1,1,1,1
 access_medical_patient_evaluation,access_medical_patient_evaluation,model_medical_patient_evaluation,base.group_user,1,1,1,1
 access_medical_patient_genetic_risk,access_medical_patient_genetic_risk,model_medical_patient_genetic_risk,base.group_user,1,1,1,1
 access_medical_disease_gene,access_medical_disease_gene,model_medical_disease_gene,base.group_user,1,1,1,1
 access_medical_patient_family_diseases,access_medical_patient_family_diseases,model_medical_patient_family_diseases,base.group_user,1,1,1,1
 access_medical_du,access_medical_du,model_medical_du,base.group_user,1,1,1,1
+=======
+access_medical_dose_unit,access_medical_dose_unit,model_medical_dose_unit,base.group_user,1,1,1,1
+>>>>>>> pruebas

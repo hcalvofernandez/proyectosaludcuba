@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_commed_body_function_view">
+            <field name="name">Body Functions</field>
+            <field name="res_model">commed.body_function</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_commed_body_structure_view">
+            <field name="name">Body Structures</field>
+            <field name="res_model">commed.body_structure</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <record model="ir.actions.act_window" id="action_commed_activity_and_participation_view">
+            <field name="name">Activities and Participation</field>
+            <field name="res_model">commed.activity_and_participation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_commed_environmental_factor_view">
+            <field name="name">Environmental Factors</field>
+            <field name="res_model">commed.environmental_factor</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_commed_activity_assessment_view">
+            <field name="name">Activity and participation</field>
+            <field name="res_model">commed.activity.assessment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_commed_body_function_assessment_view">
+            <field name="name">Body function</field>
+            <field name="res_model">commed.body_function.assessment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_commed_body_structure_assessment_view">
+            <field name="name">Body structure</field>
+            <field name="res_model">commed.body_structure.assessment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_commed_environment_assessment_view">
+            <field name="name">Environmental factor assessment</field>
+            <field name="res_model">commed.environment.assessment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_commed_patient_amputation_view">
+            <field name="name">Amputations</field>
+            <field name="res_model">commed.patient.amputation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_commed_patient_disability_view">
+            <field name="name">Patient disability</field>
+            <field name="res_model">commed.patient.disability_assessment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_commed_patient_prothesis_view">
+            <field name="name">Protheses</field>
+            <field name="res_model">commed.patient.prothesis</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="commed_body_function_tree" model="ir.ui.view">
+            <field name="name">commed.body_function.tree.view</field>
+            <field name="model">commed.body_function</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_body_function_form" model="ir.ui.view">
+            <field name="name">commed.body.function.form.view</field>
+            <field name="model">commed.body_function</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="commed_body_structure_tree" model="ir.ui.view">
+            <field name="name">commed.body.structure.tree</field>
+            <field name="model">commed.body_structure</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_body_structure_form" model="ir.ui.view">
+            <field name="name">commed.body.structure.form.view</field>
+            <field name="model">commed.body_structure</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commed_activity_and_participation_tree" model="ir.ui.view">
+            <field name="name">commed.activity.and.participation.tree</field>
+            <field name="model">commed.activity_and_participation</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_activity_and_participation_form" model="ir.ui.view">
+            <field name="name">commed.activity.and.participation.form.view</field>
+            <field name="model">commed.activity_and_participation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="commed_environmental_factor_tree" model="ir.ui.view">
+            <field name="name">commed.environmental.factor.tree</field>
+            <field name="model">commed.environmental_factor</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="category"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_environmental_factor_form" model="ir.ui.view">
+            <field name="name">commed.environmental.factor.form.view</field>
+            <field name="model">commed.environmental_factor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+
+         <record id="commed_activity_assessment_tree" model="ir.ui.view">
+            <field name="name">commed.activity.assessment.tree</field>
+            <field name="model">commed.activity.assessment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="assessment"/>
+                    <field name="activity_and_participation"/>
+                    <field name="qualifier1"/>
+                    <field name="qualifier2"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_activity_assessment_form" model="ir.ui.view">
+            <field name="name">commed.activity.assessment.form.view</field>
+            <field name="model">commed.activity.assessment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="assessment"/>
+                                <field name="activity_and_participation"/>
+                            </group>
+                            <group>
+                                <field name="qualifier1"/>
+                                <field name="qualifier2"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+
+
+        <record id="commed_body_function_assessment_tree" model="ir.ui.view">
+            <field name="name">commed.body.function.assessment.tree</field>
+            <field name="model">commed.body_function.assessment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="assessment"/>
+                    <field name="body_function"/>
+                    <field name="qualifier"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_body_function_assessment_form" model="ir.ui.view">
+            <field name="name">commed.body.function.assessment.form.view</field>
+            <field name="model">commed.body_function.assessment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="assessment"/>
+                                <field name="body_function"/>
+                            </group>
+                            <group>
+                                <field name="qualifier"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="commed_body_structure_assessment_tree" model="ir.ui.view">
+            <field name="name">commed.body.structure.assessment.tree</field>
+            <field name="model">commed.body_structure.assessment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="body_structure"/>
+                    <field name="qualifier1"/>
+                    <field name="qualifier2"/>
+                    <field name="body_side"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="commed_body_structure_assessment_form" model="ir.ui.view">
+            <field name="name">commed.body.structure.assessment.form.view</field>
+            <field name="model">commed.body_structure.assessment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="assessment"/>
+                                <field name="body_structure"/>
+                            </group>
+                            <group>
+                                <field name="qualifier1"/>
+                                <field name="qualifier2"/>
+                                <field name="body_side"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commed_commed_environment_assessment_tree" model="ir.ui.view">
+            <field name="name">commed.environment.assessment.tree</field>
+            <field name="model">commed.environment.assessment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="assessment"/>
+                    <field name="environmental_factor"/>
+                    <field name="qualifier"/>
+                </tree>
+            </field>
+         </record>
+
+         <record id="commed_environment_assessment_form" model="ir.ui.view">
+            <field name="name">commed.environment.assessment.form.view</field>
+            <field name="model">commed.environment.assessment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="assessment"/>
+                                <field name="environmental_factor"/>
+                            </group>
+                            <group>
+                                <field name="qualifier"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commed_patient_amputation_tree" model="ir.ui.view">
+            <field name="name">commed.patient.amputation.tree</field>
+            <field name="model">commed.patient.amputation</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="patient"/>
+                    <field name="amputation_date"/>
+                    <field name="etiology"/>
+                    <field name="body_structure"/>
+                    <field name="limb"/>
+                    <field name="side"/>
+                    <field name="amputation_level"/>
+                    <field name="comments"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="commed_patient_amputation_form" model="ir.ui.view">
+            <field name="name">commed.patient.amputation.form.view</field>
+            <field name="model">commed.patient.amputation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="patient"/>
+                                <field name="amputation_date"/>
+                                <field name="body_structure"/>
+                                 <field name="professional"/>
+                            </group>
+                            <group>
+                                <field name="limb"/>
+                                <field name="side"/>
+                                <field name="amputation_level"/>
+                                <field name="etiology"/>
+                                <field name="comments"/>
+                                <field name="company_id" options="{'no_create': True}"
+                                       groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commed_patient_disability_assessment_tree" model="ir.ui.view">
+            <field name="name">commed.patient.disability.assessment.tree</field>
+            <field name="model">commed.patient.disability_assessment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="patient"/>
+                    <field name="assessment_date"/>
+                    <field name="cognitive_function"/>
+                    <field name="visual_function"/>
+                    <field name="hearing_function"/>
+                    <field name="speech_function"/>
+                    <field name="hand_function"/>
+                    <field name="locomotor_function"/>
+                    <field name="uxo"/>
+                    <field name="assessment"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="commed_patient_disability_assessment_form" model="ir.ui.view">
+            <field name="name">commed.patient.disability.assessment.form.view</field>
+            <field name="model">commed.patient.disability_assessment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="patient"/>
+                                <field name="assessment_date"/>
+                            </group>
+                            <group>
+                                <field name="assessment"/>
+                                <field name="professional"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="company_id" options="{'no_create': True}"
+                                       groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                         <group>
+                            <group string="Summary - Brief Assessment">
+                                <field name="cognitive_function"/>
+                                <field name="visual_function"/>
+                                <field name="hearing_function"/>
+                                <field name="speech_function"/>
+                                <field name="hand_function"/>
+                                <field name="locomotor_function"/>
+                                <field name="activity_participation"/>
+                                 <newline/>
+                                <field name="crutches"/>
+                                <field name="wheelchair"/>
+                                <field name="uxo"/>
+                            </group>
+                            <group string="Amputee Status">
+                                <field name="amputee"/>
+                                <field name="amputee_since"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Body functions">
+                                <field name="body_functions">
+                                    <tree editable="bottom">
+                                        <field name="assessment"/>
+                                        <field name="body_function"/>
+                                        <field name="qualifier"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Body structures">
+                                <field name="body_structures">
+                                    <tree editable="bottom">
+                                        <field name="assessment"/>
+                                        <field name="body_structure"/>
+                                        <field name="qualifier1"/>
+                                        <field name="qualifier2"/>
+                                        <field name="body_side"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             <page string="Activities and Participation">
+                                <field name="activity_and_participation">
+                                    <tree editable="bottom">
+                                        <field name="assessment"/>
+                                        <field name="activity_and_participation"/>
+                                        <field name="qualifier1"/>
+                                        <field name="qualifier2"/>
+                                    </tree>
+                                </field>
+                            </page>
+                         </notebook>
+
+                        <newline/>
+                        <separator string="Extra Info"/>
+                        <newline/>
+                        <field name="notes" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="commed_patient_prothesisn_tree" model="ir.ui.view">
+            <field name="name">commed.patient.prothesis.tree</field>
+            <field name="model">commed.patient.prothesis</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="patient"/>
+                    <field name="issue_date"/>
+                    <field name="prothesis"/>
+                    <field name="comments"/>
+                </tree>
+            </field>
+         </record>
+
+         <record id="commed_patient_prothesis_form" model="ir.ui.view">
+            <field name="name">commed.patient.prothesis.form.view</field>
+            <field name="model">commed.patient.prothesis</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="patient"/>
+                                <field name="prothesis"/>
+                                <field name="issue_date"/>
+                            </group>
+                            <group>
+                                <field name="professional"/>
+                                <field name="comments"/>
+                                <field name="company_id" options="{'no_create': True}"
+                                       groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+  </data>
+</odoo>

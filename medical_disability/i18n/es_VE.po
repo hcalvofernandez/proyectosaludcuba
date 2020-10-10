@@ -1,0 +1,996 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* medical_disability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-10 17:39+0000\n"
+"PO-Revision-Date: 2020-10-10 17:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__8
+msgid "8 - Not specified"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__9
+msgid "9 - Not applicable"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__activity_participation
+msgid "A & P"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__4
+msgid "Aberrant dimensions"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_activity_and_participation_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_activity_and_participation
+#: model_terms:ir.ui.view,arch_db:medical_disability.medical_patient_disability_assessment_form
+msgid "Activities and Participation"
+msgstr "Actividades y participación"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__activity_and_participation
+msgid "Activities and Participation Impairments"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__activity_and_participation
+msgid "Activity"
+msgstr "Actividad"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_activity_assessment
+msgid "Activity and Participation Assessment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_activity_and_participation_category
+msgid "Activity and Participation Category"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_activity_assessment_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_activity_assessment
+msgid "Activity and participation"
+msgstr "Actividad y participación"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_activity_and_participation
+msgid "Activity limitations and participation restrictions"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__3
+msgid "Additional part"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_patient_amputation
+msgid "Amputation"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_patient_amputation_view
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__amputations
+#: model:ir.ui.menu,name:medical_disability.menu_medical_amputation
+#: model_terms:ir.ui.view,arch_db:medical_disability.commed_patient_disability_inherit_form
+msgid "Amputations"
+msgstr "Amputaciones"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__amputee
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__amputee
+msgid "Amputee"
+msgstr "Amputado"
+
+#. module: medical_disability
+#: model_terms:ir.ui.view,arch_db:medical_disability.medical_patient_disability_assessment_form
+msgid "Amputee Status"
+msgstr "Estado de amputado"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__assessment
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__assessment
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__assessment
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__assessment
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__disability_assesments
+#: model:ir.ui.menu,name:medical_disability.assessment_conf_menu
+msgid "Assessment"
+msgstr "Evaluación"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient_disability_assessment__professional
+msgid "Authorized health professional"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__qualifier
+msgid "Barriers"
+msgstr "Barreras"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__body_function
+msgid "Body Function"
+msgstr "Función corporal"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_body_function_category
+msgid "Body Function Category"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_body_function_view
+#: model:ir.model,name:medical_disability.model_medical_body_function
+#: model:ir.ui.menu,name:medical_disability.menu_medical_body_function
+msgid "Body Functions"
+msgstr "Funciones corporales"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_body_function_assessment
+#: model:ir.model,name:medical_disability.model_medical_body_structure_assessment
+msgid "Body Functions Assessment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__body_functions
+msgid "Body Functions Impairments"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_body_structure
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__body_structure
+msgid "Body Structure"
+msgstr "Estructura del cuerpo"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_body_structure_category
+msgid "Body Structure Category"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_body_structure_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_structure_function
+msgid "Body Structures"
+msgstr "Estructuras corporales"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__body_structures
+msgid "Body Structures Impairments"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_body_function_assessment_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_body_function_assessment
+msgid "Body function"
+msgstr "Función corporal"
+
+#. module: medical_disability
+#: model_terms:ir.ui.view,arch_db:medical_disability.medical_patient_disability_assessment_form
+msgid "Body functions"
+msgstr "Funciones corporales"
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_body_structure_assessment_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_body_structure_assessment
+msgid "Body structure"
+msgstr "Estructura corporal"
+
+#. module: medical_disability
+#: model_terms:ir.ui.view,arch_db:medical_disability.medical_patient_disability_assessment_form
+msgid "Body structures"
+msgstr "Estructuras corporales"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__body_side__both
+msgid "Both"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__qualifier2
+msgid "Capacity"
+msgstr "Capacidad"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__category
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__category
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__category
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__category
+msgid "Category"
+msgstr "Categoría"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_medicament__is_prothesis
+#: model:ir.model.fields,help:medical_disability.field_product_product__is_prothesis
+msgid "Check if the product is a prothesis"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__code
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__assessment
+msgid "Code"
+msgstr "Código"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__cognitive_function
+msgid "Cognitive"
+msgstr "Cognitivo"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__comments
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__comments
+msgid "Comments"
+msgstr "Comentarios"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__4
+msgid "Complete barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__4
+msgid "Complete difficulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__44
+msgid "Complete facilitator"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_function_assessment__qualifier__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__activity_participation__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__cognitive_function__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hand_function__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hearing_function__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__locomotor_function__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__speech_function__4
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__visual_function__4
+msgid "Complete impairment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__etiology__congenital
+msgid "Congenital"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__create_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__create_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__crutches
+msgid "Crutches"
+msgstr "Muletas"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__amputation_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__assessment_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__issue_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient__amputee_since
+#: model:ir.model.fields,help:medical_disability.field_medical_patient_disability_assessment__amputee_since
+msgid "Date of amputee status"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__6
+msgid "Deviating position"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__disability
+msgid "Disabilities / Barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.ui.menu,name:medical_disability.medical_conf_menu
+msgid "Disability"
+msgstr "Discapacidad"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__5
+msgid "Discontinuity"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__display_name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__ed
+msgid "ED - Elbow disarticulation"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__environmental_factor
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__name
+msgid "Environment"
+msgstr "Ambiente"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_environmental_factor_category
+msgid "Environmental Factor Category"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_environmental_factor_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_environmental_factor
+msgid "Environmental Factors"
+msgstr "Factores ambientales"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_environment_assessment
+msgid "Environmental Factors Assessment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__environmental_factor
+msgid "Environmental Factors Barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_environment_assessment_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_environment_assessment
+msgid "Environmental factor assessment"
+msgstr "Evaluación de factores ambientales"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_environmental_factor
+msgid "Environmental factors restrictions"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__etiology
+msgid "Etiology"
+msgstr "Etiología"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__qualifier1
+msgid "Extent"
+msgstr "Grado"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_environment_assessment__qualifier
+msgid "Extent of the barriers or facilitators"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_activity_assessment__qualifier1
+msgid "Extent of the difficulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_activity_assessment__qualifier2
+msgid "Extent of the dificulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_body_structure_assessment__qualifier1
+msgid "Extent of the impairment"
+msgstr ""
+
+#. module: medical_disability
+#: model_terms:ir.ui.view,arch_db:medical_disability.medical_patient_disability_assessment_form
+msgid "Extra Info"
+msgstr "Información extra"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient_disability_assessment__notes
+msgid "Extra Information"
+msgstr "Información extra"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__name
+msgid "Function"
+msgstr "Función"
+
+#. module: medical_disability
+#: model:ir.ui.menu,name:medical_disability.disability_conf_menu
+#: model_terms:ir.ui.view,arch_db:medical_disability.commed_patient_disability_inherit_form
+msgid "Functioning and Disability"
+msgstr "Funcionamiento y discapacidad"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__hp
+msgid "HD - Hemipelvectomy"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__hand_function
+msgid "Hand"
+msgstr "Mano"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__professional
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__professional
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__professional
+msgid "Health Professional"
+msgstr "Profesional de la salud"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__hearing_function
+msgid "Hearing"
+msgstr "Audición"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__id
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__id
+msgid "ID"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__etiology__infection
+msgid "Infection"
+msgstr "Infección"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment____last_update
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__write_uid
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environment_assessment__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__write_date
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__body_side__left
+msgid "Left"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__amputation_level
+msgid "Level"
+msgstr "Nivel"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__limb
+msgid "Limb"
+msgstr "Miembro"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient__disability
+msgid ""
+"Mark this box if the patient has history of significant disabilities and/or "
+"barriers. Review the Disability Assessments, socioeconomic info,  diseases "
+"and surgeries for more details"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__1
+msgid "Mild barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__1
+msgid "Mild difficulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__11
+msgid "Mild facilitator"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_function_assessment__qualifier__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__activity_participation__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__cognitive_function__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hand_function__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hearing_function__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__locomotor_function__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__speech_function__1
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__visual_function__1
+msgid "Mild impairment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__locomotor_function
+msgid "Mobility"
+msgstr "Movilidad"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__2
+msgid "Moderate barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__2
+msgid "Moderate difficulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__22
+msgid "Moderate facilitator"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__activity_participation__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__cognitive_function__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hand_function__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hearing_function__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__locomotor_function__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__speech_function__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__visual_function__2
+msgid "Moderate impairment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_and_participation_category__name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_category__name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_category__name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_environmental_factor_category__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__qualifier2
+msgid "Nature"
+msgstr "Naturaleza"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_body_structure_assessment__qualifier2
+msgid "Nature of the change"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__etiology__neoplasia
+msgid "Neoplasia"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__0
+msgid "No barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__0
+msgid "No change in structure"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__0
+msgid "No difficulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__00
+msgid "No facilitator"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_function_assessment__qualifier__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__activity_participation__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__cognitive_function__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hand_function__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hearing_function__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__locomotor_function__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__speech_function__0
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__visual_function__0
+msgid "No impairment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__9
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__9
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_function_assessment__qualifier__9
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__9
+msgid "Not applicable"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__8
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__8
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_function_assessment__qualifier__8
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__8
+msgid "Not specified"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__notes
+msgid "Notes"
+msgstr "Notas"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__pffd
+msgid "PFFD"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__ph
+msgid "PH"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__2
+msgid "Partial absence"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__patient
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__patient
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__patient
+msgid "Patient"
+msgstr "Paciente"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_patient_disability_assessment
+msgid "Patient Disability Information"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_patient_disability_view
+#: model:ir.ui.menu,name:medical_disability.menu_medical_patient_disability
+msgid "Patient disability"
+msgstr "Discapacidad del paciente"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_patient
+msgid "Patient lab tests"
+msgstr "Pruebas de laboratorio para pacientes"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_activity_assessment__qualifier1
+msgid "Performance"
+msgstr "Rendimiento"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__etiology__pvd
+msgid "Peripherial Vascular Disease"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient__amputee
+#: model:ir.model.fields,help:medical_disability.field_medical_patient_disability_assessment__amputee
+msgid ""
+"Person has had one or more limbs removed by amputation. Includes congenital "
+"conditions"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient_prothesis__prothesis
+msgid "Prosthetic device"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.actions.act_window,name:medical_disability.action_medical_patient_prothesis_view
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__protheses
+#: model:ir.ui.menu,name:medical_disability.menu_medical_prothesis
+#: model_terms:ir.ui.view,arch_db:medical_disability.commed_patient_disability_inherit_form
+msgid "Protheses"
+msgstr "Prótesis"
+
+#. module: medical_disability
+#: model:ir.model,name:medical_disability.model_medical_patient_prothesis
+#: model:ir.model.fields,field_description:medical_disability.field_medical_medicament__is_prothesis
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_prothesis__prothesis
+#: model:ir.model.fields,field_description:medical_disability.field_product_product__is_prothesis
+msgid "Prothesis"
+msgstr "Prótesis"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_function_assessment__qualifier
+msgid "Qualifier"
+msgstr "Calificatorio"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__7
+msgid "Qualitative changes in structure, including accumulation of fluid"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__body_side__right
+msgid "Right"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__sd
+msgid "SD - Shoulder disarticulation"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__3
+msgid "Severe barriers"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier1__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_activity_assessment__qualifier2__3
+msgid "Severe difficulty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_environment_assessment__qualifier__33
+msgid "Severe facilitator"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_function_assessment__qualifier__2
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier1__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__activity_participation__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__cognitive_function__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hand_function__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__hearing_function__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__locomotor_function__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__speech_function__3
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_disability_assessment__visual_function__3
+msgid "Severe impairment"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure_assessment__body_side
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__side
+msgid "Side"
+msgstr "Lado"
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_body_structure_assessment__body_side
+msgid "Side of the body, if applies"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__amputee_since
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__amputee_since
+msgid "Since"
+msgstr "Desde"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__speech_function
+msgid "Speech"
+msgstr "Lenguaje"
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_body_structure__name
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_amputation__body_structure
+msgid "Structure"
+msgstr "Estructura"
+
+#. module: medical_disability
+#: model_terms:ir.ui.view,arch_db:medical_disability.medical_patient_disability_assessment_form
+msgid "Summary - Brief Assessment"
+msgstr "Resumen-Evaluación breve"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__symes
+msgid "Symes"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__tf
+msgid "TF - Transfemoral"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__th
+msgid "TH - Transhumeral"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__tr
+msgid "TR - Transradial"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__tt
+msgid "TT - Transtibial"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_activity_and_participation_category_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_activity_and_participation_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_body_function_category_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_body_function_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_body_structure_category_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_body_structure_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_environmental_factor_category_unique_code
+#: model:ir.model.constraint,message:medical_disability.constraint_medical_environmental_factor_unique_code
+msgid "The code must be unique !"
+msgstr "El código debe ser único !"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_body_structure_assessment__qualifier2__1
+msgid "Total absence"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__etiology__trauma
+msgid "Trauma"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient__uxo
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__uxo
+msgid "UXO"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,help:medical_disability.field_medical_patient__uxo
+#: model:ir.model.fields,help:medical_disability.field_medical_patient_disability_assessment__uxo
+msgid "UXO casualty"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__visual_function
+msgid "Visual"
+msgstr "Visual"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__amputation_level__wd
+msgid "WD - Wrist disarticulation"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields,field_description:medical_disability.field_medical_patient_disability_assessment__wheelchair
+msgid "Wheelchair"
+msgstr "Silla de ruedas"
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__side__both
+msgid "both"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__side__left
+msgid "left"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__limb__lower
+msgid "lower limb"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__side__right
+msgid "right"
+msgstr ""
+
+#. module: medical_disability
+#: model:ir.model.fields.selection,name:medical_disability.selection__medical_patient_amputation__limb__upper
+msgid "upper limb"
+msgstr ""

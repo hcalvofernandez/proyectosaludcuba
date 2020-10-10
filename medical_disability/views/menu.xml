@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <menuitem name="Disability"
+              id="medical_conf_menu"
+               web_icon="medical_disability,static/description/icon.png"
+               />
+
+        <menuitem name="Assessment" id="assessment_conf_menu"
+                   sequence="4"
+                  parent="medical_conf_menu"/>
+
+        <menuitem name="Functioning and Disability" id="disability_conf_menu"
+                   sequence="10"
+                  parent="medical_conf_menu"/>
+
+        <menuitem action="action_medical_body_function_view"
+                  name="Body Functions"
+                  id="menu_medical_body_function"
+                  sequence="1"
+                  parent="disability_conf_menu"/>
+
+        <menuitem action="action_medical_body_structure_view"
+                  name="Body Structures"
+                  id="menu_medical_structure_function"
+                  sequence="2"
+                  parent="disability_conf_menu"/>
+
+        <menuitem action="action_medical_activity_and_participation_view"
+                  name="Activities and Participation"
+                  id="menu_medical_activity_and_participation"
+                  sequence="3"
+                  parent="disability_conf_menu"/>
+
+        <menuitem action="action_medical_environmental_factor_view"
+                  name="Environmental Factors"
+                  id="menu_medical_environmental_factor"
+                  sequence="4"
+                  parent="disability_conf_menu"/>
+
+        <menuitem action="action_medical_activity_assessment_view"
+                  name="Activity and participation"
+                  id="menu_medical_activity_assessment"
+                  sequence="1"
+                  parent="assessment_conf_menu"/>
+
+         <menuitem action="action_medical_body_function_assessment_view"
+                  name="Body function"
+                  id="menu_medical_body_function_assessment"
+                  sequence="2"
+                  parent="assessment_conf_menu"/>
+
+         <menuitem action="action_medical_body_structure_assessment_view"
+                  name="Body structure"
+                  id="menu_medical_body_structure_assessment"
+                  sequence="3"
+                  parent="assessment_conf_menu"/>
+
+        <menuitem action="action_medical_environment_assessment_view"
+                  name="Environmental factor assessment"
+                  id="menu_medical_environment_assessment"
+                  sequence="4"
+                  parent="assessment_conf_menu"/>
+
+        <menuitem action="action_medical_patient_amputation_view"
+                  name="Amputations"
+                  id="menu_medical_amputation"
+                  sequence="1"
+                  parent="medical_conf_menu"/>
+
+        <menuitem action="action_medical_patient_disability_view"
+                  name="Patient disability"
+                  id="menu_medical_patient_disability"
+                  sequence="2"
+                  parent="medical_conf_menu"/>
+
+        <menuitem action="action_medical_patient_prothesis_view"
+                  name="Protheses"
+                  id="menu_medical_prothesis"
+                  sequence="3"
+                  parent="medical_conf_menu"/>
+    </data>
+
+</odoo>
